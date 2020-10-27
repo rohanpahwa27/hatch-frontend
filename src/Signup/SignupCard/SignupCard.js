@@ -10,7 +10,6 @@ export default class SignupCard extends Component {
     const password = event.target.elements.password.value;
     const firstName = event.target.elements.firstName.value;
     const lastName = event.target.elements.lastName.value;
-    console.log(event.target.elements.radios.value)
     const admin = ((event.target.elements.radios.value === 'admin') ? true : false)
 
     const response = await api.insertUser({
@@ -18,15 +17,16 @@ export default class SignupCard extends Component {
       password: password,
       firstName: firstName,
       lastName: lastName,
-      admin: admin,
+      admin: admin
     });
+    console.log(response);
 
-    if (response.data.status === "error"){
-      alert("Error: " + response.data.message);
-    }
-    else {
-      alert("Account was created successfully!");
-    }
+    // if (response.status === "error"){
+    //   alert("Error: " + response.message);
+    // }
+    // else {
+    //   alert("Account was created successfully!");
+    // }
   };
 
   render() {
