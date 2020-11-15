@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import "./SignupHeader.css";
+import "./Header.css";
 
-export default class SignupHeader extends Component {
+export default class Header extends Component {
   render() {
     return (
       <Navbar>

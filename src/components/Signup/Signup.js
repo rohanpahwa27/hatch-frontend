@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./Signup.css";
-import SignupHeader from "./SignupHeader/SignupHeader.js";
-import SignupCard from "./SignupCard/SignupCard.js";
+import Header from "../Header/Header";
+import SignupCard from "./SignupCard/SignupCard";
 
 export default class Signup extends Component {
   render() {
     return (
       <div className="justify-content-center">
-        <SignupHeader />
+        <Header />
         <SignupCard />
       </div>
     );
