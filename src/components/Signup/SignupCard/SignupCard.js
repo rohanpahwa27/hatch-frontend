@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./SignupCard.css";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import api from "../../../api/api";
+import api from "../../../Api/api.js";
 
 
 const initialState = {

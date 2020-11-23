@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./LoginCard.css";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import api from "../../../api/api.js";
+import api from "../../../Api/api.js";
 
 export default class LoginCard extends Component {
   handleSubmit = async (event) => {
