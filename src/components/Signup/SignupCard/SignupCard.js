@@ -7,12 +7,13 @@ import api from "../../../Api/api.js";
 const initialState = {
   email: "",
   password: "",
+  confirmPassword: "",
   firstName: "",
   lastName: "",
   errors: []
 };
 
-function validate(email, password, firstName, lastName) {
+function validate(email, password, confirmPassword, firstName, lastName) {
   const errors = [];
   if (firstName.length === 0) {
     errors.push("First Name can't be empty");
@@ -33,6 +34,11 @@ function validate(email, password, firstName, lastName) {
     return errors;
   }
 
+  if (password != confirmPassword) {
+    errors.push("Passwords don't match.");
+    return errors;
+  }
+
   return [];
 }
 export default class SignupCard extends Component {
@@ -43,7 +49,7 @@ export default class SignupCard extends Component {
   
   handleSubmit = async (event) => {
     event.preventDefault();
-    const errors = validate(this.state.email, this.state.password, this.state.firstName, this.state.lastName);
+    const errors = validate(this.state.email, this.state.password, this.state.confirmPassword, this.state.firstName, this.state.lastName);
     console.log(errors);
     if (errors.length > 0) {
       this.setState({ errors: errors });
@@ -70,6 +76,10 @@ export default class SignupCard extends Component {
 
   handlePasswordChange = evt => {
     this.setState({ password: evt.target.value });
+  };
+
+  handleConfirmPasswordChange = evt => {
+    this.setState({ confirmPassword: evt.target.value });
   };
 
   handleFirstNameChange = evt => {
@@ -132,6 +142,15 @@ export default class SignupCard extends Component {
                       placeholder="Password"
                       value={this.state.password}
                       onChange={this.handlePasswordChange}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Control
+                      type="password"
+                      className="signup-input"
+                      placeholder="Confirm Password"
+                      value={this.state.confirmPassword}
+                      onChange={this.handleConfirmPasswordChange}
                     />
                   </Form.Group>
                   <fieldset>
