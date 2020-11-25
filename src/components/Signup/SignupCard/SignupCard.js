@@ -33,7 +33,7 @@ function validate(email, password, firstName, lastName) {
     return errors;
   }
 
-  return errors;
+  return [];
 }
 export default class SignupCard extends Component {
   constructor() {
@@ -49,21 +49,19 @@ export default class SignupCard extends Component {
       this.setState({ errors: errors });
       return;
     }
-    this.setState(initialState);
     const response = await api.insertUser({
       email: this.state.email,
       password: this.state.password,
       firstName: this.state.firstName,
       lastName: this.state.lastName
     });
-    console.log(response);
 
-    if (response.status === "error"){
-      alert("Error: " + response.message);
+    if (response.data.status === "error"){
+      errors.push(response.data.message)
+      this.setState({ errors: errors });
+      return;
     }
-    else {
-      alert("Account was created successfully!");
-    }
+    this.setState(initialState);
   };
 
   handleEmailChange = evt => {
@@ -98,7 +96,7 @@ export default class SignupCard extends Component {
             <div className="d-flex flex-column signup-card p-3 p-lg-5">
               <div>
                 <Form onSubmit={(e) => this.handleSubmit(e)}>
-                  <Form.Group controlId="firstName">
+                  <Form.Group>
                     <Form.Control
                       id="firstNameInput"
                       type="text"
@@ -108,7 +106,7 @@ export default class SignupCard extends Component {
                       onChange={this.handleFirstNameChange}
                     />
                   </Form.Group>
-                  <Form.Group controlId="lastName">
+                  <Form.Group>
                     <Form.Control
                       id="firstNameInput"
                       type="text"
@@ -118,7 +116,7 @@ export default class SignupCard extends Component {
                       onChange={this.handleLastNameChange}
                     />
                   </Form.Group>
-                  <Form.Group controlId="email">
+                  <Form.Group>
                     <Form.Control
                       type="email"
                       className="signup-input"
@@ -127,7 +125,7 @@ export default class SignupCard extends Component {
                       onChange={this.handleEmailChange}
                     />
                   </Form.Group>
-                  <Form.Group controlId="password">
+                  <Form.Group>
                     <Form.Control
                       type="password"
                       className="signup-input"
@@ -140,8 +138,8 @@ export default class SignupCard extends Component {
                   <Form.Group>
                   {errors.map(error => (
                   <p className= "invalid-credentials-container" key={error}>{error}</p>
-                ))}
-              </Form.Group>
+                  ))}
+                  </Form.Group>
               </fieldset>
              
                   <Button block size="lg" type="submit" className="signup-btn">
