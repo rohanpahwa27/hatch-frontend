@@ -63,52 +63,74 @@ export default class LoginCard extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <Container className="login-container">
-        <Row>
-          <Col
-            sm={{ span: 12 }}
-            md={{ span: 6, offset: 3 }}
-            lg={{ span: 6, offset: 3 }}
+      <Container fluid className="login-container">
+        <div className="row">
+          <Col className = "column"
+              sm={{ span: 12 }}
+              md={{ span: 5, offset: 0 }}
+              lg={{ span: 5, offset: 0 }}
           >
-            <div>
-              <p className="welcome-text">Welcome back!</p>
-            </div>
-            <div className="d-flex flex-column login-card p-3 p-lg-5">
-              <div>
-                <Form onSubmit={(e) => this.handleSubmit(e)}>
-                  <Form.Group>
-                    <Form.Control
-                      type="email"
-                      className="signup-input"
-                      placeholder="Email Address"
-                      value={this.state.email}
-                      onChange={this.handleEmailChange}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Control
-                      type="password"
-                      className="signup-input"
-                      placeholder="Password"
-                      value={this.state.password}
-                      onChange={this.handlePasswordChange}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                  {errors.map(error => (
-                  <p className= "invalid-credentials-container" key={error}>{error}</p>
-                  ))}
-                  </Form.Group>
-                  <fieldset>
-                  </fieldset>
-                  <Button block size="lg" type="submit" className="login-btn">
-                    <span>Login</span>
-                  </Button>
-                </Form>
+              
+              <div className="d-flex flex-column login-card p-3 p-lg-5">
+                <div>
+                  <p className="welcome-text">Welcome back!</p>
+                </div>
+                <div>
+                  <p className="helper">Email</p>
+                  <Form onSubmit={(e) => this.handleSubmit(e)}>
+                    <Form.Group>
+                      <Form.Control
+                        type="email"
+                        className="signup-input placeholder"
+                        placeholder="type your email"
+                        value={this.state.email}
+                        onChange={this.handleEmailChange}
+                      />
+                    </Form.Group>
+                    <p className="helper">Password</p>
+                    <Form.Group>
+                      <Form.Control
+                        type="password"
+                        className="signup-input placeholder"
+                        placeholder="type your password"
+                        value={this.state.password}
+                        onChange={this.handlePasswordChange}
+                      />
+                    </Form.Group>
+                    <div>
+                    <a className = "forgot-password"href="">Forgot your password?</a>
+                    </div>
+                    <Form.Group>
+                    {errors.map(error => (
+                    <p className= "invalid-credentials-container" key={error}>{error}</p>
+                    ))}
+                    </Form.Group>
+                    <Button block size="lg" type="submit" className="login-btn">
+                      <span>Login</span>
+                    </Button>
+                  </Form>
+                </div>
               </div>
-            </div>
-          </Col>
-        </Row>
+            </Col>
+            <Col>
+                <div>
+                  <p className="companyName">Our Company Name</p>
+                  <p className="mission">Empowering people in organizations to recruit<br></br>members successfully, together.</p>
+                </div>
+                <div>
+                  <p className="create-account">Or create an account to get started</p>
+                  <div className="row padding">
+                    <div className = "col">
+                      <a className="sign-up member" href="">Sign up as a member</a>
+                    </div>
+                    <div className = "col">
+                      <a className="sign-up admin" href="">Sign up as an admin</a>
+                    </div>
+                  </div>
+                </div>
+            </Col>
+        </div>
+        
       </Container>
     );
   }
