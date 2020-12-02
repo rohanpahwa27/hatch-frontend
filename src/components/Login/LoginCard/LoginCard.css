@@ -1,10 +1,11 @@
 .login-card {
     background-color: white;
-    border-radius: 10px;
+    width: 75%;
+    border-radius: 30px;
     border: 1px solid rgb(225 222 222);
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 30px;
-    margin-top: 30px;
+    box-shadow: -10px -10px 30px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 15%;
+    margin-left: 25%
 }
 
 .login-col {
@@ -12,7 +13,24 @@
     padding-right: 25px !important;
 }
 
+.forgot-password{
+    padding-left: 55%;
+    padding-bottom: 7%;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px;
+    /* identical to box height */
+    color: #121619;
+    display: flex;
+    align-items: center;
+}
+.test{
+    outline: 5px dotted green;
+    width: 75%;
+}
+
 .login-container {
+    width: 100vh;
     text-align: center;
     height: 100vh;
     display: flex;
@@ -37,10 +55,37 @@
     background-color: white !important;
 }
 
+.helper{
+    padding-top: 1.5%;
+    font-size: 12px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #697077;
+}
+
+.placeholder{
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.2px;
+    color: #697077;
+}
+
 .welcome-text {
-    color: white !important;
-    font-weight: 300;
-    font-size: 30px;
+    text-align: left;
+    color: black !important;
+    /* font-weight: 300;
+    font-size: 30px; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    padding-bottom: 5%;
 }
 
 .forgot-text {
@@ -53,9 +98,77 @@ color: #2e6cc3 !important;
 }
 
 .login-btn {
-background-color: #3e88ef !important;
-font-weight: 400;
-margin-top: 1em !important;
+    background: #F2F4F8 !important;
+    opacity: 0.8;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    color: black !important;
+    letter-spacing: 0.2px;
+    margin-top: 1em !important;
+}
+
+.companyName{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: 12%;
+    margin-left:30%;
+    display: flex;
+    align-items: center;
+    color: #121619;
+}
+
+.mission{
+    text-align: left;
+    position: relative;
+    margin-left:30%;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.2px;
+    color: #121619;
+}
+
+.create-account {
+    font-size: 12px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    color: #697077;
+    margin-left: 30%;
+    margin-top: 35%;
+}
+
+.padding{
+    margin-top: -1%;
+}
+
+.sign-up{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.03em;
+    color: #121619;
+}
+
+.member {
+    margin-left:62% !important;
+}
+
+.admin {
+    margin-left: -40% !important;
+}
+
+.row {
+    display: flex;
+  }
+  
+.column {
+    flex: 50%;
 }
 
 .login-btn:hover {
