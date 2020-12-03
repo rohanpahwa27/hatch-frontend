@@ -114,17 +114,17 @@ export default class LoginCard extends Component {
             </Col>
             <Col>
                 <div>
-                  <p className="companyName">Our Company Name</p>
+                  <p className="companyName">hatch</p>
                   <p className="mission">Empowering people in organizations to recruit<br></br>members successfully, together.</p>
                 </div>
                 <div>
                   <p className="create-account">Or create an account to get started</p>
                   <div className="row padding">
-                    <div className = "col">
-                      <a className="sign-up member" href="">Sign up as a member</a>
+                    <div className = "col-sm">
+                      <a className="sign-up member" href="signup?query=member">Sign up as a member</a>
                     </div>
-                    <div className = "col">
-                      <a className="sign-up admin" href="">Sign up as an admin</a>
+                    <div className = "col-sm">
+                      <a className="sign-up admin" href="signup?query=admin">Sign up as an admin</a>
                     </div>
                   </div>
                 </div>
