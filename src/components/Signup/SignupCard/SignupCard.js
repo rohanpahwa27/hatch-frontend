@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./SignupCard.css";
+import queryString from 'query-string';
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import api from "../../../Api/api.js";
 
@@ -10,6 +11,7 @@ const initialState = {
   confirmPassword: "",
   firstName: "",
   lastName: "",
+  orgCode: "",
   errors: []
 };
 
@@ -41,7 +43,7 @@ function validate(email, password, confirmPassword, firstName, lastName) {
 
   return [];
 }
-export default class SignupCard extends Component {
+export default class SignupCard extends React.Component {
   constructor() {
     super();
     this.state = initialState;
@@ -90,8 +92,14 @@ export default class SignupCard extends Component {
     this.setState({ lastName: evt.target.value });
   };
 
+  handleOrgCode = evt => {
+    this.setState({ orgCode: evt.target.value });
+  };
+
   render() {
     const { errors } = this.state;
+    console.log(queryString.parse(window.location.search).query == 'admin');
+    const memberIsAdmin = queryString.parse(window.location.search).query == 'admin' ? "type your organization's name" : "type your group's organization code";
     return (
       <Container className="signup-container">
         <Row>
@@ -100,12 +108,12 @@ export default class SignupCard extends Component {
             md={{ span: 6, offset: 3 }}
             lg={{ span: 6, offset: 3 }}
           >
-            <div>
-              <p className="welcome-text">Welcome!</p>
-            </div>
-            <div className="d-flex flex-column signup-card p-3 p-lg-5">
-              <div>
-                <Form onSubmit={(e) => this.handleSubmit(e)}>
+            
+            <div className="signup-card">
+              <Form onSubmit={(e) => this.handleSubmit(e)}>
+              <div className="row padding">
+                <div className = "col">
+                  <p className="helper">First Name</p>
                   <Form.Group>
                     <Form.Control
                       id="firstNameInput"
@@ -114,11 +122,14 @@ export default class SignupCard extends Component {
                       value={this.state.firstName}
                       placeholder="First Name"
                       onChange={this.handleFirstNameChange}
-                    />
+                      />
                   </Form.Group>
+                </div>
+                <div className = "col">
+                  <p className="helper">Last Name</p>
                   <Form.Group>
                     <Form.Control
-                      id="firstNameInput"
+                      id="lastNameInput"
                       type="text"
                       className="signup-input"
                       placeholder="Last Name"
@@ -126,6 +137,11 @@ export default class SignupCard extends Component {
                       onChange={this.handleLastNameChange}
                     />
                   </Form.Group>
+                </div>
+              </div>
+              <div className="row padding">
+                <div className = "col">
+                  <p className="helper">Email</p>
                   <Form.Group>
                     <Form.Control
                       type="email"
@@ -135,6 +151,13 @@ export default class SignupCard extends Component {
                       onChange={this.handleEmailChange}
                     />
                   </Form.Group>
+                </div>
+                <div className = "col">
+                </div>
+              </div>
+              <div className="row padding">
+                <div className = "col">
+                  <p className="helper">Password (6+ characters required)</p>
                   <Form.Group>
                     <Form.Control
                       type="password"
@@ -143,7 +166,10 @@ export default class SignupCard extends Component {
                       value={this.state.password}
                       onChange={this.handlePasswordChange}
                     />
-                  </Form.Group>
+                    </Form.Group>
+                </div>
+                <div className = "col">
+                  <p className="helper">Confirm</p>
                   <Form.Group>
                     <Form.Control
                       type="password"
@@ -153,23 +179,39 @@ export default class SignupCard extends Component {
                       onChange={this.handleConfirmPasswordChange}
                     />
                   </Form.Group>
-                  <fieldset>
+                </div>
+              </div>
+
+              <div className="row padding">
+                <div className = "col">
+                  <p className="helper">Organization's add code</p>
                   <Form.Group>
-                  {errors.map(error => (
+                    <Form.Control
+                      type="text"
+                      className="signup-input"
+                      placeholder= {memberIsAdmin}
+                      value={this.state.orgCode}
+                      onChange={this.handleOrgCode}
+                    />
+                  </Form.Group>
+                </div>
+                <div className = "col">
+                  
+                </div>
+              </div>
+              {errors.map(error => (
                   <p className= "invalid-credentials-container" key={error}>{error}</p>
                   ))}
-                  </Form.Group>
-              </fieldset>
-             
                   <Button block size="lg" type="submit" className="signup-btn">
                     <span>Sign Up</span>
                   </Button>
-                </Form>
-              </div>
+              </Form>
             </div>
           </Col>
         </Row>
       </Container>
+          
+        
     );
   }
 }
