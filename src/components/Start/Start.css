@@ -1,4 +1,4 @@
-.home-card {
+.start-card {
     background-color: white;
     border-radius: 10px;
     border: 1px solid rgb(225 222 222);
@@ -7,12 +7,12 @@
     margin-top: 30px;
 }
 
-.home-col {
+.start-col {
     padding-left: 25px !important;
     padding-right: 25px !important;
 }
 
-.home-container {
+.start-container {
     text-align: center;
     height: 100vh;
     display: flex;
@@ -22,17 +22,17 @@
     margin-top: -50px;
 }
 
-.home-input {
+.start-input {
     background-color: #f5f8fa !important;
     border-color: #f5f8fa !important;
 }
 
-.home-input:hover {
+.start-input:hover {
     background-color: white !important;
     border-color: #c0c5c8 !important;
 }
 
-.home-input:focus {
+.start-input:focus {
     border-color: #3e88ef !important;
     background-color: white !important;
 }
@@ -60,13 +60,13 @@ font-size: 15px;
 color: #2e6cc3 !important;
 }
 
-.home-btn {
+.start-btn {
 background-color: #3e88ef !important;
 font-weight: 400;
 margin-top: 1em !important;
 }
 
-.home-btn:hover {
+.start-btn:hover {
 background-color: #2e6cc3 !important;
 }
 
