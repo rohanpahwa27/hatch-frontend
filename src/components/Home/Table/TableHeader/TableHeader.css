@@ -1,0 +1,39 @@
+#table-header-grid-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 4fr 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+
+    height: 5vh;
+    width: 80vw;
+}
+
+.table-header {
+    grid-row: 1 / span 1;
+}
+
+/*
+Left-align name label in header
+*/
+#name-header {
+    grid-column: 1 / span 1;
+    justify-self: start;
+    padding-left: 3%;
+}
+
+.table-header-text {
+    font-weight: bold;
+}
+
+#likes-header {
+    grid-column: 2 / span 1;
+}
+
+#comments-header {
+    grid-column: 3 / span 1;
+}
+
+#tags-header {
+    grid-column: 4 / span 1;
+}
