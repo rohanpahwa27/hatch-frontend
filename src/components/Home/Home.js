@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import "./Home.css"
 import applicantData from "./ApplicantData.js"
+import { initializeIcons } from '@uifabric/icons';
+import { Icon } from '@fluentui/react/lib/Icon';
 
 class Home extends Component {
+    // componentDidMount() {
+    //     initializeIcons();
+    // }
+
     render() {
         let tableData = []
 
@@ -12,20 +18,22 @@ class Home extends Component {
         */
         for (let i = 0; i < applicantData.length; i++) {
             const nameDiv = (
-                <div className="name-div">
+                <div className="name-div table-data-cell">
                     <img className="applicant-image" src={applicantData[i].imgURL} />
                     <span className="applicant-name">{applicantData[i].firstName} {applicantData[i].lastName}</span>
                 </div>
             )
 
             const likesDiv = (
-                <div>
+                <div className="table-data-cell">
+                    <Icon className="heart-icon" iconName="Heart" />
                     <span>{applicantData[i].likes}</span>
                 </div>
             )
 
             const commentsDiv = (
-                <div>
+                <div className="table-data-cell">
+                    <Icon className="comment-icon" iconName="Comment" />
                     <span>{applicantData[i].comments}</span>
                 </div>
             )
@@ -41,9 +49,7 @@ class Home extends Component {
             tableData.push(tagsDiv)
         }
 
-        // To make header sticky, take header out of grid container that
-        // because grid container has overflow-y: scroll
-        // Now, just make header one row
+        initializeIcons();
         return (
             <div>
                 <div id="table-header-grid-container">

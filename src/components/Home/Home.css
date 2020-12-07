@@ -54,6 +54,10 @@ Left-align name label in header
     align-items: center;
 }
 
+.table-data-cell {
+    display: flex;
+}
+
 .name-div {
     justify-self: start;
     padding-left: 3%;
@@ -67,4 +71,9 @@ Left-align name label in header
 
 .applicant-name {
     margin-left: 3%;
+}
+
+.heart-icon, .comment-icon {
+    margin-right: 10%;
+    /* border: 1px solid black; */
 }
