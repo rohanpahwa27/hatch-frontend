@@ -11,6 +11,10 @@
     align-items: center;
 }
 
+#table-row-grid-container:hover {
+    background-color: #F8F8F8;
+}
+
 .table-data-cell {
     display: flex;
 }

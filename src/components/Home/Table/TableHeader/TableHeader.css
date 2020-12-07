@@ -11,6 +11,8 @@
     grid-template-columns: 4fr 1fr 1fr 2fr;
     justify-items: center;
     align-items: center;
+
+    border-bottom: 1px solid #F2F4F8;
 }
 
 .table-header {

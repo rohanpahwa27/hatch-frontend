@@ -1,0 +1,9 @@
+#account-side-bar-item {
+    margin: 20px;
+}
+
+#account-image {
+    display: block;
+    height: 25px;
+    border-radius: 50%;
+}

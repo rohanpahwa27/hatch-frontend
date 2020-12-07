@@ -5,7 +5,9 @@ import { initializeIcons } from '@uifabric/icons';
 
 import TableRow from "./TableRow/TableRow.js"
 
-// we'll probably end up getting passed down an object of filtered applicants
+/* we'll probably end up getting passed down an object of filtered applicants
+from Table as a prop
+*/
 class TableBody extends Component {
     render() {
         initializeIcons();
