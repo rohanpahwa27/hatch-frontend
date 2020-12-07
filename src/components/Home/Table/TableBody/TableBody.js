@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./TableBody.css"
 import applicantData from "./../../ApplicantData.js"
 import { initializeIcons } from '@uifabric/icons';
-import { Icon } from '@fluentui/react/lib/Icon';
 
 import TableRow from "./TableRow/TableRow.js"
 
@@ -16,6 +15,7 @@ class TableBody extends Component {
                 <TableRow key={index} 
                           firstName={applicant.firstName} 
                           lastName={applicant.lastName} 
+                          imgURL={applicant.imgURL}
                           likes={applicant.likes} 
                           comments={applicant.comments} 
                           tags={applicant.tags} />
