@@ -1,0 +1,18 @@
+/*
+table-grid-container is a grid item of home-grid-container 
+and a grid container for table-body-grid-container and table-header-grid-container
+*/
+
+#table-grid-container {
+    /* Grid item properties */
+    grid-row: 2 / -1;
+    grid-column: 2/ -1;
+
+    width: 100%;
+    height: 100%;
+
+    /* Grid container properties */
+    display: grid;
+    grid-template-rows: 10% 90%;
+    grid-template-columns: 1fr;
+}

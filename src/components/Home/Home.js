@@ -6,7 +6,7 @@ import Table from "./Table/Table.js";
 class Home extends Component {
     render() {
         return (
-            <div>
+            <div id="home-grid-container">
                 <Table />
             </div>
         )
