@@ -10,10 +10,10 @@ import TableBody from "./TableBody/TableBody.js"
 class Table extends Component {
     render() {
         return (
-            <div id="table-grid-container">
+            <table id="table-grid-container">
                 <TableHeader />
                 <TableBody />
-            </div>
+            </table>
         )
     }
 }
