@@ -12,25 +12,26 @@ class Home extends Component {
         */
         for (let i = 0; i < applicantData.length; i++) {
             const nameDiv = (
-                <div>
-                    {applicantData[i].firstName}
+                <div className="name-div">
+                    <img className="applicant-image" src={applicantData[i].imgURL} />
+                    <span className="applicant-name">{applicantData[i].firstName} {applicantData[i].lastName}</span>
                 </div>
             )
 
             const likesDiv = (
                 <div>
-                    {applicantData[i].likes}
+                    <span>{applicantData[i].likes}</span>
                 </div>
             )
 
             const commentsDiv = (
                 <div>
-                    {applicantData[i].comments}
+                    <span>{applicantData[i].comments}</span>
                 </div>
             )
             const tagsDiv = (
                 <div>
-                    {applicantData[i].tags}
+                    <span>{applicantData[i].tags}</span>
                 </div>
             )
 
@@ -40,25 +41,31 @@ class Home extends Component {
             tableData.push(tagsDiv)
         }
 
+        // To make header sticky, take header out of grid container that
+        // because grid container has overflow-y: scroll
+        // Now, just make header one row
         return (
-            <div id="table-grid-container">
-                <div id="name-grid-item">
-                    <p id="name-header-text">Name</p>
+            <div>
+                <div id="table-header-grid-container">
+                    <div id="name-header" className="table-header">
+                        <span class="table-header-text">Name</span>
+                    </div>
+                    <div id="likes-header" className="table-header">
+                        <span class="table-header-text">Likes</span>
+                    </div>
+                    <div id="comments-header" className="table-header"> 
+                        <span class="table-header-text">Comments</span>
+                    </div>
+                    <div id="tags-header-grid-item" className="table-header"> 
+                        <span class="table-header-text">Tags</span>
+                    </div>
                 </div>
-                <div id="likes-grid-item">
-                    <p>Likes</p>
+                <div id="table-body-grid-container">
+                    {tableData}
+                    {tableData}
+                    {tableData}
+                    {tableData}
                 </div>
-                <div id="comments-grid-item"> 
-                    <p>Comments</p>
-                </div>
-                <div id="tags-grid-item"> 
-                    <p>Tags</p>
-                </div>
-
-                {tableData}
-                {tableData}
-                {tableData}
-                {tableData}
             </div>
         )
     }
