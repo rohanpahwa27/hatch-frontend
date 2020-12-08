@@ -5,6 +5,7 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Datatable from "./components/Datatable/Datatable";
 import Home from "./components/Home/Home";
+import importApplicants from "./components/Admin/importApplicants/importApplicants"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/Signup" component={Signup} />
       <Route path="/Login" component={Login} />
       <Route path="/Overview" component={Datatable} />
+      <Route path="/importApplicants" component={importApplicants} />
     </Router>
   );
 }
