@@ -9,7 +9,7 @@
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 4fr 1fr 1fr 2fr;
-    justify-items: center;
+    justify-items: flex-start;
     align-items: center;
 
     border-bottom: 1px solid #F2F4F8;
@@ -25,7 +25,6 @@ Left-align name label in header
 */
 #name-header {
     grid-column: 1 / span 1;
-    justify-self: start;
     padding-left: 3%;
 }
 
@@ -39,7 +38,6 @@ Left-align name label in header
 
 #tags-header {
     grid-column: 4 / span 1;
-    justify-self: start;
     padding-left: 10%;
     font-weight: normal;
     color: #697077;

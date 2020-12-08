@@ -1,7 +1,7 @@
 #home-grid-container {
     display: grid;
     grid-template-rows: 10% 90%;
-    grid-template-columns: 20% 50% 30%;
+    grid-template-columns: 20% 40% 40%;
 
     width: 100vw;
     height: 100vh;
@@ -22,6 +22,9 @@
     display: flex;
     justify-content: start;
     align-items: center;
+
+    width: 100%;
+    height: 100%;
 }
 
 #search-bar-flex-container {
@@ -29,7 +32,7 @@
     justify-content: start;
     align-items: center;
 
-    width: 280px;
+    width: 50%;
     height: 44px;
 
     background-color: rgba(242, 244, 248, 0.4);
@@ -40,7 +43,7 @@
     margin-left: 5px;
     border: 0px;
 
-    width: 240px;
+    width: 85%;
 
     background-color: rgba(242, 244, 248, 0.4);
 }
@@ -50,4 +53,20 @@
     height: 14px;
 
     margin-left: 10px;
+}
+
+#showing-x-applicants {
+    /* Grid item properties */
+    grid-row: 1 / span 1;
+    grid-column: 3 / span 1;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#showing-x-applicants span {
+    color: #697077;
 }

@@ -7,7 +7,7 @@
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 4fr 1fr 1fr 2fr;
-    justify-items: center;
+    justify-items: flex-start;
     align-items: center;
 }
 
@@ -21,7 +21,6 @@
 }
 
 .name-div {
-    justify-self: start;
     padding-left: 3%;
     width: 100%;
 }

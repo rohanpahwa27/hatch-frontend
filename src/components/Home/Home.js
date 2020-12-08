@@ -12,7 +12,7 @@ import searchImage from "./Icons/search.png"
 class Home extends Component {
     constructor() {
         super()
-        this.state = {tableData: applicantData, query: ""}
+        this.state = {tableData: applicantData, query: "", numApplicants: applicantData.length}
 
         this.handleChange = this.handleChange.bind(this)
     }
@@ -27,7 +27,8 @@ class Home extends Component {
 
         this.setState({
             tableData: filteredApplicants,
-            query: queryText
+            query: queryText,
+            numApplicants: filteredApplicants.length
         })
     }
 
@@ -35,6 +36,8 @@ class Home extends Component {
         return (
             <div id="home-grid-container">
                 <Logo />
+
+                {/* Search and filter */}
                 <div id="search-filter-grid-item">
                     <div id="search-filter-flex-container">
                         <div id="search-bar-flex-container">
@@ -44,6 +47,12 @@ class Home extends Component {
                         <Filter />
                     </div>
                 </div>
+            
+                {/* Showing x out of y applicants */}
+                <div id="showing-x-applicants">
+                    <span>Showing {this.state.numApplicants} of {applicantData.length} applicants</span>
+                </div>
+
                 <SideNavBar query={this.state.query} handleChange={this.handleChange} />
                 <Table data={this.state.tableData} />
             </div>
