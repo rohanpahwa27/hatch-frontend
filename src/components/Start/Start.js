@@ -33,9 +33,9 @@ export default class Start extends Component {
                   </Button>
                 </Link>
                 <br/>
-                <Link to="/overview">
+                <Link to="/home">
                 <Button block size="lg" className="start-btn">
-                    <span>Overview</span>
+                    <span>Home</span>
                   </Button>
                 </Link>
               </div>
