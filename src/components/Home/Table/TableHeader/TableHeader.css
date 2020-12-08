@@ -39,4 +39,8 @@ Left-align name label in header
 
 #tags-header {
     grid-column: 4 / span 1;
+    justify-self: start;
+    padding-left: 10%;
+    font-weight: normal;
+    color: #697077;
 }

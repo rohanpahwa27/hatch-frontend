@@ -17,6 +17,7 @@
 
 .table-data-cell {
     display: flex;
+    align-items: center;
 }
 
 .name-div {
@@ -36,4 +37,6 @@
 
 .heart-icon, .comment-icon {
     margin-right: 10%;
+    width: 16px;
+    height: 16px;
 }

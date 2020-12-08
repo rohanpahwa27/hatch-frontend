@@ -1,7 +1,10 @@
 import React, { Component } from "react"
 import "./TableRow.css"
-import { initializeIcons } from '@uifabric/icons';
-import { Icon } from '@fluentui/react/lib/Icon';
+import likesImage from "./Icons/heart.png"
+import commentsImage from "./Icons/comment.png"
+
+// import { initializeIcons } from '@uifabric/icons';
+// import { Icon } from '@fluentui/react/lib/Icon';
 
 // import props
 // should be firstname, lastname, likes, comments, tags
@@ -18,14 +21,14 @@ class TableRow extends Component {
 
         const likes = (
             <td className="table-data-cell">
-                <Icon className="heart-icon" iconName="Heart" />
+                <img className="heart-icon" src={likesImage} atl="Heart" />
                 <span>{this.props.likes}</span>
             </td>
         )
 
         const comments = (
             <td className="table-data-cell">
-                <Icon className="comment-icon" iconName="Comment" />
+                <img className="comment-icon" src={commentsImage} atl="Heart" />
                 <span>{this.props.comments}</span>
             </td>
         )
@@ -41,7 +44,7 @@ class TableRow extends Component {
         components.push(comments)
         components.push(tags)
 
-        initializeIcons();
+        // initializeIcons();
 
         return (
             <tr id="table-row-grid-container">
