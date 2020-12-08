@@ -12,7 +12,7 @@ class TableBody extends Component {
     render() {
         initializeIcons();
 
-        const applicantComponents = applicantData.map((applicant, index) => {
+        const applicantComponents = this.props.data.map((applicant, index) => {
             return (
                 <TableRow key={index} 
                           firstName={applicant.firstName} 

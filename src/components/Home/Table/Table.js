@@ -9,7 +9,7 @@ class Table extends Component {
         return (
             <table id="table-grid-container">
                 <TableHeader />
-                <TableBody />
+                <TableBody data={this.props.data} />
             </table>
         )
     }

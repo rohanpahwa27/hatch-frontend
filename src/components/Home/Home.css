@@ -6,3 +6,18 @@
     width: 100vw;
     height: 100vh;
 }
+
+#search-bar-flex-container {
+    /* Grid item properties */
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+
+    /* Flexbox container properties */
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
+}
+
+#search-bar-textbox {
+    margin-left: 10px;
+}
