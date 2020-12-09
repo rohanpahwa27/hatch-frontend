@@ -5,9 +5,9 @@ import applicantData from "./ApplicantData.js"
 import Table from "./Table/Table.js";
 import Logo from "./Logo/Logo.js"
 import SideNavBar from "./SideNavBar/SideNavBar.js"
-import Filter from "./Filter/Filter.js"
 
-import searchImage from "./Icons/search.png"
+
+import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 
 class Home extends Component {
     constructor() {
@@ -37,16 +37,7 @@ class Home extends Component {
             <div id="home-grid-container">
                 <Logo />
 
-                {/* Search and filter */}
-                <div id="search-filter-grid-item">
-                    <div id="search-filter-flex-container">
-                        <div id="search-bar-flex-container">
-                            <img id="search-icon" src={searchImage} alt="Search image" />
-                            <input id="search-bar-textbox" type="text" placeholder="search applicants" value={this.state.query} onChange={event => this.handleChange(event)} />
-                        </div>
-                        <Filter />
-                    </div>
-                </div>
+                <SearchAndFilter query={this.state.query} handleChange={this.handleChange} />
             
                 {/* Showing x out of y applicants */}
                 <div id="showing-x-applicants">
