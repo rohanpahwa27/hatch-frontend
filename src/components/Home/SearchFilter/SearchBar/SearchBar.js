@@ -6,8 +6,8 @@ class SearchBar extends Component {
     render() {
         return (
             <div id="search-bar-flex-container">
-                <img id="search-icon" src={searchImage} alt="Search image" />
-                <input id="search-bar-textbox" type="text" placeholder="search applicants" value={this.props.query} onChange={event => this.props.handleChange(event)} />
+                <img id="search-icon" src={searchImage} alt="Search" />
+                <input id="search-bar-textbox" type="text" placeholder="search applicants" value={this.props.query} onChange={event => this.props.handleSearch(event)} />
             </div>
         )
     }

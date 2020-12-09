@@ -8,7 +8,7 @@ class SearchAndFilter extends Component {
         return (
             <div id="search-filter-grid-item">
                 <div id="search-filter-flex-container">
-                    <SearchBar query={this.props.query} handleChange={this.props.handleChange} />
+                    <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
                     <Filter />
                 </div>
             </div>
