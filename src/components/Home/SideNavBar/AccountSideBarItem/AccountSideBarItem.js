@@ -7,7 +7,7 @@ class AccountSideBarItem extends Component {
 
         return (
             <div id="account-side-bar-item">
-                <img id="account-image" src={grayCircleSrc} alt="Account image" />
+                <img id="account-image" src={grayCircleSrc} alt="Account icon" />
                 <span>Account</span>
             </div>
         )
