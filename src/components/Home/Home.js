@@ -39,7 +39,7 @@ class Home extends Component {
             
                 <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={applicantData.length} />
 
-                <SideNavBar query={this.state.query} handleChange={this.handleChange} />
+                <SideNavBar />
                 <Table data={this.state.tableData} />
             </div>
         )
