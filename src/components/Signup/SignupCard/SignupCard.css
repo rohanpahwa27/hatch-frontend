@@ -7,24 +7,117 @@
     margin-top: 30px;
 }
 
-.signup-col {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-}
-
 .signup-container {
     text-align: center;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     justify-content: center;
+    grid-template-columns: 3fr 1fr 2fr;
+    grid-template-rows: repeat(3, 1fr);
     background-color: transparent !important;
-    margin-top: -50px;
+    row-gap: 1.5%;
+    column-gap: 1.5%;
+}
+
+.set-up-account{
+    margin-bottom: 10%;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #121619;
+}
+
+
+.instructions{
+    font-size: 14px;
+    line-height: 150%;
+    color: #121619;
+    width: 100%;
+    text-align: left;
+}
+
+.instructionsColumn{
+    width:90%;
+    margin-top: 10%;
+}
+
+.column{
+    width: 43%;
+    padding-top: 3%;
+    margin-left:7%;
+}
+
+.name{
+    margin-bottom: 20%;
+    font-size: 30px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #121619;
+    font-weight: bold;
+}
+
+.helper{
+    padding-top: 1.5%;
+    font-size: 12px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #697077;
+}
+
+.adminSignUp{
+    padding-top: 11%;
+    font-size: 12px;
+    line-height: 150%;
+    color: #121619;
+    text-align: left !important;
+    width: 100%;
+}
+
+.signupLink{
+    padding-top: 11%;
+    font-size: 12px;
+    line-height: 150%;
+    color: #121619;
+    text-align: left !important;
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
+
+input[type=text], [type=email], [type=password], select, textarea {
+    width: 100%; 
+    padding: 2.2%;
+    border: 1px solid #ccc;
+    background: rgba(242, 244, 248, 0.4);
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+input[type=submit] {
+    margin-top: 10%;
+    width: 30%;
+    color: white;
+    padding: 2.5% 3.5%;
+    border: none;
+    background: rgba(221, 225, 230, 0.6);
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    color: #121619;
+    float: right;
 }
 
 .signup-input {
     background-color: #f5f8fa !important;
     border-color: #f5f8fa !important;
+}
+
+.signup-col {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
 }
 
 .signup-input:hover {
@@ -68,24 +161,6 @@ margin-top: 1em !important;
 
 .signup-btn:hover {
 background-color: #2e6cc3 !important;
-}
-
-.get-started-text {
-color: white !important;
-font-size: 20px;
-}
-
-.get-started-link {
-color: white !important;
-font-size: 20px !important;
-}
-
-.get-started-link:hover {
-color: rgb(235, 235, 235) !important;
-}
-
-.get-started-link:visited {
-color: rgb(235, 235, 235) !important;
 }
 
 .invalid-credentials-container {
