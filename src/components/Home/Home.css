@@ -6,19 +6,3 @@
     width: 100vw;
     height: 100vh;
 }
-
-#showing-x-applicants {
-    /* Grid item properties */
-    grid-row: 1 / span 1;
-    grid-column: 3 / span 1;
-
-    width: 100%;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#showing-x-applicants span {
-    color: #697077;
-}
