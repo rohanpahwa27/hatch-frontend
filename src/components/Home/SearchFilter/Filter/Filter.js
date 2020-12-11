@@ -7,7 +7,6 @@ class Filter extends Component {
         return (
             <div id="filter-flex-container">
                 <img id="filter-icon" src={filterImage} alt="Filter icon" />
-                <span>Filter</span>
             </div>
         )
     }

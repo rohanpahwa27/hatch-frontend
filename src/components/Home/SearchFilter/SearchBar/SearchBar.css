@@ -6,7 +6,9 @@
     width: 50%;
     height: 44px;
 
-    background-color: rgba(242, 244, 248, 0.4);
+    margin-left: 5%;
+
+    border: 1px solid #E8EDF1;
     border-radius: 10px;
 }
 
@@ -15,13 +17,11 @@
     border: 0px;
 
     width: 85%;
-
-    background-color: rgba(242, 244, 248, 0.4);
 }
 
 #search-icon {
-    width: 14px;
-    height: 14px;
+    width: 19px;
+    height: 19px;
 
     margin-left: 10px;
 }
