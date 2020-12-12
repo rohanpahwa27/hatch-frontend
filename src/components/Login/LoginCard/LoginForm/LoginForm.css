@@ -1,0 +1,50 @@
+.label-input-container {
+    margin: 5% 0%;
+}
+
+#login-card-content input {
+    width: 100%;
+}
+
+#sign-up-links {
+    display: flex;
+}
+
+#sign-up-admin {
+    margin-left: 10px;
+} 
+
+.invalid-credentials {
+    color: red;
+}
+
+#forgot-password-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+#login-button {
+    width: 100%;
+}
+
+.img-input-container {
+    height: 52px;
+    border: 1px solid #E8EDF1;
+    border-radius: 10px;
+
+    margin-top: 1%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.img-input-container img {
+    margin-left: 10px;
+    margin-right: 5px;
+    height: 20px;
+}
+
+.img-input-container input {
+    border: 0px;
+}

@@ -1,101 +1,10 @@
-.home-card {
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid rgb(225 222 222);
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
+#home-grid-container {
+    display: grid;
+    grid-template-rows: 15% 85%;
+    grid-template-columns: 20% 40% 40%;
 
-.home-col {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-}
-
-.home-container {
-    text-align: center;
+    width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: transparent !important;
-    margin-top: -50px;
-}
 
-.home-input {
-    background-color: #f5f8fa !important;
-    border-color: #f5f8fa !important;
-}
-
-.home-input:hover {
-    background-color: white !important;
-    border-color: #c0c5c8 !important;
-}
-
-.home-input:focus {
-    border-color: #3e88ef !important;
-    background-color: white !important;
-}
-
-.welcome-text {
-    text-align: left;
-    color: black !important;
-    /* font-weight: 300;
-    font-size: 30px; */
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 150%;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.03em;
-}
-
-.forgot-text {
-color: #3e88ef !important;
-font-size: 15px;
-}
-
-.forgot-text:hover {
-color: #2e6cc3 !important;
-}
-
-.home-btn {
-background-color: #3e88ef !important;
-font-weight: 400;
-margin-top: 1em !important;
-}
-
-.home-btn:hover {
-background-color: #2e6cc3 !important;
-}
-
-.get-started-text {
-color: white !important;
-font-size: 20px;
-}
-
-.get-started-link {
-color: white !important;
-font-size: 20px !important;
-}
-
-.get-started-link:hover {
-color: rgb(235, 235, 235) !important;
-}
-
-.get-started-link:visited {
-color: rgb(235, 235, 235) !important;
-}
-
-.invalid-credentials-container {
-align-items: center;
-justify-content: center;
-color: #e44e4e;
-font-size: 15px;
-padding-top: 10px;
-}
-
-.alert-icon-container {
-padding-right: 5px;
+    background-color: #FFFFFF;
 }

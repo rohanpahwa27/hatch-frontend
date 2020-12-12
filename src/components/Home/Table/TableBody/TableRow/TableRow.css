@@ -1,0 +1,41 @@
+#table-row-grid-container {
+    /* Grid item properties */
+    height: 100%;
+    width: 100%;
+
+    /* Grid container properties */
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 4fr 1fr 1fr 2fr;
+    justify-items: flex-start;
+    align-items: center;
+}
+
+#table-row-grid-container:hover {
+    background-color: #F8F8F8;
+}
+
+.table-data-cell {
+    display: flex;
+    align-items: center;
+}
+
+.name-div {
+    padding-left: 3%;
+    width: 100%;
+}
+
+.applicant-image {
+    height: 25px;
+    border-radius: 50%;
+}
+
+.applicant-name {
+    margin-left: 3%;
+}
+
+.heart-icon, .comment-icon {
+    margin-right: 10%;
+    width: 16px;
+    height: 16px;
+}

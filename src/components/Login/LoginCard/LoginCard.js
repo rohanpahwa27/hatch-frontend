@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./LoginCard.css";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import api from "../../../Api/api.js";
+import LoginForm from "./LoginForm/LoginForm.js"
 
 const initialState = {
   email: "",
@@ -9,6 +9,7 @@ const initialState = {
   errors: []
 };
 
+// checks if email and password are empty
 function validate(email, password) {
   const errors = [];
   if (email.length === 0) {
@@ -23,6 +24,7 @@ function validate(email, password) {
 
   return [];
 }
+
 export default class LoginCard extends Component {
   constructor() {
     super();
@@ -63,75 +65,14 @@ export default class LoginCard extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <Container fluid className="login-container">
-        <div className="row">
-          <Col className = "column"
-              sm={{ span: 12 }}
-              md={{ span: 5, offset: 0 }}
-              lg={{ span: 5, offset: 0 }}
-          >
-              
-              <div className="d-flex flex-column login-card p-3 p-lg-5">
-                <div>
-                  <p className="welcome-text">Welcome back!</p>
-                </div>
-                <div>
-                  <p className="helper">Email</p>
-                  <Form onSubmit={(e) => this.handleSubmit(e)}>
-                    <Form.Group>
-                      <Form.Control
-                        type="email"
-                        className="signup-input placeholder"
-                        placeholder="type your email"
-                        value={this.state.email}
-                        onChange={this.handleEmailChange}
-                      />
-                    </Form.Group>
-                    <p className="helper">Password</p>
-                    <Form.Group>
-                      <Form.Control
-                        type="password"
-                        className="signup-input placeholder"
-                        placeholder="type your password"
-                        value={this.state.password}
-                        onChange={this.handlePasswordChange}
-                      />
-                    </Form.Group>
-                    <div>
-                    <a className = "forgot-password"href="">Forgot your password?</a>
-                    </div>
-                    <Form.Group>
-                    {errors.map(error => (
-                    <p className= "invalid-credentials-container" key={error}>{error}</p>
-                    ))}
-                    </Form.Group>
-                    <Button block size="lg" type="submit" className="login-btn">
-                      <span>Login</span>
-                    </Button>
-                  </Form>
-                </div>
-              </div>
-            </Col>
-            <Col>
-                <div>
-                  <p className="companyName">hatch</p>
-                  <p className="mission">Empowering people in organizations to recruit<br></br>members successfully, together.</p>
-                </div>
-                <div>
-                  <p className="create-account">Or create an account to get started</p>
-                  <div className="row padding">
-                    <div className = "col-sm">
-                      <a className="sign-up member" href="signup?query=member">Sign up as a member</a>
-                    </div>
-                    <div className = "col-sm">
-                      <a className="sign-up admin" href="signup?query=admin">Sign up as an admin</a>
-                    </div>
-                  </div>
-                </div>
-            </Col>
+      <div id="login-card-container"> 
+        <div id="login-card-content">
+          <h6> Welcome back! </h6>
+          <LoginForm email={this.state.email} password={this.state.password} handleSubmit={this.handleSubmit} handleEmailChange={this.handleEmailChange} handlePasswordChange={this.handlePasswordChange} errors={errors} />
+          <p id="create-account-label">Or, create an account to get started</p>
+          <a className="sign-up-link" href="signup?query=member">Sign up as a member</a> or <a className="sign-up-link" href="signup?query=admin">sign up as an admin</a>
         </div>
-        
-      </Container>
+      </div>
     );
   }
 }
