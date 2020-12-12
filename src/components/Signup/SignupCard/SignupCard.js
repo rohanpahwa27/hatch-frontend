@@ -32,7 +32,9 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
     errors.email = "Email must include \'@\' symbol"
   }
 
-  if (password.length < 6) {
+  if (password.length === 0){
+    errors.password = "Required Field"
+  } else if (password.length < 6) {
     errors.password = "Must be 6+ characters"
   }
 
@@ -92,26 +94,32 @@ class SignupCard extends React.Component {
   };
 
   handleEmailChange = evt => {
+    this.setState({ errors: {} });
     this.setState({ email: evt.target.value });
   };
 
   handlePasswordChange = evt => {
+    this.setState({ errors: {} });
     this.setState({ password: evt.target.value });
   };
 
   handleConfirmPasswordChange = evt => {
+    this.setState({ errors: {} });
     this.setState({ confirmPassword: evt.target.value });
   };
 
   handleFirstNameChange = evt => {
+    this.setState({ errors: {} });
     this.setState({ firstName: evt.target.value });
   };
 
   handleLastNameChange = evt => {
+    this.setState({ errors: {} });
     this.setState({ lastName: evt.target.value });
   };
 
   handleOrg = evt => {
+    this.setState({ errors: {} });
     this.setState({ org: evt.target.value });
   };
 
@@ -123,7 +131,7 @@ class SignupCard extends React.Component {
     let signup;
     if (!admin) {
       // submit = <input type="submit" value="Done" admin={false} onClick={(e) => this.handleSubmit(e, admin)}></input>
-      submit = <Button className= "submit" type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button>
+      submit = <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
       signup = <p className="adminSignUp">if your group doesn’t have an add code or any accounts with us yet, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
     }
     return (
