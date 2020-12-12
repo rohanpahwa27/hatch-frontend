@@ -15,19 +15,6 @@
     justify-content: center;
     background-color: transparent !important;
     align-items: center;
-    /* background-color: white;
-    border-radius: 10px;
-    border: 1px solid rgb(225 222 222);
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: left;
-    width: 50vh;
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 3fr 1fr 2fr;
-    grid-template-rows: repeat(3, 1fr);
-    background-color: transparent !important;
-    row-gap: 1.5%;
-    column-gap: 1.5%; */
 }
 
 .set-up-account{
@@ -80,7 +67,7 @@
 }
 
 .adminSignUp{
-    padding-top: 11%;
+    padding-top: 8%;
     font-size: 12px;
     line-height: 150%;
     color: #121619;
@@ -98,55 +85,14 @@
     text-decoration: underline;
 }
 
-/* input[type=text], [type=email], [type=password], select, textarea {
-    width: 100%; 
-    padding: 2.2%;
-    border: 1px solid #ccc;
-    background: rgba(242, 244, 248, 0.4);
-    border-radius: 8px;
-    box-sizing: border-box;
-  } */
+.submit{
+    float: right !important;
+    padding-left: 10% !important;
+    border-radius: 20px !important;
+}
 
 /* input[type=submit] {
-    margin-top: 10%;
-    width: 30%;
-    color: white;
-    padding: 2.5% 3.5%;
-    border: none;
-    background: rgba(221, 225, 230, 0.6);
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    color: #121619;
-    float: right;
-} */
-
-input[type=submit] {
     float:right !important;
-}
-
-/* .signup-input {
-    background: #FFFFFF !important;
-    border: 1px solid #E8EDF1 !important;
-    box-sizing: border-box !important;
-    border-radius: 12px !important;
-    width: 100% !important; 
-    padding: 2.2% !important;
-} */
-
-/* .signup-col {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-}
-
-.signup-input:hover {
-    background-color: white !important;
-    border-color: #c0c5c8 !important;
-}
-
-.signup-input:focus {
-    border-color: #3e88ef !important;
-    background-color: white !important;
 } */
 
 .welcome-text {

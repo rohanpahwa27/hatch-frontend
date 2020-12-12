@@ -28,14 +28,16 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
 
   if (email.length === 0) {
     errors.email = "Required Field"
-  }
-
-  if (!email.includes('@')){
+  } else if (!email.includes('@')){
     errors.email = "Email must include \'@\' symbol"
   }
 
   if (password.length < 6) {
     errors.password = "Must be 6+ characters"
+  }
+
+  if (confirmPassword.length == 0) {
+    errors.confirmPassword = "Required Field"
   }
 
   if (org.length === 0) {
@@ -46,7 +48,6 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
     errors.password = "Passwords don't match."
     errors.confirmPassword = " "
   }
-
   return errors;
 }
 class SignupCard extends React.Component {
@@ -60,7 +61,7 @@ class SignupCard extends React.Component {
     console.log('ADMIN HERE:', admin)
     const errors = validate(this.state.email, this.state.password, this.state.confirmPassword, this.state.firstName, this.state.lastName, this.state.org);
     console.log(errors);
-    if (errors.length > 0) {
+    if (errors) {
       this.setState({ errors: errors });
       return;
     }
@@ -122,26 +123,29 @@ class SignupCard extends React.Component {
     let signup;
     if (!admin) {
       // submit = <input type="submit" value="Done" admin={false} onClick={(e) => this.handleSubmit(e, admin)}></input>
-      submit = <Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button>
+      submit = <Button className= "submit" type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button>
       signup = <p className="adminSignUp">if your group doesn’t have an add code or any accounts with us yet, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
     }
     return (
       <div className="signup-container">
         <div className="signup-card">
+          <div className="row">
+            <div class="column"> <p>Create your Hatch account</p></div>
+            <div class="column">
+            </div>
+          </div>
           <div class="row">
             <div class="column">
               <InputField
-                // className="signup-input"
                 label="First Name"
                 placeholder="type your first name"
-                error = {this.state.errors.firstName}
+                error = {errors.firstName}
                 value={this.state.firstName}
                 onChange={this.handleFirstNameChange}
               /> 
             </div>
             <div class="column">
               <InputField
-                // className="signup-input"
                 label="Last Name"
                 placeholder="type your last name"
                 error = {this.state.errors.lastName}
@@ -153,7 +157,6 @@ class SignupCard extends React.Component {
           <div class="row">
             <div class="column">
               <InputField
-                className="signup-input"
                 label="Email"
                 error = {this.state.errors.email}
                 placeholder="type your email"
@@ -166,7 +169,6 @@ class SignupCard extends React.Component {
           <div class="row">
             <div class="column">
               <InputField
-                className="signup-input"
                 label="Password"
                 placeholder="create a password"
                 type="password"
@@ -178,7 +180,6 @@ class SignupCard extends React.Component {
             </div>
             <div class="column">
               <InputField
-                className="signup-input"
                 label="Confirm Password"
                 placeholder="retype password"
                 type="password"
@@ -190,14 +191,13 @@ class SignupCard extends React.Component {
           </div>
           <div class="row">
             <div class="column">
-            <InputField
-              className="signup-input"
-              label="Add Code"
-              placeholder= {memberIsAdmin}
-              error={this.state.errors.org}
-              value={this.state.org}
-              onChange={this.handleOrg}
-            />
+              <InputField
+                label="Add Code"
+                placeholder= {memberIsAdmin}
+                error={this.state.errors.org}
+                value={this.state.org}
+                onChange={this.handleOrg}
+              />
             </div>
             <div class="column">
               {signup}
