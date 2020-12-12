@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "js-file-download": "^0.4.12",
     "material-table": "^1.69.1",
     "query-string": "^6.13.7",
     "react": "^17.0.1",
