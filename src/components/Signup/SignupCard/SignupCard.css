@@ -1,41 +1,99 @@
 .signup-card {
-    /* background-color: transparent; */
-    /* border-radius: 10px; */
-    /* border: 1px solid rgb(225 222 222); */
-    /* box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19); */
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-
-.signup-col {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(225 222 222);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+    width: flex;
 }
 
 .signup-container {
-    text-align: center;
+    text-align: left;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: transparent !important;
-    margin-top: -50px;
+    align-items: center;
 }
 
-.signup-input {
-    background-color: #f5f8fa !important;
-    border-color: #f5f8fa !important;
+.set-up-account{
+    margin-bottom: 10%;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #121619;
 }
 
-.signup-input:hover {
-    background-color: white !important;
-    border-color: #c0c5c8 !important;
+
+.instructions{
+    font-size: 14px;
+    line-height: 150%;
+    color: #121619;
+    width: 100%;
+    text-align: left;
 }
 
-.signup-input:focus {
-    border-color: #3e88ef !important;
-    background-color: white !important;
+.instructionsColumn{
+    width:90%;
+    margin-top: 10%;
 }
+
+.column{
+    width: 43%;
+    padding-top: 3%;
+    margin-left:7%;
+}
+
+.name{
+    margin-bottom: 20%;
+    font-size: 30px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #121619;
+    font-weight: bold;
+}
+
+.helper{
+    padding-top: 1.5%;
+    font-size: 12px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #697077;
+}
+
+.adminSignUp{
+    padding-top: 8%;
+    font-size: 12px;
+    line-height: 150%;
+    color: #121619;
+    text-align: left !important;
+    width: 100%;
+}
+
+.signupLink{
+    padding-top: 11%;
+    font-size: 12px;
+    line-height: 150%;
+    color: #007F6D;
+    text-align: left !important;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.submit{
+    float: right !important;
+    padding-left: 10% !important;
+    border-radius: 20px !important;
+}
+
+/* input[type=submit] {
+    float:right !important;
+} */
 
 .welcome-text {
     text-align: left;
@@ -68,24 +126,6 @@ margin-top: 1em !important;
 
 .signup-btn:hover {
 background-color: #2e6cc3 !important;
-}
-
-.get-started-text {
-color: white !important;
-font-size: 20px;
-}
-
-.get-started-link {
-color: white !important;
-font-size: 20px !important;
-}
-
-.get-started-link:hover {
-color: rgb(235, 235, 235) !important;
-}
-
-.get-started-link:visited {
-color: rgb(235, 235, 235) !important;
 }
 
 .invalid-credentials-container {
