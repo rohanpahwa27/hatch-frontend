@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import "./Signup.css";
+import "../Login/Login.css"
 import SignupCard from "./SignupCard/SignupCard";
+import SignupLogo from "./SignupLogo/SignupLogo"
 
 export default class Signup extends Component {
   render() {
     return (
-      <div className="justify-content-center">
-        <SignupCard />
+      <div id="login-grid-container">
+        <div id="signup-grid-item">
+          <SignupLogo />
+          <SignupCard />
+        </div>
       </div>
     );
   }

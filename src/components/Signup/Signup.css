@@ -1,4 +1,12 @@
 body {
     background: #e5e5e5 !important;
 }
+
+#signup-grid-item {
+    /* Grid item properties */
+    grid-row: 1 / -1;
+    grid-column: 1 / - 1;
+
+    min-width: 50%;
+}
   

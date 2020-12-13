@@ -130,9 +130,8 @@ class SignupCard extends React.Component {
     let submit;
     let signup;
     if (!admin) {
-      // submit = <input type="submit" value="Done" admin={false} onClick={(e) => this.handleSubmit(e, admin)}></input>
       submit = <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
-      signup = <p className="adminSignUp">if your group doesn’t have an add code or any accounts with us yet, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
+      signup = <p className="adminSignUp">if your group doesn’t have an add code or a Hatch account, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
     }
     return (
       <div className="signup-container">
@@ -150,6 +149,7 @@ class SignupCard extends React.Component {
                 error = {errors.firstName}
                 value={this.state.firstName}
                 onChange={this.handleFirstNameChange}
+                maxLength="20"
               /> 
             </div>
             <div class="column">
@@ -159,6 +159,7 @@ class SignupCard extends React.Component {
                 error = {this.state.errors.lastName}
                 value={this.state.lastName}
                 onChange={this.handleLastNameChange}
+                maxLength="20"
               />
             </div>
           </div>
@@ -170,6 +171,7 @@ class SignupCard extends React.Component {
                 placeholder="type your email"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
+                maxLength="30"
               />
             </div>
             <div class="column"></div>
@@ -180,10 +182,10 @@ class SignupCard extends React.Component {
                 label="Password"
                 placeholder="create a password"
                 type="password"
-                help="6+ characters"
                 error={this.state.errors.password}
                 value={this.state.password}
                 onChange={this.handlePasswordChange}
+                maxLength="30"
               />
             </div>
             <div class="column">
@@ -194,6 +196,7 @@ class SignupCard extends React.Component {
                 error={this.state.errors.confirmPassword}
                 value={this.state.confirmPassword}
                 onChange={this.handleConfirmPasswordChange}
+                maxLength="30"
               />
             </div>
           </div>
@@ -205,6 +208,7 @@ class SignupCard extends React.Component {
                 error={this.state.errors.org}
                 value={this.state.org}
                 onChange={this.handleOrg}
+                maxLength="4"
               />
             </div>
             <div class="column">
@@ -218,112 +222,9 @@ class SignupCard extends React.Component {
             </div>
           </div>
         </div>
-      </div>
-          
-        
+      </div>   
     );
   }
 }
 
 export default withRouter(SignupCard);
-
-
-{/* <div className = "col1">
-        <div class="row">
-          <div class="column">
-            <p className="name">Hatch</p>
-          </div>
-        </div>
-          <div class="row">
-            <div class="column">
-              <InputField
-                id="firstNameInput"
-                type="text"
-                label= "First Name"
-                className="signup-input"
-                value={this.state.firstName}
-                placeholder="type your first name"
-                onChange={this.handleFirstNameChange}
-              />
-            </div>
-            <div class="column">
-              <p className="helper">Last Name</p>
-              <input
-                id="lastNameInput"
-                type="text"
-                className="signup-input"
-                placeholder="type your last name"
-                value={this.state.lastName}
-                onChange={this.handleLastNameChange}
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="column">
-              <p className="helper">Email</p>
-              <input
-                type="email"
-                type="text"
-                className="signup-input"
-                placeholder="type your email"
-                value={this.state.email}
-                onChange={this.handleEmailChange}
-              />
-            </div>
-            <div class="column"></div>
-          </div>
-          <div class="row">
-            <div class="column">
-              <p className="helper">Password (6+ characters required)</p>
-              <input
-                type="password"
-                className="signup-input"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handlePasswordChange}
-              />
-            </div>
-            <div class="column">
-              <p className="helper">Confirm</p>
-              <input
-                type="password"
-                className="signup-input"
-                placeholder="retype password"
-                value={this.state.confirmPassword}
-                onChange={this.handleConfirmPasswordChange}
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="column">
-              <p className="helper">Organization's add code</p>
-              <input
-                type="text"
-                className="signup-input"
-                placeholder= {memberIsAdmin}
-                value={this.state.org}
-                onChange={this.handleOrg}
-              />
-            </div>
-            <div class="column">
-              {signup}
-            </div>
-          </div>
-          <div className="row">
-            <div class="column"></div>
-            <div class="column">
-              {errors.map(error => (
-                    <p className= "invalid-credentials-container" key={error}>{error}</p>
-                    ))}
-              {submit}
-            </div>
-          </div>
-        </div>
-        <div className = "col2 column">
-        </div>
-        <div className = "col3 instructionsColumn">
-          <div className = "col">
-            <p className="set-up-account">Set up your account</p> 
-              <p className="instructions">We’re so excited to have you here with us!<br></br>Follow these steps to sign up as a member of your organization.</p>
-          </div>
-        </div> */}
