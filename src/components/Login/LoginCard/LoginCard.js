@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./LoginCard.css";
 import api from "../../../Api/api.js";
 import LoginForm from "./LoginForm/LoginForm.js"
+import { withRouter } from "react-router-dom";
 
 const initialState = {
   email: "",
@@ -25,7 +26,7 @@ function validate(email, password) {
   return [];
 }
 
-export default class LoginCard extends Component {
+class LoginCard extends Component {
   constructor() {
     super();
     this.state = initialState;
@@ -34,7 +35,6 @@ export default class LoginCard extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const errors = validate(this.state.email, this.state.password);
-    console.log(errors);
     if (errors.length > 0) {
       this.setState({ errors: errors });
       return;
@@ -51,7 +51,10 @@ export default class LoginCard extends Component {
       this.setState({ errors: errors });
       return;
     }
-    this.setState(initialState);
+    localStorage.setItem("userID", response.data.user._id);
+    localStorage.setItem("orgID", response.data.user.organizations[0]);
+    localStorage.setItem("isAdmin", response.data.user.admin) //stored as a string not boolean because of localStorage properties
+    this.props.history.push("/home");
   };
 
   handleEmailChange = evt => {
@@ -76,3 +79,5 @@ export default class LoginCard extends Component {
     );
   }
 }
+
+export default withRouter(LoginCard);

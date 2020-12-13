@@ -60,10 +60,9 @@ class SignupCard extends React.Component {
   
   handleSubmit = async (event, admin) => {
     event.preventDefault();
-    console.log('ADMIN HERE:', admin)
     const errors = validate(this.state.email, this.state.password, this.state.confirmPassword, this.state.firstName, this.state.lastName, this.state.org);
     console.log(errors);
-    if (errors) {
+    if (Object.keys(errors).length) {
       this.setState({ errors: errors });
       return;
     }
@@ -74,7 +73,7 @@ class SignupCard extends React.Component {
       lastName: this.state.lastName,
       admin: admin
     }
-
+    console.log(user)
     if (admin) {
       user.organizationName = this.state.org;
     } else {
@@ -83,14 +82,18 @@ class SignupCard extends React.Component {
     const response = await api.insertUser(user);
 
     if (response.data.status === "error"){
-      errors.push(response.data.message)
+      if (response.data.message == 'Organization Name taken.'){
+        errors.org = response.data.message
+      } else if (response.data.message == 'Organization Code doesn\'t exist.'){
+        errors.org = response.data.message
+      } else {
+        errors.email = response.data.message;
+      }
       this.setState({ errors: errors });
       return;
     }
 
-    localStorage.setItem("userID", response.data.user._id);
-    localStorage.setItem("orgID", response.data.user.organizations[0]);
-    this.props.history.push("/Login");
+    this.props.history.push("/login");
   };
 
   handleEmailChange = evt => {
