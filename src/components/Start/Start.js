@@ -38,6 +38,12 @@ export default class Start extends Component {
                     <span>Home</span>
                   </Button>
                 </Link>
+                <br/>
+                <Link to="/import1">
+                <Button block size="lg" className="start-btn">
+                    <span>Import Applicants</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </Col>
