@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./TableBody.css"
-import applicantData from "./../../ApplicantData.js"
-import { initializeIcons } from '@uifabric/icons';
 
 import TableRow from "./TableRow/TableRow.js"
 
@@ -10,8 +8,6 @@ from Table as a prop
 */
 class TableBody extends Component {
     render() {
-        initializeIcons();
-
         const applicantComponents = this.props.data.map((applicant, index) => {
             return (
                 <TableRow key={index} 

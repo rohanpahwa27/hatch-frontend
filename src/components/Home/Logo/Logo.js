@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./hatch-logo-transparent.png"
+import logo from "./hatch.png"
 import "./Logo.css"
 
 class Logo extends Component {

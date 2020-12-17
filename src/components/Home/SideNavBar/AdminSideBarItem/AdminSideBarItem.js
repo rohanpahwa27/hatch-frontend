@@ -6,7 +6,7 @@ class AdminSideBarItem extends Component {
     render() {
         return (
             <div id="admin-side-bar-item">
-                <img id="admin-image" src={image} alt="Admin image" />
+                <img id="admin-image" src={image} alt="Admin icon" />
                 <span>Admin</span>
             </div>
         )

@@ -8,7 +8,7 @@ class Table extends Component {
     render() {
         return (
             <table id="table-grid-container">
-                <TableHeader />
+                <TableHeader handleSort={this.props.handleSort} sortBy={this.props.sortBy} sortDirection={this.props.sortDirection} />
                 <TableBody data={this.props.data} />
             </table>
         )
