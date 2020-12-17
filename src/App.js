@@ -6,9 +6,8 @@ import Login from "./components/Login/Login";
 import Datatable from "./components/Datatable/Datatable";
 import Start from "./components/Start/Start.js";
 import Home from "./components/Home/Home.js";
-import importApplicants from "./components/Admin/importApplicants/importApplicants"
-import ImportHome from "./components/ImportHome/ImportHome.js";
-import Import from "./components/Import/Import.js";
+import ImportHome from "./components/Admin/importApplicants/ImportHome/ImportHome.js";
+import Import from "./components/Admin/importApplicants/Import/Import.js";
 
 function App() {
   return (
