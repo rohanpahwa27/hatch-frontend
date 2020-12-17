@@ -8,6 +8,8 @@
     /* Flexbox container properties */
     display: flex;
     align-items: flex-end;
+
+    background-color: rgba(239, 242, 245, 0.5);
 }
 
 #search-filter-flex-container {

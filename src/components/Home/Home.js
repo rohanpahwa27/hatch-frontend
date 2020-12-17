@@ -28,8 +28,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        console.log("Component did mount")
-
         this.sortByName(this.state.tableData, "ascending")
     }
 
