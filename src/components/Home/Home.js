@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import "./Home.css"
 import applicantData from "./ApplicantData.js"
+// import axios from "axios"
 
-import Table from "./Table/Table.js";
+import Table from "./Table/Table.js"
 import Logo from "./Logo/Logo.js"
 import SideNavBar from "./SideNavBar/SideNavBar.js"
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"

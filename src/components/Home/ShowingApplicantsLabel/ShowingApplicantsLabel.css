@@ -8,6 +8,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    background-color: rgba(239, 242, 245, 0.5);
 }
 
 #showing-x-applicants span {

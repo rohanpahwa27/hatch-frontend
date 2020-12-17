@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import "./SearchBar.css"
-import searchImage from "./Icons/search.png"
+import InputField from "@kiwicom/orbit-components/lib/InputField";
+import Search from "@kiwicom/orbit-components/lib/icons/Search";
 
 class SearchBar extends Component {
     render() {
         return (
             <div id="search-bar-flex-container">
-                <img id="search-icon" src={searchImage} alt="Search" />
-                <input id="search-bar-textbox" type="text" placeholder="search applicants" value={this.props.query} onChange={event => this.props.handleSearch(event)} />
+                <InputField id="search-bar" prefix={<Search />} type="text" value={this.props.query} onChange={event => this.props.handleSearch(event)} />
             </div>
         )
     }
