@@ -2,133 +2,111 @@ body {
     background: #ffffff !important;
 }
 
-#grid-container {
+#import-applicants-grid-container {
     display: grid;
-    grid-template-rows: 30% 10% 30% 10% 20%;
-    grid-template-columns: 20% 20% 20% 40%;
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-columns: repeat(2, 50%);
+    grid-row-gap: 20px;
+    justify-items: start;
+    align-items: center;
 
-    width: 100vw;
-    height: 100vh;
+    min-width: 1000px;
+    margin-left: 40px;
+}
+
+#back-button-item {
+    grid-column: 1 / 2;
+}
+
+#grid-item-1 {
+    grid-row: span 1;
+    grid-column: 1 / 2;
+}
+
+#download-template-item {
+    grid-row: span 1;
+    grid-column: 1 / 2;
+}
+
+#grid-item-3 {
+    grid-row: span 1;
+    grid-column: 1 / 2;
+}
+
+#upload-buttons-item {
+    grid-row: span 1;
+    grid-column: 1 / 2;
+
+    justify-self: normal;
+}
+
+#example-item {
+    grid-row: span 1;
+    grid-column: 1 / 2;
+
+    margin-top: 60px;
+}
+
+#upload-buttons-item div {
+    display: flex;
+    align-items: baseline;
+}
+
+#small-icon {
+    width: 24px;
+    height: 24px;
+}
+
+#example-image {
+    max-width: 100%;
+    height: auto;
+}
+
+#back-button {
+    background-color: #ffffff;
+    color: #252A31;
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+}
+
+#download-template-button {
+    background-color: #ffffff;
+    color: #00A991;
+    border: 0;
+    border-radius: 5px;
+}
+
+#select-file-button {
+    background-color: #E8EDF1;
+    color: #252A31;
+    padding: 20px;
+    border: 0;
+    border-radius: 5px;
+    min-width: 150px;
+}
+
+#upload-file-button {
+    background-color: #00A991;
+    color: #ffffff;
+    padding: 20px;
+    border: 0;
+    border-radius: 5px;
+    min-width: 150px;
+}
+
+#upload-text {
+    flex-grow: 1;
+    margin-left: 20px;
+
+    font-style: italic;
+    color: #5F738C;
+}
+
+#your-upload-text {
+    color: #5F738C;
+}
+
+#large {
     font-size: large;
-}
-
-#manage-applicants-flex-container {
-    /* Flexbox container properties */
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-}
-
-#applicants-text-flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 44px;
-}
-
-/* ========================== */
-
-#import-grid-container {
-    /* Grid item properties */
-    grid-row: 3 / span 1;
-    grid-column: 3 / span 1;
-
-    width: 100%;
-    height: 100%;
-    min-width: 250px;
-    min-height: 300px;
-
-    /* Grid container properties */
-    display: grid;
-    grid-template-rows: 30% 40% 30%;
-    grid-template-columns: 1fr;
-    text-align: center; /* Centers items within container*/
-}
-
-#import-icon {
-    width: 60px;
-    height: 60px;
-}
-
-#import-icon-container {
-    grid-row: 1 / span 1;
-    display: block;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-}
-
-#import-text-container {
-    grid-row: 2 / span 1;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#import-button-container {
-    grid-row: 3 / span 1;
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-    justify-content: center;
-    align-items: center;
-}
-
-#import-button {
-    width: 100%;
-    height: 70%;
-    background-color: #F2F4F8;
-    color: #121619;
-    font-weight: bold;
-    border: 0;
-    border-radius: 10px;
-}
-
-#upload-button-container {
-    grid-row: 4 / span 1;
-    grid-column: 3 / span 1;
-
-    min-width: 250px;
-
-    justify-content: center;
-    align-items: center;
-
-    display: grid;
-    grid-template-rows: 50% 50%;
-    grid-template-columns: 1fr;
-    text-align: center;
-}
-
-#upload-filename {
-    grid-row: 1 / span 1;
-
-    min-width: 250px;
-    text-align: center;
-    min-width: 250px;
-    min-height: 50px;
-}
-
-#upload-button {
-    grid-row: 2 / span 1;
-
-    min-width: 250px;
-    min-height: 50px;
-    background-color: #F2F4F8;
-    color: #121619;
-    font-weight: bold;
-    border: 0;
-    border-radius: 10px;
 }
