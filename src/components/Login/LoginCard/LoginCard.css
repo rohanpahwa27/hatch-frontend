@@ -17,6 +17,11 @@
     margin-top: 10%;
 }
 
-.sign-up-link {
+#sign-up-links {
+    display: flex;
+}
+
+#sign-up-links a {
     color: #00A991;
+    width: 50%;
 }
