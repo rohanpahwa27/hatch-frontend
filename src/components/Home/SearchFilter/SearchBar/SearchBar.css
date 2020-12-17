@@ -3,25 +3,5 @@
     justify-content: flex-start;
     align-items: center;
 
-    width: 50%;
-    height: 44px;
-
     margin-left: 5%;
-
-    border: 1px solid #E8EDF1;
-    border-radius: 10px;
-}
-
-#search-bar-textbox {
-    margin-left: 5px;
-    border: 0px;
-
-    width: 85%;
-}
-
-#search-icon {
-    width: 19px;
-    height: 19px;
-
-    margin-left: 10px;
 }
