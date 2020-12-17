@@ -70,7 +70,7 @@ class LoginCard extends Component {
     return (
       <div id="login-card-container"> 
         <div id="login-card-content">
-          <h6> Welcome back! </h6>
+          <h5> Welcome back! </h5>
           <LoginForm email={this.state.email} password={this.state.password} handleSubmit={this.handleSubmit} handleEmailChange={this.handleEmailChange} handlePasswordChange={this.handlePasswordChange} errors={errors} />
           <p id="create-account-label">Or, create an account to get started</p>
           <a className="sign-up-link" href="signup?query=member">Sign up as a member</a> or <a className="sign-up-link" href="signup?query=admin">sign up as an admin</a>
