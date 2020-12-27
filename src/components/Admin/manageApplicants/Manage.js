@@ -1,18 +1,19 @@
 import React, { Component } from "react"
 import "./Manage.css"
 import applicantData from "./ManageApplicantData.js"
-// import axios from "axios"
 
 import Table from "./Table/Table.js"
-// import Logo from "./Logo/Logo.js"
-// import SideNavBar from "./SideNavBar/SideNavBar.js"
-import SearchAndFilter from "./SearchFilter/SearchFilter.js"
-// import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
+import TableToolbar from "./TableToolbar/TableToolbar.js"
 
 class Manage extends Component {
     constructor() {
         super()
         this.state = {
+            cycleOptions: [
+                {value: 'fall-2017', label: 'Fall 2017', key: 'fall-2017'},
+                {value: 'fall-2018', label: 'Fall 2018', key: 'fall-2018'},
+            ],
+            selectedOption: "",
             tableData: applicantData, 
             query: "", 
             numApplicantsShowing: applicantData.length,
@@ -20,6 +21,7 @@ class Manage extends Component {
             sortDirection: "descending"
         }
 
+        this.handleCycleSelect = this.handleCycleSelect.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleSort = this.handleSort.bind(this)
         this.sortByName = this.sortByName.bind(this)
@@ -29,6 +31,17 @@ class Manage extends Component {
 
     componentDidMount() {
         this.sortByName(this.state.tableData, "ascending")
+    }
+
+    
+    handleCycleSelect(event) {
+        console.log(event)
+        console.log(event.target.value)
+        const cycleOption = event.target.value;
+        this.setState({
+            selectedOption: cycleOption
+        })
+        console.log(this.state)
     }
 
     handleSearch(event) {
@@ -259,7 +272,15 @@ class Manage extends Component {
         return (
             <div id="manage-applicant-grid-container">
                 {/* Pass handleSort function down all the way to TableHeader */}
-                {/* <SearchAndFilter query={this.state.query} handleSearch={this.handleSearch} /> */}
+                <TableToolbar 
+                    cycleOptions={this.state.cycleOptions}
+                    selectedOption={this.state.selectedOption}
+                    handleCycleSelect={this.handleCycleSelect}
+                    numApplicantsShowing={this.state.numApplicantsShowing}
+                    totalApplicants={applicantData.length}
+                    query={this.state.query} 
+                    handleSearch={this.handleSearch} 
+                />
                 <Table
                   data={this.state.tableData} 
                   handleSort={this.handleSort} 

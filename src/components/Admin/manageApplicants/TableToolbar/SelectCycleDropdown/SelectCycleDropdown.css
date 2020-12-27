@@ -1,0 +1,13 @@
+#select-cycle-dropdown-flex-container {
+  /* height: 44px;
+  width: 44px; */
+  margin-left: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#select-cycle-dropdown-icon {
+  height: 12px;
+}

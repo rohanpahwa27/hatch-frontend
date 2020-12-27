@@ -1,13 +1,13 @@
-#filter-flex-container {
+#toolbar-filter-flex-container {
     height: 44px;
     width: 44px;
-    margin-left: 20px;
+    margin-left: 3%;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#filter-icon {
+#toolbar-filter-icon {
     height: 12px;
 }
