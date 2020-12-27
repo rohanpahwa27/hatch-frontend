@@ -8,6 +8,7 @@ import Start from "./components/Start/Start.js";
 import Home from "./components/Home/Home.js";
 import ImportHome from "./components/Admin/importApplicants/ImportHome/ImportHome.js";
 import Import from "./components/Admin/importApplicants/Import/Import.js";
+import Manage from "./components/Admin/manageApplicants/Manage.js";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/Home" component={Home} />
       <Route path="/import1" component={ImportHome} />
       <Route path="/import2" component={Import} />
+      <Route path="/manage" component={Manage} />
     </Router>
   );
 }

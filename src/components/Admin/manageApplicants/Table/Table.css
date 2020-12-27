@@ -1,0 +1,15 @@
+#manage-table-grid-container {
+    /* Grid item properties */
+    grid-row: 2 / -1;
+    grid-column: 1 / -1;
+
+    width: 100%;
+    height: 100%;
+    
+    border-left: 2px solid #E8EDF1;
+
+    /* Grid container properties */
+    display: grid;
+    grid-template-rows: 5% 95%;
+    grid-template-columns: 1fr;
+}

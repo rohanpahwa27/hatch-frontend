@@ -1,0 +1,12 @@
+body {
+  background: #ffffff !important;
+}
+
+#manage-applicant-grid-container {
+  display: grid;
+  grid-template-rows: 15% 85%;
+  justify-items: start;
+  align-items: center;
+
+  min-width: 1000px;
+}

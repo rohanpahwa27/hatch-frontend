@@ -1,0 +1,7 @@
+#search-bar-flex-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-left: 5%;
+}

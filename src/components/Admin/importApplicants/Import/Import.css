@@ -11,24 +11,14 @@ body {
     align-items: center;
 
     min-width: 1000px;
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 #back-button-item {
     grid-column: 1 / 2;
 }
 
-#grid-item-1 {
-    grid-row: span 1;
-    grid-column: 1 / 2;
-}
-
 #download-template-item {
-    grid-row: span 1;
-    grid-column: 1 / 2;
-}
-
-#grid-item-3 {
     grid-row: span 1;
     grid-column: 1 / 2;
 }
@@ -66,6 +56,7 @@ body {
     background-color: #ffffff;
     color: #252A31;
     font-weight: bold;
+
     border: 0;
     border-radius: 5px;
 }
@@ -73,6 +64,7 @@ body {
 #download-template-button {
     background-color: #ffffff;
     color: #00A991;
+
     border: 0;
     border-radius: 5px;
 }
@@ -80,19 +72,19 @@ body {
 #select-file-button {
     background-color: #E8EDF1;
     color: #252A31;
-    padding: 20px;
+
+    padding: 12px 16px 12px 16px;
     border: 0;
     border-radius: 5px;
-    min-width: 150px;
 }
 
 #upload-file-button {
     background-color: #00A991;
     color: #ffffff;
-    padding: 20px;
+
+    padding: 12px 16px 12px 16px;
     border: 0;
     border-radius: 5px;
-    min-width: 150px;
 }
 
 #upload-text {
