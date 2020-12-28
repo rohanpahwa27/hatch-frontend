@@ -14,7 +14,8 @@ class ManageMembers extends Component {
             selected: new Set(),
             numMembersShowing: memberData.length,
             sortBy: "name",
-            sortDirection: "descending"
+            sortDirection: "descending",
+            orgCode: "1234"
         }
         this.handleSearch = this.handleSearch.bind(this)
         this.handleSelected = this.handleSelected.bind(this)
@@ -28,10 +29,15 @@ class ManageMembers extends Component {
         this.sortByEmail = this.sortByEmail.bind(this)
         this.sortByAdmin = this.sortByAdmin.bind(this)
         this.selectAll = this.selectAll.bind(this)
+        this.generateOrgCode = this.generateOrgCode.bind(this)
     }
 
     componentDidMount() {
         this.sortByName(this.state.tableData, "ascending")
+    }
+
+    generateOrgCode(){
+        this.setState({orgCode: "0527"})
     }
 
     isSelected(memberID){
@@ -332,7 +338,9 @@ class ManageMembers extends Component {
      }
 
     updateMembers(){
-        console.log('UPDATEDDDDD')
+        //make request to backend with list of members to delete
+        //set state to result
+        //this.setState({tableData:...})
         this.setState({selected: new Set()})
     }
 
@@ -347,8 +355,7 @@ class ManageMembers extends Component {
         return (
             <div id="manage-members-grid-container">
                 {/* Pass handleSort function down all the way to TableHeader */}
-                {/* <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} /> */}
-                <Search query={this.state.query} handleSearch={this.handleSearch}/>
+                <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
                 <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
                 <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
             </div>
