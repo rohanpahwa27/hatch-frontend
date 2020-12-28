@@ -1,0 +1,37 @@
+.updateMembers-container {
+    background-color: white;
+    width: 25%;
+    box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
+    border-radius: 3px; 
+    position: absolute;
+    right: 3%;
+    bottom: 5%;
+}
+
+.updateMembers-card {
+    margin: 5% 10%;
+}
+
+#numMembersSelected{
+    font-size: 16px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+}
+
+#updateMemberAccountStatus{
+    font-size: 14px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #252A31;
+}
+
+#updateToAdminMember{
+    padding-bottom: 50%;
+}
+
+#deleteMembers{
+    background: #FAEAEA;
+    border-radius: 3px;
+}
