@@ -5,9 +5,9 @@
     line-height: 150%;
 }
 
-div:last-of-type {
+/* div:last-of-type {
     margin-left: auto;
-}
+} */
 
 #generateOrgCodeAdminSectionMember{
     font-weight: 500;

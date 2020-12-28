@@ -4,10 +4,12 @@
 }
 
 #member-search-flex-container {
-    /* Flexbox container properties */
     display: flex;
-    /* flex-direction: column; */
     justify-content: flex-start;
+}
+
+#member-search-flex-container > div:last-of-type {
+    margin-left: auto;
 }
 
 #member-search-flex-container > div{
