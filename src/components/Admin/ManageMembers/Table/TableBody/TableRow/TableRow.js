@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import "./TableRow.css"
-import likesImage from "./Icons/heart.png"
 import Checkbox from "@kiwicom/orbit-components/lib/Checkbox";
 
 
