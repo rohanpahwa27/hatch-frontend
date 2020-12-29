@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Manage.css";
 import applicantData from "./ManageApplicantData.js";
+import Navbar from "../../Navbar/Navbar.js";
 
 import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
@@ -8,7 +9,7 @@ import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js
 
 class Manage extends Component {
     constructor() {
-        super()
+        super();
         this.state = {
             cycleOptions: [
                 { value: 'fall-2017', label: 'Fall 2017', key: 'fall-2017' },
@@ -21,7 +22,7 @@ class Manage extends Component {
             numApplicantsShowing: applicantData.length,
             sortBy: "name",
             sortDirection: "descending"
-        }
+        };
 
         this.handleCycleSelect = this.handleCycleSelect.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
@@ -37,20 +38,20 @@ class Manage extends Component {
     }
 
     componentDidMount() {
-        this.sortByName(this.state.tableData, "ascending")
+        this.sortByName(this.state.tableData, "ascending");
     }
 
 
     isSelected(applicantId) {
-        console.log('ISSELECTED', this.state.selected.has(applicantId))
-        return this.state.selected.has(applicantId)
+        console.log('ISSELECTED', this.state.selected.has(applicantId));
+        return this.state.selected.has(applicantId);
     }
 
     handleSelected(applicantId) {
-        const selected = this.state.selected
+        const selected = this.state.selected;
         selected.has(applicantId) ? selected.delete(applicantId) : selected.add(applicantId);
         this.setState({ selected: selected });
-        console.log(this.state.selected)
+        console.log(this.state.selected);
         return;
     }
 
@@ -61,28 +62,24 @@ class Manage extends Component {
         }
         let selectAll = new Set();
         this.state.tableData.map((member) => {
-            selectAll.add(member.objectID)
+            selectAll.add(member.objectID);
         })
-        this.setState({ selected: selectAll })
+        this.setState({ selected: selectAll });
     }
 
     handleCycleSelect(event) {
-        console.log(event)
-        console.log(event.target.value)
         const cycleOption = event.target.value;
-        console.log(cycleOption)
         this.setState({
             selectedOption: cycleOption
         })
-        console.log(this.state.selectedOption)
     }
 
     handleSearch(event) {
-        const queryText = event.target.value
+        const queryText = event.target.value;
 
         // filtering applicantData is the problem here
         const filteredApplicants = applicantData.filter(applicant => {
-            const applicantFullName = applicant.firstName + " " + applicant.lastName
+            const applicantFullName = applicant.firstName + " " + applicant.lastName;
             return applicantFullName.toLowerCase().indexOf(queryText) > -1;
         })
 
@@ -96,19 +93,18 @@ class Manage extends Component {
 
         // console.log(filteredApplicants.length)
         if (this.state.sortBy === "name") {
-            this.sortByName(filteredApplicants, this.state.sortDirection)
+            this.sortByName(filteredApplicants, this.state.sortDirection);
         }
         else if (this.state.sortBy === "avgScore") {
-            this.sortByAvgScore(filteredApplicants, this.state.sortDirection)
+            this.sortByAvgScore(filteredApplicants, this.state.sortDirection);
         }
         else if (this.state.sortBy === "votes") {
-            this.sortByVotes(filteredApplicants, this.state.sortDirection)
+            this.sortByVotes(filteredApplicants, this.state.sortDirection);
         }
     }
 
     handleSort(event) {
         const classNames = event.target.className;
-        console.log(classNames)
 
         // if the name header is clicked
         if (classNames.indexOf("name") > -1) {
@@ -122,7 +118,7 @@ class Manage extends Component {
                 direction = "descending";
             }
 
-            this.sortByName(this.state.tableData, direction)
+            this.sortByName(this.state.tableData, direction);
         }
 
         // if the avgScore header is clicked
@@ -131,7 +127,7 @@ class Manage extends Component {
             if (this.state.sortBy === "avgScore" && this.state.sortDirection === "descending") {
                 direction = "ascending";
             }
-            this.sortByAvgScore(this.state.tableData, direction)
+            this.sortByAvgScore(this.state.tableData, direction);
         }
         // if the votes header is clicked
         else if (classNames.indexOf("votes") > -1) {
@@ -139,7 +135,7 @@ class Manage extends Component {
             if (this.state.sortBy === "votes" && this.state.sortDirection === "descending") {
                 direction = "ascending";
             }
-            this.sortByVotes(this.state.tableData, direction)
+            this.sortByVotes(this.state.tableData, direction);
         }
     }
 
@@ -306,31 +302,34 @@ class Manage extends Component {
 
     render() {
         return (
-            <div id="manage-applicant-grid-container">
-                {/* Pass handleSort function down all the way to TableHeader */}
-                <TableToolbar
-                    cycleOptions={this.state.cycleOptions}
-                    selectedOption={this.state.selectedOption}
-                    handleCycleSelect={this.handleCycleSelect}
-                    numApplicantsShowing={this.state.numApplicantsShowing}
-                    totalApplicants={applicantData.length}
-                    query={this.state.query}
-                    handleSearch={this.handleSearch}
-                />
-                <Table
-                    data={this.state.tableData}
-                    handleSelected={this.handleSelected}
-                    selectAll={this.selectAll} 
-                    isSelected={this.isSelected}
-                    handleSort={this.handleSort}
-                    sortBy={this.state.sortBy}
-                    sortDirection={this.state.sortDirection}
-                />
-                <UpdateApplicantsCard
-                    numSelected={this.state.selected.size}
-                    deleteMembers={this.deleteMembers}
-                    updateApplicants={this.updateApplicants}
-                />
+            <div id="navbar-content-grid-container">
+                <Navbar />
+                <div id="manage-applicant-grid-container">
+                    {/* Pass handleSort function down all the way to TableHeader */}
+                    <TableToolbar
+                        cycleOptions={this.state.cycleOptions}
+                        selectedOption={this.state.selectedOption}
+                        handleCycleSelect={this.handleCycleSelect}
+                        numApplicantsShowing={this.state.numApplicantsShowing}
+                        totalApplicants={applicantData.length}
+                        query={this.state.query}
+                        handleSearch={this.handleSearch}
+                    />
+                    <Table
+                        data={this.state.tableData}
+                        handleSelected={this.handleSelected}
+                        selectAll={this.selectAll}
+                        isSelected={this.isSelected}
+                        handleSort={this.handleSort}
+                        sortBy={this.state.sortBy}
+                        sortDirection={this.state.sortDirection}
+                    />
+                    <UpdateApplicantsCard
+                        numSelected={this.state.selected.size}
+                        deleteMembers={this.deleteMembers}
+                        updateApplicants={this.updateApplicants}
+                    />
+                </div>
             </div>
         )
     }

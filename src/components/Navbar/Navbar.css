@@ -1,0 +1,40 @@
+body {
+  background: #ffffff !important;
+}
+
+#grid-container {
+  position: absolute;
+  display: grid;
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-columns: repeat(2, 50%);
+  justify-items: start;
+  align-items: center;
+
+  min-width: 1000px;
+}
+
+
+#grid-item-1 {
+  grid-row: span 1;
+  grid-column: 1 / span 1;
+}
+
+#grid-item-2 {
+  grid-row: span 1;
+  grid-column: 1 / span 1;
+}
+
+#grid-item-3 {
+  grid-row: span 1;
+  grid-column: 1 / span 1;
+}
+
+#grid-item-4 {
+  grid-row: span 1;
+  grid-column: 1 / span 1;
+}
+
+#grid-item-5 {
+  grid-row: span 1;
+  grid-column: 1 / span 1;
+}
