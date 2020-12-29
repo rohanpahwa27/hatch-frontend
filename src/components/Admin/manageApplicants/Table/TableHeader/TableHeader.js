@@ -6,33 +6,33 @@ import downArrow from "./Icons/down.png"
 
 class TableHeader extends Component {
     render() {
-        const sortBy = this.props.sortBy
-        const sortDirection = this.props.sortDirection
+        const sortBy = this.props.sortBy;
+        const sortDirection = this.props.sortDirection;
 
         return (
-            <thead id="table-header-manage-grid-container">
-                <tr id="table-header-manage-row-grid-container">
+            <thead id="applicant-table-header-grid-container">
+                <tr id="applicant-table-header-row-grid-container">
 
-                    <th id="select-header-manage">Select</th>
+                    <th id="applicant-select-header" onClick={event => this.props.selectAll(event)}>Select</th>
 
-                    <th id="name-header-manage" className="name-header-manage-click-area" onClick={event => this.props.handleSort(event)}>
-                        <span className="column-header-manage-span name-header-manage-click-area" style={sortBy === "name" ? {fontWeight: "bold"} : null}>Name</span> 
+                    <th id="applicant-name-header" className="name-header-click-area" onClick={event => this.props.handleSort(event)}>
+                        <span className="applicant-column-header-span name-header-click-area" style={sortBy === "name" ? {fontWeight: "bold"} : null}>Name</span> 
                         {sortBy === "name" ? 
-                        <img className="sort-arrow name-header-manage-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
+                        <img className="sort-arrow name-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
                     </th>
 
-                    <th id="tags-header-manage">Tags</th>
+                    <th id="applicant-tags-header">Tags</th>
 
-                    <th id="likes-header-manage" className="likes-header-manage-click-area" onClick={event => this.props.handleSort(event)}>
-                        <span className="column-header-manage-span likes-header-manage-click-area" style={sortBy === "score" ? {fontWeight: "bold"} : null}>Avg. score</span>
-                        {sortBy === "score" ? 
-                        <img className="sort-arrow likes-header-manage-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
+                    <th id="applicant-avgScore-header" className="avgScore-header-click-area" onClick={event => this.props.handleSort(event)}>
+                        <span className="applicant-column-header-span avgScore-header-click-area" style={sortBy === "avgScore" ? {fontWeight: "bold"} : null}>Avg. score</span>
+                        {sortBy === "avgScore" ? 
+                        <img className="sort-arrow avgScore-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
                     </th>
 
-                    <th id="comments-header-manage" className="comments-header-manage-click-area" onClick={event => this.props.handleSort(event)}>
-                        <span className="column-header-manage-span comments-header-manage-click-area" style={sortBy === "votes" ? {fontWeight: "bold"} : null}>Votes</span>
+                    <th id="applicant-votes-header" className="votes-header-click-area" onClick={event => this.props.handleSort(event)}>
+                        <span className="applicant-column-header-span votes-header-click-area" style={sortBy === "votes" ? {fontWeight: "bold"} : null}>Votes</span>
                         {sortBy === "votes" ? 
-                        <img className="sort-arrow comments-header-manage-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
+                        <img className="sort-arrow votes-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
                     </th>
                 </tr>
             </thead>
@@ -40,4 +40,4 @@ class TableHeader extends Component {
     }
 }
 
-export default TableHeader
+export default TableHeader;

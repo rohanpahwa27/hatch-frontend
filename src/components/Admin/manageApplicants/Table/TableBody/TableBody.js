@@ -10,13 +10,18 @@ class TableBody extends Component {
     render() {
         const applicantComponents = this.props.data.map((applicant, index) => {
             return (
-                <TableRow key={index} 
-                          firstName={applicant.firstName} 
-                          lastName={applicant.lastName} 
-                          imgURL={applicant.imgURL}
-                          likes={applicant.likes} 
-                          comments={applicant.comments} 
-                          tags={applicant.tags} />
+                <TableRow
+                    key={index}
+                    applicantId={applicant.objectID}
+                    firstName={applicant.firstName}
+                    lastName={applicant.lastName}
+                    imgURL={applicant.imgURL}
+                    avgScore={applicant.avgScore}
+                    votes={applicant.votes}
+                    tags={applicant.tags}
+                    handleSelected={this.props.handleSelected}
+                    isSelected={this.props.isSelected}
+                />
             )
         })
 

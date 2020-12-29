@@ -1,4 +1,4 @@
-#applicant-table-header-grid-container {
+#member-table-header-grid-container {
     /* Grid item properties*/
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
@@ -8,11 +8,11 @@
     background-color: rgba(239, 242, 245, 0.5);
 }
 
-#applicant-table-header-row-grid-container {
+#member-table-header-row-grid-container {
     /* Grid container properties */
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 2fr 2fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 3fr 3fr 1fr 1fr 1fr;
     justify-items: flex-start;
     align-items: center;
 
@@ -23,7 +23,7 @@
     box-shadow: 0px 6px 4px -4px #E8EDF1;
 }
 
-#applicant-table-header-row-grid-container th {
+#member-table-header-row-grid-container th {
     grid-row: 1 / span 1;
 
     width: 100%;
@@ -33,46 +33,44 @@
     align-items: center;
 }
 
-#applicant-select-header {
+#member-select-header {
     grid-column: 1 / span 1;
-    
-    font-weight: normal;
-    border-right: 1px solid #E8EDF1;
-    justify-content: center;
+    padding-left: 7%;
+    width: 93%;
+    height: 100%;
+    font-weight:normal;
+    font-size: .87vw;
 }
 
-#applicant-name-header {
+#member-name-header {
     grid-column: 2 / span 1;
-    border-right: 1px solid #E8EDF1;
     padding-left: 3%;
+    width: 97%;
+    height: 100%;
 }
 
-#applicant-tags-header {
+#member-email-header {
     grid-column: 3 / span 1;
-    font-weight: normal;
-    border-right: 1px solid #E8EDF1;
-    padding-left: 3%;
 }
 
-#applicant-avgScore-header {
+#member-comments-header {
     grid-column: 4 / span 1;
-    border-right: 1px solid #E8EDF1;
-    padding-left: 3%;
 }
 
-#applicant-votes-header {
+#member-votes-header {
     grid-column: 5 / span 1;
-    border-right: 1px solid #E8EDF1;
-    padding-left: 3%;
+}
+
+#member-admin-header {
+    grid-column: 6 / span 1;
 }
 
 .sort-arrow {
     width: 20px;
     height: 20px;
-
     margin-left: 5px;
 }
 
-.applicant-column-header-span {
+.column-header-span {
     font-weight: normal;
 }
