@@ -1,0 +1,10 @@
+#applicant-grid-container {
+    display: grid;
+    grid-template-rows: 15% 15% 15% 55%;
+    grid-template-columns: 20% 60% 25%;
+
+    width: 95vw;
+    height: 100vh;
+
+    background-color: #FFFFFF;
+}

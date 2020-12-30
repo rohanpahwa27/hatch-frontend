@@ -1,0 +1,9 @@
+#sidenavbar {
+    /* Grid item properties*/
+    grid-row: 2 / -1;
+    grid-column: 1 / span 3;
+
+    /* Flexbox container properties*/
+    display: flex;
+    flex-direction: column;
+}

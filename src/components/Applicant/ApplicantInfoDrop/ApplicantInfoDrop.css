@@ -1,0 +1,53 @@
+#applicantinfodrop {
+    /* Grid item properties*/
+    grid-row: 4 / span 1;
+    grid-column: 3/ span 1;
+
+    /* font-family: Neue Haas Unica W1G; */
+    font-style: normal;
+    font-weight: normbal;
+    font-size: 17px;
+    line-height: 100%;
+
+    padding: 20px 20px 10px 10px;
+}
+
+#collapse {
+    border: 1px solid #E8EDF1;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px -4px #E8EDF1;
+    border-radius: 3px;
+    border-bottom: 1px solid #E8EDF1;
+    padding: 20px 15px 10px 15px;
+}
+
+/* TODO: Figure out how to get shadows + border */
+/* #onclick {
+    box-shadow: 6px 6px 6px -4px  #E8EDF1 6px 6px 6px -4px  #E8EDF1;
+} */
+
+#title {
+    /* font-family: Neue Haas Unica W1G; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+
+    display: flex;
+    align-items: center;
+    color: #5F738C;
+    padding: 12px 0px 3px 0px;
+}
+
+#info {
+    /* font-family: Neue Haas Unica W1G; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 150%;
+
+    padding: 0px 0px 0px 0px;
+
+    display: flex;
+    align-items: center;
+}
