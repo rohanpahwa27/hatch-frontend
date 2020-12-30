@@ -2,8 +2,6 @@ import React, { Component } from "react"
 import "./TableRow.css"
 import Checkbox from "@kiwicom/orbit-components/lib/Checkbox";
 
-
-
 const Check = ({ memberID, handleSelected, isSelected}) => {
     let [checked] = React.useState(false);
     checked = isSelected(memberID)
