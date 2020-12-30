@@ -1,0 +1,44 @@
+#member-table-row-grid-container {
+    /* Grid item properties */
+    height: 100%;
+    width: 100%;
+
+    /* Grid container properties */
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 1fr 3fr 3fr 1fr 1fr 1fr;
+    justify-items: flex-start;
+    align-items: center;
+}
+
+#member-table-row-grid-container:hover {
+    background-color: #F8F8F8;
+}
+
+.checkbox{
+    padding-left: 7%;
+}
+
+.table-data-cell {
+    display: flex;
+    align-items: center;
+}
+
+.name-div {
+    padding-left: 3%;
+    width: 100%;
+}
+
+.member-name {
+    margin-left: 3%;
+}
+
+.row-item{
+    font-size: 1vw;
+}
+
+.check-icon{
+    margin-right: 10%;
+    width: 16px;
+    height: 16px;
+}

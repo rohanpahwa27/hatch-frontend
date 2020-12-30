@@ -1,0 +1,18 @@
+#member-search-grid-item {
+    background-color: rgba(239, 242, 245, 0.5);
+    padding-bottom: 1%;
+}
+
+#member-search-flex-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#member-search-flex-container > div:last-of-type {
+    margin-left: auto;
+}
+
+#member-search-flex-container > div{
+    padding: 1%;
+    padding-bottom: 0%;
+}
