@@ -1,0 +1,22 @@
+#sortcomment {
+    /* Grid item properties*/
+    grid-row: 3 / span 1;
+    grid-column: 3/ span 1;
+    width:100%;
+
+    /* border-left:5px solid #E8EDF1; */
+
+    /* font-family: Neue Haas Unica W1G; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 150%;
+
+    color:#5F738C;
+
+    padding: 10px 40px 10px 10px;
+}
+
+#select {
+    padding: 20px 10px 10px 10px;
+}

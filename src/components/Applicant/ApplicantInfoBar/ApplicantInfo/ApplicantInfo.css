@@ -1,0 +1,52 @@
+#applicant-info-item {
+    /* Grid item properties */
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: left;
+    padding: 10px 0px;
+
+    width: 100%;
+}
+
+#applicant-name {
+    /* font-family: Neue Haas Unica W16; */
+    font-style: normal;
+    font-size: 22px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+}
+
+#applicant-image {
+    margin: 20px 20px 20px 30px;
+    display: block;
+    height: 70px;
+    border-radius: 50%;
+}
+
+#heart-image {
+    margin: 5px 3px 5px 20px;
+    display: block;
+    height: 25px;
+    border-radius: 50%;
+}
+
+#chat-image {
+    margin: 4px 3px 5px 20px;
+    display: block;
+    height: 22px;
+    border-radius: 50%;
+}
+
+#applicant-info {
+    /* font-family: Neue Haas Unica W16; */
+    font-style: normal;
+    font-size: 17px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+}
