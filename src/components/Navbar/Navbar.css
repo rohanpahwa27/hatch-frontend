@@ -4,8 +4,8 @@ body {
 
 #navbar-content-grid-container {
   display: grid;
-  grid-template-rows: 10% 90%;
-  grid-template-columns: 100%;
+  grid-template-rows: 125px;
+  /* grid-template-columns: 100%; */
 
   min-width: 1000px;
 }
@@ -42,10 +42,9 @@ body {
 
 #navbar-applicants-link-item {
   margin-right: 3%;
-  border: 2px;
 }
 
-#navbar-members-link-item:hover {
+#navbar-members-link-item {
   
 }
 
