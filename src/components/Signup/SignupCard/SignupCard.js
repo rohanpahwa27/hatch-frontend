@@ -71,7 +71,7 @@ class SignupCard extends React.Component {
       password: this.state.password,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      admin: admin
+      isAdmin: admin
     }
     console.log(user)
     if (admin) {
