@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import "./Home.css"
-import axios from "axios"
 
 import Table from "./Table/Table.js"
 import Logo from "./Logo/Logo.js"
@@ -8,9 +7,7 @@ import SideNavBar from "./SideNavBar/SideNavBar.js"
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
 
-const api = axios.create({
-    baseURL: "http://localhost:3000"
-})
+import api from "../../Api/api"
 
 class Home extends Component {
     constructor() {
@@ -35,7 +32,7 @@ class Home extends Component {
 
     componentDidMount() {
         const orgId = localStorage.getItem("orgID");
-        api.get(`/applicants/${orgId}`)
+        api.getApplicantsInOrg(orgId)
             .then(res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
