@@ -25,6 +25,7 @@ class Home extends Component {
         this.sortByName = this.sortByName.bind(this)
         this.sortByLikes = this.sortByLikes.bind(this)
         this.sortByComments = this.sortByComments.bind(this)
+        // this.handleFilter = this.handleFilter.bind(this)
     }
 
     componentDidMount() {
@@ -59,6 +60,10 @@ class Home extends Component {
             this.sortByComments(filteredApplicants, this.state.sortDirection)
         }
     }
+
+    // handleFilter(event) {
+    //     const 
+    // }
 
     handleSort(event) {
         const classNames = event.target.className
