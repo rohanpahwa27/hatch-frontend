@@ -19,7 +19,6 @@ const RadioButton = ({label, updateMembers}) => {
 class UpdateMembersCard extends Component {
     render() {
         const numSelectedText = (this.props.numSelected > 1) ? "members selected":"member selected" 
-        console.log(this.props.numSelected)
         return (
             (this.props.numSelected > 0) ?
             <div className="updateMembers-container">

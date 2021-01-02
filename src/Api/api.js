@@ -11,12 +11,16 @@ export const downloadTemplate = () => api.get("/downloadTemplate", {responseType
   FileDownload(response.data, 'applicantTemplate.xlsx');
 });
 export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
+export const getAllMembers = () => api.get(`/members/${localStorage.getItem('orgID')}`)
+export const getOrganization = () => api.get(`/organizations/${localStorage.getItem('orgID')}`)
 
 const apis = {
   insertUser,
   loginUser,
   downloadTemplate,
-  uploadApplicantInfo
+  uploadApplicantInfo,
+  getAllMembers,
+  getOrganization
 };
 
 export default apis;

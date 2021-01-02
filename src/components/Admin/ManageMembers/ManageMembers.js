@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import "./ManageMembers.css"
-import memberData from "./MemberData"
 import Table from "./Table/Table"
 import UpdateMembersCard from "./UpdateMembersCard/UpdateMembersCard"
 import Search from "./Search/Search"
+import api from "../../../Api/api"
 
+var memberData = []
 class ManageMembers extends Component {
     constructor() {
         super()
@@ -32,7 +33,21 @@ class ManageMembers extends Component {
         this.generateOrgCode = this.generateOrgCode.bind(this)
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
+        try {
+            const memberResponse = await api.getAllMembers();
+            memberData = memberResponse.data.members
+            const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+            if (index > -1) memberData.splice(index, 1);
+            console.log(memberData)
+
+            const organizationResponse = await api.getOrganization()
+            const orgCode = organizationResponse.data.organization.addCode
+            this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode})
+        } catch (error) {
+            
+        }
+        
         this.sortByName(this.state.tableData, "ascending")
     }
 
@@ -41,7 +56,6 @@ class ManageMembers extends Component {
     }
 
     isSelected(memberID){
-        console.log('ISSELECTED', this.state.selected.has(memberID))
         return this.state.selected.has(memberID)
     }
 

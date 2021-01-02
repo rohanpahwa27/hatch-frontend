@@ -11,14 +11,13 @@ class TableBody extends Component {
         const memberComponents = this.props.data.map((member, index) => {
             return (
                 <TableRow key={index}
-                          memberID={member.objectID} 
+                          memberID={member._id} 
                           firstName={member.firstName} 
                           lastName={member.lastName} 
                           imgURL={member.imgURL}
-                          votes={member.votes} 
-                          comments={member.comments} 
+                          comments={member.numComments} 
                           email={member.email} 
-                          admin = {member.admin}
+                          admin = {member.isAdmin}
                           handleSelected={this.props.handleSelected}
                           isSelected={this.props.isSelected}/>
             )
