@@ -32,7 +32,7 @@ class Home extends Component {
 
     componentDidMount() {
         const orgId = localStorage.getItem("orgID");
-        api.getApplicantsByOrgId(orgId)
+        api.getApplicantsInOrg(orgId)
             .then(res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
