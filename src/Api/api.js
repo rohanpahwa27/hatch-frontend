@@ -5,6 +5,10 @@ const api = axios.create({
   baseURL: "http://localhost:3000",
 });
 
+// Applicants 
+export const getApplicantsAcrossAllOrgs = () => api.get("/applicants")
+export const getApplicantsByOrgId = orgId => api.get(`/applicants/${orgId}`)
+
 export const insertUser = (payload) => api.post("/signup", payload);
 export const loginUser = (payload) => api.post("/login", payload);
 export const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob'}).then((response) => {
@@ -16,7 +20,9 @@ const apis = {
   insertUser,
   loginUser,
   downloadTemplate,
-  uploadApplicantInfo
+  uploadApplicantInfo,
+  getApplicantsAcrossAllOrgs,
+  getApplicantsByOrgId
 };
 
 export default apis;
