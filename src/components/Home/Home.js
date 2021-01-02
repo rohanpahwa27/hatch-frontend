@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import "./Home.css"
-import applicantData from "./ApplicantData.js"
-// import axios from "axios"
+import axios from "axios"
 
 import Table from "./Table/Table.js"
 import Logo from "./Logo/Logo.js"
@@ -9,13 +8,20 @@ import SideNavBar from "./SideNavBar/SideNavBar.js"
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
 
+const api = axios.create({
+    baseURL: "http://localhost:3000"
+})
+
 class Home extends Component {
     constructor() {
         super()
+        // allApplicants is all of the applicants in the organization
+        // tableData is only the applicants currently showing in the table
         this.state = {
-            tableData: applicantData, 
+            allApplicants: [],
+            tableData: [], 
             query: "", 
-            numApplicantsShowing: applicantData.length,
+            numApplicantsShowing: 0,
             sortBy: "name",
             sortDirection: "descending"
         }
@@ -28,14 +34,42 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        const orgId = localStorage.getItem("orgID");
+        api.get(`/applicants/${orgId}`)
+            .then(res => {
+                const applicants = res.data.applicants.map(applicant => {
+                    const applicantInfo = {
+                        firstName: applicant.firstName,
+                        lastName: applicant.lastName,
+                        email: applicant.email,
+                        likes: Math.floor(Math.random() * 50),
+                        comments: Math.floor(Math.random() * 20),
+                        extraFields: applicant.extraFields,
+                        status: applicant.status,
+                        recruitingCycle: applicant.recruitingCycle,
+                        organization: applicant.organization,
+                        imgURL: "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
+                    }
+                    return applicantInfo
+                })
+
+                this.setState({
+                    allApplicants: applicants,
+                    tableData: applicants,
+                    numApplicantsShowing: applicants.length
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
         this.sortByName(this.state.tableData, "ascending")
     }
 
     handleSearch(event) {
         const queryText = event.target.value
 
-        // filtering applicantData is the problem here
-        const filteredApplicants = applicantData.filter(applicant => {
+        const filteredApplicants = this.state.allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName
             return applicantFullName.toLowerCase().indexOf(queryText) > -1;
         })
@@ -261,7 +295,7 @@ class Home extends Component {
                 <Logo />
                 <SearchAndFilter query={this.state.query} handleSearch={this.handleSearch} />
             
-                <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={applicantData.length} />
+                <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={this.state.allApplicants.length} />
 
                 <SideNavBar />
 
