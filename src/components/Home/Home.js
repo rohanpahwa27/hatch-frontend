@@ -15,6 +15,7 @@ class Home extends Component {
         this.state = {
             tableData: applicantData, 
             query: "", 
+            filters: new Set(["active"]),
             numApplicantsShowing: applicantData.length,
             sortBy: "name",
             sortDirection: "descending"
@@ -25,11 +26,33 @@ class Home extends Component {
         this.sortByName = this.sortByName.bind(this)
         this.sortByLikes = this.sortByLikes.bind(this)
         this.sortByComments = this.sortByComments.bind(this)
-        // this.handleFilter = this.handleFilter.bind(this)
+        this.handleFilter = this.handleFilter.bind(this)
     }
 
     componentDidMount() {
-        this.sortByName(this.state.tableData, "ascending")
+        this.sortByName(this.state.tableData, "ascending");
+        this.handleFilter(this.state.filters);
+    }
+
+    handleFilter(updatedFilters) {
+        const { tableData } = this.state;
+        let filteredApplicants = applicantData.filter(applicant => {
+            // console.log(applicant);
+            const status = applicant.status;
+            // console.log(status);
+            // console.log(updatedFilters.has(status));
+            return updatedFilters.has(status);
+        })
+
+        // WIP: Potential workaround to include searched data:
+        // Cross reference this filteredApplicants with current tableData
+        // Then return ONLY the results that are already in tableData
+
+        this.setState({
+            tableData: filteredApplicants,
+            numApplicantsShowing: filteredApplicants.length,
+            filters: updatedFilters
+        });
     }
 
     handleSearch(event) {
@@ -60,10 +83,6 @@ class Home extends Component {
             this.sortByComments(filteredApplicants, this.state.sortDirection)
         }
     }
-
-    // handleFilter(event) {
-    //     const 
-    // }
 
     handleSort(event) {
         const classNames = event.target.className
@@ -264,7 +283,10 @@ class Home extends Component {
         return (
             <div id="home-grid-container">
                 <Logo />
-                <SearchAndFilter query={this.state.query} handleSearch={this.handleSearch} />
+                <SearchAndFilter 
+                    query={this.state.query} handleSearch={this.handleSearch} 
+                    filters={this.state.filters} handleFilter={this.handleFilter}
+                />
             
                 <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={applicantData.length} />
 

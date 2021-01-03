@@ -7,16 +7,14 @@ class Filter extends Component {
     constructor() {
         super();
         this.state = {
-            showFilter: false,
-            updatedFilters: []
+            showFilterCard: false,
         }
     }
-
+    
+    // Declaring it as such binds the function automatically; don't need this.toggleShowFilter = this.toggleShowFilter.bind(this)
     toggleShowFilter = () => {
-        // Declaring it like above binds the function automatically; don't need this.toggleShowFilter = this.toggleShowFilter.bind(this)
         this.setState({
-            showFilter: true
-            // showFilter: !this.state.showFilter            
+            showFilterCard: !this.state.showFilterCard            
         });
     }
 
@@ -30,8 +28,12 @@ class Filter extends Component {
                     <img id="filter-icon" src={filterImage} alt="Filter icon" />
                 </button>
                 <div>
-                    {this.state.showFilter ?
-                        <FilterCard /> : null
+                    {this.state.showFilterCard ?
+                        <FilterCard
+                            toggleShowFilter={this.toggleShowFilter}
+                            filters={this.props.filters}
+                            handleFilter={this.props.handleFilter}
+                        /> : null
                     }
                 </div>
             </div>
