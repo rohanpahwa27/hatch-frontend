@@ -13,6 +13,8 @@ export const downloadTemplate = () => api.get("/downloadTemplate", {responseType
 export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
 export const getAllMembers = () => api.get(`/members/${localStorage.getItem('orgID')}`)
 export const getOrganization = () => api.get(`/organizations/${localStorage.getItem('orgID')}`)
+export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload)
+export const deleteMember = (memberID) => api.delete(`/members/${localStorage.getItem('orgID')}/${memberID}`)
 
 const apis = {
   insertUser,
@@ -20,7 +22,9 @@ const apis = {
   downloadTemplate,
   uploadApplicantInfo,
   getAllMembers,
-  getOrganization
+  getOrganization,
+  generateOrgCode,
+  deleteMember
 };
 
 export default apis;

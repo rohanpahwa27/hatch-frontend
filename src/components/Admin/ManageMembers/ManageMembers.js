@@ -39,7 +39,6 @@ class ManageMembers extends Component {
             memberData = memberResponse.data.members
             const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
             if (index > -1) memberData.splice(index, 1);
-            console.log(memberData)
 
             const organizationResponse = await api.getOrganization()
             const orgCode = organizationResponse.data.organization.addCode
@@ -51,8 +50,14 @@ class ManageMembers extends Component {
         this.sortByName(this.state.tableData, "ascending")
     }
 
-    generateOrgCode(){
-        this.setState({orgCode: "0527"})
+    generateOrgCode = async () => {
+        await api.generateOrgCode({
+            orgID: localStorage.getItem('orgID')
+        }).then(res => {
+            this.setState({orgCode: res.data.code})
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     isSelected(memberID){
@@ -63,7 +68,6 @@ class ManageMembers extends Component {
         const selected = this.state.selected
         selected.has(memberID) ? selected.delete(memberID): selected.add(memberID);
         this.setState({ selected: selected});
-        console.log(this.state.selected)
         return;
     }
 
@@ -358,10 +362,15 @@ class ManageMembers extends Component {
         this.setState({selected: new Set()})
     }
 
-    deleteMembers(){
-        //make request to backend with list of members to delete
-        //set state to result
-        //this.setState({tableData:...})
+    deleteMembers = async () => {
+        for (let memberID in this.state.selected){
+            await api.deleteMember(memberID)
+        }
+        const memberResponse = await api.getAllMembers();
+        memberData = memberResponse.data.members
+        const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+        if (index > -1) memberData.splice(index, 1);
+        this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
 
