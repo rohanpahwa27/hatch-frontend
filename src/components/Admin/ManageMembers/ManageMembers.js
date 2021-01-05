@@ -36,13 +36,13 @@ class ManageMembers extends Component {
 
     componentDidMount = async () => {
         try {
-            const memberResponse = await api.getAllMembers();
+            const memberResponse = await api.getMembersInOrg();
             console.log(memberResponse)
             memberData = memberResponse.data.members
             const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
             if (index > -1) memberData.splice(index, 1);
 
-            const organizationResponse = await api.getOrganization()
+            const organizationResponse = await api.getOrg()
             const orgCode = organizationResponse.data.organization.addCode
             this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode})
         } catch (error) {
