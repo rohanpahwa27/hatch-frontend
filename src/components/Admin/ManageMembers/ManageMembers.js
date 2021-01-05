@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import "./ManageMembers.css"
 import Table from "./Table/Table"
 import UpdateMembersCard from "./UpdateMembersCard/UpdateMembersCard"
+import Navbar from "../../Navbar/Navbar"
 import Search from "./Search/Search"
 import api from "../../../Api/api"
 
@@ -36,6 +37,7 @@ class ManageMembers extends Component {
     componentDidMount = async () => {
         try {
             const memberResponse = await api.getAllMembers();
+            console.log(memberResponse)
             memberData = memberResponse.data.members
             const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
             if (index > -1) memberData.splice(index, 1);
@@ -355,14 +357,21 @@ class ManageMembers extends Component {
         }) 
      }
 
-    updateMembers(){
-        //make request to backend with list of members to delete
-        //set state to result
-        //this.setState({tableData:...})
+    updateMembers = async (label) => {
+        for (let memberID in this.state.selected){
+            await api.updateMember({updatedStatus: label}, memberID)
+        }
+
+        const memberResponse = await api.getAllMembers();
+        memberData = memberResponse.data.members
+        const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+        if (index > -1) memberData.splice(index, 1);
+        this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
 
     deleteMembers = async () => {
+        //need to update deleteMembers
         for (let memberID in this.state.selected){
             await api.deleteMember(memberID)
         }
@@ -376,12 +385,16 @@ class ManageMembers extends Component {
 
     render() {
         return (
-            <div id="manage-members-grid-container">
-                {/* Pass handleSort function down all the way to TableHeader */}
-                <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
-                <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
-                <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+            <div id="navbar-content-grid-container">
+                <Navbar/>
+                <div id="manage-members-grid-container">
+                    {/* Pass handleSort function down all the way to TableHeader */}
+                    <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
+                    <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
+                    <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+                </div>
             </div>
+            
         )
     }
 }

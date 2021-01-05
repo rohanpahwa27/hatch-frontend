@@ -15,6 +15,9 @@ export const getAllMembers = () => api.get(`/members/${localStorage.getItem('org
 export const getOrganization = () => api.get(`/organizations/${localStorage.getItem('orgID')}`)
 export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload)
 export const deleteMember = (memberID) => api.delete(`/members/${localStorage.getItem('orgID')}/${memberID}`)
+export const didUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
+export const changeUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
+export const updateMember = (payload, memberID) => api.patch(`/${localStorage.getItem('orgID')}/${memberID}`, payload)
 
 const apis = {
   insertUser,
@@ -24,7 +27,10 @@ const apis = {
   getAllMembers,
   getOrganization,
   generateOrgCode,
-  deleteMember
+  deleteMember,
+  didUserLikeMember,
+  changeUserLikeMember,
+  updateMember
 };
 
 export default apis;

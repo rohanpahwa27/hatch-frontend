@@ -10,7 +10,7 @@ const RadioButton = ({label, updateMembers}) => {
       <Radio
         checked={checked}
         onChange={() => {setChecked(!checked)
-                        updateMembers()}}
+                        updateMembers(label)}}
         label={label}
       />
     );
