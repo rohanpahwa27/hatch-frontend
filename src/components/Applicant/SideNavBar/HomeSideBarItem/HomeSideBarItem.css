@@ -1,9 +1,9 @@
-#admin-side-bar-item {
+#home-side-bar-item {
     margin: 30px 20px 20px 30px;
     display: flex;
 }
 
-#admin-side-image {
+#home-image {
     display: block;
     height: 25px;
     border-radius: 50%;
