@@ -52,8 +52,8 @@ class LoginCard extends Component {
       return;
     }
     localStorage.setItem("userID", response.data.member._id);
-    localStorage.setItem("orgID", response.data.member.organizations[0]);
-    localStorage.setItem("isAdmin", response.data.member.isAdmin) //stored as a string not boolean because of localStorage properties
+    localStorage.setItem("orgID", response.data.member.organizations[0].organization);
+    localStorage.setItem("isAdmin", response.data.member.organizations[0].isAdmin) //stored as a string not boolean because of localStorage properties
     this.props.history.push("/home");
   };
 

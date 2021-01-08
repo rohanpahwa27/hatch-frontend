@@ -33,8 +33,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        // const orgId = localStorage.getItem("orgID");
-        const orgId = '5fe5c93dcfe5e5867446677d';
+        const orgId = localStorage.getItem("orgID");
         api.getApplicantsInOrg(orgId)
             .then(res => {
                 const applicants = res.data.applicants.map(applicant => {
