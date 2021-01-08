@@ -7,26 +7,28 @@ const api = axios.create({
 
 // Organizations
 const getAllOrgs = () => api.get("/organizations")
+const getOrgById = orgId => api.get(`/organizations/byId/${orgId}`)
 const createOrg = payload => api.post("/organizations", payload)
-const getOrg = () => api.get(`/organizations/${localStorage.getItem('orgID')}`)
 const updateOrg = (orgId, payload) => api.patch(`/organizations/${orgId}`, payload)
 const deleteOrg = orgId => api.delete(`/organizations/${orgId}`)
 
 // Members
 const getMembersAcrossAllOrgs = () => api.get("/members")
-const getMembersInOrg = () => api.get(`/members/${localStorage.getItem('orgID')}`)
-const createMember = (orgId, payload) => api.post(`/members/${orgId}`, payload)
-const getMember = (orgId, memberId) => api.get(`/members/${orgId}/${memberId}`)
-const updateMember = (orgId, memberId, payload) => api.patch(`/members/${orgId}/${memberId}`, payload)
-const deleteMember = (memberID) => api.delete(`/members/${localStorage.getItem('orgID')}/${memberID}`)
+const getMembersInOrg = orgId => api.get(`/members/inOrg/${orgId}`)
+const getMemberById = memberId => api.get(`/members/byId/${memberId}`)
+const createMember = payload => api.post("/members", payload)
+const addMemberToOrg = (orgId, memberId, payload) => api.post(`/members/${orgId}/${memberId}`, payload)
+const updateMember = (memberId, payload) => api.patch(`/members//${memberId}`, payload)
+const deleteMember = memberId => api.delete(`/members/${memberId}`)
+const removeMemberFromOrg = (orgId, memberId) => api.delete(`/members/${orgId}/${memberId}`)
 
 // Applicants 
 const getApplicantsAcrossAllOrgs = () => api.get("/applicants")
-const getApplicantsInOrg = orgId => api.get(`/applicants/${orgId}`)
+const getApplicantsInOrg = orgId => api.get(`/applicants/inOrg/${orgId}`)
+const getApplicantById = applicantId => api.get(`/applicants/byId/${applicantId}`)
 const createApplicant = (orgId, payload) => api.post(`/applicants/${orgId}`, payload)
-const getApplicant = (orgId, applicantId) => api.get(`/applicants/${orgId}/${applicantId}`)
-const updateApplicant = (orgId, applicantId, payload) => api.patch(`/applicants/${orgId}/${applicantId}`, payload)
-const deleteApplicant = (orgId, applicantId) => api.delete(`/applicants/${orgId}/${applicantId}`)
+const updateApplicant = (applicantId, payload) => api.patch(`/applicants//${applicantId}`, payload)
+const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
 
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
@@ -42,20 +44,22 @@ export const updateMemberStatus = (payload, memberID) => api.patch(`/updateMembe
 
 const apis = {
   getAllOrgs,
+  getOrgById,
   createOrg,
-  getOrg,
   updateOrg,
   deleteOrg,
   getMembersAcrossAllOrgs,
   getMembersInOrg,
+  getMemberById,
   createMember,
-  getMember,
+  addMemberToOrg,
   updateMember,
   deleteMember,
+  removeMemberFromOrg,
   getApplicantsAcrossAllOrgs,
   getApplicantsInOrg,
+  getApplicantById,
   createApplicant,
-  getApplicant,
   updateApplicant,
   deleteApplicant,
   insertUser,
