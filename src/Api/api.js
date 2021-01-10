@@ -7,7 +7,7 @@ const api = axios.create({
 
 // Organizations
 const getAllOrgs = () => api.get("/organizations")
-const getOrgById = orgId => api.get(`/organizations/byId/${orgId}`)
+const getOrgById = orgId => api.get(`/organizations/${orgId}`)
 const createOrg = payload => api.post("/organizations", payload)
 const updateOrg = (orgId, payload) => api.patch(`/organizations/${orgId}`, payload)
 const deleteOrg = orgId => api.delete(`/organizations/${orgId}`)
