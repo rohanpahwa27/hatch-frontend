@@ -1,9 +1,10 @@
-#profile-side-bar-item {
+#home-side-bar-item {
     margin: 30px 20px 20px 30px;
     display: flex;
+    cursor: pointer;
 }
 
-#profile-image {
+#home-image {
     display: block;
     height: 25px;
     border-radius: 50%;
