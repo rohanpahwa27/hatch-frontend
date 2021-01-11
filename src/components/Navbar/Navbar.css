@@ -4,8 +4,7 @@ body {
 
 #navbar-content-grid-container {
   display: grid;
-  grid-template-rows: 125px;
-  /* grid-template-columns: 100%; */
+  grid-template-rows: 50px;
 
   min-width: 1000px;
 }
@@ -19,7 +18,7 @@ body {
 
   display: flex;
   align-items: center;
-  padding: 40px 30px 0px 30px;
+  padding: 10px 8px 0px 8px;
 }
 
 #navbar-applicants-link-item {
@@ -31,21 +30,22 @@ body {
 }
 
 #navbar-link-green {
-  color: #5F738C;
-  padding: 20px;
+  color: inherit;
+  font-weight: bold;
+  padding: 5px 20px;
   border-bottom: 4px solid #00A991;
   text-decoration: inherit;
 }
 
 #navbar-link-grey {
   color: #5F738C;
-  padding: 20px;
+  padding: 5px 20px;
   border-bottom: 4px solid #BAC7D5;
   text-decoration: inherit;
 }
 
 #navbar-link-green:hover {
-  color: #5F738C;
+  color: inherit;
   background-color: rgba(239, 242, 245, 0.5);
   text-decoration: inherit;
 }
