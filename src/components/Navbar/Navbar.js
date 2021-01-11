@@ -1,28 +1,23 @@
 import React, { Component } from "react";
 import "./Navbar.css";
-import hatchLogo from "./Assets/hatch.png";
 import { NavLink } from "react-router-dom";
-// import Logo from "../Home/Logo/Logo.js";
 
 class Navbar extends Component {
   render() {
     return (
       <div id="navbar-flex-container">
-        <div id="navbar-logo-item">
-          <img id="navbar-logo" src={hatchLogo} alt="Hatch" />
-        </div>
-        <div id="navbar-administration-text-item">
-          <span id="navbar-administration-text">Administration</span>
-        </div>
+        {console.log(window.location.pathname)}
         <div id="navbar-applicants-link-item">
           <NavLink
-            id="navbar-link"
-            to="/manage"
+            id={window.location.pathname==="/manageApplicants" ? 
+            "navbar-link-green" : "navbar-link-grey"}
+            to="/manageApplicants"
           >Applicants</NavLink>
         </div>
         <div id="navbar-members-link-item">
           <NavLink
-            id="navbar-link"
+            id={window.location.pathname==="/manageMembers" ? 
+            "navbar-link-green" : "navbar-link-grey"}
             to="/manageMembers"
           >Members</NavLink>
         </div>

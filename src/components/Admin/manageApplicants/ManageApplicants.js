@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Manage.css";
+import "./ManageApplicants.css";
 import applicantData from "./ManageApplicantData.js";
 import Navbar from "../../Navbar/Navbar.js";
 
@@ -7,7 +7,7 @@ import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
 
-class Manage extends Component {
+class ManageApplicants extends Component {
     constructor() {
         super();
         this.state = {
@@ -335,4 +335,4 @@ class Manage extends Component {
     }
 }
 
-export default Manage;
+export default ManageApplicants;

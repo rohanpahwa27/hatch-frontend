@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./SignupCard.css";
 import queryString from 'query-string';
 import api from "../../../Api/api.js";
@@ -29,7 +29,7 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
   if (email.length === 0) {
     errors.email = "Required Field"
   } else if (!email.includes('@')){
-    errors.email = "Email must include \'@\' symbol"
+    errors.email = "Email must include '@' symbol"
   }
 
   if (password.length === 0){
@@ -38,7 +38,7 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
     errors.password = "Must be 6+ characters"
   }
 
-  if (confirmPassword.length == 0) {
+  if (confirmPassword.length === 0) {
     errors.confirmPassword = "Required Field"
   }
 
@@ -46,7 +46,7 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
     errors.org = "Required Field"
   }
 
-  if (password != confirmPassword) {
+  if (password !== confirmPassword) {
     errors.password = "Passwords don't match."
     errors.confirmPassword = " "
   }
@@ -81,9 +81,9 @@ class SignupCard extends React.Component {
     }
     const response = await api.insertUser(user);
     if (response.data.status === "error"){
-      if (response.data.message == 'Organization Name taken.'){
+      if (response.data.message === 'Organization Name taken.'){
         errors.org = response.data.message
-      } else if (response.data.message == 'Organization Code doesn\'t exist.'){
+      } else if (response.data.message === 'Organization Code doesn\'t exist.'){
         errors.org = response.data.message
       } else {
         errors.email = response.data.message;
@@ -127,8 +127,8 @@ class SignupCard extends React.Component {
 
   render() {
     const { errors } = this.state;
-    const memberIsAdmin = queryString.parse(window.location.search).query == 'admin' ? "type your organization's name" : "type your group's add code";
-    const admin = queryString.parse(window.location.search).query == 'admin'
+    const memberIsAdmin = queryString.parse(window.location.search).query === 'admin' ? "type your organization's name" : "type your group's add code";
+    const admin = queryString.parse(window.location.search).query === 'admin'
     // let submit;
     let signup;
     let organizationNameorCode;

@@ -22,41 +22,36 @@ body {
   padding: 40px 30px 0px 30px;
 }
 
-#navbar-logo {
-  height: 25px;
-}
-
-#navbar-administration-text-item {
-  align-items: center;
-  flex-grow: 1;
-
-  height: 25px;
-  margin-top: 10px;
-  margin-left: 3%;
-}
-
-#navbar-administration-text {
-  font-size: 16px;
-  color: #5F738C;
-}
-
 #navbar-applicants-link-item {
-  margin-right: 3%;
-}
-
-#navbar-members-link-item {
   
 }
 
-#navbar-link {
-  color: inherit;
+#navbar-members-link-item {
+  margin-left: 3%;
+}
+
+#navbar-link-green {
+  color: #5F738C;
   padding: 20px;
   border-bottom: 4px solid #00A991;
   text-decoration: inherit;
 }
 
-#navbar-link:hover {
-  color: inherit;
+#navbar-link-grey {
+  color: #5F738C;
+  padding: 20px;
+  border-bottom: 4px solid #BAC7D5;
+  text-decoration: inherit;
+}
+
+#navbar-link-green:hover {
+  color: #5F738C;
+  background-color: rgba(239, 242, 245, 0.5);
+  text-decoration: inherit;
+}
+
+#navbar-link-grey:hover {
+  color: #5F738C;
   background-color: rgba(239, 242, 245, 0.5);
   text-decoration: inherit;
 }
