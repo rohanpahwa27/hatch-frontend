@@ -8,10 +8,6 @@ import AddApplicant from "./AddApplicant/AddApplicant.js"
 import Download from "./Download/Download.js"
 
 class TableToolbar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div id="table-toolbar-grid-item">

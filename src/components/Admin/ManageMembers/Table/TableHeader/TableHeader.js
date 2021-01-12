@@ -31,11 +31,11 @@ class TableHeader extends Component {
                         <img className="sort-arrow comments-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
                     </th>
 
-                    <th id="member-votes-header" className="votes-header-click-area" onClick={event => this.props.handleSort(event)}>
+                    {/* <th id="member-votes-header" className="votes-header-click-area" onClick={event => this.props.handleSort(event)}>
                         <span className="column-header-span votes-header-click-area" style={sortBy === "votes" ? {fontWeight: "bold"} : null}>Votes</span>
                         {sortBy === "votes" ? 
                         <img className="sort-arrow votes-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
-                    </th>
+                    </th> */}
                     <th id="member-admin-header" className="admin-header-click-area" onClick={event => this.props.handleSort(event)}>
                         <span className="column-header-span admin-header-click-area" style={sortBy === "admin" ? {fontWeight: "bold"} : null}>Admin</span>
                         {sortBy === "admin" ? 

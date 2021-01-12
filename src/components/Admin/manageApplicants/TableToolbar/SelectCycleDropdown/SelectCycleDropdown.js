@@ -4,10 +4,6 @@ import Select from "@kiwicom/orbit-components/lib/Select";
 // import downArrowIcon from "./down-arrow.png"
 
 class SelectCycleDropdown extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div id="select-cycle-dropdown-flex-container">

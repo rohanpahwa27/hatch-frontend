@@ -67,20 +67,19 @@ class SignupCard extends React.Component {
       return;
     }
     let user = {
-      email: this.state.email,
+      email: this.state.email.trim(),
       password: this.state.password,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      admin: admin
+      firstName: this.state.firstName.trim(),
+      lastName: this.state.lastName.trim(),
+      isAdmin: admin
     }
     console.log(user)
     if (admin) {
-      user.organizationName = this.state.org;
+      user.organizationName = this.state.org.trim();
     } else {
-      user.organizationCode = this.state.org;
+      user.organizationCode = this.state.org.trim();
     }
     const response = await api.insertUser(user);
-
     if (response.data.status === "error"){
       if (response.data.message == 'Organization Name taken.'){
         errors.org = response.data.message
@@ -130,11 +129,29 @@ class SignupCard extends React.Component {
     const { errors } = this.state;
     const memberIsAdmin = queryString.parse(window.location.search).query == 'admin' ? "type your organization's name" : "type your group's add code";
     const admin = queryString.parse(window.location.search).query == 'admin'
-    let submit;
+    // let submit;
     let signup;
+    let organizationNameorCode;
     if (!admin) {
-      submit = <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
+      // submit = <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
+      organizationNameorCode = <InputField
+      label="Add Code"
+      placeholder= {memberIsAdmin}
+      error={this.state.errors.org}
+      value={this.state.org}
+      onChange={this.handleOrg}
+      maxLength="4"
+    />
       signup = <p className="adminSignUp">if your group doesn’t have an add code or a Hatch account, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
+    } else {
+      organizationNameorCode = <InputField
+      label="Organization Name"
+      placeholder= {memberIsAdmin}
+      error={this.state.errors.org}
+      value={this.state.org}
+      onChange={this.handleOrg}
+    />
+      signup = <p className="adminSignUp">If someone in your organization is asking you to join them on Hatch, <Link className='signupLink' to="/signup?query=member">sign up as a member </Link></p>
     }
     return (
       <div className="signup-container">
@@ -205,14 +222,7 @@ class SignupCard extends React.Component {
           </div>
           <div class="row">
             <div class="column">
-              <InputField
-                label="Add Code"
-                placeholder= {memberIsAdmin}
-                error={this.state.errors.org}
-                value={this.state.org}
-                onChange={this.handleOrg}
-                maxLength="4"
-              />
+              {organizationNameorCode}
             </div>
             <div class="column">
               {signup}
@@ -221,7 +231,7 @@ class SignupCard extends React.Component {
           <div className="row">
             <div class="column"></div>
             <div class="column">
-              {submit}
+              <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
             </div>
           </div>
         </div>

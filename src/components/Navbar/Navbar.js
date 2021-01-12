@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Navbar.css";
 import hatchLogo from "./Assets/hatch.png";
-import { Button, Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 // import Logo from "../Home/Logo/Logo.js";
 
