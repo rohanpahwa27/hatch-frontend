@@ -5,7 +5,7 @@ import comments from "./SampleCommentData.js"
 // import { useHistory } from "react-router-dom";
 
 import Logo from "./Logo/Logo.js"
-import SideNavBar from "./SideNavBar/SideNavBar.js"
+import SideNavBar from "../SideNavBar/SideNavBar"
 import ApplicantInfoBar from "./ApplicantInfoBar/ApplicantInfoBar.js"
 import ApplicantInfoDrop from "./ApplicantInfoDrop/ApplicantInfoDrop.js"
 import UploadPhoto from "./UploadPhoto/UploadPhoto.js"

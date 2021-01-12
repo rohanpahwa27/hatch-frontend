@@ -1,17 +1,18 @@
-#home-side-bar-item {
+#admin-side-bar-item {
     margin: 30px 20px 20px 30px;
     display: flex;
+    cursor: pointer;
 }
 
-#home-image {
+#admin-side-image {
     display: block;
     height: 25px;
     border-radius: 50%;
     margin: 0px 15px 0px 0px;
 }
 
-#applicants-to-home-link {
+#applicants-to-admin-link {
     display: flex;
     color: inherit;
     text-decoration: inherit;
-  }
+}
