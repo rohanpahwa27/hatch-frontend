@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import "./HomeSideBarItem.css"
+import { NavLink } from "react-router-dom";
 
 class HomeSideBarItem extends Component {
     render() {
@@ -7,8 +8,12 @@ class HomeSideBarItem extends Component {
 
         return (
             <div id="home-side-bar-item">
-                <img id="home-image" src={home} alt="Home icon" />
-                <span>Home</span>
+                <NavLink
+                    id="applicants-to-home-link"
+                    to="/home">
+                    <img id="home-image" src={home} alt="Home icon" />
+                    <span>Home</span>
+                </NavLink>
             </div>
         )
     }

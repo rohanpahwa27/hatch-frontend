@@ -8,6 +8,12 @@
 
 #logo {
     height: 25px;
-    margin-top: 10%;
-    margin-left: 10%;
+    margin-top: 15%;
+    margin-left: 15%;
 }
+
+#logo-link {
+    display: flex;
+    color: inherit;
+    text-decoration: inherit;
+  }
