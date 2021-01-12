@@ -68,7 +68,7 @@ class EditPicture extends Component {
                     </div>
                 </div>
                 }
-                primaryAction={<Button type="primary" onClick={(e) => this.confirmProfilePicture()}>Confirm</Button>}
+                primaryAction={<Button type="primary" onClick={(e) => this.confirmProfilePicture()} disabled={!file}>Confirm</Button>}
             >
             </Dialog>
 
