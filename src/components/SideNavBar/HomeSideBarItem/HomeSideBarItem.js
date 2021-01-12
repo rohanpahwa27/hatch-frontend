@@ -8,11 +8,8 @@ class HomeSideBarItem extends Component {
         this.state = {
             
         };
-        this.handleClick = this.handleClick.bind(this);
     }
-    handleClick() {
-        this.props.history.push("/home");
-    }
+    
     render() {
         let home = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Home/SVG/ic_fluent_home_16_regular.svg"
 
