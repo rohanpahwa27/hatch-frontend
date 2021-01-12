@@ -3,7 +3,6 @@ import "./TableRow.css"
 import likesImage from "./Icons/heart.png"
 import commentsImage from "./Icons/comment.png"
 
-
 class TableRow extends Component {
     render() {
         const components = []
@@ -41,7 +40,7 @@ class TableRow extends Component {
         components.push(tags)
 
         return (
-            <tr id="table-row-grid-container">
+            <tr id="table-row-grid-container" onClick={event => this.props.handleClick(event, this.props.appID)}>
                 {components}
             </tr>
         )

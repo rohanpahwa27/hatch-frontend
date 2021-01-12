@@ -3,25 +3,31 @@
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: left;
+    display: grid;
+    grid-template-rows: 45% 15% 40%;
+    grid-template-columns: 15% 90%;
     padding: 10px 0px;
 
     width: 100%;
 }
 
 #applicant-name {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+
     /* font-family: Neue Haas Unica W16; */
-    font-style: normal;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 20px;
     line-height: 150%;
     display: flex;
     align-items: center;
+    padding: 20px 0px 0px 0px;
 }
 
 #applicant-image {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+
     margin: 20px 20px 20px 30px;
     display: block;
     height: 70px;
@@ -29,7 +35,7 @@
 }
 
 #heart-image {
-    margin: 5px 3px 5px 20px;
+    margin: 0px 3px 5px 0px;
     display: block;
     height: 25px;
     border-radius: 50%;
@@ -43,9 +49,15 @@
 }
 
 #applicant-info {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+
+    align-items: flex-start;
+    justify-items: flex-start;
+
     /* font-family: Neue Haas Unica W16; */
     font-style: normal;
-    font-size: 17px;
+    font-size: 15px;
     line-height: 150%;
     display: flex;
     align-items: center;
