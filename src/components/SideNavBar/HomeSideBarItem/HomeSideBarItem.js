@@ -29,4 +29,4 @@ class HomeSideBarItem extends Component {
     }
 }
 
-export default withRouter(HomeSideBarItem)
+export default HomeSideBarItem

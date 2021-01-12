@@ -28,4 +28,4 @@ class AdminSideBarItem extends Component {
     }
 }
 
-export default withRouter(AdminSideBarItem)
+export default AdminSideBarItem
