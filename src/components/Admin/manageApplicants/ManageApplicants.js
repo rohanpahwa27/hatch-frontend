@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import "./Manage.css";
-import applicantData from "./ManageApplicantData.js";
+import "./ManageApplicants.css";
+import api from "../../../Api/api";
 import Navbar from "../../Navbar/Navbar.js";
 
+import ImportApplicants from "../ImportApplicants/ImportApplicants.js";
 import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
 
-class Manage extends Component {
+class ManageApplicants extends Component {
     constructor() {
         super();
         this.state = {
@@ -16,12 +17,14 @@ class Manage extends Component {
                 { value: 'fall-2018', label: 'Fall 2018', key: 'fall-2018' },
             ],
             selectedOption: "",
-            tableData: applicantData,
+            allApplicantData: [],
+            tableData: [],
             query: "",
             selected: new Set(),
-            numApplicantsShowing: applicantData.length,
+            numApplicantsShowing: 0,
             sortBy: "name",
-            sortDirection: "descending"
+            sortDirection: "descending",
+            orgCode: ""
         };
 
         this.handleCycleSelect = this.handleCycleSelect.bind(this);
@@ -37,7 +40,25 @@ class Manage extends Component {
         this.deleteApplicants = this.deleteApplicants.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
+        try {
+            const orgId = localStorage.getItem("orgID");
+            const applicantResponse = await api.getApplicantsInOrg(orgId);
+            let applicantData = applicantResponse.data.applicants;
+            const index = applicantData.map(function (e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+            if (index > -1) applicantData.splice(index, 1);
+
+            const organizationResponse = await api.getOrgById(orgId);
+            const orgCode = organizationResponse.data.organization.addCode;
+            this.setState({
+                allApplicantData: applicantData,
+                tableData: applicantData,
+                numApplicantsShowing: applicantData.length,
+                orgCode: orgCode
+            });
+        } catch (error) {
+
+        }
         this.sortByName(this.state.tableData, "ascending");
     }
 
@@ -76,9 +97,10 @@ class Manage extends Component {
 
     handleSearch(event) {
         const queryText = event.target.value;
+        const { allApplicantData } = this.state;
 
         // filtering applicantData is the problem here
-        const filteredApplicants = applicantData.filter(applicant => {
+        const filteredApplicants = allApplicantData.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName;
             return applicantFullName.toLowerCase().indexOf(queryText) > -1;
         })
@@ -304,35 +326,39 @@ class Manage extends Component {
         return (
             <div id="navbar-content-grid-container">
                 <Navbar />
-                <div id="manage-applicant-grid-container">
-                    {/* Pass handleSort function down all the way to TableHeader */}
-                    <TableToolbar
-                        cycleOptions={this.state.cycleOptions}
-                        selectedOption={this.state.selectedOption}
-                        handleCycleSelect={this.handleCycleSelect}
-                        numApplicantsShowing={this.state.numApplicantsShowing}
-                        totalApplicants={applicantData.length}
-                        query={this.state.query}
-                        handleSearch={this.handleSearch}
-                    />
-                    <Table
-                        data={this.state.tableData}
-                        handleSelected={this.handleSelected}
-                        selectAll={this.selectAll}
-                        isSelected={this.isSelected}
-                        handleSort={this.handleSort}
-                        sortBy={this.state.sortBy}
-                        sortDirection={this.state.sortDirection}
-                    />
-                    <UpdateApplicantsCard
-                        numSelected={this.state.selected.size}
-                        deleteMembers={this.deleteMembers}
-                        updateApplicants={this.updateApplicants}
-                    />
-                </div>
+                {this.state.allApplicantData.length === 0 ?
+                    <ImportApplicants /> 
+                    :
+                    <div id="manage-applicant-grid-container">
+                        {/* Pass handleSort function down all the way to TableHeader */}
+                        <TableToolbar
+                            cycleOptions={this.state.cycleOptions}
+                            selectedOption={this.state.selectedOption}
+                            handleCycleSelect={this.handleCycleSelect}
+                            numApplicantsShowing={this.state.numApplicantsShowing}
+                            totalApplicants={this.state.allApplicantData.length}
+                            query={this.state.query}
+                            handleSearch={this.handleSearch}
+                        />
+                        <Table
+                            data={this.state.tableData}
+                            handleSelected={this.handleSelected}
+                            selectAll={this.selectAll}
+                            isSelected={this.isSelected}
+                            handleSort={this.handleSort}
+                            sortBy={this.state.sortBy}
+                            sortDirection={this.state.sortDirection}
+                        />
+                        <UpdateApplicantsCard
+                            numSelected={this.state.selected.size}
+                            deleteMembers={this.deleteMembers}
+                            updateApplicants={this.updateApplicants}
+                        />
+                    </div>
+                }
             </div>
         )
     }
 }
 
-export default Manage;
+export default ManageApplicants;

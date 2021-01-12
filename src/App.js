@@ -5,10 +5,10 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Start from "./components/Start/Start.js";
 import Home from "./components/Home/Home.js";
-import ImportHome from "./components/Admin/importApplicants/ImportHome/ImportHome.js";
-import Import from "./components/Admin/importApplicants/Import/Import.js";
+// import ImportApplicants from "./components/Admin/ImportApplicants/ImportApplicants.js";
+// import Import from "./components/Admin/importApplicants/Import/Import.js";
 import Applicant from "./components/Applicant/Applicant"
-import Manage from "./components/Admin/manageApplicants/Manage.js";
+import ManageApplicants from "./components/Admin/ManageApplicants/ManageApplicants.js";
 import ManageMembers from "./components/Admin/ManageMembers/ManageMembers"
 
 function App() {
@@ -18,10 +18,10 @@ function App() {
       <Route path="/Signup" component={Signup} />
       <Route path="/Login" component={Login} />
       <Route path="/Home" component={Home} />
-      <Route path="/import1" component={ImportHome} />
-      <Route path="/import2" component={Import} />
+      {/* <Route path="/import1" component={ImportApplicants} /> */}
+      {/* <Route path="/import2" component={Import} /> */}
       <Route path="/Applicant" component={Applicant} />
-      <Route path="/manage" component={Manage} />
+      <Route path="/manageApplicants" component={ManageApplicants} />
       <Route path="/manageMembers" component={ManageMembers} />
     </Router>
   );
