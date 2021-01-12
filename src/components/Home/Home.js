@@ -25,10 +25,18 @@ class Home extends Component {
         this.sortByName = this.sortByName.bind(this)
         this.sortByLikes = this.sortByLikes.bind(this)
         this.sortByComments = this.sortByComments.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
         this.sortByName(this.state.tableData, "ascending")
+    }
+
+    handleClick(event, data) {
+        this.props.history.push({
+            pathname: '/applicant',
+            state: { appID: data }
+        })
     }
 
     handleSearch(event) {
@@ -266,7 +274,7 @@ class Home extends Component {
                 <SideNavBar />
 
                 {/* Pass handleSort function down all the way to TableHeader */}
-                <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
+                <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick}/>
             </div>
         )
     }

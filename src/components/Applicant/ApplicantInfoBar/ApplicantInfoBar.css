@@ -1,7 +1,7 @@
 #applicantinfobar {
     width: 100%;
     height: 100%;
-    /* blur effect + background */
+
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 4fr 1fr 1fr;
@@ -14,5 +14,5 @@
     border-left: 2px solid #E8EDF1;
     box-shadow: 0px 6px 4px -4px #E8EDF1;
 
-    background-color: rgba(239, 242, 245, 0.5);
+    background-color: rgba(255, 255, 255, 0.6);
 }

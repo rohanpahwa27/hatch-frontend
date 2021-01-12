@@ -16,7 +16,9 @@ class TableBody extends Component {
                           imgURL={applicant.imgURL}
                           likes={applicant.likes} 
                           comments={applicant.comments} 
-                          tags={applicant.tags} />
+                          tags={applicant.tags}
+                          appID={applicant.appID}
+                          handleClick={this.props.handleClick}/>
             )
         })
 
