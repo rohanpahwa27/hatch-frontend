@@ -13,7 +13,7 @@ class OtherComment extends Component {
         )
 
         const name = (
-            <td className="name-div">
+            <td className="applicant-name-div">
                 <span className="comment-name">{this.props.firstName} {this.props.lastName}</span>
                 <span className="comment">{this.props.comment}</span>
                 {/* TODO, account for one line comments + comments that are more than 2 lines with see more */}

@@ -36,7 +36,8 @@ class ManageMembers extends Component {
 
     componentDidMount = async () => {
         try {
-            const memberResponse = await api.getMembersInOrg();
+            const orgId = localStorage.getItem("orgID");
+            const memberResponse = await api.getMembersInOrg(orgId);
             console.log(memberResponse)
             memberData = memberResponse.data.members
             const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));

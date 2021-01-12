@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./HomeSideBarItem.css"
-import { withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class HomeSideBarItem extends Component {
     constructor(props) {
@@ -17,9 +17,13 @@ class HomeSideBarItem extends Component {
         let home = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Home/SVG/ic_fluent_home_16_regular.svg"
 
         return (
-            <div id="home-side-bar-item" onClick={this.handleClick}>
-                <img id="home-image" src={home} alt="Home icon" />
-                <span>Home</span>
+            <div id="home-side-bar-item">
+                <NavLink
+                    id="applicants-to-home-link"
+                    to="/home">
+                    <img id="home-image" src={home} alt="Home icon" />
+                    <span>Home</span>
+                </NavLink>
             </div>
         )
     }

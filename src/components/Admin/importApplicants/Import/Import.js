@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Import.css";
-import { Link } from "react-router-dom";
 import api from "../../../../Api/api.js";
 
 import exampleImage from "./Assets/example.png";
@@ -46,12 +45,13 @@ class Import extends Component {
     return (
       <div id="import-applicants-grid-container">
         <div id="back-button-item">
-          <Link to="/import1">
-            <button id="back-button">
-              <img id="small-icon" src={backIcon} alt="Back icon" />
+          <button
+            id="back-button"
+            onClick={this.props.toggleImportPage}
+          >
+            <img id="small-icon" src={backIcon} alt="Back icon" />
               &nbsp;Back
-            </button>
-          </Link>
+          </button>
         </div>
         <div id="download-template-item">
           <p id="large">Add applicants to Hatch</p>
