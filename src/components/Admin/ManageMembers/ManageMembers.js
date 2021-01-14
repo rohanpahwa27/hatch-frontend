@@ -373,8 +373,8 @@ class ManageMembers extends Component {
 
     deleteMembers = async () => {
         //need to update deleteMembers
-        for (let memberID in this.state.selected){
-            await api.deleteMember(memberID)
+        for (let memberID of this.state.selected){
+            await api.removeMemberFromOrg(localStorage.getItem('orgID'), memberID)
         }
         const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
         memberData = memberResponse.data.members
