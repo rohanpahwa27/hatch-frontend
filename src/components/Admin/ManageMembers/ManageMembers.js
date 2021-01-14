@@ -277,7 +277,7 @@ class ManageMembers extends Component {
         }
         let selectAll = new Set();
         this.state.tableData.map((member) => {
-            selectAll.add(member.objectID)
+            selectAll.add(member._id)
         })
         this.setState({selected: selectAll})
      }
