@@ -13,7 +13,7 @@ class TableBody extends Component {
                 <TableRow key={index} 
                           firstName={applicant.firstName} 
                           lastName={applicant.lastName} 
-                          imgURL={applicant.imgURL}
+                          imageUrl={applicant.imageUrl}
                           likes={applicant.likes} 
                           comments={applicant.comments} 
                           tags={applicant.tags}

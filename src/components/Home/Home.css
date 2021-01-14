@@ -1,7 +1,7 @@
 #home-grid-container {
     display: grid;
     grid-template-rows: 15% 85%;
-    grid-template-columns: 20% 40% 40%;
+    grid-template-columns: 20% 4fr 2fr;
 
     width: 100vw;
     height: 100vh;
