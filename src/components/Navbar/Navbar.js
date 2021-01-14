@@ -6,7 +6,6 @@ class Navbar extends Component {
   render() {
     return (
       <div id="navbar-flex-container">
-        {console.log(window.location.pathname)}
         <div id="navbar-applicants-link-item">
           <NavLink
             id={window.location.pathname==="/manageApplicants" ? 
