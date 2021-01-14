@@ -12,7 +12,7 @@
     /* Grid container properties */
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 4fr 1fr 1fr 2fr;
+    grid-template-columns: 4fr 1fr 1fr;
     justify-items: flex-start;
     align-items: center;
 
@@ -47,13 +47,6 @@
 
 #comments-header {
     grid-column: 3 / span 1;
-}
-
-#tags-header {
-    grid-column: 4 / span 1;
-    padding-left: 10%;
-    font-weight: normal;
-    color: #697077;
 }
 
 .sort-arrow {
