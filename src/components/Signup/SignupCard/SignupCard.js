@@ -83,7 +83,7 @@ class SignupCard extends React.Component {
     if (response.data.status === "error"){
       if (response.data.message === 'Organization Name taken.'){
         errors.org = response.data.message
-      } else if (response.data.message === 'Organization Code doesn\'t exist.'){
+      } else if (response.data.message === 'Add code doesn\'t exist.'){
         errors.org = response.data.message
       } else {
         errors.email = response.data.message;
