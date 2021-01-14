@@ -3,7 +3,7 @@ import "./ManageApplicants.css";
 import api from "../../../Api/api";
 import Navbar from "../../Navbar/Navbar.js";
 
-import ImportApplicants from "../ImportApplicants/ImportApplicants.js";
+import ImportApplicants from "../importApplicants/ImportApplicants.js";
 import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
