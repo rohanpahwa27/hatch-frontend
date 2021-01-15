@@ -73,7 +73,6 @@ class SignupCard extends React.Component {
       lastName: this.state.lastName.trim(),
       isAdmin: admin
     }
-    console.log(user)
     if (admin) {
       user.organizationName = this.state.org.trim();
     } else {
