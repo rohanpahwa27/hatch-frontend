@@ -30,6 +30,10 @@ const createApplicant = (orgId, payload) => api.post(`/applicants/${orgId}`, pay
 const updateApplicant = (applicantId, payload) => api.patch(`/applicants//${applicantId}`, payload)
 const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
 
+// Upload image
+const uploadApplicantImage = (applicantId, payload) => api.post(`/upload-image/applicant/${applicantId}`, payload)
+const uploadMemberImage = (memberId, payload) => api.post(`/upload-image/member/${memberId}`, payload)
+
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
 const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob'}).then((response) => {
@@ -62,15 +66,16 @@ const apis = {
   createApplicant,
   updateApplicant,
   deleteApplicant,
+  uploadApplicantImage,
+  uploadMemberImage,
   insertUser,
   loginUser,
   downloadTemplate,
   uploadApplicantInfo,
   generateOrgCode,
-  deleteMember,
   didUserLikeMember,
   changeUserLikeMember,
-  updateMember
+  updateMemberStatus
 };
 
 export default apis;
