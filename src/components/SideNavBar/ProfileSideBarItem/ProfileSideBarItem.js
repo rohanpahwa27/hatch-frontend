@@ -18,7 +18,7 @@ class ProfileSideBarItem extends Component {
         });
     }
 
-    closeProfile(){
+    closeProfile() {
         this.setState({
             showProfile: false
         });
@@ -27,8 +27,8 @@ class ProfileSideBarItem extends Component {
     render() {
         let person = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Person/SVG/ic_fluent_person_16_regular.svg"
         return (
-            <div>
-                <div id="profile-side-bar-item"
+            <div id="profile-side-bar-item">
+                <div id="applicants-to-profile-link"
                     onClick={this.handleClick}>
                     <img id="profile-image" src={person} alt="Profile icon" />
                     <span>Profile</span>

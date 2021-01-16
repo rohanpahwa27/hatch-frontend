@@ -1,7 +1,6 @@
 #profile-side-bar-item {
     margin: 30px 20px 20px 30px;
     display: flex;
-    cursor: pointer;
 }
 
 #profile-image {
@@ -9,4 +8,12 @@
     height: 25px;
     border-radius: 50%;
     margin: 0px 15px 0px 0px;
+    cursor: pointer;
+}
+
+#applicants-to-profile-link {
+    display: flex;
+    color: inherit;
+    text-decoration: inherit;
+    cursor: pointer;
 }
