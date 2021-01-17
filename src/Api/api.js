@@ -3,6 +3,18 @@ const FileDownload = require('js-file-download');
 
 const api = axios.create({
   baseURL: "http://localhost:3000",
+  withCredentials: true
+});
+
+api.interceptors.response.use(function (response) {
+  // Do something with response data
+  return response;
+}, function (error) {
+  // Do something with response error
+  if (error.status === 401) {
+    // DELETE YOUR AUTHENTICATE_USER item from localStorage 
+  }
+  return Promise.reject(error);
 });
 
 // Organizations
@@ -41,6 +53,8 @@ export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload
 export const didUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
 export const changeUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
 const updateMemberStatus = (memberID, payload) => api.patch(`/updateMemberStatus/${localStorage.getItem('orgID')}/${memberID}`, payload)
+const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
+const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
 
 const apis = {
   getAllOrgs,
@@ -70,7 +84,9 @@ const apis = {
   deleteMember,
   didUserLikeMember,
   changeUserLikeMember,
-  updateMemberStatus
+  updateMemberStatus,
+  checkIfUserLoggedIn,
+  checkIfUserIsAdmin
 };
 
 export default apis;
