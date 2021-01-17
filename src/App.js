@@ -8,11 +8,10 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Start from "./components/Start/Start.js";
 import Home from "./components/Home/Home.js";
-// import ImportApplicants from "./components/Admin/ImportApplicants/ImportApplicants.js";
-// import Import from "./components/Admin/importApplicants/Import/Import.js";
-import Applicant from "./components/Applicant/Applicant"
+import Applicant from "./components/Applicant/Applicant";
 import ManageApplicants from "./components/Admin/ManageApplicants/ManageApplicants.js";
-import ManageMembers from "./components/Admin/ManageMembers/ManageMembers"
+import ManageMembers from "./components/Admin/ManageMembers/ManageMembers";
+import Page from "./components/Page/Page.js";
 
 function App() {
   return (
@@ -27,6 +26,7 @@ function App() {
         <PrivateRoute component={<Applicant />} path="/Applicant" exact />
         <AdminRoute component={<ManageApplicants />} path="/Admin/Applicants" exact />
         <AdminRoute component={<ManageMembers />} path="/Admin/Members" exact />
+      <Route path="/page" component={Page} />
       </Switch>
     </Router>
   );
