@@ -6,17 +6,6 @@ const api = axios.create({
   withCredentials: true
 });
 
-api.interceptors.response.use(function (response) {
-  // Do something with response data
-  return response;
-}, function (error) {
-  // Do something with response error
-  if (error.status === 401) {
-    // DELETE YOUR AUTHENTICATE_USER item from localStorage 
-  }
-  return Promise.reject(error);
-});
-
 // Organizations
 const getAllOrgs = () => api.get("/organizations")
 const getOrgById = orgId => api.get(`/organizations/${orgId}`)

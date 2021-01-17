@@ -54,7 +54,6 @@ class LoginCard extends Component {
     localStorage.setItem("userID", response.data.member._id);
     localStorage.setItem("orgID", response.data.member.organizations[0].organization);
     localStorage.setItem("isAdmin", response.data.member.organizations[0].isAdmin) //stored as a string not boolean because of localStorage properties
-    console.log('redirecting to home')
     this.props.history.push("/Home");
   };
 
