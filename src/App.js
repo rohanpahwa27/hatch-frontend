@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PublicRoute from "./components/Routes/PublicRoute"
+import PrivateRoute from "./components/Routes/PrivateRoute"
+import AdminRoute from "./components/Routes/AdminRoute"
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import Start from "./components/Start/Start.js";
@@ -13,14 +16,18 @@ import Page from "./components/Page/Page.js";
 function App() {
   return (
     <Router>
-      <Route exact path="/" component={Start}  />
-      <Route path="/Signup" component={Signup} />
-      <Route path="/Login" component={Login} />
-      <Route path="/Home" component={Home} />
-      <Route path="/Applicant" component={Applicant} />
-      <Route path="/manageApplicants" component={ManageApplicants} />
-      <Route path="/manageMembers" component={ManageMembers} />
+      <Switch>
+        <PublicRoute restricted={false} component={<Start />} path="/" exact />
+        <PublicRoute restricted={true} component={<Signup />} path="/Signup" exact />
+        <PrivateRoute component={<Home/>} loadingScreen={true} path="/Home" exact />
+        <PublicRoute restricted={true} component={<Login />} path="/Login" exact />
+        {/* <Route path="/import1" component={ImportApplicants} /> */}
+        {/* <Route path="/import2" component={Import} /> */}
+        <PrivateRoute component={<Applicant />} path="/Applicant" exact />
+        <AdminRoute component={<ManageApplicants />} path="/Admin/Applicants" exact />
+        <AdminRoute component={<ManageMembers />} path="/Admin/Members" exact />
       <Route path="/page" component={Page} />
+      </Switch>
     </Router>
   );
 }
