@@ -6,7 +6,8 @@ import { withRouter } from "react-router-dom";
 
 const initialState = {
   email: "",
-  errors: []
+  errors: [],
+  submitted: false
 };
 
 // checks if email and password are empty
@@ -34,7 +35,6 @@ class ForgotPasswordCard extends Component {
       return;
     }
     
-    console.log("sup")
     const response = await api.forgotPassword({
       email: this.state.email
     });
@@ -45,6 +45,10 @@ class ForgotPasswordCard extends Component {
       this.setState({ errors: errors });
       return;
     }
+
+    this.setState({
+        submitted: true
+    })
   };
 
   handleEmailChange = evt => {
@@ -52,13 +56,27 @@ class ForgotPasswordCard extends Component {
   };
 
   render() {
+    const resetPasswordText = (
+        <div>
+            <h5> Reset password </h5>
+            <p> Enter the email associated with your account and we'll send you an email with instructions to reset your password. </p>
+        </div>
+    )
+
+    const checkEmailText = (
+        <div>
+            <h5> Check your email </h5>
+            <p> We've sent instructions to your email to reset your password. </p>
+        </div>
+    )
+
     const { errors } = this.state;
     return (
       <div id="forgot-password-card-container"> 
         <div id="forgot-password-card-content">
-          <h5> Reset password </h5>
-          <p> Enter the email associated with your account and we'll send you an email with instructions to reset your password </p>
-          <ForgotPasswordForm email={this.state.email} handleSubmit={this.handleSubmit} handleEmailChange={this.handleEmailChange} errors={errors} />
+          <a id="back-button" href={this.state.submitted ? "forgot-password" : "login"}>Back</a>
+          {this.state.submitted ? checkEmailText : resetPasswordText}
+          {this.state.submitted ? <div> </div> : <ForgotPasswordForm email={this.state.email} handleSubmit={this.handleSubmit} handleEmailChange={this.handleEmailChange} errors={errors} /> }
           <p id="create-account-label">Or, create an account to get started</p>
           <div id="sign-up-links">
             <a href="signup?query=member">Sign up as a member</a>

@@ -16,7 +16,7 @@ class LoginForm extends Component {
                 <InputField type="password" placeholder="type your password" value={this.props.password} onChange={this.props.handlePasswordChange} />
             </div>
             <div id="forgot-password-container">
-                <a href="/">Forgot your password?</a>
+                <a href="/forgot-password">Forgot your password?</a>
             </div>
             {this.props.errors.map(error => (
                     <p className="invalid-credentials" key={error}>{error}</p> 
