@@ -1,0 +1,13 @@
+#logo-slogan-container {
+    /* Flexbox properties */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+}
+
+#logo-slogan-container img {
+    height: 32px;
+    margin-bottom: 10px;
+}

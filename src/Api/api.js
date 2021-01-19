@@ -34,6 +34,10 @@ const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
 const uploadApplicantImage = (applicantId, payload) => api.post(`/upload-image/applicant/${applicantId}`, payload)
 const uploadMemberImage = (memberId, payload) => api.post(`/upload-image/member/${memberId}`, payload)
 
+// Forgot and reset password
+const forgotPassword = payload => api.post("/forgot-password", payload)
+const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload)
+
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
 const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob'}).then((response) => {
@@ -68,6 +72,8 @@ const apis = {
   deleteApplicant,
   uploadApplicantImage,
   uploadMemberImage,
+  forgotPassword,
+  resetPassword,
   insertUser,
   loginUser,
   downloadTemplate,

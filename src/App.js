@@ -10,6 +10,7 @@ import Home from "./components/Home/Home.js";
 import Applicant from "./components/Applicant/Applicant"
 import ManageApplicants from "./components/Admin/manageApplicants/ManageApplicants.js";
 import ManageMembers from "./components/Admin/ManageMembers/ManageMembers"
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword.js"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/Applicant" component={Applicant} />
       <Route path="/manageApplicants" component={ManageApplicants} />
       <Route path="/manageMembers" component={ManageMembers} />
+      <Route path="/forgot-password" component={ForgotPassword} />
     </Router>
   );
 }
