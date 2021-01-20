@@ -11,6 +11,7 @@ import Applicant from "./components/Applicant/Applicant"
 import ManageApplicants from "./components/Admin/manageApplicants/ManageApplicants.js";
 import ManageMembers from "./components/Admin/ManageMembers/ManageMembers"
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword.js"
+import ResetPassword from "./components/ResetPassword/ResetPassword.js"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/manageApplicants" component={ManageApplicants} />
       <Route path="/manageMembers" component={ManageMembers} />
       <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/reset-password/:token" component={ResetPassword} />
     </Router>
   );
 }
