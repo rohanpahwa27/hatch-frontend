@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import "./TableToolbar.css"
-import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js.js"
-import Filter from "./Filter/Filter.js.js"
-import SearchBar from "./SearchBar/SearchBar.js.js"
-import SelectCycleDropdown from "./SelectCycleDropdown/SelectCycleDropdown.js.js"
-import AddApplicant from "./AddApplicant/AddApplicant.js.js"
-import Download from "./Download/Download.js.js"
+import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
+import Filter from "./Filter/Filter.js"
+import SearchBar from "./SearchBar/SearchBar.js"
+import SelectCycleDropdown from "./SelectCycleDropdown/SelectCycleDropdown.js"
+import AddApplicant from "./AddApplicant/AddApplicant.js"
+import Download from "./Download/Download.js"
 
 class TableToolbar extends Component {
     render() {
