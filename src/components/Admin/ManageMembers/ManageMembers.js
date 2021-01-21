@@ -5,6 +5,8 @@ import UpdateMembersCard from "./UpdateMembersCard/UpdateMembersCard"
 import Navbar from "../../Navbar/Navbar"
 import Search from "./Search/Search"
 import api from "../../../Api/api"
+import Logo from "../../Page/Logo/Logo";
+import SideNavBar from "../../SideNavBar/SideNavBar";
 
 var memberData = []
 class ManageMembers extends Component {
@@ -386,13 +388,17 @@ class ManageMembers extends Component {
 
     render() {
         return (
-            <div id="navbar-content-grid-container">
-                <Navbar/>
-                <div id="manage-members-grid-container">
-                    {/* Pass handleSort function down all the way to TableHeader */}
-                    <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
-                    <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
-                    <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+            <div id="page-grid-container">
+                <Logo />
+                <SideNavBar />
+                <div id="navbar-content-grid-container">
+                    <Navbar/>
+                    <div id="manage-members-grid-container">
+                        {/* Pass handleSort function down all the way to TableHeader */}
+                        <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
+                        <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
+                        <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+                    </div>
                 </div>
             </div>
             
