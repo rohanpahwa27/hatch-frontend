@@ -17,3 +17,15 @@
     text-decoration: inherit;
     cursor: pointer;
 }
+
+.color-side-bar-nav-text{
+    color: #00A991
+}
+
+.fill-test-side-nav-bar{
+    fill:#00A991
+}
+
+.side-nav-bar-item-text{
+    margin-top: 3px;
+}

@@ -45,6 +45,13 @@ const updateMemberStatus = (memberID, payload) => api.patch(`/updateMemberStatus
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
 
+
+//Profile Page APIs
+const confirmPassword = (payload) => api.post(`/updateProfile/confirmPassword`, payload)
+const updatePassword = (payload) => api.patch(`/updateProfile/updatePassword`, payload)
+const removeMember = () => api.delete(`/updateProfile/deleteMember`)
+const logout = () => api.get(`/updateProfile/logout`)
+
 const apis = {
   getAllOrgs,
   getOrgById,
@@ -75,7 +82,11 @@ const apis = {
   changeUserLikeMember,
   updateMemberStatus,
   checkIfUserLoggedIn,
-  checkIfUserIsAdmin
+  checkIfUserIsAdmin,
+  confirmPassword,
+  updatePassword,
+  removeMember,
+  logout
 };
 
 export default apis;
