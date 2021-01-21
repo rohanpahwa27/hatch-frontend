@@ -5,6 +5,8 @@ import UpdateMembersCard from "./UpdateMembersCard/UpdateMembersCard"
 import Navbar from "../../Navbar/Navbar"
 import Search from "./Search/Search"
 import api from "../../../Api/api"
+import Logo from "../../Page/Logo/Logo";
+import SideNavBar from "../../SideNavBar/SideNavBar";
 
 var memberData = []
 class ManageMembers extends Component {
@@ -43,11 +45,11 @@ class ManageMembers extends Component {
             const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
             if (index > -1) memberData.splice(index, 1);
 
-            const organizationResponse = await api.getOrg()
+            const organizationResponse = await api.getOrgById(localStorage.getItem('orgID'))
             const orgCode = organizationResponse.data.organization.addCode
             this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode})
         } catch (error) {
-            
+            console.log(error)
         }
         
         this.sortByName(this.state.tableData, "ascending")
@@ -277,7 +279,7 @@ class ManageMembers extends Component {
         }
         let selectAll = new Set();
         this.state.tableData.map((member) => {
-            selectAll.add(member.objectID)
+            selectAll.add(member._id)
         })
         this.setState({selected: selectAll})
      }
@@ -359,11 +361,11 @@ class ManageMembers extends Component {
      }
 
     updateMembers = async (label) => {
-        for (let memberID in this.state.selected){
-            await api.updateMember({updatedStatus: label}, memberID)
+        for (let memberID of this.state.selected){
+            const resp = await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
         }
 
-        const memberResponse = await api.getAllMembers();
+        const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
         memberData = memberResponse.data.members
         const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
         if (index > -1) memberData.splice(index, 1);
@@ -373,10 +375,10 @@ class ManageMembers extends Component {
 
     deleteMembers = async () => {
         //need to update deleteMembers
-        for (let memberID in this.state.selected){
-            await api.deleteMember(memberID)
+        for (let memberID of this.state.selected){
+            await api.removeMemberFromOrg(localStorage.getItem('orgID'), memberID)
         }
-        const memberResponse = await api.getAllMembers();
+        const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
         memberData = memberResponse.data.members
         const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
         if (index > -1) memberData.splice(index, 1);
@@ -386,13 +388,17 @@ class ManageMembers extends Component {
 
     render() {
         return (
-            <div id="navbar-content-grid-container">
-                <Navbar/>
-                <div id="manage-members-grid-container">
-                    {/* Pass handleSort function down all the way to TableHeader */}
-                    <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
-                    <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
-                    <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+            <div id="page-grid-container">
+                <Logo />
+                <SideNavBar />
+                <div id="navbar-content-grid-container">
+                    <Navbar/>
+                    <div id="manage-members-grid-container">
+                        {/* Pass handleSort function down all the way to TableHeader */}
+                        <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
+                        <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
+                        <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+                    </div>
                 </div>
             </div>
             

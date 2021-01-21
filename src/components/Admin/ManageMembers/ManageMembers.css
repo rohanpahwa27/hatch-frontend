@@ -1,7 +1,10 @@
 #manage-members-grid-container{
-    /* grid-template-areas:
-    'header header header header header header'
-    'menu main main main right right'
-    'menu footer footer footer footer footer'; */
+    display: grid;
+    grid-template-rows: 15% 85%;
+
+    width: 85.7vw;
+    height: 93.5vh;
+
+    background-color: #FFFFFF;
     overflow: hidden;
 }

@@ -6,7 +6,7 @@
     /* Grid container properties */
     display: grid;
     grid-template-rows: 100%;
-    grid-template-columns: 4fr 1fr 1fr 2fr;
+    grid-template-columns: 4fr 1fr 1fr;
     justify-items: flex-start;
     align-items: center;
 }

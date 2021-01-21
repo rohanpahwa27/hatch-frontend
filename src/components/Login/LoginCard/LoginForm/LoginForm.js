@@ -3,8 +3,8 @@ import "./LoginForm.css"
 import Button from "@kiwicom/orbit-components/lib/Button";
 import InputField from "@kiwicom/orbit-components/lib/InputField";
 
-import email from "./Icons/email.png"
-import password from "./Icons/password.png"
+// import email from "./Icons/email.png";
+// import password from "./Icons/password.png";
 
 class LoginForm extends Component {
     render() {
@@ -19,7 +19,7 @@ class LoginForm extends Component {
                 <InputField type="password" placeholder="type your password" value={this.props.password} onChange={this.props.handlePasswordChange} />
             </div>
             <div id="forgot-password-container">
-                <a href="">Forgot your password?</a>
+                <a href="/">Forgot your password?</a>
             </div>
             {this.props.errors.map(error => (
                     <p className="invalid-credentials" key={error}>{error}</p> 

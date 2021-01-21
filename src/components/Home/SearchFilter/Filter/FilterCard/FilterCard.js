@@ -24,7 +24,6 @@ class FilterCard extends Component {
   }
 
   isFilterSelected = (filterValue) => {
-    // console.log("isFilterSelected: ", filterValue);
     const { updatedFilters } = this.state;
     return updatedFilters.has(filterValue);
   }
@@ -40,7 +39,6 @@ class FilterCard extends Component {
   }
 
   resetFilters = () => {
-    // console.log("resetFilters");
     this.setState({
       updatedFilters: new Set(this.props.filters)
     });
@@ -56,8 +54,8 @@ class FilterCard extends Component {
   }
 
   render() {
-    const activeText = '';
-    const releasedText = '';
+    // const activeText = '';
+    // const releasedText = '';
     return (
       <div className="home-filter-card-container">
         <div className="home-filter-card">

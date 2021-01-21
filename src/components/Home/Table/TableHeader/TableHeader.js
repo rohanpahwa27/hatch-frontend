@@ -29,8 +29,6 @@ class TableHeader extends Component {
                         {sortBy === "comments" ? 
                         <img className="sort-arrow comments-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
                     </th>
-
-                    <th id="tags-header">Tags</th>
                 </tr>
             </thead>
         )

@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 
 class SideNavBar extends Component {
     render() {
+        //if profile and other item shouldn't be, then gotta pull up the profile state
         return (
             <div id="sidenavbar">
                 <HomeSideBarItem />

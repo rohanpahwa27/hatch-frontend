@@ -8,10 +8,12 @@
     height: 25px;
     border-radius: 50%;
     margin: 0px 15px 0px 0px;
+    cursor: pointer;
 }
 
 #applicants-to-admin-link {
     display: flex;
     color: inherit;
     text-decoration: inherit;
+    cursor: pointer;
 }

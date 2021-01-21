@@ -1,0 +1,114 @@
+#profile-container {
+    cursor: auto;
+    background-color: white;
+    width: 25%;
+    box-shadow: 0px 8px 18px -6px rgba(24, 39, 75, 0.12), 0px 12px 42px -4px rgba(24, 39, 75, 0.12);
+    border-radius: 3px;
+    position: fixed;
+    left: 10%;
+    bottom: 28%;
+    z-index: 1;
+}
+
+#profile-card {
+    margin: 5% 10%;
+}
+
+#profile-flex-container {
+    display: flex;
+}
+
+/* #profile-flex-container > div{
+    margin-left: 2%;
+    padding-bottom: 0%;
+} */
+
+#profile-name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+}
+
+#profile-organization-name{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    color: #5F738C;
+}
+
+#profile-name-org-attributes{
+    margin: 16px 0px;
+}
+
+#profile-edit-picture-button{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 100%;
+    text-align: center;
+    color: #252A31;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+
+#profile-picture-flex{
+    flex: auto
+}
+
+#show-profile-image{
+    margin: 10px 0px 0px 15px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.profile-likes-comments-attribute{
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 150%;
+    color: #252A31;  
+    margin-right: 2%
+}
+
+#profile-likes-attribute{
+    padding-top: 1%;
+    margin-right: 6%;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+    color: #252A31;
+}
+
+#profile-title{
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 140%;
+    color: #5F738C;
+}
+
+.profile-attributes-padding{
+    padding-bottom: 1%;
+}
+
+.profile-email-admin-title-attribute{
+    padding-top: 7%;
+}
+
+.profile-email-admin-attribute{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+    color: #252A31;
+}
+
+.profile-buttons-padding{
+    padding-top: 12%;
+}
+
+#profile-logout-button{
+    margin-right: 6%
+}
+
+#delete-profile-button-padding{
+    padding-top: 14%;
+}

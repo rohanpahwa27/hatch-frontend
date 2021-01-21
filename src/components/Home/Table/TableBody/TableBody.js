@@ -14,7 +14,7 @@ class TableBody extends Component {
                           id={applicant.id}
                           firstName={applicant.firstName} 
                           lastName={applicant.lastName} 
-                          imgURL={applicant.imgURL}
+                          imageUrl={applicant.imageUrl}
                           likes={applicant.likes} 
                           comments={applicant.comments} 
                           tags={applicant.tags}

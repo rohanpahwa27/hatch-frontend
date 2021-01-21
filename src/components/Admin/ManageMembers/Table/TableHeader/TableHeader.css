@@ -4,7 +4,7 @@
     grid-column: 1 / span 1;
     height: 100%;
     width: 100%;
-
+    overflow: hidden;
     background-color: rgba(239, 242, 245, 0.5);
 }
 
