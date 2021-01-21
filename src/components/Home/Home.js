@@ -104,7 +104,7 @@ class Home extends Component {
     handleClick(event, data) {
         this.props.history.push({
             pathname: '/applicant',
-            state: { appID: data }
+            state: { email: data }
         })
     }
 

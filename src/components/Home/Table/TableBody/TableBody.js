@@ -17,7 +17,7 @@ class TableBody extends Component {
                           likes={applicant.likes} 
                           comments={applicant.comments} 
                           tags={applicant.tags}
-                          appID={applicant.appID}
+                          email={applicant.email}
                           handleClick={this.props.handleClick}/>
             )
         })
