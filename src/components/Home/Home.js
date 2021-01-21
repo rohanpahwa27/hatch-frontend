@@ -39,6 +39,7 @@ class Home extends Component {
             .then(res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
+                        id: applicant._id,
                         firstName: applicant.firstName,
                         lastName: applicant.lastName,
                         email: applicant.email,
@@ -101,9 +102,10 @@ class Home extends Component {
     }
 
     handleClick(event, data) {
+        console.log(data)
         this.props.history.push({
             pathname: '/applicant',
-            state: { email: data }
+            state: { id: data }
         })
     }
 
