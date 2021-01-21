@@ -45,13 +45,14 @@ class UploadPhoto extends Component {
 
     render() {
         const file = this.state.selectedFile;
+        var applicant = this.props.data[this.props.ID]
         let add = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Add/SVG/ic_fluent_add_12_regular.svg"
         let grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
         return (
             <div id="upload-container">
                 <button id ="upload-image-button" onClick={this.toggleShowModal}> 
                     <img id="add-image" src={add} alt="Add icon" />
-                    Upload a picture of Emily
+                    Upload a picture of {applicant.firstName}
                 </button>
                 <div>
                     {this.state.isOpen ?
@@ -59,7 +60,7 @@ class UploadPhoto extends Component {
                             <ModalSection>
                                 <div id="upload-photo">
                                     <div id="upload-photo-header">
-                                        <span> Upload a picture of Emily Readey </span>
+                                        <span> Upload a picture of {applicant.firstName} {applicant.lastName} </span>
                                     </div>
                                     <div id="upload-photo-your-upload">
                                         Your upload

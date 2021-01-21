@@ -75,7 +75,7 @@ class Applicant extends Component {
                 <SideNavBar />
                 <ApplicantInfoBar data = {this.state.allApplicants} ID = {appID} handleClick={this.handleClick}/>
                 <CommentSection data = {this.state.commentData} />
-                <UploadPhoto />
+                <UploadPhoto data = {this.state.allApplicants} ID = {appID}/>
                 {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
                 <ApplicantInfoDrop data = {this.state.allApplicants} ID = {appID}/>
             </div>
