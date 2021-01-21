@@ -40,7 +40,7 @@ class TableRow extends Component {
         components.push(tags)
 
         return (
-            <tr id="table-row-grid-container" onClick={event => this.props.handleClick(event, this.props.appID)}>
+            <tr id="table-row-grid-container" onClick={event => this.props.handleClick(event, this.props.email)}>
                 {components}
             </tr>
         )

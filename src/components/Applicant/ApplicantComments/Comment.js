@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import likesImage from "./heart.png"
-import "./OtherComment.css"
+import "./Comment.css"
 
 class OtherComment extends Component {
     render() {
@@ -8,7 +8,7 @@ class OtherComment extends Component {
 
         const image = (
             <td className="image">
-                <img className="comment-user-image" src={this.props.imgURL} alt="Headshot" />
+                {/* <img className="comment-user-image" src={this.props.imgURL} alt="Headshot" /> */}
             </td>
         )
 
@@ -22,7 +22,7 @@ class OtherComment extends Component {
 
         const likes = (
             <td className ="like">
-                <img className="heart-image" src={likesImage} alt="Heart icon" />
+                {/* <img className="heart-image" src={likesImage} alt="Heart icon" /> */}
                 <span className="comment-like">{this.props.likes}</span>
             </td>
         )
