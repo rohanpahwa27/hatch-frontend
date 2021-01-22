@@ -26,7 +26,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "@types/styled-components": "^5.1.5",
+    "react-onclickoutside": "^6.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,9 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/styled-components": "^5.1.5",
-    "react-onclickoutside": "^6.9.0"
   }
 }
