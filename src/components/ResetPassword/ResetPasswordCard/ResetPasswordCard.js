@@ -7,6 +7,8 @@ import { withRouter, useParams } from "react-router-dom";
 const initialState = {
   password: "",
   confirmPassword: "",
+  submitted: false,
+  validToken: false,
   errors: []
 };
 
@@ -42,16 +44,20 @@ class ResetPasswordCard extends Component {
 
     const token = this.props.match.params.token
     
-    const response = await api.resetPassword(token, {
+    console.log("sup")
+    await api.resetPassword(token, {
       password: this.state.password
-    });
-    console.log(response);
-
-    if (response.data.status === "error"){
-      errors.push(response.data.message)
-      this.setState({ errors: errors });
-      return;
-    }
+    }).then(res => {
+      console.log(res)
+      this.setState({
+        submitted: true,
+        validToken: true
+      })
+    }).catch(err => {
+      console.log(err)
+      errors.push(err)
+      this.setState({ submitted: true, validToken: false, errors: errors });
+    })
   };
 
   handlePasswordChange = evt => {
@@ -64,18 +70,46 @@ class ResetPasswordCard extends Component {
 
   render() {
     const resetPasswordText = (
-        <div>
-            <h5> Reset password </h5>
-            <p> We've sent instructions to your email to reset your password. </p>
-        </div>
+      <div>
+          <h5> Reset password </h5>
+          <p> We've sent instructions to your email to reset your password. </p>
+      </div>
+  )
+
+    const confirmationText = (
+      <div>
+          <h5> Your password has been reset </h5>
+          <p> Use your new password to <a href="http://localhost:8080/login"> login.</a> </p>
+      </div>
     )
+
+    const invalidTokenText = (
+      <div>
+          <h5> Invalid token </h5>
+          <p> The token is either invalid or has expired. Please <a href="http://localhost:8080/forgot-password">try again.</a></p>
+      </div>
+    )
+
+    let text
+
+    if (this.state.submitted) {
+      if (this.state.validToken) {
+        text = confirmationText
+      }
+      else {
+        text = invalidTokenText
+      }
+    }
+    else {
+      text = resetPasswordText
+    }
 
     const { errors } = this.state;
     return (
       <div id="reset-password-card-container"> 
         <div id="reset-password-card-content">
-          {resetPasswordText}
-          <ResetPasswordForm password={this.state.password} confirmPassword={this.state.confirmPassword} handleSubmit={this.handleSubmit} handlePasswordChange={this.handlePasswordChange} handleConfirmPasswordChange={this.handleConfirmPasswordChange} errors={errors} />
+          {text}
+          {this.state.submitted ? <div> </div> : <ResetPasswordForm password={this.state.password} confirmPassword={this.state.confirmPassword} handleSubmit={this.handleSubmit} handlePasswordChange={this.handlePasswordChange} handleConfirmPasswordChange={this.handleConfirmPasswordChange} errors={errors} /> }
           <p id="create-account-label">Or, create an account to get started</p>
           <div id="sign-up-links">
             <a href="signup?query=member">Sign up as a member</a>
