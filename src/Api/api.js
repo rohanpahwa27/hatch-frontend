@@ -3,6 +3,7 @@ const FileDownload = require('js-file-download');
 
 const api = axios.create({
   baseURL: "http://localhost:3000",
+  withCredentials: true
 });
 
 // Organizations
@@ -48,7 +49,16 @@ export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo",
 export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload)
 export const didUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
 export const changeUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
-export const updateMemberStatus = (payload, memberID) => api.patch(`/updateMemberStatus/${localStorage.getItem('orgID')}/${memberID}`, payload)
+const updateMemberStatus = (memberID, payload) => api.patch(`/updateMemberStatus/${localStorage.getItem('orgID')}/${memberID}`, payload)
+const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
+const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
+
+
+//Profile Page APIs
+const confirmPassword = (payload) => api.post(`/updateProfile/confirmPassword`, payload)
+const updatePassword = (payload) => api.patch(`/updateProfile/updatePassword`, payload)
+const removeMember = () => api.delete(`/updateProfile/deleteMember`)
+const logout = () => api.get(`/updateProfile/logout`)
 
 const apis = {
   getAllOrgs,
@@ -81,7 +91,13 @@ const apis = {
   generateOrgCode,
   didUserLikeMember,
   changeUserLikeMember,
-  updateMemberStatus
+  updateMemberStatus,
+  checkIfUserLoggedIn,
+  checkIfUserIsAdmin,
+  confirmPassword,
+  updatePassword,
+  removeMember,
+  logout
 };
 
 export default apis;

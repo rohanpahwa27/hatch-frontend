@@ -28,6 +28,12 @@ function validate(currentPassword, newPassword, confirmNewPassword) {
     if (confirmNewPassword.length === 0) {
       errors.confirmNewPassword = "Required Field"
     }
+
+    if (newPassword.length == 0) {
+        errors.newPassword = "Required Field"
+    } else if (newPassword.length < 6) {
+        errors.newPassword = "Must be 6+ characters"
+    }
   
     if (newPassword != confirmNewPassword) {
       errors.newPassword = "Passwords don't match."
@@ -65,18 +71,34 @@ class ChangePassword extends Component {
           return;
         }
         try {
-            const response = await api.loginUser({
-                email: this.state.email, //replace with member email
+            let response = await api.confirmPassword({
                 password: this.state.currentPassword
-              });
-            console.log(response);
+            });
+            console.log(response)
             if (response.data.status === "error"){
             errors.currentPassword = "Current password doesn't match"
             this.setState({ errors: errors });
             return;
             }
+            
+            if (this.state.currentPassword == this.state.newPassword){
+                errors.newPassword = "New password must be different";
+                this.setState({ errors: errors });
+                return;
+            }
+
+            response = await api.updatePassword({
+                password: this.state.newPassword
+            });
+            console.log(response)
+            if (response.status == 500) {
+                errors.currentPassword = "Server error. Please try again later."
+                this.setState({ errors: errors });
+                return;
+            }
+            this.props.closeButton()
         } catch(e){
-            errors.currentPassword = 'Service down. Please try again later'
+            console.log(e)
             return;
         }
     };

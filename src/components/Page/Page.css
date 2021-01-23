@@ -1,0 +1,11 @@
+#page-grid-container {
+  /* Make sure to update css class name when making a new page */
+  display: grid;
+  grid-template-rows: 15% 15% 15% 55%;
+  grid-template-columns: 15% 65% 25%;
+
+  width: 95vw;
+  height: 100vh;
+
+  background-color: #FFFFFF;
+}

@@ -31,7 +31,6 @@ class EditPicture extends Component {
         if(file) {
             fileReader.readAsDataURL(file)
         }
-        //this.sendFile();
     };
     render() {
         const file = this.state.selectedFile;
