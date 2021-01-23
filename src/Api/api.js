@@ -31,6 +31,14 @@ const createApplicant = (orgId, payload) => api.post(`/applicants/${orgId}`, pay
 const updateApplicant = (applicantId, payload) => api.patch(`/applicants//${applicantId}`, payload)
 const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
 
+// Upload image
+const uploadApplicantImage = (applicantId, payload) => api.post(`/upload-image/applicant/${applicantId}`, payload)
+const uploadMemberImage = (memberId, payload) => api.post(`/upload-image/member/${memberId}`, payload)
+
+// Forgot and reset password
+const forgotPassword = payload => api.post("/forgot-password", payload)
+const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload)
+
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
 const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob'}).then((response) => {
@@ -72,12 +80,15 @@ const apis = {
   createApplicant,
   updateApplicant,
   deleteApplicant,
+  uploadApplicantImage,
+  uploadMemberImage,
+  forgotPassword,
+  resetPassword,
   insertUser,
   loginUser,
   downloadTemplate,
   uploadApplicantInfo,
   generateOrgCode,
-  deleteMember,
   didUserLikeMember,
   changeUserLikeMember,
   updateMemberStatus,
