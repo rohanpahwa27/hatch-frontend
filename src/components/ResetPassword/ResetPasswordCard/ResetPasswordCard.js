@@ -16,16 +16,18 @@ const initialState = {
 function validate(password, confirmPassword) {
   const errors = [];
   if (password.length === 0) {
-    errors.push("First password field can't be empty");
-    return errors;
+    errors.push("First password field can't be empty.");
   }
 
   if (confirmPassword.length === 0) {
-    errors.push("Second password field can't be empty");
-    return errors;
+    errors.push("Second password field can't be empty.");
   }
 
-  return [];
+  if (password !== confirmPassword) {
+    errors.push("Passwords don't match.")
+  }
+
+  return errors;
 }
 
 class ResetPasswordCard extends Component {
@@ -44,7 +46,6 @@ class ResetPasswordCard extends Component {
 
     const token = this.props.match.params.token
     
-    console.log("sup")
     await api.resetPassword(token, {
       password: this.state.password
     }).then(res => {
