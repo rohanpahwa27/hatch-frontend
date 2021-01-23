@@ -2,7 +2,7 @@ import axios from "axios";
 const FileDownload = require('js-file-download');
 
 const api = axios.create({
-  baseURL: "https://hatchrecruiting-service.herokuapp.com/:5000",
+  baseURL: "https://hatchrecruiting-service.herokuapp.com/",
   withCredentials: true
 });
 
