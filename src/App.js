@@ -32,8 +32,8 @@ function App() {
         <AdminRoute component={<ManageApplicants />} path="/Admin/Applicants" exact />
         <AdminRoute component={<ManageMembers />} path="/Admin/Members" exact />
         <Route path="/page" component={Page} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/reset-password/:token" component={ResetPassword} />
+        <PublicRoute restricted={true} component={<ForgotPassword />} path="/forgot-password" exact />
+        <PublicRoute restricted={true} component={<ResetPassword />} path="/reset-password/:token" exact />
       </Switch>
     </Router>
   );
