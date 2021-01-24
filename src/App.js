@@ -12,7 +12,7 @@ import Home from "./components/Home/Home.js";
 // import ImportApplicants from "./components/Admin/ImportApplicants/ImportApplicants.js";
 // import Import from "./components/Admin/importApplicants/Import/Import.js";
 import Applicant from "./components/Applicant/Applicant"
-import ManageApplicants from "./components/Admin/manageApplicants/ManageApplicants.js";
+import ManageApplicants from "./components/Admin/ManageApplicants/ManageApplicants.js";
 import ManageMembers from "./components/Admin/ManageMembers/ManageMembers"
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword.js"
 import ResetPassword from "./components/ResetPassword/ResetPassword.js"

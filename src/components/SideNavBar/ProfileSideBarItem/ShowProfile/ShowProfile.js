@@ -86,6 +86,9 @@ class Profile extends Component {
 
     render() {
         let grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
+        let profilePreviewSrc;
+        profilePreviewSrc = (this.state.profileAttributes.imageURL) ? this.state.profileAttributes.imageURL: grayCircleSrc
+
         return (
             (this.props.showProfile && this.state.profileAttributes.name != null) ?
             <div id="profile-container">
@@ -98,7 +101,7 @@ class Profile extends Component {
                         <div id="profile-picture-flex"></div>
                         <div>
                             <span id="profile-edit-picture-button" onClick={(e) => this.editPicture()}>Edit</span>
-                            <img id="show-profile-image" src={grayCircleSrc} alt="Applicant icon" />
+                            <img id="show-profile-image" src={profilePreviewSrc} alt="Applicant icon" />
                         </div>
                     </div>
                     <span id="profile-title"> Contribution </span>
@@ -148,7 +151,7 @@ class Profile extends Component {
                     }
 
                     {this.state.editPicture
-                        ? <EditPicture closeButton={this.closeButtonEditPicture} />
+                        ? <EditPicture closeButton={this.closeButtonEditPicture} imageURL={this.state.profileAttributes.imageURL}/>
                         : null
                     }
                 </div>
