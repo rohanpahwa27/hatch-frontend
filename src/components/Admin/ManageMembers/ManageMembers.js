@@ -38,14 +38,12 @@ class ManageMembers extends Component {
 
     componentDidMount = async () => {
         try {
-            const orgId = localStorage.getItem("orgID");
-            const memberResponse = await api.getMembersInOrg(orgId);
-            console.log(memberResponse)
+            const memberResponse = await api.getMembersInOrg();
             memberData = memberResponse.data.members
-            const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-            if (index > -1) memberData.splice(index, 1);
+            // const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+            // if (index > -1) memberData.splice(index, 1);
 
-            const organizationResponse = await api.getOrgById(localStorage.getItem('orgID'))
+            const organizationResponse = await api.getOrgById()
             const orgCode = organizationResponse.data.organization.addCode
             this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode})
         } catch (error) {
@@ -365,10 +363,11 @@ class ManageMembers extends Component {
             const resp = await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
         }
 
-        const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
+        const memberResponse = await api.getMembersInOrg();
         memberData = memberResponse.data.members
-        const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-        if (index > -1) memberData.splice(index, 1);
+
+        // const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+        // if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
@@ -378,10 +377,11 @@ class ManageMembers extends Component {
         for (let memberID of this.state.selected){
             await api.removeMemberFromOrg(localStorage.getItem('orgID'), memberID)
         }
-        const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
+        const memberResponse = await api.getMembersInOrg();
         memberData = memberResponse.data.members
-        const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-        if (index > -1) memberData.splice(index, 1);
+
+        // const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+        // if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
