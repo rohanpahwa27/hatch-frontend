@@ -9,7 +9,7 @@ import Login from "./components/Login/Login";
 import Start from "./components/Start/Start.js";
 import Home from "./components/Home/Home.js";
 
-// import ImportApplicants from "./components/Admin/ImportApplicants/ImportApplicants.js";
+import ImportApplicants from "./components/Admin/ImportApplicants/ImportApplicants.js";
 // import Import from "./components/Admin/importApplicants/Import/Import.js";
 import Applicant from "./components/Applicant/Applicant"
 import ManageApplicants from "./components/Admin/ManageApplicants/ManageApplicants.js";
@@ -26,7 +26,7 @@ function App() {
         <PublicRoute restricted={true} component={<Signup />} path="/Signup" exact />
         <PrivateRoute component={<Home/>} loadingScreen={true} path="/Home" exact />
         <PublicRoute restricted={true} component={<Login />} path="/Login" exact />
-        {/* <Route path="/import1" component={ImportApplicants} /> */}
+        <Route path="/import1" component={ImportApplicants} />
         {/* <Route path="/import2" component={Import} /> */}
         <PrivateRoute component={<Applicant />} path="/Applicant" exact />
         <AdminRoute component={<ManageApplicants />} path="/Admin/Applicants" exact />
