@@ -21,7 +21,7 @@ const RadioButton = ({ label, updateApplicants }) => {
 class UpdateApplicantsCard extends Component {
     render() {
         const numSelectedText = (this.props.numSelected > 1) ? "applicants selected" : "applicant selected";
-        const addTagText = (this.props.numSelected > 1) ? `Add a tag to all ${this.props.numSelected} applicants` : "Add a tag";
+        // const addTagText = (this.props.numSelected > 1) ? `Add a tag to all ${this.props.numSelected} applicants` : "Add a tag";
         console.log(this.props.numSelected)
         return (
             (this.props.numSelected > 0) ?
@@ -36,12 +36,12 @@ class UpdateApplicantsCard extends Component {
                             </div>
                         </div>
                         <div id="card-bottom-space">
-                            <button id="manage-applicants-tag-button">
+                            {/* <button id="manage-applicants-tag-button">
                                 <p id="add-tag-text">
                                     <img id="add-icon" src={addIcon} alt="Add icon" />
                                     &nbsp;{addTagText}
                                 </p>
-                            </button>
+                            </button> */}
                         </div>
                         <ButtonLink
                             type="critical"

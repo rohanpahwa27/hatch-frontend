@@ -20,20 +20,21 @@ class ManageMembers extends Component {
             sortBy: "name",
             sortDirection: "descending",
             orgCode: "1234"
-        }
-        this.handleSearch = this.handleSearch.bind(this)
-        this.handleSelected = this.handleSelected.bind(this)
-        this.deleteMembers = this.deleteMembers.bind(this)
-        this.isSelected = this.isSelected.bind(this)
-        this.updateMembers = this.updateMembers.bind(this)
-        this.handleSort = this.handleSort.bind(this)
-        this.sortByName = this.sortByName.bind(this)
-        this.sortByVotes = this.sortByVotes.bind(this)
-        this.sortByComments = this.sortByComments.bind(this)
-        this.sortByEmail = this.sortByEmail.bind(this)
-        this.sortByAdmin = this.sortByAdmin.bind(this)
-        this.selectAll = this.selectAll.bind(this)
-        this.generateOrgCode = this.generateOrgCode.bind(this)
+        };
+        
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleSelected = this.handleSelected.bind(this);
+        this.deleteMembers = this.deleteMembers.bind(this);
+        this.isSelected = this.isSelected.bind(this);
+        this.updateMembers = this.updateMembers.bind(this);
+        this.handleSort = this.handleSort.bind(this);
+        this.sortByName = this.sortByName.bind(this);
+        this.sortByVotes = this.sortByVotes.bind(this);
+        this.sortByComments = this.sortByComments.bind(this);
+        this.sortByEmail = this.sortByEmail.bind(this);
+        this.sortByAdmin = this.sortByAdmin.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+        this.generateOrgCode = this.generateOrgCode.bind(this);
     }
 
     componentDidMount = async () => {
