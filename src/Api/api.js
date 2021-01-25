@@ -22,6 +22,7 @@ const deleteOrg = () => api.delete("/organizations")
 const getMembersAcrossAllOrgs = () => api.get("/members")
 const getMembersInOrg = () => api.get("/members/inOrg")
 const getMemberById = memberId => api.get(`/members/byId/${memberId}`)
+const getThisMember = () => api.get(`/members/me`)
 const createMember = payload => api.post("/members", payload)
 const addMemberToOrg = (orgId, payload) => api.post(`/members/${orgId}/`, payload)
 const updateMember = payload => api.patch(`/members`, payload)
@@ -74,6 +75,7 @@ const apis = {
   getMembersAcrossAllOrgs,
   getMembersInOrg,
   getMemberById,
+  getThisMember,
   createMember,
   addMemberToOrg,
   updateMember,
