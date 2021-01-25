@@ -13,26 +13,27 @@ const api = axios.create({
 
 // Organizations
 const getAllOrgs = () => api.get("/organizations")
-const getOrgById = orgId => api.get(`/organizations/${orgId}`)
+const getOrgById = () => api.get("/organizations/myOrg")
 const createOrg = payload => api.post("/organizations", payload)
-const updateOrg = (orgId, payload) => api.patch(`/organizations/${orgId}`, payload)
-const deleteOrg = orgId => api.delete(`/organizations/${orgId}`)
+const updateOrg = payload => api.patch("/organizations/", payload)
+const deleteOrg = () => api.delete("/organizations")
 
 // Members
 const getMembersAcrossAllOrgs = () => api.get("/members")
-const getMembersInOrg = orgId => api.get(`/members/inOrg/${orgId}`)
+const getMembersInOrg = () => api.get("/members/inOrg")
 const getMemberById = memberId => api.get(`/members/byId/${memberId}`)
+const getThisMember = () => api.get(`/members/me`)
 const createMember = payload => api.post("/members", payload)
-const addMemberToOrg = (orgId, memberId, payload) => api.post(`/members/${orgId}/${memberId}`, payload)
-const updateMember = (memberId, payload) => api.patch(`/members//${memberId}`, payload)
-const deleteMember = memberId => api.delete(`/members/${memberId}`)
+const addMemberToOrg = (orgId, payload) => api.post(`/members/${orgId}/`, payload)
+const updateMember = payload => api.patch(`/members`, payload)
+const deleteMember = () => api.delete(`/members`)
 const removeMemberFromOrg = (orgId, memberId) => api.delete(`/members/${orgId}/${memberId}`)
 
 // Applicants 
 const getApplicantsAcrossAllOrgs = () => api.get("/applicants")
-const getApplicantsInOrg = orgId => api.get(`/applicants/inOrg/${orgId}`)
+const getApplicantsInOrg = () => api.get(`/applicants/inOrg`)
 const getApplicantById = applicantId => api.get(`/applicants/byId/${applicantId}`)
-const createApplicant = (orgId, payload) => api.post(`/applicants/${orgId}`, payload)
+const createApplicant = payload => api.post(`/applicants`, payload)
 const updateApplicant = (applicantId, payload) => api.patch(`/applicants//${applicantId}`, payload)
 const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
 
@@ -52,9 +53,9 @@ const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob
 
 export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
 export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload)
-export const didUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
-export const changeUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
-const updateMemberStatus = (memberID, payload) => api.patch(`/updateMemberStatus/${localStorage.getItem('orgID')}/${memberID}`, payload)
+export const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`)
+export const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`)
+const updateMemberStatus = (memberId, payload) => api.patch(`/updateMemberStatus/${memberId}`, payload)
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
 
@@ -74,6 +75,7 @@ const apis = {
   getMembersAcrossAllOrgs,
   getMembersInOrg,
   getMemberById,
+  getThisMember,
   createMember,
   addMemberToOrg,
   updateMember,
@@ -94,8 +96,8 @@ const apis = {
   downloadTemplate,
   uploadApplicantInfo,
   generateOrgCode,
-  didUserLikeMember,
-  changeUserLikeMember,
+  didMemberLikeApplicant,
+  changeMemberLikeApplicant,
   updateMemberStatus,
   checkIfUserLoggedIn,
   checkIfUserIsAdmin,
