@@ -27,7 +27,7 @@ const createMember = payload => api.post("/members", payload)
 const addMemberToOrg = (orgId, payload) => api.post(`/members/${orgId}/`, payload)
 const updateMember = payload => api.patch(`/members`, payload)
 const deleteMember = () => api.delete(`/members`)
-const removeMemberFromOrg = (orgId, memberId) => api.delete(`/members/${orgId}/${memberId}`)
+const removeMemberFromOrg = (memberId) => api.delete(`/members/${memberId}`)
 
 // Applicants 
 const getApplicantsAcrossAllOrgs = () => api.get("/applicants")
@@ -39,7 +39,7 @@ const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
 
 // Upload image
 const uploadApplicantImage = (applicantId, payload) => api.post(`/upload-image/applicant/${applicantId}`, payload)
-const uploadMemberImage = (memberId, payload) => api.post(`/upload-image/member/${memberId}`, payload)
+const uploadMemberImage = payload => api.post(`/upload-image/member`, payload)
 
 // Forgot and reset password
 const forgotPassword = payload => api.post("/forgot-password", payload)
