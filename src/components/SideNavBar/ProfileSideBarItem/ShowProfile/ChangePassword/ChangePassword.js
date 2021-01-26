@@ -21,7 +21,7 @@ function validate(currentPassword, newPassword, confirmNewPassword) {
       errors.currentPassword = "Required Field"
     }
   
-    if (newPassword.length == 0) {
+    if (newPassword.length === 0) {
       errors.newPassword = "Required Field"
     }
   
@@ -29,13 +29,13 @@ function validate(currentPassword, newPassword, confirmNewPassword) {
       errors.confirmNewPassword = "Required Field"
     }
 
-    if (newPassword.length == 0) {
+    if (newPassword.length === 0) {
         errors.newPassword = "Required Field"
     } else if (newPassword.length < 6) {
         errors.newPassword = "Must be 6+ characters"
     }
   
-    if (newPassword != confirmNewPassword) {
+    if (newPassword !== confirmNewPassword) {
       errors.newPassword = "Passwords don't match."
       errors.confirmNewPassword = " "
     }
@@ -74,7 +74,6 @@ class ChangePassword extends Component {
             let response = await api.confirmPassword({
                 password: this.state.currentPassword
             });
-            console.log(response)
             if (response.data.status === "error"){
             errors.currentPassword = "Current password doesn't match"
             this.setState({ errors: errors });

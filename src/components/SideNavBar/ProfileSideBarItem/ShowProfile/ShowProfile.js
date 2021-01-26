@@ -40,7 +40,8 @@ class Profile extends Component {
                                             numLikes: memberResp.data.member.organizations[0].numLikes,
                                             numComments: memberResp.data.member.organizations[0].numComments,
                                             accountType: (memberResp.data.member.organizations[0].isAdmin) ? "Administrator" : "General Member",
-                                        orgName: orgResp.data.organization.name}})
+                                        orgName: orgResp.data.organization.name,
+                                    imageURL: memberResp.data.member.imageUrl}})
         } catch (error){
 
         }
