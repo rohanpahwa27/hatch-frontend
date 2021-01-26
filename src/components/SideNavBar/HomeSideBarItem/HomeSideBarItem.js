@@ -11,8 +11,6 @@ class HomeSideBarItem extends Component {
     }
     
     render() {
-        let home = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Home/SVG/ic_fluent_home_16_regular.svg"
-
         let navlink;
         navlink = (this.props.showingProfile) ? 
         <NavLink

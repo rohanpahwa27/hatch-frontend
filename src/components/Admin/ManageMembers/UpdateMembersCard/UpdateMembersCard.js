@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./UpdateMembersCard.css"
 import Radio from "@kiwicom/orbit-components/lib/Radio";
 import ButtonLink from "@kiwicom/orbit-components/lib/ButtonLink";
-import Remove from "@kiwicom/orbit-components/lib/icons/Remove"
 
 const RadioButton = ({label, updateMembers}) => {
     const [checked, setChecked] = React.useState(false);

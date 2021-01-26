@@ -6,7 +6,7 @@ import Search from "@kiwicom/orbit-components/lib/icons/Search";
 
 class SearchBar extends Component {
     render() {
-        const showingAllMembers = this.props.numMembersShowing == this.props.totalMembers ? <div className = "member-search-container-text"><span>Showing all members ({this.props.totalMembers})</span></div>
+        const showingAllMembers = this.props.numMembersShowing === this.props.totalMembers ? <div className = "member-search-container-text"><span>Showing all members ({this.props.totalMembers})</span></div>
         : <div className = "member-search-container-text"><span>Showing {this.props.numMembersShowing} of {this.props.totalMembers} members</span></div>
         return (
             <div id="member-search-flex-container">

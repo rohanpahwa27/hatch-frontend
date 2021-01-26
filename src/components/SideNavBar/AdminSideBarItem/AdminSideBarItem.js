@@ -11,8 +11,6 @@ class AdminSideBarItem extends Component {
     }
     
     render() {
-        let person = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Settings/SVG/ic_fluent_settings_16_regular.svg"
-
         let navlink;
         navlink = (this.props.showingProfile) ? 
         <NavLink

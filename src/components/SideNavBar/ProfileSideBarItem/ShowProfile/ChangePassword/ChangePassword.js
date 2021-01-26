@@ -80,7 +80,7 @@ class ChangePassword extends Component {
             return;
             }
             
-            if (this.state.currentPassword == this.state.newPassword){
+            if (this.state.currentPassword === this.state.newPassword){
                 errors.newPassword = "New password must be different";
                 this.setState({ errors: errors });
                 return;
@@ -89,7 +89,7 @@ class ChangePassword extends Component {
             response = await api.updatePassword({
                 password: this.state.newPassword
             });
-            if (response.status == 500) {
+            if (response.status === 500) {
                 errors.currentPassword = "Server error. Please try again later."
                 this.setState({ errors: errors });
                 return;

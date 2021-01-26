@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, Redirect } from 'react-router-dom';
 import api from "../../Api/api"
-import Loading from "@kiwicom/orbit-components/lib/Loading";
 import "./route.css"
 
 let _isMounted = false;
@@ -9,7 +8,7 @@ let _isMounted = false;
 const isLogin = async () => {
     if (_isMounted){
         const resp = await api.checkIfUserLoggedIn();
-        return resp.data.status == 'success'
+        return resp.data.status === 'success'
     }
     return false;
 };

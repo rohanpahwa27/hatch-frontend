@@ -7,7 +7,6 @@ import Search from "./Search/Search"
 import api from "../../../Api/api"
 import Logo from "../../Page/Logo/Logo";
 import SideNavBar from "../../SideNavBar/SideNavBar";
-import axios from 'axios';
 
 var memberData = []
 class ManageMembers extends Component {
@@ -273,13 +272,13 @@ class ManageMembers extends Component {
      }
 
      selectAll(){
-        if (this.state.selected.size == this.state.tableData.length){
+        if (this.state.selected.size === this.state.tableData.length){
             this.setState({selected: new Set()});
             return;
         }
         let selectAll = new Set();
         this.state.tableData.map((member) => {
-            selectAll.add(member._id)
+            return selectAll.add(member._id)
         })
         this.setState({selected: selectAll})
      }
