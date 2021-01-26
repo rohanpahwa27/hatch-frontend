@@ -26,7 +26,7 @@ class TableBody extends Component {
                               memberID={member._id} 
                               firstName={member.firstName} 
                               lastName={member.lastName} 
-                              imgURL={member.imgURL}
+                              imgURL={member.imgUrl}
                               comments={numComments} 
                               email={member.email} 
                               admin = {admin}

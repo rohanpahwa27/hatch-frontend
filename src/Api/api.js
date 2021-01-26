@@ -55,7 +55,6 @@ export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo",
 export const generateOrgCode = () => api.get(`/generateOrgCode`)
 export const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`)
 export const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`)
-const updateAllMemberStatus = (memberId, payload) =>  {return api.patch(`/updateMemberStatus/${memberId}`, payload)}
 const updateMemberStatus = (memberId, payload) => api.patch(`/updateMemberStatus/${memberId}`, payload)
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
@@ -106,7 +105,6 @@ const apis = {
   updatePassword,
   removeMember,
   logout,
-  updateAllMemberStatus
 };
 
 export default apis;
