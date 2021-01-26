@@ -90,7 +90,6 @@ class ChangePassword extends Component {
             response = await api.updatePassword({
                 password: this.state.newPassword
             });
-            console.log(response)
             if (response.status == 500) {
                 errors.currentPassword = "Server error. Please try again later."
                 this.setState({ errors: errors });

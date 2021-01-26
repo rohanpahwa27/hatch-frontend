@@ -3,6 +3,7 @@ import "./EditPicture.css"
 import Close from "@kiwicom/orbit-components/lib/icons/Close"
 import Button from "@kiwicom/orbit-components/lib/Button";
 import Dialog from "@kiwicom/orbit-components/lib/Dialog";
+import api from "../../../../../Api/api"
 
 class EditPicture extends Component {
     constructor(props) {
@@ -14,8 +15,12 @@ class EditPicture extends Component {
         }
     }
 
-    confirmProfilePicture(){
-        //call api to upload image
+    confirmProfilePicture = async () => {
+        const formData = new FormData();
+        formData.append("image", this.state.selectedFile);
+        const resp = await api.uploadMemberImage(formData);
+        console.log('pictureresp', resp.data)
+        this.props.closeButton()
     }
 
     uploadFile = event => {

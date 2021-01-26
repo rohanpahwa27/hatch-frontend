@@ -33,8 +33,8 @@ class Profile extends Component {
 
     componentDidMount = async () => {
         try {
-            const memberResp = await api.getMemberById(localStorage.getItem('userID'))
-            const orgResp = await api.getOrgById(localStorage.getItem('orgID'))
+            const memberResp = await api.getThisMember()
+            const orgResp = await api.getOrgById()
             this.setState({profileAttributes: {name: memberResp.data.member.firstName + " " + memberResp.data.member.lastName,
                                                 email: memberResp.data.member.email,
                                             numLikes: memberResp.data.member.organizations[0].numLikes,
@@ -47,7 +47,6 @@ class Profile extends Component {
     }
 
     handleClickOutside = (event) => {
-        console.log(event)
         event.stopPropagation();
         if (this.props.showProfile && !this.state.deleteAccount && !this.state.editPicture && !this.state.changePassword){
             this.props.closeProfile(event)
@@ -75,6 +74,7 @@ class Profile extends Component {
     }
 
     closeButtonEditPicture(){
+        this.componentDidMount()
         this.setState({editPicture: false})
     }
 

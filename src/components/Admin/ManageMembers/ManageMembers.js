@@ -7,6 +7,7 @@ import Search from "./Search/Search"
 import api from "../../../Api/api"
 import Logo from "../../Page/Logo/Logo";
 import SideNavBar from "../../SideNavBar/SideNavBar";
+import axios from 'axios';
 
 var memberData = []
 class ManageMembers extends Component {
@@ -19,7 +20,7 @@ class ManageMembers extends Component {
             numMembersShowing: memberData.length,
             sortBy: "name",
             sortDirection: "descending",
-            orgCode: "1234"
+            orgCode: ""
         }
         this.handleSearch = this.handleSearch.bind(this)
         this.handleSelected = this.handleSelected.bind(this)
@@ -40,8 +41,11 @@ class ManageMembers extends Component {
         try {
             const memberResponse = await api.getMembersInOrg();
             memberData = memberResponse.data.members
-            // const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-            // if (index > -1) memberData.splice(index, 1);
+
+            const userResp = await api.getThisMember();
+            let userID = userResp.data.member._id
+            const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
+            if (index > -1) memberData.splice(index, 1);
 
             const organizationResponse = await api.getOrgById()
             const orgCode = organizationResponse.data.organization.addCode
@@ -54,9 +58,7 @@ class ManageMembers extends Component {
     }
 
     generateOrgCode = async () => {
-        await api.generateOrgCode({
-            orgID: localStorage.getItem('orgID')
-        }).then(res => {
+        api.generateOrgCode().then(res => {
             this.setState({orgCode: res.data.code})
         }).catch(err => {
             console.log(err)
@@ -359,29 +361,32 @@ class ManageMembers extends Component {
      }
 
     updateMembers = async (label) => {
-        for (let memberID of this.state.selected){
-            const resp = await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
-        }
 
+        for (let memberID of this.state.selected){
+            api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
+        }
+    
         const memberResponse = await api.getMembersInOrg();
         memberData = memberResponse.data.members
 
-        // const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-        // if (index > -1) memberData.splice(index, 1);
+        const userResp = await api.getThisMember();
+        let userID = userResp.data.member._id
+        const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
+        if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
 
     deleteMembers = async () => {
-        //need to update deleteMembers
         for (let memberID of this.state.selected){
-            await api.removeMemberFromOrg(localStorage.getItem('orgID'), memberID)
+            api.removeMemberFromOrg(memberID)
         }
         const memberResponse = await api.getMembersInOrg();
         memberData = memberResponse.data.members
-
-        // const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-        // if (index > -1) memberData.splice(index, 1);
+        const userResp = await api.getThisMember();
+        let userID = userResp.data.member._id
+        const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
+        if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
