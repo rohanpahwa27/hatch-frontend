@@ -361,9 +361,11 @@ class ManageMembers extends Component {
 
     updateMembers = async (label) => {
 
-        for (let memberID of this.state.selected){
-            await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
-        }
+        // for (let memberID of this.state.selected){
+        //     await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
+        // }
+
+        await api.updateMemberStatus({updatedStatus: label.toLowerCase(), members: Array.from(this.state.selected)})
     
         const memberResponse = await api.getMembersInOrg();
         memberData = memberResponse.data.members
@@ -377,9 +379,7 @@ class ManageMembers extends Component {
     }
 
     deleteMembers = async () => {
-        for (let memberID of this.state.selected){
-            await api.removeMemberFromOrg(memberID)
-        }
+        await api.removeManyMembers({members: Array.from(this.state.selected)})
         const memberResponse = await api.getMembersInOrg();
         memberData = memberResponse.data.members
         const userResp = await api.getThisMember();
