@@ -360,18 +360,9 @@ class ManageMembers extends Component {
      }
 
     updateMembers = async (label) => {
-
-        // for (let memberID of this.state.selected){
-        //     await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
-        // }
-
-        await api.updateMemberStatus({updatedStatus: label.toLowerCase(), members: Array.from(this.state.selected)})
-    
-        const memberResponse = await api.getMembersInOrg();
-        memberData = memberResponse.data.members
-
-        const userResp = await api.getThisMember();
-        let userID = userResp.data.member._id
+        const resp = await api.updateMemberStatus({updatedStatus: label.toLowerCase(), members: Array.from(this.state.selected)})
+        memberData = resp.data.allMembers
+        const userID = resp.data.user._id
         const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
@@ -379,11 +370,9 @@ class ManageMembers extends Component {
     }
 
     deleteMembers = async () => {
-        await api.removeManyMembers({members: Array.from(this.state.selected)})
-        const memberResponse = await api.getMembersInOrg();
-        memberData = memberResponse.data.members
-        const userResp = await api.getThisMember();
-        let userID = userResp.data.member._id
+        const resp = await api.removeManyMembers({members: Array.from(this.state.selected)})
+        memberData = resp.data.allMembers
+        const userID = resp.data.user._id
         const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
