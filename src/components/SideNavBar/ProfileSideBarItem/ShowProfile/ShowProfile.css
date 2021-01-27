@@ -58,6 +58,7 @@
 #show-profile-image{
     margin: 10px 0px 0px 15px;
     height: 60px;
+    width: 60px;
     border-radius: 50%;
 }
 

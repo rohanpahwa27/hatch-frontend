@@ -52,10 +52,11 @@ const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob
 });
 
 export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
-export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload)
+export const generateOrgCode = () => api.get(`/generateOrgCode`)
 export const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`)
 export const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`)
-const updateMemberStatus = (memberId, payload) => api.patch(`/updateMemberStatus/${memberId}`, payload)
+const updateMemberStatus = (payload) => api.patch(`/updateMemberStatus/`, payload)
+const removeManyMembers = (payload) => api.patch(`/updateMemberStatus/deleteMembers`, payload)
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
 
@@ -104,7 +105,8 @@ const apis = {
   confirmPassword,
   updatePassword,
   removeMember,
-  logout
+  logout,
+  removeManyMembers
 };
 
 export default apis;
