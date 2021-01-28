@@ -13,8 +13,8 @@ class ProfileSideBarItem extends Component {
     }
 
     handleClick(event) {
-        console.log('hi?')
         event.stopPropagation();
+        this.props.setShowingProfile(!this.state.showProfile)
         this.setState({
             showProfile: !this.state.showProfile
         });
@@ -22,6 +22,7 @@ class ProfileSideBarItem extends Component {
 
     closeProfile(event) {
         event.stopPropagation();
+        this.props.setShowingProfile(false)
         this.setState({
             showProfile: false
         });

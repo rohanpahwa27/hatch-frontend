@@ -9,24 +9,15 @@ from Table as a prop
 class TableBody extends Component {
     render() {
         const memberComponents = this.props.data.map((member, index) => {
-            let admin = false
-            let numComments = 0;
-            for (let org in member.organizations){
-                if (member.organizations[org].organization == localStorage.getItem('orgID')){
-                    numComments = member.organizations[org].numComments
-                    if (member.organizations[org].isAdmin) {
-                        admin = true;
-                    }
-                    break;
-                }
-            }
-            if (member.imgURL){
+            let admin = member.organizations[0].isAdmin
+            let numComments = member.organizations[0].numComments;
+            if (member.imageUrl){
                 return (
                     <TableRow key={index}
                               memberID={member._id} 
                               firstName={member.firstName} 
                               lastName={member.lastName} 
-                              imgURL={member.imgURL}
+                              imgURL={member.imageUrl}
                               comments={numComments} 
                               email={member.email} 
                               admin = {admin}

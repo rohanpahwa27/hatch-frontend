@@ -19,34 +19,34 @@ class ManageMembers extends Component {
             numMembersShowing: memberData.length,
             sortBy: "name",
             sortDirection: "descending",
-            orgCode: "1234"
-        };
-        
-        this.handleSearch = this.handleSearch.bind(this);
-        this.handleSelected = this.handleSelected.bind(this);
-        this.deleteMembers = this.deleteMembers.bind(this);
-        this.isSelected = this.isSelected.bind(this);
-        this.updateMembers = this.updateMembers.bind(this);
-        this.handleSort = this.handleSort.bind(this);
-        this.sortByName = this.sortByName.bind(this);
-        this.sortByVotes = this.sortByVotes.bind(this);
-        this.sortByComments = this.sortByComments.bind(this);
-        this.sortByEmail = this.sortByEmail.bind(this);
-        this.sortByAdmin = this.sortByAdmin.bind(this);
-        this.selectAll = this.selectAll.bind(this);
-        this.generateOrgCode = this.generateOrgCode.bind(this);
+            orgCode: ""
+        }
+        this.handleSearch = this.handleSearch.bind(this)
+        this.handleSelected = this.handleSelected.bind(this)
+        this.deleteMembers = this.deleteMembers.bind(this)
+        this.isSelected = this.isSelected.bind(this)
+        this.updateMembers = this.updateMembers.bind(this)
+        this.handleSort = this.handleSort.bind(this)
+        this.sortByName = this.sortByName.bind(this)
+        this.sortByVotes = this.sortByVotes.bind(this)
+        this.sortByComments = this.sortByComments.bind(this)
+        this.sortByEmail = this.sortByEmail.bind(this)
+        this.sortByAdmin = this.sortByAdmin.bind(this)
+        this.selectAll = this.selectAll.bind(this)
+        this.generateOrgCode = this.generateOrgCode.bind(this)
     }
 
     componentDidMount = async () => {
         try {
-            const orgId = localStorage.getItem("orgID");
-            const memberResponse = await api.getMembersInOrg(orgId);
-            console.log(memberResponse)
+            const memberResponse = await api.getMembersInOrg();
             memberData = memberResponse.data.members
-            const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+
+            const userResp = await api.getThisMember();
+            let userID = userResp.data.member._id
+            const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
             if (index > -1) memberData.splice(index, 1);
 
-            const organizationResponse = await api.getOrgById(localStorage.getItem('orgID'))
+            const organizationResponse = await api.getOrgById()
             const orgCode = organizationResponse.data.organization.addCode
             this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode})
         } catch (error) {
@@ -57,9 +57,7 @@ class ManageMembers extends Component {
     }
 
     generateOrgCode = async () => {
-        await api.generateOrgCode({
-            orgID: localStorage.getItem('orgID')
-        }).then(res => {
+        api.generateOrgCode().then(res => {
             this.setState({orgCode: res.data.code})
         }).catch(err => {
             console.log(err)
@@ -274,13 +272,13 @@ class ManageMembers extends Component {
      }
 
      selectAll(){
-        if (this.state.selected.size == this.state.tableData.length){
+        if (this.state.selected.size === this.state.tableData.length){
             this.setState({selected: new Set()});
             return;
         }
         let selectAll = new Set();
         this.state.tableData.map((member) => {
-            selectAll.add(member._id)
+            return selectAll.add(member._id)
         })
         this.setState({selected: selectAll})
      }
@@ -362,26 +360,20 @@ class ManageMembers extends Component {
      }
 
     updateMembers = async (label) => {
-        for (let memberID of this.state.selected){
-            const resp = await api.updateMemberStatus(memberID, {updatedStatus: label.toLowerCase()})
-        }
-
-        const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
-        memberData = memberResponse.data.members
-        const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+        const resp = await api.updateMemberStatus({updatedStatus: label.toLowerCase(), members: Array.from(this.state.selected)})
+        memberData = resp.data.allMembers
+        const userID = resp.data.user._id
+        const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})
     }
 
     deleteMembers = async () => {
-        //need to update deleteMembers
-        for (let memberID of this.state.selected){
-            await api.removeMemberFromOrg(localStorage.getItem('orgID'), memberID)
-        }
-        const memberResponse = await api.getMembersInOrg(localStorage.getItem('orgID'));
-        memberData = memberResponse.data.members
-        const index = memberData.map(function(e) { return e._id; }).indexOf(localStorage.getItem('userID'));
+        const resp = await api.removeManyMembers({members: Array.from(this.state.selected)})
+        memberData = resp.data.allMembers
+        const userID = resp.data.user._id
+        const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length})
         this.setState({selected: new Set()})

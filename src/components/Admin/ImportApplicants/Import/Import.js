@@ -19,21 +19,14 @@ class Import extends Component {
   };
 
   handleFileUploadChange = async (event) => {
-    console.log(event.target.files.length)
-    console.log(event.target.files[0])
     this.setState({ selectedFile: event.target.files[0] });
     this.sendFile();
   };
 
   sendFile = async (event) => {
     const formData = new FormData();
-    const orgId = localStorage.getItem("orgID");
-    console.log('test')
     formData.append("data", this.state.selectedFile);
-    formData.append("orgID", orgId ? orgId : '5fcebc5bdc4d7b32372834c5');
-    //TODO: pass information through pages and programatically input orgID instead of hardcoding it above
-    const response = await api.uploadApplicantInfo(formData);
-    console.log(response);
+    await api.uploadApplicantInfo(formData);
   };
 
   downloadTemplate = async (event) => {

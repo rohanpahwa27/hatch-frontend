@@ -15,6 +15,12 @@
     background-color: #F8F8F8;
 }
 
+.member-image{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
 .checkbox{
     padding-left: 7%;
 }

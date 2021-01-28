@@ -3,16 +3,23 @@ import "./EditPicture.css"
 import Close from "@kiwicom/orbit-components/lib/icons/Close"
 import Button from "@kiwicom/orbit-components/lib/Button";
 import Dialog from "@kiwicom/orbit-components/lib/Dialog";
+import api from "../../../../../Api/api"
 
 class EditPicture extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            oldFileUrl: this.props.imageURL,
             selectedFile: null,
             photoUrl: null
         }
     }
-    confirmProfilePicture(){
+
+    confirmProfilePicture = async () => {
+        const formData = new FormData();
+        formData.append("image", this.state.selectedFile);
+        await api.uploadMemberImage(formData);
+        this.props.closeButton()
     }
 
     uploadFile = event => {
@@ -21,8 +28,6 @@ class EditPicture extends Component {
     
     handleFileUploadChange = async (event) => {
         const file = event.target.files[0]
-        console.log(event.target.files.length)
-        console.log(event.target.files[0])
         const fileReader = new FileReader()
         this.setState({ selectedFile: event.target.files[0] });
         fileReader.onloadend = () => {
@@ -35,6 +40,13 @@ class EditPicture extends Component {
     render() {
         const file = this.state.selectedFile;
         let grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
+
+        let previewSRC;
+        if (file == null){
+            previewSRC = (this.state.oldFileUrl) ? this.state.oldFileUrl:grayCircleSrc;
+        } else {
+            previewSRC = this.state.photoUrl
+        }
         return (
             <Dialog
                 title={
@@ -59,8 +71,7 @@ class EditPicture extends Component {
                         <div>
                             <span id="your-upload-text">Preview</span>
                             <div>
-                                {file == null ?
-                                <img id="preview-profile-image" src={grayCircleSrc} alt="Applicant icon" /> : <img id="preview-profile-image" src={this.state.photoUrl} alt='preview'/>}
+                                <img id="preview-profile-image" src={previewSRC} alt="Applicant icon" />
                             </div>
                         </div>
                         
