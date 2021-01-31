@@ -93,14 +93,6 @@
     font-weight: 500;
 }
 
-#upload-photo-text {
-    flex-grow: 1;
-    margin-left: 20px;
-
-    font-style: italic;
-    color: #5F738C;
-}
-
 #upload-photo-preview {
     grid-row: 2 / -1;
     grid-column: 2/ span -1;

@@ -75,13 +75,6 @@ class UploadPhoto extends Component {
                                                 </input>
                                                 Select a file
                                             </button>
-                                            <div id="upload-photo-text">
-                                            {/* TODO: Limit file name length? */}
-                                            {file != null ?
-                                                <p>{file.name.substr(0, 15)}</p>
-                                                : <p>No file chosen</p>
-                                            }
-                                            </div>
                                         </div>
                                     </div>
                                     <div id="upload-photo-preview">

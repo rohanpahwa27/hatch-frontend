@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import {Route, withRouter} from 'react-router-dom'
 import "./Home.css"
 
 import Table from "./Table/Table.js"
@@ -103,7 +104,6 @@ class Home extends Component {
     }
 
     handleClick(event, data) {
-        console.log(data)
         this.props.history.push({
             pathname: '/applicant',
             state: { id: data }
@@ -353,4 +353,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default withRouter(Home)
