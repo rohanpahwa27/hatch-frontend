@@ -5,13 +5,14 @@ import Collapse from "@kiwicom/orbit-components/lib/Collapse";
 class ApplicantInfoDrop extends Component {
     render() {
         // var applicant = this.props.data[this.props.ID]
+        console.log(this.props.data.extraFields)
         return (
             // TODO: don't hard code info but use the extra fields attributes that should be included
             <div id="applicantinfodrop">
                 <div id="collapse">
                     <Collapse label="Applicant info">
                         <div id = "onclick"></div>
-                        <span>{this.props.data.extraFields}</span>
+                        {/* <span>{this.props.data.extraFields}</span> */}
                          {/* EXAMPLE OF HARD CODE*/}
                         {/* <div id = "title"> Year in school </div> */}
                         {/* <div id = "info"> {applicant.year} </div>

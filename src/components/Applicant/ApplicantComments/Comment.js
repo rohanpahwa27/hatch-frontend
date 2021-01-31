@@ -23,13 +23,13 @@ class OtherComment extends Component {
         const likes = (
             <td className ="like">
                 {/* <img className="heart-image" src={likesImage} alt="Heart icon" /> */}
-                <span className="comment-like">{this.props.likes}</span>
+                {/* <span className="comment-like">{this.props.likes}</span> */}
             </td>
         )
 
         const date = (
             <td className ="date">
-                <span className="comment-date">{this.props.date}</span>
+                {/* <span className="comment-date">{this.props.date}</span> */}
             </td>
         )
 
