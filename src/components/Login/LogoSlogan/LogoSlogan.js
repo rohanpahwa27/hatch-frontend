@@ -7,7 +7,7 @@ class LogoSlogan extends Component {
         return (
             <div id="logo-slogan-container">
                 <img src={logo} alt="hatch logo" />
-                <p>Recruiting the future, together.</p>
+                <p>Recruiting better when you're together</p>
             </div>
         )
     }

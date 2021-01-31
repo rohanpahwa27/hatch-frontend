@@ -1,6 +1,11 @@
 import axios from "axios";
 const FileDownload = require('js-file-download');
 
+// const api = axios.create({
+//   baseURL: "https://hatchrecruiting-service.herokuapp.com/",
+//   withCredentials: true
+// });
+
 const api = axios.create({
   baseURL: "http://localhost:3000",
   withCredentials: true
@@ -8,28 +13,37 @@ const api = axios.create({
 
 // Organizations
 const getAllOrgs = () => api.get("/organizations")
-const getOrgById = orgId => api.get(`/organizations/${orgId}`)
+const getOrgById = () => api.get("/organizations/myOrg")
 const createOrg = payload => api.post("/organizations", payload)
-const updateOrg = (orgId, payload) => api.patch(`/organizations/${orgId}`, payload)
-const deleteOrg = orgId => api.delete(`/organizations/${orgId}`)
+const updateOrg = payload => api.patch("/organizations/", payload)
+const deleteOrg = () => api.delete("/organizations")
 
 // Members
 const getMembersAcrossAllOrgs = () => api.get("/members")
-const getMembersInOrg = orgId => api.get(`/members/inOrg/${orgId}`)
+const getMembersInOrg = () => api.get("/members/inOrg")
 const getMemberById = memberId => api.get(`/members/byId/${memberId}`)
+const getThisMember = () => api.get(`/members/me`)
 const createMember = payload => api.post("/members", payload)
-const addMemberToOrg = (orgId, memberId, payload) => api.post(`/members/${orgId}/${memberId}`, payload)
-const updateMember = (memberId, payload) => api.patch(`/members//${memberId}`, payload)
-const deleteMember = memberId => api.delete(`/members/${memberId}`)
-const removeMemberFromOrg = (orgId, memberId) => api.delete(`/members/${orgId}/${memberId}`)
+const addMemberToOrg = (orgId, payload) => api.post(`/members/${orgId}/`, payload)
+const updateMember = payload => api.patch(`/members`, payload)
+const deleteMember = () => api.delete(`/members`)
+const removeMemberFromOrg = (memberId) => api.delete(`/members/${memberId}`)
 
 // Applicants 
 const getApplicantsAcrossAllOrgs = () => api.get("/applicants")
-const getApplicantsInOrg = orgId => api.get(`/applicants/inOrg/${orgId}`)
+const getApplicantsInOrg = () => api.get(`/applicants/inOrg`)
 const getApplicantById = applicantId => api.get(`/applicants/byId/${applicantId}`)
-const createApplicant = (orgId, payload) => api.post(`/applicants/${orgId}`, payload)
+const createApplicant = payload => api.post(`/applicants`, payload)
 const updateApplicant = (applicantId, payload) => api.patch(`/applicants//${applicantId}`, payload)
 const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
+
+// Upload image
+const uploadApplicantImage = (applicantId, payload) => api.post(`/upload-image/applicant/${applicantId}`, payload)
+const uploadMemberImage = payload => api.post(`/upload-image/member`, payload)
+
+// Forgot and reset password
+const forgotPassword = payload => api.post("/forgot-password", payload)
+const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload)
 
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
@@ -38,10 +52,11 @@ const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob
 });
 
 export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
-export const generateOrgCode = (payload) => api.post(`/generateOrgCode`, payload)
-export const didUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
-export const changeUserLikeMember = (applicantID) => api.get(`/${localStorage.getItem('userID')}/${applicantID}`)
-const updateMemberStatus = (memberID, payload) => api.patch(`/updateMemberStatus/${localStorage.getItem('orgID')}/${memberID}`, payload)
+export const generateOrgCode = () => api.get(`/generateOrgCode`)
+export const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`)
+export const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`)
+const updateMemberStatus = (payload) => api.patch(`/updateMemberStatus/`, payload)
+const removeManyMembers = (payload) => api.patch(`/updateMemberStatus/deleteMembers`, payload)
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
 
@@ -61,6 +76,7 @@ const apis = {
   getMembersAcrossAllOrgs,
   getMembersInOrg,
   getMemberById,
+  getThisMember,
   createMember,
   addMemberToOrg,
   updateMember,
@@ -72,21 +88,25 @@ const apis = {
   createApplicant,
   updateApplicant,
   deleteApplicant,
+  uploadApplicantImage,
+  uploadMemberImage,
+  forgotPassword,
+  resetPassword,
   insertUser,
   loginUser,
   downloadTemplate,
   uploadApplicantInfo,
   generateOrgCode,
-  deleteMember,
-  didUserLikeMember,
-  changeUserLikeMember,
+  didMemberLikeApplicant,
+  changeMemberLikeApplicant,
   updateMemberStatus,
   checkIfUserLoggedIn,
   checkIfUserIsAdmin,
   confirmPassword,
   updatePassword,
   removeMember,
-  logout
+  logout,
+  removeManyMembers
 };
 
 export default apis;

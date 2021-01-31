@@ -7,9 +7,6 @@ import { withRouter } from "react-router-dom";
 import api from "../../../../../Api/api"
 
 class DeleteAccount extends Component {
-    constructor(props) {
-        super(props);
-    }
     deleteAccount = async () => {
         await api.removeMember()
         this.props.history.push("/login");

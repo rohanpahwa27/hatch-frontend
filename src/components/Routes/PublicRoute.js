@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Route, Redirect } from 'react-router-dom';
 import api from "../../Api/api"
-import Loading from "@kiwicom/orbit-components/lib/Loading";
 import "./route.css"
 
 let _isMounted = false;
 
 const isLogin = async () => {
     const resp = await api.checkIfUserLoggedIn();
-    return resp.data.status == 'success'
+    return resp.data.status === 'success'
 };
 
 export default class PublicRoute extends Component {

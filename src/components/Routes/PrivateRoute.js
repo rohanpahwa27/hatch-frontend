@@ -8,7 +8,7 @@ let _isMounted = false;
 
 const isLogin = async () => {
     const resp = await api.checkIfUserLoggedIn();
-    return resp.data.status == 'success'
+    return resp.data.status === 'success'
 };
 
 
