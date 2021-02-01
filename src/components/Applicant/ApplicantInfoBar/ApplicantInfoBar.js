@@ -8,10 +8,9 @@ class ApplicantInfoBar extends Component {
     render() {
         return (
             <div id="applicantinfobar">
-                {/* Add another div inside to separate profile info and actions */}
-                <ApplicantInfo data={this.props.data} ID = {this.props.ID}/>
+                <ApplicantInfo applicant={this.props.applicant}/>
                 <LikeInfoBarItem />
-                <NextInfoBarItem handleClick={this.props.handleClick} ID = {this.props.ID}/>
+                <NextInfoBarItem handleClick={this.props.handleClick}/>
             </div>
         )
     }

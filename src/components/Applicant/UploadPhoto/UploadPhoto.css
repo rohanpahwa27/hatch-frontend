@@ -37,7 +37,7 @@
 #upload-photo {
     display: grid;
     grid-template-rows: 20% 70% 10%;
-    grid-template-columns: 50% 30% 15%;
+    grid-template-columns: 50% 30% 20%;
 
     width: 50vw;
     height: 40vh;
@@ -93,14 +93,6 @@
     font-weight: 500;
 }
 
-#upload-photo-text {
-    flex-grow: 1;
-    margin-left: 20px;
-
-    font-style: italic;
-    color: #5F738C;
-}
-
 #upload-photo-preview {
     grid-row: 2 / -1;
     grid-column: 2/ span -1;
@@ -117,8 +109,8 @@
 
 #upload-photo-applicant-image {
     position: absolute;
-    width: 190px;
-    height: 190px;
+    width: 200px;
+    height: 200px;
     
     background: #EFF2F5;
     border-radius: 50%;

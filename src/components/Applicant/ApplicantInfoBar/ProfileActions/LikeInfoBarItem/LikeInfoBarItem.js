@@ -20,7 +20,6 @@ class LikeInfoBarItem extends Component {
     render() {
         const imageClick = async () => {
             this.setState({likedApplicant: !this.state.likedApplicant})
-            console.log('changing like');
             // const response = api.changeUserLikeMember(this.props.applicantID);
             // this.setState({likedApplicant: response.data.like})
         } 
