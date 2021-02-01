@@ -18,9 +18,10 @@ class ApplicantComment extends Component {
             <tbody id="applicant-comments-grid-container">
                 {commentComponents}
             </tbody> : 
-            <div id="no-comments"> No comments yet!</div>
+            // TODO: Make this look prettier
+            <div id="no-comments"> No comments yet</div>
         )
     }
 }
 
-export default ApplicantCommentd
+export default ApplicantComment

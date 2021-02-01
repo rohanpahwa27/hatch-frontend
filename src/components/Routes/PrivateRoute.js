@@ -23,7 +23,7 @@ export default class AdminRoute extends Component {
     componentDidMount = async () => {
         _isMounted = true;
         if (_isMounted){
-            console.log(await isLogin())
+            // console.log(await isLogin())
             this.setState({proceed: (await isLogin())})
         }
     }

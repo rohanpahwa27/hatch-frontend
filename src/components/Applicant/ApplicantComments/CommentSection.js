@@ -9,7 +9,7 @@ class CommentSection extends Component {
         return (
             <table id="comment-section-grid-container">
                 <ApplicantComment comments={this.props.comments} />
-                {/* <NewComment /> */}
+                <NewComment />
             </table>
         )
     }
