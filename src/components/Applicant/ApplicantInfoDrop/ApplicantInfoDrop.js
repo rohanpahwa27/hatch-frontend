@@ -3,30 +3,28 @@ import "./ApplicantInfoDrop.css"
 import Collapse from "@kiwicom/orbit-components/lib/Collapse";
 
 class ApplicantInfoDrop extends Component {
+    
     render() {
-        // var applicant = this.props.data[this.props.ID]
-        console.log(this.props.data.extraFields)
+        const FieldMapping = ({extraFields, extraFieldContents}) => (
+            <>
+              {extraFields.map((extraField, index) => (
+                  <div id = "field" key={extraField}>
+                    <div id = "title" key={extraField}>{extraField} </div>
+                    <div id = "info" key={index}> {extraFieldContents[index]}</div>
+                  </div>
+              ))}
+            </>
+        );
         return (
-            // TODO: don't hard code info but use the extra fields attributes that should be included
+            (this.props.applicant.extraFields.length > 1) ?
             <div id="applicantinfodrop">
                 <div id="collapse">
                     <Collapse label="Applicant info">
                         <div id = "onclick"></div>
-                        {/* <span>{this.props.data.extraFields}</span> */}
-                         {/* EXAMPLE OF HARD CODE*/}
-                        {/* <div id = "title"> Year in school </div> */}
-                        {/* <div id = "info"> {applicant.year} </div>
-                        <div id = "title"> GPA </div>
-                        <div id = "info"> {applicant.GPA}</div>
-                        <div id = "title"> Major </div>
-                        <div id = "info"> {applicant.major} </div>
-                        <div id = "title"> Interests </div>
-                        <div id = "info"> {applicant.interests}</div>
-                        <div id = "title"> Hometown</div>
-                        <div id = "info"> {applicant.hometown}</div> */}
+                        <FieldMapping extraFields={this.props.applicant.extraFields[0]} extraFieldContents={this.props.applicant.extraFields[1]} />
                     </Collapse>
                 </div>
-            </div>
+            </div> : null
         )
     }
 }

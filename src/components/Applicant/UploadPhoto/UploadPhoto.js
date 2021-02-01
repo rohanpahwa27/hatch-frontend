@@ -33,7 +33,7 @@ class UploadPhoto extends Component {
         this.setState({ selectedFile: event.target.files[0] });
         fileReader.onloadend = () => {
             this.setState({selectedFile: file, photoUrl: fileReader.result})
-        }   
+        }
         if(file) {
             fileReader.readAsDataURL(file)
         }
