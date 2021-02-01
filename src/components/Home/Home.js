@@ -39,7 +39,6 @@ class Home extends Component {
         api.getApplicantsInOrg(orgId)
             .then(res => {
                 const applicants = res.data.applicants.map(applicant => {
-                    console.log(applicant.imageUrl)
                     const applicantInfo = {
                         id: applicant._id,
                         firstName: applicant.firstName,

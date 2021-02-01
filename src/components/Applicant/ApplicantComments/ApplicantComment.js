@@ -5,24 +5,22 @@ import Comment from "./Comment.js"
 class ApplicantComment extends Component {
     render() {
         // TODO: add sort here
-        const commentComponents = this.props.data.map((comments, index) => {
+        const commentComponents = this.props.comments.map((comments, index) => {
             return (
-                <Comment key={index} 
-                          firstName={comments.firstName} 
-                          lastName={comments.lastName} 
-                          imgURL={comments.imgURL}
-                          likes={comments.likes}
-                          date={comments.date}
-                          comment={comments.comment} />
+                <Comment key={index}
+                            likes={comments.likes}
+                            commenterID={comments.member}
+                            comment={comments.text} />
             )
         })
 
-        return (
+        return ( (this.props.comments.length >= 1) ?
             <tbody id="applicant-comments-grid-container">
                 {commentComponents}
-            </tbody>
+            </tbody> : 
+            <div id="no-comments"> No comments yet!</div>
         )
     }
 }
 
-export default ApplicantComment
+export default ApplicantCommentd

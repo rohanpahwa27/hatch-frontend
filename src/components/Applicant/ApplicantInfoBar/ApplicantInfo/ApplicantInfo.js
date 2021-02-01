@@ -7,7 +7,7 @@ class ApplicantInfo extends Component {
         let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
         let chat = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Chat/SVG/ic_fluent_chat_16_regular.svg"
         let placeholder = ""
-        let applicant = this.props.data
+        let applicant = this.props.applicant
         return (
             <div id="applicant-info-item">
                  <img id="applicant-image" src={applicant ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />

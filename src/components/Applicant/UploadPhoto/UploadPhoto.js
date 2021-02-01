@@ -44,7 +44,6 @@ class UploadPhoto extends Component {
     sendFile = async (event) => {
         const formData = new FormData();
         const orgId = localStorage.getItem("orgID");
-        console.log('test')
         formData.append("data", this.state.selectedFile);
         formData.append("orgID", orgId ? orgId : '5fcebc5bdc4d7b32372834c5');
         //TODO: pass information through pages and programatically input orgID instead of hardcoding it above

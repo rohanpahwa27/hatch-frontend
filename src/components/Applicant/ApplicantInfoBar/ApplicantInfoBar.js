@@ -8,7 +8,7 @@ class ApplicantInfoBar extends Component {
     render() {
         return (
             <div id="applicantinfobar">
-                <ApplicantInfo data={this.props.data}/>
+                <ApplicantInfo applicant={this.props.applicant}/>
                 <LikeInfoBarItem />
                 <NextInfoBarItem handleClick={this.props.handleClick}/>
             </div>

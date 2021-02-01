@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import {Route, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import "./Applicant.css"
 import applicantInfo from "./ApplicantData.js"
 import comments from "./SampleCommentData.js"
@@ -53,8 +53,8 @@ class Applicant extends Component {
             <div id="applicant-grid-container">
                 <Logo />
                 <SideNavBar />
-                <ApplicantInfoBar data = {this.state.currApplicant} handleClick={this.handleClick}/>
-                <CommentSection data = {this.state.commentData} />
+                <ApplicantInfoBar applicant = {this.state.currApplicant} handleClick={this.handleClick}/>
+                <CommentSection comments = {this.state.commentData} />
                 <UploadPhoto applicant = {this.state.currApplicant}/>
                 {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
                 <ApplicantInfoDrop applicant = {this.state.currApplicant}/>

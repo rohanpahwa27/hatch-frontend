@@ -8,8 +8,8 @@ class CommentSection extends Component {
     render() {
         return (
             <table id="comment-section-grid-container">
-                <ApplicantComment data={this.props.data} />
-                <NewComment />
+                <ApplicantComment comments={this.props.comments} />
+                {/* <NewComment /> */}
             </table>
         )
     }
