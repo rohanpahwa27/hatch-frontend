@@ -19,7 +19,7 @@ class ApplicantComment extends Component {
                 {commentComponents}
             </tbody> : 
             // TODO: Make this look prettier
-            <div id="no-comments"> No comments yet</div>
+            <tbody id="no-comments"> No comments yet</tbody>
         )
     }
 }
