@@ -53,8 +53,8 @@ const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob
 
 export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
 export const generateOrgCode = () => api.get(`/generateOrgCode`)
-export const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`)
-export const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`)
+const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`)
+const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`)
 const updateMemberStatus = (payload) => api.patch(`/updateMemberStatus/`, payload)
 const removeManyMembers = (payload) => api.patch(`/updateMemberStatus/deleteMembers`, payload)
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
