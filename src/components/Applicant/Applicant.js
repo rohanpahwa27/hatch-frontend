@@ -54,7 +54,7 @@ class Applicant extends Component {
                 <Logo />
                 <SideNavBar />
                 <ApplicantInfoBar applicant = {this.state.currApplicant} handleClick={this.handleClick}/>
-                <CommentSection comments = {this.state.commentData} />
+                <CommentSection applicant = {this.state.currApplicant} comments = {this.state.commentData} />
                 <UploadPhoto applicant = {this.state.currApplicant}/>
                 {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
                 <ApplicantInfoDrop applicant = {this.state.currApplicant}/>
