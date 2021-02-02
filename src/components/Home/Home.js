@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import {Route, withRouter} from 'react-router-dom'
 import "./Home.css"
 
 import Table from "./Table/Table.js"
@@ -38,8 +39,8 @@ class Home extends Component {
         api.getApplicantsInOrg(orgId)
             .then(res => {
                 const applicants = res.data.applicants.map(applicant => {
-                    console.log(applicant.imageUrl)
                     const applicantInfo = {
+                        id: applicant._id,
                         firstName: applicant.firstName,
                         lastName: applicant.lastName,
                         email: applicant.email,
@@ -104,7 +105,7 @@ class Home extends Component {
     handleClick(event, data) {
         this.props.history.push({
             pathname: '/applicant',
-            state: { email: data }
+            state: { id: data }
         })
     }
 
@@ -351,4 +352,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default withRouter(Home)

@@ -10,7 +10,8 @@ class TableBody extends Component {
     render() {
         const applicantComponents = this.props.data.map((applicant, index) => {
             return (
-                <TableRow key={index} 
+                <TableRow key={index}
+                          id={applicant.id}
                           firstName={applicant.firstName} 
                           lastName={applicant.lastName} 
                           imageUrl={applicant.imageUrl}
