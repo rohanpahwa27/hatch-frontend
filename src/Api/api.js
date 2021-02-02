@@ -45,8 +45,8 @@ const uploadMemberImage = payload => api.post(`/upload-image/member`, payload)
 const forgotPassword = payload => api.post("/forgot-password", payload)
 const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload)
 
-// Comment
-const uploadApplicantComment = (applicantId, payload) => api.post(`/comments/${applicantId}`, payload)
+const getComments = applicantId => api.get(`/forgot-password/${applicantId}`)
+const addComment = (applicantId, payload) => api.post(`/forgot-password/${applicantId}`, payload)
 
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
@@ -62,7 +62,6 @@ const updateMemberStatus = (payload) => api.patch(`/updateMemberStatus/`, payloa
 const removeManyMembers = (payload) => api.patch(`/updateMemberStatus/deleteMembers`, payload)
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login")
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin")
-
 
 //Profile Page APIs
 const confirmPassword = (payload) => api.post(`/updateProfile/confirmPassword`, payload)
@@ -95,7 +94,8 @@ const apis = {
   uploadMemberImage,
   forgotPassword,
   resetPassword,
-  uploadApplicantComment,
+  getComments,
+  addComment,
   insertUser,
   loginUser,
   downloadTemplate,
