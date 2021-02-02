@@ -45,6 +45,9 @@ const uploadMemberImage = payload => api.post(`/upload-image/member`, payload)
 const forgotPassword = payload => api.post("/forgot-password", payload)
 const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload)
 
+// Comment
+const uploadApplicantComment = (applicantId, payload) => api.post(`/comments/${applicantId}`, payload)
+
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
 const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob'}).then((response) => {
@@ -92,6 +95,7 @@ const apis = {
   uploadMemberImage,
   forgotPassword,
   resetPassword,
+  uploadApplicantComment,
   insertUser,
   loginUser,
   downloadTemplate,
