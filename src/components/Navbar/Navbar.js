@@ -8,16 +8,16 @@ class Navbar extends Component {
       <div id="navbar-flex-container">
         <div id="navbar-applicants-link-item">
           <NavLink
-            id={window.location.pathname.toLowerCase()==="/manageApplicants".toLowerCase() ? 
+            id={window.location.pathname.toLowerCase()==="/Admin/Applicants".toLowerCase() ? 
             "navbar-link-green" : "navbar-link-grey"}
-            to="/manageApplicants"
+            to="/Admin/Applicants"
           >Applicants</NavLink>
         </div>
         <div id="navbar-members-link-item">
           <NavLink
-            id={window.location.pathname.toLowerCase()==="/manageMembers".toLowerCase() ? 
+            id={window.location.pathname.toLowerCase()==="/Admin/Members".toLowerCase() ? 
             "navbar-link-green" : "navbar-link-grey"}
-            to="/manageMembers"
+            to="/Admin/Members"
           >Members</NavLink>
         </div>
       </div>

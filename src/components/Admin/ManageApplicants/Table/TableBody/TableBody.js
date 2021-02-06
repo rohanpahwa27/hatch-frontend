@@ -12,7 +12,7 @@ class TableBody extends Component {
             return (
                 <TableRow
                     key={index}
-                    applicantId={applicant.objectID}
+                    applicantId={applicant._id}
                     firstName={applicant.firstName}
                     lastName={applicant.lastName}
                     imgURL={applicant.imgURL}

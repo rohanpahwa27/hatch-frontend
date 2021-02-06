@@ -39,7 +39,7 @@ class Import extends Component {
       <div id="import-applicants-grid-container">
         <div id="back-button-item">
           <button
-            id="back-button"
+            id="back-button-import"
             onClick={this.props.toggleImportPage}
           >
             <img id="small-icon" src={backIcon} alt="Back icon" />
