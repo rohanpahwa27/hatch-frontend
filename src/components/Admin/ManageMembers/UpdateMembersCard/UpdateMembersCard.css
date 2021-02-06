@@ -1,6 +1,7 @@
 .updateMembers-container {
     background-color: white;
-    width: 25%;
+    width: 341px;
+    height: 319px;
     box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
     border-radius: 3px; 
     position: fixed;

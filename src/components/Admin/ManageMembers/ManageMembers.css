@@ -1,6 +1,6 @@
 #manage-members-grid-container{
     display: grid;
-    grid-template-rows: 15% 85%;
+    grid-template-rows: 60px 85%;
 
     width: 85.7vw;
     height: 93.5vh;

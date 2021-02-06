@@ -8,7 +8,7 @@
     border-left: 2px solid #E8EDF1;
 
     display: grid;
-    grid-template-rows: 5% 95%;
+    grid-template-rows: 40px 95%;
     grid-template-columns: 1fr;
     overflow: hidden;
 }

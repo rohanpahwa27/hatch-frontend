@@ -39,7 +39,8 @@
     width: 93%;
     height: 100%;
     font-weight:normal;
-    font-size: .87vw;
+    font-size: 13px;
+    line-height: 150%;
 }
 
 #member-name-header {
@@ -47,22 +48,32 @@
     padding-left: 3%;
     width: 97%;
     height: 100%;
+    font-size: 13px;
+    line-height: 150%;
 }
 
 #member-email-header {
     grid-column: 3 / span 1;
+    font-size: 13px;
+    line-height: 150%;
 }
 
 #member-comments-header {
     grid-column: 4 / span 1;
+    font-size: 13px;
+    line-height: 150%;
 }
 
 #member-votes-header {
     grid-column: 5 / span 1;
+    font-size: 13px;
+    line-height: 150%;
 }
 
 #member-admin-header {
     grid-column: 6 / span 1;
+    font-size: 13px;
+    line-height: 150%;
 }
 
 .sort-arrow {

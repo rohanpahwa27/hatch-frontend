@@ -21,14 +21,14 @@ class LikeInfoBarItem extends Component {
     render() {
         const imageClick = async () => {
             this.setState({likedApplicant: !this.state.likedApplicant})
-            
-            try {
-                const response = await api.changeMemberLikeApplicant(this.props.applicantID);
-                console.log(response.data)
-                this.setState({likedApplicant: response.data.like})
-            } catch (error) {
-                console.log(error)
-            }
+            const response = await api.changeMemberLikeApplicant(this.props.applicantID);
+            console.log(response)
+            // try {
+            //     const response = await api.changeMemberLikeApplicant(this.props.applicantID);
+            //     this.setState({likedApplicant: response.data.like})
+            // } catch (error) {
+            //     console.log('ERROR', error)
+            // }
         } 
         let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
         let filledHeart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_filled.svg"

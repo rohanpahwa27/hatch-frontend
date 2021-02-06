@@ -12,10 +12,10 @@ class SearchBar extends Component {
             <div id="member-search-flex-container">
                 {showingAllMembers}
                 <div>
-                    <InputField id="member-search-bar" prefix={<Search />} type="text" placeholder="Search applicants" value={this.props.query} onChange={event => this.props.handleSearch(event)} />
+                    <InputField id="member-search-bar" prefix={<Search />} type="text" placeholder="Search members" value={this.props.query} onChange={event => this.props.handleSearch(event)} />
                 </div>
-                <div className = "member-search-container-text"><span>Your add code for members: {this.props.orgCode}&emsp;</span> 
-                <Link id="generateOrgCodeAdminSectionMember" onClick={this.props.generateOrgCode}>generate new org code</Link></div>
+                <div className = "member-search-container-text"><span>Add code for members: {this.props.orgCode}&emsp;</span> 
+                <Link id="generateOrgCodeAdminSectionMember" onClick={this.props.generateOrgCode}>get new code</Link></div>
             </div>
         )
     }
