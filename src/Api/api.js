@@ -45,8 +45,8 @@ const uploadMemberImage = payload => api.post(`/upload-image/member`, payload)
 const forgotPassword = payload => api.post("/forgot-password", payload)
 const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload)
 
-const getComments = applicantId => api.get(`/forgot-password/${applicantId}`)
-const addComment = (applicantId, payload) => api.post(`/forgot-password/${applicantId}`, payload)
+const getComments = applicantId => api.get(`/comments/${applicantId}`)
+const addComment = (applicantId, payload) => api.post(`/comments/${applicantId}`, payload)
 
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
