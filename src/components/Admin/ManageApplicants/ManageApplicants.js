@@ -17,7 +17,7 @@ class ManageApplicants extends Component {
                 { value: 'fall-2018', label: 'Fall 2018', key: 'fall-2018' },
             ],
             selectedOption: "",
-            allApplicantData: [],
+            allApplicantData: null,
             tableData: [],
             query: "",
             selected: new Set(),
@@ -64,7 +64,6 @@ class ManageApplicants extends Component {
 
 
     isSelected(applicantId) {
-        console.log('ISSELECTED', this.state.selected.has(applicantId));
         return this.state.selected.has(applicantId);
     }
 
@@ -81,9 +80,10 @@ class ManageApplicants extends Component {
             this.setState({ selected: new Set() });
             return;
         }
+        console.log(this.state.tableData)
         let selectAll = new Set();
-        this.state.tableData.map((member) => {
-            selectAll.add(member.objectID);
+        this.state.tableData.map((applicant) => {
+            selectAll.add(applicant._id);
         })
         this.setState({ selected: selectAll });
     }
@@ -323,38 +323,45 @@ class ManageApplicants extends Component {
     }
 
     render() {
+        console.log(this.state.applicantData);
         return (
             <div id="navbar-content-grid-container">
                 <Navbar />
-                {this.state.allApplicantData.length === 0 ?
-                    <ImportApplicants /> 
+                {this.state.allApplicantData === null ?
+                    <div>{this.state.allApplicantData}</div>
                     :
-                    <div id="manage-applicant-grid-container">
-                        {/* Pass handleSort function down all the way to TableHeader */}
-                        <TableToolbar
-                            cycleOptions={this.state.cycleOptions}
-                            selectedOption={this.state.selectedOption}
-                            handleCycleSelect={this.handleCycleSelect}
-                            numApplicantsShowing={this.state.numApplicantsShowing}
-                            totalApplicants={this.state.allApplicantData.length}
-                            query={this.state.query}
-                            handleSearch={this.handleSearch}
-                        />
-                        <Table
-                            data={this.state.tableData}
-                            handleSelected={this.handleSelected}
-                            selectAll={this.selectAll}
-                            isSelected={this.isSelected}
-                            handleSort={this.handleSort}
-                            sortBy={this.state.sortBy}
-                            sortDirection={this.state.sortDirection}
-                        />
-                        <UpdateApplicantsCard
-                            numSelected={this.state.selected.size}
-                            deleteMembers={this.deleteMembers}
-                            updateApplicants={this.updateApplicants}
-                        />
-                    </div>
+                    <div>
+                        {this.state.allApplicantData.length === 0 ?
+                            <ImportApplicants />
+                            :
+                            <div id="manage-applicant-grid-container">
+                                {/* Pass handleSort function down all the way to TableHeader */}
+                                <TableToolbar
+                                    cycleOptions={this.state.cycleOptions}
+                                    selectedOption={this.state.selectedOption}
+                                    handleCycleSelect={this.handleCycleSelect}
+                                    numApplicantsShowing={this.state.numApplicantsShowing}
+                                    totalApplicants={this.state.allApplicantData.length}
+                                    query={this.state.query}
+                                    handleSearch={this.handleSearch}
+                                />
+                                <Table
+                                    data={this.state.tableData}
+                                    handleSelected={this.handleSelected}
+                                    selectAll={this.selectAll}
+                                    isSelected={this.isSelected}
+                                    handleSort={this.handleSort}
+                                    sortBy={this.state.sortBy}
+                                    sortDirection={this.state.sortDirection}
+                                />
+                                <UpdateApplicantsCard
+                                    numSelected={this.state.selected.size}
+                                    deleteMembers={this.deleteMembers}
+                                    updateApplicants={this.updateApplicants}
+                                />
+                            </div>
+                        }</div>
+
                 }
             </div>
         )

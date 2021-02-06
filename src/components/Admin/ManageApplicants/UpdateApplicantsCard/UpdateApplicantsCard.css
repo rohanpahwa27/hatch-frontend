@@ -4,6 +4,7 @@
     box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
     border-radius: 3px; 
     position: fixed;
+    min-width: 300px;
     right: 2.5%;
     bottom: 4%;
 }
@@ -17,7 +18,12 @@
   height: 10px;
 }
 
-#add-tag-text {
+#goto-icon {
+    width: 8px;
+    height: 12px;
+}
+
+#goto-profile-text {
     font-size: 13px;
     font-weight: bold;
     line-height: 150%;
@@ -26,10 +32,11 @@
     color: #252A31;
 }
 
-#manage-applicants-tag-button {
-    background-color: #ffffff;
+#manage-applicants-goto-profile-button {
+    background-color: #F5F7F9;
     border: 0px;
     border-radius: 5px;
+    height: 50px;
 }
 
 #num-applicants-selected {
