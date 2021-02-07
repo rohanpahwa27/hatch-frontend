@@ -8,6 +8,9 @@ import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
 
+import Logo from "../../Page/Logo/Logo.js";
+import SideNavBar from "../../SideNavBar/SideNavBar.js";
+
 class ManageApplicants extends Component {
     constructor() {
         super();
@@ -325,44 +328,50 @@ class ManageApplicants extends Component {
     render() {
         console.log(this.state.applicantData);
         return (
-            <div id="navbar-content-grid-container">
-                <Navbar />
-                {this.state.allApplicantData === null ?
-                    <div>{this.state.allApplicantData}</div>
-                    :
-                    <div>
-                        {this.state.allApplicantData.length === 0 ?
-                            <ImportApplicants />
-                            :
-                            <div id="manage-applicant-grid-container">
-                                {/* Pass handleSort function down all the way to TableHeader */}
-                                <TableToolbar
-                                    cycleOptions={this.state.cycleOptions}
-                                    selectedOption={this.state.selectedOption}
-                                    handleCycleSelect={this.handleCycleSelect}
-                                    numApplicantsShowing={this.state.numApplicantsShowing}
-                                    totalApplicants={this.state.allApplicantData.length}
-                                    query={this.state.query}
-                                    handleSearch={this.handleSearch}
-                                />
-                                <Table
-                                    data={this.state.tableData}
-                                    handleSelected={this.handleSelected}
-                                    selectAll={this.selectAll}
-                                    isSelected={this.isSelected}
-                                    handleSort={this.handleSort}
-                                    sortBy={this.state.sortBy}
-                                    sortDirection={this.state.sortDirection}
-                                />
-                                <UpdateApplicantsCard
-                                    numSelected={this.state.selected.size}
-                                    deleteMembers={this.deleteMembers}
-                                    updateApplicants={this.updateApplicants}
-                                />
-                            </div>
-                        }</div>
+            <div id="page-grid-container">
+                <Logo />
+                <SideNavBar />
+                <div id="navbar-content-grid-container">
+                    <Navbar />
+                    {this.state.allApplicantData === null ?
+                        <div>{this.state.allApplicantData}</div>
+                        :
+                        <div>
+                            {this.state.allApplicantData.length === 0 ?
+                                <ImportApplicants />
+                                :
+                                (
+                                    <div id="manage-applicant-grid-container">
+                                        {/* Pass handleSort function down all the way to TableHeader */}
+                                        <TableToolbar
+                                            cycleOptions={this.state.cycleOptions}
+                                            selectedOption={this.state.selectedOption}
+                                            handleCycleSelect={this.handleCycleSelect}
+                                            numApplicantsShowing={this.state.numApplicantsShowing}
+                                            totalApplicants={this.state.allApplicantData.length}
+                                            query={this.state.query}
+                                            handleSearch={this.handleSearch}
+                                        />
+                                        <Table
+                                            data={this.state.tableData}
+                                            handleSelected={this.handleSelected}
+                                            selectAll={this.selectAll}
+                                            isSelected={this.isSelected}
+                                            handleSort={this.handleSort}
+                                            sortBy={this.state.sortBy}
+                                            sortDirection={this.state.sortDirection}
+                                        />
+                                        <UpdateApplicantsCard
+                                            numSelected={this.state.selected.size}
+                                            deleteMembers={this.deleteMembers}
+                                            updateApplicants={this.updateApplicants}
+                                        />
+                                    </div>
+                                )
+                            }</div>
 
-                }
+                    }
+                </div>
             </div>
         )
     }
