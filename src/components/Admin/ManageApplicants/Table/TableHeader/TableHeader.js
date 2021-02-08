@@ -21,7 +21,13 @@ class TableHeader extends Component {
                         <img className="sort-arrow name-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
                     </th>
 
-                    <th id="applicant-tags-header">Tags</th>
+                    {/* <th id="applicant-tags-header">Tags</th> */}
+                    {/* 
+                        likes, 
+                        comments, 
+                        date added, 
+                        last modified 
+                    */}
 
                     <th id="applicant-avgScore-header" className="avgScore-header-click-area" onClick={event => this.props.handleSort(event)}>
                         <span className="applicant-column-header-span avgScore-header-click-area" style={sortBy === "avgScore" ? {fontWeight: "bold"} : null}>Avg. score</span>

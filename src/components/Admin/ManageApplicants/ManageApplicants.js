@@ -15,11 +15,6 @@ class ManageApplicants extends Component {
     constructor() {
         super();
         this.state = {
-            cycleOptions: [
-                { value: 'fall-2017', label: 'Fall 2017', key: 'fall-2017' },
-                { value: 'fall-2018', label: 'Fall 2018', key: 'fall-2018' },
-            ],
-            selectedOption: "",
             allApplicantData: null,
             tableData: [],
             query: "",
@@ -30,7 +25,6 @@ class ManageApplicants extends Component {
             orgCode: ""
         };
 
-        this.handleCycleSelect = this.handleCycleSelect.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleSort = this.handleSort.bind(this);
         this.sortByName = this.sortByName.bind(this);
@@ -89,13 +83,6 @@ class ManageApplicants extends Component {
             selectAll.add(applicant._id);
         })
         this.setState({ selected: selectAll });
-    }
-
-    handleCycleSelect(event) {
-        const cycleOption = event.target.value;
-        this.setState({
-            selectedOption: cycleOption
-        })
     }
 
     handleSearch(event) {
@@ -344,9 +331,6 @@ class ManageApplicants extends Component {
                                     <div id="manage-applicant-grid-container">
                                         {/* Pass handleSort function down all the way to TableHeader */}
                                         <TableToolbar
-                                            cycleOptions={this.state.cycleOptions}
-                                            selectedOption={this.state.selectedOption}
-                                            handleCycleSelect={this.handleCycleSelect}
                                             numApplicantsShowing={this.state.numApplicantsShowing}
                                             totalApplicants={this.state.allApplicantData.length}
                                             query={this.state.query}
