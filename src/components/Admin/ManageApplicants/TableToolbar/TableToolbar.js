@@ -23,11 +23,6 @@ class TableToolbar extends Component {
                 <Filter />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
                 <div style={{flexGrow: 1}}></div>
-                <SelectCycleDropdown
-                    cycleOptions={this.props.cycleOptions}
-                    selectedOption={this.props.selectedOption}
-                    handleCycleSelect={this.props.handleCycleSelect}
-                />
                 <AddApplicant />
                 <Download />
             </div>
