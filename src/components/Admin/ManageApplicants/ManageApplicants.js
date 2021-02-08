@@ -8,15 +8,13 @@ import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
 
+import Logo from "../../Page/Logo/Logo.js";
+import SideNavBar from "../../SideNavBar/SideNavBar.js";
+
 class ManageApplicants extends Component {
     constructor() {
         super();
         this.state = {
-            cycleOptions: [
-                { value: 'fall-2017', label: 'Fall 2017', key: 'fall-2017' },
-                { value: 'fall-2018', label: 'Fall 2018', key: 'fall-2018' },
-            ],
-            selectedOption: "",
             allApplicantData: null,
             tableData: [],
             query: "",
@@ -27,7 +25,6 @@ class ManageApplicants extends Component {
             orgCode: ""
         };
 
-        this.handleCycleSelect = this.handleCycleSelect.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleSort = this.handleSort.bind(this);
         this.sortByName = this.sortByName.bind(this);
@@ -86,13 +83,6 @@ class ManageApplicants extends Component {
             selectAll.add(applicant._id);
         })
         this.setState({ selected: selectAll });
-    }
-
-    handleCycleSelect(event) {
-        const cycleOption = event.target.value;
-        this.setState({
-            selectedOption: cycleOption
-        })
     }
 
     handleSearch(event) {
@@ -325,44 +315,47 @@ class ManageApplicants extends Component {
     render() {
         console.log(this.state.applicantData);
         return (
-            <div id="navbar-content-grid-container">
-                <Navbar />
-                {this.state.allApplicantData === null ?
-                    <div>{this.state.allApplicantData}</div>
-                    :
-                    <div>
-                        {this.state.allApplicantData.length === 0 ?
-                            <ImportApplicants />
-                            :
-                            <div id="manage-applicant-grid-container">
-                                {/* Pass handleSort function down all the way to TableHeader */}
-                                <TableToolbar
-                                    cycleOptions={this.state.cycleOptions}
-                                    selectedOption={this.state.selectedOption}
-                                    handleCycleSelect={this.handleCycleSelect}
-                                    numApplicantsShowing={this.state.numApplicantsShowing}
-                                    totalApplicants={this.state.allApplicantData.length}
-                                    query={this.state.query}
-                                    handleSearch={this.handleSearch}
-                                />
-                                <Table
-                                    data={this.state.tableData}
-                                    handleSelected={this.handleSelected}
-                                    selectAll={this.selectAll}
-                                    isSelected={this.isSelected}
-                                    handleSort={this.handleSort}
-                                    sortBy={this.state.sortBy}
-                                    sortDirection={this.state.sortDirection}
-                                />
-                                <UpdateApplicantsCard
-                                    numSelected={this.state.selected.size}
-                                    deleteMembers={this.deleteMembers}
-                                    updateApplicants={this.updateApplicants}
-                                />
-                            </div>
-                        }</div>
+            <div id="page-grid-container">
+                <Logo />
+                <SideNavBar />
+                <div id="navbar-content-grid-container">
+                    <Navbar />
+                    {this.state.allApplicantData === null ?
+                        <div>{this.state.allApplicantData}</div>
+                        :
+                        <div>
+                            {this.state.allApplicantData.length === 0 ?
+                                <ImportApplicants />
+                                :
+                                (
+                                    <div id="manage-applicant-grid-container">
+                                        {/* Pass handleSort function down all the way to TableHeader */}
+                                        <TableToolbar
+                                            numApplicantsShowing={this.state.numApplicantsShowing}
+                                            totalApplicants={this.state.allApplicantData.length}
+                                            query={this.state.query}
+                                            handleSearch={this.handleSearch}
+                                        />
+                                        <Table
+                                            data={this.state.tableData}
+                                            handleSelected={this.handleSelected}
+                                            selectAll={this.selectAll}
+                                            isSelected={this.isSelected}
+                                            handleSort={this.handleSort}
+                                            sortBy={this.state.sortBy}
+                                            sortDirection={this.state.sortDirection}
+                                        />
+                                        <UpdateApplicantsCard
+                                            numSelected={this.state.selected.size}
+                                            deleteMembers={this.deleteMembers}
+                                            updateApplicants={this.updateApplicants}
+                                        />
+                                    </div>
+                                )
+                            }</div>
 
-                }
+                    }
+                </div>
             </div>
         )
     }

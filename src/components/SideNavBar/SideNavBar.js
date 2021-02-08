@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import "./SideNavBar.css"
-import AdminSideBarItem from "./AdminSideBarItem/AdminSideBarItem.js"
-import ProfileSideBarItem from "./ProfileSideBarItem/ProfileSideBarItem.js"
-import HomeSideBarItem from "./HomeSideBarItem/HomeSideBarItem.js"
+import React, { Component } from "react";
+import "./SideNavBar.css";
+import AdminSideBarItem from "./AdminSideBarItem/AdminSideBarItem.js";
+import ProfileSideBarItem from "./ProfileSideBarItem/ProfileSideBarItem.js";
+import HomeSideBarItem from "./HomeSideBarItem/HomeSideBarItem.js";
 
 class SideNavBar extends Component {
     constructor(props) {
@@ -13,8 +13,8 @@ class SideNavBar extends Component {
         this.setShowingProfile = this.setShowingProfile.bind(this);
     }
 
-    setShowingProfile(setToThis){
-        this.setState({showingProfile: setToThis})
+    setShowingProfile(setToThis) {
+        this.setState({ showingProfile: setToThis });
     }
 
     render() {
@@ -29,4 +29,4 @@ class SideNavBar extends Component {
     }
 }
 
-export default SideNavBar
+export default SideNavBar;

@@ -1,9 +1,23 @@
 #sidenavbar {
     /* Grid item properties*/
-    grid-row: 2 / -1;
-    grid-column: 1 / span 3;
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+
+    /* Sidebar dimensions and responsiveness */
+    /* position: fixed; */
+    width: 175px;
+    border-right: 4px solid #E8EDF1;
+    padding-top: 50px;
 
     /* Flexbox container properties*/
     display: flex;
     flex-direction: column;
+}
+
+.side-nav-bar-item-text{
+    margin-top: 3px;
+    font-size: 13px;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight#common_weight_name_mapping
+    medium == 500 */
+    font-weight: 500; 
 }

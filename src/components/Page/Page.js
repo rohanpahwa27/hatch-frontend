@@ -14,7 +14,7 @@ class Page extends Component {
         <div id="navbar-content-grid-container">
           <Navbar />
           <div id="">
-            {/* Your Component goes here */}
+            Your Component goes here
           </div>
         </div>
       </div>
