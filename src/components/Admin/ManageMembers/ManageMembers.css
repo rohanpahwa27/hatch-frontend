@@ -2,7 +2,9 @@
     display: grid;
     grid-template-rows: 60px 85%;
 
-    width: 85.7vw;
+    /* width: 85.7vw; */
+    /* width: minmax(100px, 85.7vw); */
+    width: minmax(100px, .857fr);
     height: 93.5vh;
 
     background-color: #FFFFFF;
