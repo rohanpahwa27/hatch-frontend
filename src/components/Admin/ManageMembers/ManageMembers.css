@@ -1,11 +1,11 @@
 #manage-members-grid-container{
     display: grid;
-    grid-template-rows: 60px 85%;
+    grid-template-rows: 60px auto;
 
     /* width: 85.7vw; */
-    /* width: minmax(100px, 85.7vw); */
-    width: minmax(100px, .857fr);
-    height: 93.5vh;
+    width: minmax(500px, calc("100vw - 500px"));
+    /* height: 54vh; */
+    height: calc(100vh - 50px);
 
     background-color: #FFFFFF;
     overflow: hidden;

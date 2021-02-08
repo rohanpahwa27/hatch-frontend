@@ -4,7 +4,7 @@ body {
 
 #navbar-content-grid-container {
   display: grid;
-  grid-template-rows: 50px;
+  grid-template-rows: 50px auto;
 
   min-width: 1000px;
 }

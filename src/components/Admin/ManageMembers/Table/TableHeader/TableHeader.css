@@ -2,6 +2,7 @@
     /* Grid item properties*/
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
+    grid-template-columns: minmax(1000px, 1fr);
     height: 100%;
     width: 100%;
     overflow: hidden;
