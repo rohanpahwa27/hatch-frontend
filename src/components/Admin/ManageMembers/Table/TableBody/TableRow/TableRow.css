@@ -43,6 +43,13 @@
     font-size: 13px;
 }
 
+.truncate-text-admin-members{
+    width: calc(850px/3);
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
 .check-icon{
     margin-right: 10%;
     width: 16px;
