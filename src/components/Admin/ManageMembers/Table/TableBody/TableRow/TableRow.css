@@ -40,7 +40,14 @@
 }
 
 .row-item{
-    font-size: 1vw;
+    font-size: 13px;
+}
+
+.truncate-text-admin-members{
+    width: calc(850px/3);
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 
 .check-icon{

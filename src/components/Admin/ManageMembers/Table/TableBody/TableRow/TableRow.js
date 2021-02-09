@@ -27,13 +27,13 @@ class TableRow extends Component {
         const name = (
             <td className="name-div table-data-cell">
                 <img className="member-image" src={this.props.imgURL} alt="Headshot" />
-                <span className="member-name row-item">{this.props.firstName} {this.props.lastName}</span>
+                <span className="member-name row-item truncate-text-admin-members">{this.props.firstName} {this.props.lastName}</span>
             </td>
         )
 
         const email = (
             <td className="table-data-cell">
-                <span className="row-item">{this.props.email}</span>
+                <span className="row-item truncate-text-admin-members">{this.props.email}</span>
             </td>
         )
 
