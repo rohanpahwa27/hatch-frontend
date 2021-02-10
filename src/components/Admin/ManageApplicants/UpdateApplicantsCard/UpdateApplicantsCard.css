@@ -7,6 +7,7 @@
     min-width: 300px;
     right: 2.5%;
     bottom: 4%;
+    z-index: 2;
 }
 
 .update-applicants-card {
