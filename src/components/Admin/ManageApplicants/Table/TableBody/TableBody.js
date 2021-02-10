@@ -15,9 +15,9 @@ class TableBody extends Component {
                     applicantId={applicant._id}
                     firstName={applicant.firstName}
                     lastName={applicant.lastName}
-                    imgURL={applicant.imgURL}
-                    avgScore={applicant.avgScore}
-                    votes={applicant.votes}
+                    imageUrl={applicant.imageUrl}
+                    likes={applicant.likes.length}
+                    comments={applicant.comments.length}
                     tags={applicant.tags}
                     handleSelected={this.props.handleSelected}
                     isSelected={this.props.isSelected}

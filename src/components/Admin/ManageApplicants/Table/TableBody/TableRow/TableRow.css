@@ -21,7 +21,8 @@
 }
 
 .manage-checkbox-div {
-    justify-self: center;
+    justify-self: flex-start;
+    padding-left: 9%;
 }
 
 .select-checkbox {
@@ -41,4 +42,8 @@
 
 .manage-applicant-name {
     margin-left: 3%;
+}
+
+.manage-row-item {
+    font-size: 13px;
 }

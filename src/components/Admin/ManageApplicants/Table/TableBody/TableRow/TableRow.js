@@ -17,11 +17,11 @@ const Check = ({ applicantId, handleSelected, isSelected }) => {
 
 class TableRow extends Component {
     render() {
-        const components = []
+        const components = [];
 
         const select = (
             <td className="manage-checkbox-div manage-table-data-cell">
-                <span className="select-checkbox">
+                <span className="manage-row-item select-checkbox">
                     <Check
                         applicantId={this.props.applicantId}
                         handleSelected={this.props.handleSelected}
@@ -29,45 +29,44 @@ class TableRow extends Component {
                     />
                 </span>
             </td>
-        )
+        );
 
         const name = (
             <td className="manage-name-div manage-table-data-cell">
-                <img className="manage-applicant-image" src={this.props.imgURL} alt="Headshot" />
-                <span className="manage-applicant-name">{this.props.firstName} {this.props.lastName}</span>
+                <img className="manage-applicant-image" src={this.props.imageUrl} alt="Headshot" />
+                <span className="manage-row-item manage-applicant-name">{this.props.firstName} {this.props.lastName}</span>
             </td>
-        )
+        );
 
-        const avgScore = (
+        const likes = (
             <td className="manage-table-data-cell">
-                <span>{this.props.avgScore}/20</span>
+                <span className="manage-row-item">{this.props.likes}</span>
             </td>
-        )
+        );
 
-        const votes = (
+        const comments = (
             <td className="manage-table-data-cell">
-                <span>{this.props.votes}</span>
+                <span className="manage-row-item">{this.props.comments}</span>
             </td>
-        )
+        );
 
-        const tags = (
-            <td>
-                <span>{this.props.tags}</span>
-            </td>
-        )
+        // const tags = (
+        //     <td>
+        //         <span className="manage-row-item">{this.props.tags}</span>
+        //     </td>
+        // );
 
-        components.push(select)
-        components.push(name)
-        components.push(tags)
-        components.push(avgScore)
-        components.push(votes)
+        components.push(select);
+        components.push(name);
+        components.push(likes);
+        components.push(comments);
 
         return (
             <tr id="manage-table-row-grid-container">
                 {components}
             </tr>
-        )
+        );
     }
 }
 
-export default TableRow
+export default TableRow;

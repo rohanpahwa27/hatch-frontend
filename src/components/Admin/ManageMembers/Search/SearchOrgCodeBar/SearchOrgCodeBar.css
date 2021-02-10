@@ -1,14 +1,14 @@
 .member-search-container-text{
-    margin-top: .75%;
+    /* margin-top: .75%; */
     color: #252A31;
     font-size: 13px;
-    line-height: 150%;
+    /* line-height: 150%; */
 }
 
 #generateOrgCodeAdminSectionMember{
     font-weight: 500;
     font-size: 11px;
-    line-height: 150%;
+    /* line-height: 150%; */
     text-decoration-line: underline;
     color: #252A31;
 }

@@ -6,7 +6,7 @@ body {
   display: grid;
   grid-template-rows: 50px;
 
-  min-width: 1000px;
+  min-width: 300px;
 }
 
 
@@ -19,29 +19,31 @@ body {
 
   display: flex;
   align-items: center;
-  /* padding: 10px 8px 0px 8px; */
-  padding-top: 10px;
 }
 
 #navbar-applicants-link-item {
-  
+  width: 132px;
+  padding-top: 15px;
 }
 
 #navbar-members-link-item {
-  /* margin-left: 3%; */
+  width: 132px;
+  padding-top: 15px;
+  
+  margin-left: 16px;
 }
 
 #navbar-link-green {
   color: inherit;
   font-weight: bold;
-  padding: 7px 20px;
+  padding: 6px 32px;
   border-bottom: 2px solid #00A991;
   text-decoration: inherit;
 }
 
 #navbar-link-grey {
   color: #5F738C;
-  padding: 7px 20px;
+  padding: 6px 32px;
   border-bottom: 2px solid #BAC7D5;
   text-decoration: inherit;
 }
