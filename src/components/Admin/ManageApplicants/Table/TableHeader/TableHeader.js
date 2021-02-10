@@ -15,10 +15,10 @@ class TableHeader extends Component {
 
                     <th id="applicant-select-header" onClick={event => this.props.selectAll(event)}>Select</th>
 
-                    <th id="applicant-name-header" className="name-header-click-area" onClick={event => this.props.handleSort(event)}>
-                        <span className="applicant-column-header-span name-header-click-area" style={sortBy === "name" ? {fontWeight: "bold"} : null}>Name</span> 
+                    <th id="applicant-header" onClick={event => this.props.handleSort(event)}>
+                        <span style={sortBy === "name" ? {fontWeight: "bold"} : null}>Name</span> 
                         {sortBy === "name" ? 
-                        <img className="sort-arrow name-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
+                        <img className="sort-arrow" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
                     </th>
 
                     {/* <th id="applicant-tags-header">Tags</th> */}
@@ -29,16 +29,28 @@ class TableHeader extends Component {
                         last modified 
                     */}
 
-                    <th id="applicant-avgScore-header" className="avgScore-header-click-area" onClick={event => this.props.handleSort(event)}>
-                        <span className="applicant-column-header-span avgScore-header-click-area" style={sortBy === "avgScore" ? {fontWeight: "bold"} : null}>Avg. score</span>
-                        {sortBy === "avgScore" ? 
-                        <img className="sort-arrow avgScore-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
+                    <th id="applicant-header" onClick={event => this.props.handleSort(event)}>
+                        <span style={sortBy === "likes" ? {fontWeight: "bold"} : null}>Likes</span>
+                        {sortBy === "likes" ? 
+                        <img className="sort-arrow" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
                     </th>
 
-                    <th id="applicant-votes-header" className="votes-header-click-area" onClick={event => this.props.handleSort(event)}>
-                        <span className="applicant-column-header-span votes-header-click-area" style={sortBy === "votes" ? {fontWeight: "bold"} : null}>Votes</span>
-                        {sortBy === "votes" ? 
-                        <img className="sort-arrow votes-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
+                    <th id="applicant-header" onClick={event => this.props.handleSort(event)}>
+                        <span style={sortBy === "comments" ? {fontWeight: "bold"} : null}>Comments</span>
+                        {sortBy === "comments" ? 
+                        <img className="sort-arrow" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
+                    </th>
+
+                    <th id="applicant-header" onClick={event => this.props.handleSort(event)}>
+                        <span style={sortBy === "dateAdded" ? {fontWeight: "bold"} : null}>Date Added</span>
+                        {sortBy === "dateAdded" ? 
+                        <img className="sort-arrow" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
+                    </th>
+
+                    <th id="applicant-header" onClick={event => this.props.handleSort(event)}>
+                        <span style={sortBy === "dateModified" ? {fontWeight: "bold"} : null}>Date Modified</span>
+                        {sortBy === "dateModified" ? 
+                        <img className="sort-arrow" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
                     </th>
                 </tr>
             </thead>

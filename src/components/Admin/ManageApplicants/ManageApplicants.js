@@ -313,7 +313,6 @@ class ManageApplicants extends Component {
     }
 
     render() {
-        console.log(this.state.applicantData);
         return (
             <div id="page-grid-container">
                 <Logo />

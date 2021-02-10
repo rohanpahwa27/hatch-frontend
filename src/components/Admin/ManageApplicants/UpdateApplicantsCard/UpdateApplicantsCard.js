@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./UpdateApplicantsCard.css"
+import "./UpdateApplicantsCard.css";
 import Radio from "@kiwicom/orbit-components/lib/Radio";
 import ButtonLink from "@kiwicom/orbit-components/lib/ButtonLink";
 import addIcon from "./Icons/add.png";
@@ -24,7 +24,6 @@ class UpdateApplicantsCard extends Component {
         const numSelectedText = (this.props.numSelected > 1) ? "applicants selected" : "applicant selected";
         const applicantButtonText = (this.props.numSelected == 1) ? "Go to applicant profile" : "";
         const deleteApplicantText = (this.props.numSelected > 1) ? `Delete ${this.props.numSelected} applicants` : "Delete this applicant";
-        console.log(this.props.numSelected)
         return (
             (this.props.numSelected > 0) ?
                 <div className="update-applicants-container">
@@ -38,6 +37,7 @@ class UpdateApplicantsCard extends Component {
                             </div>
                         </div>
                         <div id="card-bottom-space">
+                            <br/>
                             {(this.props.numSelected == 1) ?
                                 <button id="manage-applicants-goto-profile-button">
                                     <div id="goto-profile-text">

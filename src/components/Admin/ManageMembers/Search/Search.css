@@ -5,6 +5,7 @@
 #member-search-flex-container {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
 #member-search-flex-container > div:last-of-type {

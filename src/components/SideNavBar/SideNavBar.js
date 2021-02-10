@@ -20,7 +20,7 @@ class SideNavBar extends Component {
     render() {
         //if profile and other item shouldn't be, then gotta pull up the profile state
         return (
-            <div id="sidenavbar">
+            <div id="sidenav-grid-container">
                 <HomeSideBarItem showingProfile={this.state.showingProfile}/>
                 <ProfileSideBarItem setShowingProfile={this.setShowingProfile}/>
                 <AdminSideBarItem showingProfile={this.state.showingProfile}/>

@@ -1,15 +1,8 @@
-body {
-  background: #ffffff !important;
-}
-
 #manage-applicant-grid-container {
   display: grid;
-  grid-template-rows: 10% 90%;
-  grid-template-columns: 100%;
-  justify-items: start;
-  align-items: center;
+  grid-template-rows: 60px auto;
 
-  min-width: 1000px;
-  min-height: 1000px;
-  height: 100vh;
+  width: minmax(500px, calc("100vw - 500px"));
+  height: calc(100vh - 50px);
+  overflow: hidden;
 }
