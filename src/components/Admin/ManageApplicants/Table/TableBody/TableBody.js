@@ -8,9 +8,7 @@ from Table as a prop
 */
 class TableBody extends Component {
     render() {
-        console.log(this.props.data)
         const applicantComponents = this.props.data.map((applicant, index) => {
-            console.log(applicant)
             return (
                 <TableRow
                     key={index}
@@ -18,8 +16,8 @@ class TableBody extends Component {
                     firstName={applicant.firstName}
                     lastName={applicant.lastName}
                     imageUrl={applicant.imageUrl}
-                    avgScore={applicant.avgScore}
-                    votes={applicant.votes}
+                    likes={applicant.likes.length}
+                    comments={applicant.comments.length}
                     tags={applicant.tags}
                     handleSelected={this.props.handleSelected}
                     isSelected={this.props.isSelected}

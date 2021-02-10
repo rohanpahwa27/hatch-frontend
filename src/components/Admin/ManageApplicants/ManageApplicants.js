@@ -28,8 +28,8 @@ class ManageApplicants extends Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.handleSort = this.handleSort.bind(this);
         this.sortByName = this.sortByName.bind(this);
-        this.sortByAvgScore = this.sortByAvgScore.bind(this);
-        this.sortByVotes = this.sortByVotes.bind(this);
+        this.sortbyLikes = this.sortbyLikes.bind(this);
+        this.sortbyComments = this.sortbyComments.bind(this);
         this.isSelected = this.isSelected.bind(this);
         this.handleSelected = this.handleSelected.bind(this);
         this.selectAll = this.selectAll.bind(this);
@@ -107,11 +107,11 @@ class ManageApplicants extends Component {
         if (this.state.sortBy === "name") {
             this.sortByName(filteredApplicants, this.state.sortDirection);
         }
-        else if (this.state.sortBy === "avgScore") {
-            this.sortByAvgScore(filteredApplicants, this.state.sortDirection);
+        else if (this.state.sortBy === "likes") {
+            this.sortbyLikes(filteredApplicants, this.state.sortDirection);
         }
-        else if (this.state.sortBy === "votes") {
-            this.sortByVotes(filteredApplicants, this.state.sortDirection);
+        else if (this.state.sortBy === "comments") {
+            this.sortbyComments(filteredApplicants, this.state.sortDirection);
         }
     }
 
@@ -123,7 +123,7 @@ class ManageApplicants extends Component {
             let direction = "ascending";
             /* we only want to sort alphaetically in descending order 
             if the user was already sorting names alphabetically in ascending order.
-            if the user was previously sorting by avgScore and votes and clicks
+            if the user was previously sorting by likes and comments and clicks
             on the names tab, then the default should be to sort in ascending order
             */
             if (this.state.sortBy === "name" && this.state.sortDirection === "ascending") {
@@ -133,21 +133,23 @@ class ManageApplicants extends Component {
             this.sortByName(this.state.tableData, direction);
         }
 
-        // if the avgScore header is clicked
-        else if (classNames.indexOf("avgScore") > -1) {
+        // if the likes header is clicked
+        else if (classNames.indexOf("likes") > -1) {
+            console.log("see likes in index")
             let direction = "descending";
-            if (this.state.sortBy === "avgScore" && this.state.sortDirection === "descending") {
+            if (this.state.sortBy === "likes" && this.state.sortDirection === "descending") {
                 direction = "ascending";
             }
-            this.sortByAvgScore(this.state.tableData, direction);
+            this.sortbyLikes(this.state.tableData, direction);
         }
-        // if the votes header is clicked
-        else if (classNames.indexOf("votes") > -1) {
+        // if the comments header is clicked
+        else if (classNames.indexOf("comments") > -1) {
+            console.log("see comments in index")
             let direction = "descending";
-            if (this.state.sortBy === "votes" && this.state.sortDirection === "descending") {
+            if (this.state.sortBy === "comments" && this.state.sortDirection === "descending") {
                 direction = "ascending";
             }
-            this.sortByVotes(this.state.tableData, direction);
+            this.sortbyComments(this.state.tableData, direction);
         }
     }
 
@@ -210,17 +212,17 @@ class ManageApplicants extends Component {
         })
     }
 
-    sortByAvgScore(applicantsArray, direction) {
+    sortbyLikes(applicantsArray, direction) {
         // clone array
         const tableDataCopy = applicantsArray
 
         // sort in ascending order
         if (direction === "ascending") {
             tableDataCopy.sort((a, b) => {
-                if (a.avgScore < b.avgScore) {
+                if (a.likes.length < b.likes.length) {
                     return -1
                 }
-                else if (a.avgScore < b.avgScore) {
+                else if (a.likes.length < b.likes.length) {
                     return 1
                 }
 
@@ -234,10 +236,10 @@ class ManageApplicants extends Component {
         // sort in descending order
         else {
             tableDataCopy.sort((a, b) => {
-                if (a.avgScore > b.avgScore) {
+                if (a.likes.length > b.likes.length) {
                     return -1
                 }
-                else if (a.avgScore > b.avgScore) {
+                else if (a.likes.length > b.likes.length) {
                     return 1
                 }
 
@@ -252,24 +254,25 @@ class ManageApplicants extends Component {
         // update data we pass down to the table to the sorted data
         this.setState({
             tableData: tableDataCopy,
-            sortBy: "avgScore"
+            sortBy: "likes"
         })
     }
 
-    sortByVotes(applicantsArray, direction) {
+    sortbyComments(applicantsArray, direction) {
         // clone array
         const tableDataCopy = applicantsArray
 
         /* if sortDirection was ascending before click or the user was sorting by
-        another variable, then we want to sort descending by votes 
+        another variable, then we want to sort descending by comments 
         */
+       console.log("SORTING BY COMMENTS")
         if (direction === "ascending") {
             tableDataCopy.sort((a, b) => {
 
-                if (a.votes < b.votes) {
+                if (a.comments.length < b.comments.length) {
                     return -1
                 }
-                else if (a.votes < b.votes) {
+                else if (a.comments.length < b.comments.length) {
                     return 1
                 }
 
@@ -282,10 +285,10 @@ class ManageApplicants extends Component {
         }
         else {
             tableDataCopy.sort((a, b) => {
-                if (a.votes > b.votes) {
+                if (a.comments.length > b.comments.length) {
                     return -1
                 }
-                else if (a.votes > b.votes) {
+                else if (a.comments.length > b.comments.length) {
                     return 1
                 }
 
@@ -300,7 +303,7 @@ class ManageApplicants extends Component {
         // update data we pass down to the table to the sorted data
         this.setState({
             tableData: tableDataCopy,
-            sortBy: "votes"
+            sortBy: "comments"
         })
     }
 

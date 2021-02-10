@@ -17,7 +17,6 @@ const Check = ({ applicantId, handleSelected, isSelected }) => {
 
 class TableRow extends Component {
     render() {
-        console.log(this.props)
         const components = [];
 
         const select = (
@@ -39,29 +38,28 @@ class TableRow extends Component {
             </td>
         );
 
-        const avgScore = (
+        const likes = (
             <td className="manage-table-data-cell">
-                <span className="manage-row-item">{this.props.avgScore}/20</span>
+                <span className="manage-row-item">{this.props.likes}</span>
             </td>
         );
 
-        const votes = (
+        const comments = (
             <td className="manage-table-data-cell">
-                <span className="manage-row-item">{this.props.votes}</span>
+                <span className="manage-row-item">{this.props.comments}</span>
             </td>
         );
 
-        const tags = (
-            <td>
-                <span className="manage-row-item">{this.props.tags}</span>
-            </td>
-        );
+        // const tags = (
+        //     <td>
+        //         <span className="manage-row-item">{this.props.tags}</span>
+        //     </td>
+        // );
 
         components.push(select);
         components.push(name);
-        components.push(tags);
-        components.push(avgScore);
-        components.push(votes);
+        components.push(likes);
+        components.push(comments);
 
         return (
             <tr id="manage-table-row-grid-container">
