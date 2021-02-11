@@ -27,14 +27,16 @@ class NewComment extends Component {
 
     render() {
         return (
-            <tbody id="new-comment">
-                <div id="text-box">
-                    <InputField type="text" placeholder="type your comment here" value={this.state.comment} onChange={this.handleChange}/>
+            <div id="new-comment-bar">
+                <div id="new-comment-container">
+                    <div id="new-comment-text-box">
+                        <InputField type="text" placeholder="type your comment here" value={this.state.comment} onChange={this.handleChange}/>
+                    </div>
+                    <div id="new-comment-send">
+                        <Button submit={true} fullWidth={false} type={"secondary"} onClick={this.sendComment}>Send</Button>
+                    </div>
                 </div>
-                <div id="send">
-                    <Button submit={true} fullWidth={false} type={"secondary"} onClick={this.sendComment}>Send</Button>
-                </div>
-            </tbody>
+            </div>
         )
     }
 }

@@ -1,12 +1,11 @@
 #comments-grid-container {
     position: static;
-    width: 482px;
+    width: 550px;
     /* TODO: FIX to adjust based on comment size */
     height: 59px;
     left: 0px;
-    top: 0px;
 
-    margin: 32px 0px;
+    margin: 0px 0px 32px 0px;
 }
 
 #comment-frame {
@@ -15,10 +14,8 @@
     align-items: flex-start;
 
     /* position: absolute; */
-    width: 514px;
+    width: 550px;
     height: 59px;
-    left: 0px;
-    top: 0px;
 }
 
 .comment-user-image {
@@ -53,10 +50,9 @@
     position: static;
     width: 446px;
     height: 59px;
-    left: 0px;
-    top: 0px;
 
-    /* TODO, look into this and figure out why it's not working */
+
+    /* TODO, look into this and figure out why it's not */
     margin: -4px 30px; 
 }
 

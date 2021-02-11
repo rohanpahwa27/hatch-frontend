@@ -57,10 +57,12 @@ class Applicant extends Component {
             <div id="applicant-grid-container">
                 <ApplicantInfoBar applicant = {this.state.currApplicant} handleClick={this.handleClick}/>
                 <CommentSection applicant = {this.state.currApplicant} comments = {this.state.commentData} />
-                {/* <NewComment applicant={this.props.applicant} /> */}
-                {/* <UploadPhoto applicant = {this.state.currApplicant}/> */}
-                {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
-                {/* <ApplicantInfoDrop applicant = {this.state.currApplicant}/> */}
+                <div id="applicant-side-features-container">
+                    <UploadPhoto applicant = {this.state.currApplicant}/>
+                    {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
+                    <ApplicantInfoDrop applicant = {this.state.currApplicant}/>
+                </div>
+                <NewComment applicant={this.props.applicant} />
             </div>
           </div> : <div id="loading-screen"><Loading/></div>
         )

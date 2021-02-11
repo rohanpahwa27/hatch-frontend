@@ -9,8 +9,10 @@ class ApplicantInfoBar extends Component {
         return (
             <div id="applicantinfobar">
                 <ApplicantInfo applicant={this.props.applicant}/>
-                <LikeInfoBarItem applicantID={this.props.applicant._id}/>
-                <NextInfoBarItem handleClick={this.props.handleClick}/>
+                <div id="applicant-action-container">
+                    <LikeInfoBarItem applicantID={this.props.applicant._id}/>
+                    <NextInfoBarItem handleClick={this.props.handleClick}/>
+                </div>
             </div>
         )
     }
