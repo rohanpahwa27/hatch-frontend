@@ -14,3 +14,38 @@
 
     overflow-y: scroll;
 }
+
+#no-comments-container {
+    position: absolute;
+    width: 283px;
+    height: 319px;
+    left: 391px;
+    top: 200px;
+}
+
+.no-comments-image {
+    position: absolute;
+    right: 1.06%;
+    bottom: 12.23%;
+    left: 0%;
+    top: 0%;
+
+    width: 280px;
+    height: 280px;
+}
+
+#no-comments-text {
+    position: absolute;
+    left: 4.59%;
+    top: 87.77%;
+    bottom: 5.96%;
+    right: 0%;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+    text-align: center;
+
+    color: #252A31;
+}
