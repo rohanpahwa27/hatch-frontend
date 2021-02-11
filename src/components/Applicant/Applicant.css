@@ -1,7 +1,7 @@
 #applicant-grid-container {
     display: grid;
     grid-template-rows: 96px auto;
-    grid-template-columns: 15% 65% 25%;
+    grid-template-columns: 280px auto;
 
     width: 83vw;
     height: 100vh;

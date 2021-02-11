@@ -1,0 +1,15 @@
+#comment-section-grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: absolute;
+    width: 482px;
+    height: 556px;
+    left: calc(175px + 31px);
+    top: 96px;
+
+    overflow-y: scroll;
+}
