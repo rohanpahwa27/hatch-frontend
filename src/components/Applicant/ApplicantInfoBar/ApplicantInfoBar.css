@@ -8,12 +8,9 @@
     width: 101%;
     height: 96px;
 
-    /* justify-items: right;
-    align-items: center; */
-
-    display: grid;
-    grid-template-rows: 44px auto;
-    grid-template-columns: 256px auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     border-bottom: 2px solid #E8EDF1;
     box-sizing: border-box;
