@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./ApplicantComment.css"
+import "./CommentSection.css"
+
 import Comment from "./Comment.js"
 
-class ApplicantComment extends Component {
+class CommentSection extends Component {
     render() {
-        // TODO: add sort here
         const commentComponents = this.props.comments.map((comments, index) => {
             return (
                 <Comment key={index}
@@ -15,13 +15,12 @@ class ApplicantComment extends Component {
         })
 
         return ( (this.props.comments.length >= 1) ?
-            <tbody id="applicant-comments-grid-container">
+            <div id="comment-section-grid-container">
                 {commentComponents}
-            </tbody> : 
-            // TODO: Make this look prettier
-            <tbody id="no-comments"> No comments yet</tbody>
+            </div> : 
+            <div id="no-comments"> No comments yet</div>
         )
     }
 }
 
-export default ApplicantComment
+export default CommentSection

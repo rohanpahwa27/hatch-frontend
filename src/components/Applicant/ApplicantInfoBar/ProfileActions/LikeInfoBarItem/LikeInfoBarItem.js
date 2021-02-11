@@ -35,8 +35,8 @@ class LikeInfoBarItem extends Component {
         return (
             <div id="like-info-bar-item">
                 {this.state.likedApplicant ? <img id="like-image" src={filledHeart} onClick={() => imageClick()}/> :
-                <img id="like-image" src={heart} alt="Like icon" onClick={() => imageClick()}/>}
-                <span>Like</span>
+                <img id="applicant-action-like-image" src={heart} alt="Like icon" onClick={() => imageClick()}/>}
+                <span id="applicant-action-like-text">Like</span>
             </div>
         )
     }

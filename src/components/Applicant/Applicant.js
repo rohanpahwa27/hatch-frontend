@@ -1,25 +1,26 @@
 import React, { Component } from "react"
 import {withRouter} from 'react-router-dom'
-import "./Applicant.css"
-import applicantInfo from "./ApplicantData.js"
-import comments from "./SampleCommentData.js"
 import Loading from "@kiwicom/orbit-components/lib/Loading";
 
-import Logo from "./Logo/Logo.js"
 import SideNavBar from "../SideNavBar/SideNavBar"
+import Logo from "../Page/Logo/Logo.js";
+
 import ApplicantInfoBar from "./ApplicantInfoBar/ApplicantInfoBar.js"
 import ApplicantInfoDrop from "./ApplicantInfoDrop/ApplicantInfoDrop.js"
 import UploadPhoto from "./UploadPhoto/UploadPhoto.js"
-import CommentSection from "./ApplicantComments/CommentSection"
+import NewComment from "./NewComment/NewComment.js"
+import CommentSection from "./CommentSection/CommentSection"
 
 import api from "../../Api/api"
+
+import "./Applicant.css"
 
 class Applicant extends Component {
     constructor() {
         super()
         this.state = {
-            commentData: comments,
-            allApplicants: applicantInfo,
+            commentData: null,
+            allApplicants: null,
             currApplicant: null,
             numApplicantsShowing: 1
         }
@@ -49,18 +50,21 @@ class Applicant extends Component {
 
     render() {
         return (
-            (this.state.currApplicant) ?
+        (this.state.currApplicant) ?
+          <div id="page-grid-container">
+            <Logo />
+            <SideNavBar />
             <div id="applicant-grid-container">
-                <Logo />
-                <SideNavBar />
                 <ApplicantInfoBar applicant = {this.state.currApplicant} handleClick={this.handleClick}/>
                 <CommentSection applicant = {this.state.currApplicant} comments = {this.state.commentData} />
-                <UploadPhoto applicant = {this.state.currApplicant}/>
+                {/* <NewComment applicant={this.props.applicant} /> */}
+                {/* <UploadPhoto applicant = {this.state.currApplicant}/> */}
                 {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
-                <ApplicantInfoDrop applicant = {this.state.currApplicant}/>
-            </div> : <div id="loading-screen"><Loading/></div>
+                {/* <ApplicantInfoDrop applicant = {this.state.currApplicant}/> */}
+            </div>
+          </div> : <div id="loading-screen"><Loading/></div>
         )
-    }
+      }
 }
 
 export default withRouter(Applicant)

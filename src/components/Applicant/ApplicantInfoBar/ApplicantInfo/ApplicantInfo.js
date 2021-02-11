@@ -10,16 +10,22 @@ class ApplicantInfo extends Component {
         let applicant = this.props.applicant
         return (
             <div id="applicant-info-item">
-                 <img id="applicant-image" src={applicant ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />
-                 <div id="applicant-name">
-                     <span>{applicant ? applicant.firstName : placeholder} {applicant ? applicant.lastName : placeholder}</span>
-                 </div>
-                 <div id="applicant-info">
-                     <img id="heart-image" src={heart} alt="Heart icon" />
-                     <span>{applicant ? applicant.likes.length : placeholder} like{applicant.likes.length != 1 ? "s" : ""} </span>
-                       <img id="chat-image" src={chat} alt="Chat icon" />
-                     <span>{applicant ? applicant.comments.length : placeholder} comment{applicant.likes.length != 1 ? "s" : ""} </span>
-                 </div>
+                <img id="applicant-image" src={applicant ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />
+                <div id="applicant-info-heading-container">
+                    <div id="applicant-name">
+                        <span>{applicant ? applicant.firstName : placeholder} {applicant ? applicant.lastName : placeholder}</span>
+                    </div>
+                    <div id="applicant-likes-and-comments-container">
+                        <div id="applicant-likes-container">
+                            <img id="applicant-heart-image" src={heart} alt="Heart icon" />
+                            <span id="applicant-like-text">{applicant ? applicant.likes.length : placeholder} like{applicant.likes.length != 1 ? "s" : ""} </span>
+                        </div>
+                        <div id="applicant-comments-container">
+                            <img id="applicant-chat-image" src={chat} alt="Chat icon" />
+                            <span id="applicant-comment-text">{applicant ? applicant.comments.length : placeholder} comment{applicant.likes.length != 1 ? "s" : ""} </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

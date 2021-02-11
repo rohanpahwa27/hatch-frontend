@@ -1,9 +1,9 @@
 #applicant-grid-container {
     display: grid;
-    grid-template-rows: 15% 15% 15% 55%;
-    grid-template-columns: 15% 65% 25%;
+    grid-template-rows: 96px auto;
+    grid-template-columns: 280px auto;
 
-    width: 95vw;
+    width: 83vw;
     height: 100vh;
 
     background-color: #FFFFFF;

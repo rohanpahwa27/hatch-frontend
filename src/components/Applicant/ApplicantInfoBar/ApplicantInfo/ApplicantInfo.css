@@ -3,61 +3,154 @@
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
 
-    display: grid;
-    grid-template-rows: 45% 15% 40%;
-    grid-template-columns: 15% 90%;
-    padding: 10px 0px;
-
-    width: 100%;
-}
-
-#applicant-name {
-    grid-row: 1 / span 1;
-    grid-column: 2 / span 1;
-
-    /* font-family: Neue Haas Unica W16; */
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 150%;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    padding: 20px 0px 0px 0px;
+    padding: 0px;
+
+    position: absolute;
+    width: 256px;
+    height: 56px;
+    left: 19px;
+    top: 20px;
 }
 
 #applicant-image {
-    grid-row: 1 / span 1;
-    grid-column: 1 / span 1;
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
 
-    margin: 20px 20px 20px 30px;
-    display: block;
-    height: 70px;
-    border-radius: 50%;
+    position: absolute;
+    left: 0%;
+    right: 78.12%;
+    top: 0%;
+    bottom: 0%;
+
+    position: static;
+    width: 56px;
+    height: 56px;
+    border-radius: 30px;
 }
 
-#heart-image {
-    margin: 0px 3px 5px 0px;
-    display: block;
-    height: 25px;
-    border-radius: 50%;
-}
-
-#chat-image {
-    margin: 0px 3px 5px 20px;
-    display: block;
-    height: 22px;
-    border-radius: 50%;
-}
-
-#applicant-info {
-    grid-row: 2 / span 1;
-    grid-column: 2 / span 1;
-
-    align-items: flex-start;
-    justify-items: flex-start;
-
-    /* font-family: Neue Haas Unica W16; */
-    font-style: normal;
-    font-size: 15px;
-    line-height: 150%;
+#applicant-info-heading-container {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: static;
+    width: 180px;
+    height: 48px;
+    left: 76px;
+    top: 4px;
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    margin: 0px 20px;
+}
+
+#applicant-name {
+    position: static;
+    left: 0%;
+    right: 58.89%;
+    top: 0%;
+    bottom: 50%;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+
+    display: flex;
+    align-items: flex-end;
+
+    color: #252A31;
+
+    flex: none;
+    margin: 4px 0px;
+}
+
+#applicant-likes-and-comments-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: static;
+    width: 180px;
+    height: 20px;
+    left: 0px;
+    top: 28px;
+}
+
+#applicant-likes-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+
+    position: static;
+    left: 0%;
+    right: 62.78%;
+    top: 0%;
+    bottom: 0%;
+}
+
+#applicant-heart-image {
+    width: 16px;
+    height: 16px;
+    left: calc(50% - 16px/2);
+    top: calc(50% - 16px/2);
+}
+
+#applicant-like-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 3px;
+}
+
+#applicant-comments-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    margin: 0px 16px;
+
+    position: static;
+    left: 46.11%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+}
+
+#applicant-chat-image {
+    width: 16px;
+    height: 146x;
+    left: calc(50% - 16px/2);
+    top: calc(50% - 16px/2 + 0px);
+}
+
+#applicant-comment-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 3px;
 }

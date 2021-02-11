@@ -8,8 +8,8 @@ class NextInfoBarItem extends Component {
         // TODO: how do we want to determine order for next?? handling inactive applicants + prob want an array sent down of valid memberIDs?
         return (
             <div id="next-info-bar-item" onClick={event => this.props.handleClick(event)}>
-                <img id="next-image" src={next} alt="Next icon" />
-                <span>Next applicant</span>
+                <img id="applicant-action-next-image" src={next} alt="Next icon" />
+                <span id="applicant-action-next-text">Next applicant</span>
             </div>
         )
     }
