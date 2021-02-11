@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./CommentSection.css"
 
 import Comment from "./Comment.js"
+import noCommentsImage from "./no-comments.png"
 
 class CommentSection extends Component {
     render() {
@@ -18,7 +19,10 @@ class CommentSection extends Component {
             <div id="comment-section-grid-container">
                 {commentComponents}
             </div> : 
-            <div id="no-comments"> No comments yet</div>
+            <div id="no-comments-container"> 
+                <img className="no-comments-image" src={noCommentsImage} alt="No Comments default image" />
+                <span id="no-comments-text">No one has comment yet. Be the first!</span>
+            </div>
         )
     }
 }
