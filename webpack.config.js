@@ -1,4 +1,5 @@
 const path = require('path');
+require('dotenv').config()
 module.exports = {
     entry: ['babel-polyfill', './src/index.js'],
     output: {
@@ -32,6 +33,7 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        contentBase: path.join(__dirname, 'public')
+        contentBase: path.join(__dirname, 'public'),
+        port: process.env.PORT || 8080
     },
 };
