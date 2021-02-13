@@ -18,7 +18,8 @@ class EditPicture extends Component {
     confirmProfilePicture = async () => {
         const formData = new FormData();
         formData.append("image", this.state.selectedFile);
-        await api.uploadMemberImage(formData);
+        const response = await api.uploadMemberImage(formData);
+        console.log(response)
         this.props.closeButton()
     }
 

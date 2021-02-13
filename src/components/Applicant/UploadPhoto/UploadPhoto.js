@@ -1,7 +1,10 @@
 import React, { Component } from "react"
 import "./UploadPhoto.css"
+import Close from "@kiwicom/orbit-components/lib/icons/Close"
+import Dialog from "@kiwicom/orbit-components/lib/Dialog"
+import Button from "@kiwicom/orbit-components/lib/Button"
 
-import Modal, { ModalSection } from "@kiwicom/orbit-components/lib/Modal";
+import api from "../../../Api/api"
 
 class UploadPhoto extends Component {
     constructor() {
@@ -14,6 +17,7 @@ class UploadPhoto extends Component {
     }
 
     toggleShowModal = () => {
+        console.log("hello")
         this.setState({
             isOpen: !this.state.isOpen
         })
@@ -43,13 +47,11 @@ class UploadPhoto extends Component {
 
     sendFile = async (event) => {
         const formData = new FormData();
-        const orgId = localStorage.getItem("orgID");
-        formData.append("data", this.state.selectedFile);
-        formData.append("orgID", orgId ? orgId : '5fcebc5bdc4d7b32372834c5');
-        //TODO: pass information through pages and programatically input orgID instead of hardcoding it above
-        // const response = await api.uploadApplicantPhoto(formData);
-        // TODO: use shorthand for api call
-        // console.log(response);
+        // formData.append("applicantId", this.props.applicant._id);
+        formData.append("image", this.state.selectedFile);
+        response = await api.uploadApplicantImage(formData);
+        console.log(response);
+        this.toggleShowModal();
     };
 
     render() {
@@ -72,40 +74,39 @@ class UploadPhoto extends Component {
                 </button>
                 <div>
                     {this.state.isOpen ?
-                        <Modal id="upload-photo-modal" onClose={this.toggleShowModal}>
-                            <ModalSection>
-                                <div id="upload-photo">
-                                    <div id="upload-photo-header">
-                                        <span> Upload a picture of {this.props.applicant.firstName} {this.props.applicant.lastName} </span>
-                                    </div>
-                                    <div id="upload-photo-your-upload">
-                                        Your upload
-                                        <div id="upload-photo-file-info">
-                                            <button id="upload-photo-file-button"
-                                                onClick={this.uploadFile}>
-                                                <input
-                                                    type="file"
-                                                    ref={input => this.inputElement = input}
-                                                    accept="image/*" // TODO add acceptable photo types
-                                                    onChange={e => this.handleFileUploadChange(e)}
-                                                    style={{ display: 'none', position: 'absolute' }}>
-                                                </input>
-                                                Select a file
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div id="upload-photo-preview">
-                                        Preview
-                                        <img id="upload-photo-applicant-image" src={previewSRC} alt="Applicant icon" />
-                                    </div>
-                                    <div id="upload-photo-confirm">
-                                        <button id="upload-photo-confirm-button" onClick={this.sendFile}>
-                                            Confirm
-                                        </button>
+                        <Dialog
+                        title={
+                        <div>
+                            <div id="change-password-flex-container">
+                                <span id="change-password">Upload a picture of {this.props.applicant.firstName} {this.props.applicant.lastName}</span>
+                                <span id="close-button-change-password" onClick={this.toggleShowModal}><Close/></span>
+                            </div>
+                            <div id="change-password-flex-container" className="edit-profile-picture-container-padding">
+                                <div>
+                                    <span id="your-upload-text">Your Upload</span>
+                                    <Button type="secondary" onClick={this.uploadFile}>Select a file<input
+                                        type="file"
+                                        ref={input => this.inputElement = input}
+                                        accept="image/*"
+                                        onChange={e => this.handleFileUploadChange(e)}
+                                        style={{ display: 'none', position: 'absolute' }}
+                                        >
+                                    </input></Button>
+                                </div>
+                                
+                                <div>
+                                    <span id="your-upload-text">Preview</span>
+                                    <div>
+                                        <img id="preview-profile-image" src={previewSRC} alt="Applicant icon" />
                                     </div>
                                 </div>
-                            </ModalSection>
-                        </Modal> : null
+                                
+                            </div>
+                        </div>
+                        }
+                        primaryAction={<Button type="primary" onClick={(e) => this.sendFile()} disabled={!file}>Confirm</Button>}
+                        >
+                        </Dialog> : null
                     }
                 </div>
             </div>
