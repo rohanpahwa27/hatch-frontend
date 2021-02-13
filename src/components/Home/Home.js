@@ -3,8 +3,8 @@ import {Route, withRouter} from 'react-router-dom'
 import "./Home.css"
 
 import Table from "./Table/Table.js"
-import Logo from "./Logo/Logo.js"
-import SideNavBar from "./SideNavBar/SideNavBar.js"
+import Logo from "./Logo/Logo.js";
+import SideNavBar from "../SideNavBar/SideNavBar.js";
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
 
@@ -44,8 +44,8 @@ class Home extends Component {
                         firstName: applicant.firstName,
                         lastName: applicant.lastName,
                         email: applicant.email,
-                        likes: Math.floor(Math.random() * 50),
-                        comments: Math.floor(Math.random() * 20),
+                        likes: applicant.likes.length,
+                        comments: applicant.comments.length,
                         extraFields: applicant.extraFields,
                         status: applicant.status,
                         recruitingCycle: applicant.recruitingCycle,
@@ -334,19 +334,19 @@ class Home extends Component {
 
     render() {
         return (
-            <div id="home-grid-container">
-                <Logo />
-                <SearchAndFilter
-                    query={this.state.query} handleSearch={this.handleSearch}
-                    filters={this.state.filters} handleFilter={this.handleFilter}
-                />
+            <div id="page-grid-container">
+            <Logo />
+            <SideNavBar />
+                <div id="home-grid-container">
+                    <SearchAndFilter
+                        query={this.state.query} handleSearch={this.handleSearch}
+                        filters={this.state.filters} handleFilter={this.handleFilter}
+                    />
 
-                <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={this.state.allApplicants.length} />
-
-                <SideNavBar />
-
-                {/* Pass handleSort function down all the way to TableHeader */}
-                <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick}/>
+                    <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={this.state.allApplicants.length} />
+                    {/* Pass handleSort function down all the way to TableHeader */}
+                    <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick}/>
+                </div>
             </div>
         )
     }

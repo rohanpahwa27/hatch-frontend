@@ -1,11 +1,42 @@
 import React, { Component } from "react"
 import "./TableRow.css"
-import likesImage from "./Icons/heart.png"
+import emptyHeart from "./Icons/emptyHeart.png"
+import filledHeart from "./Icons/filledHeart.png"
 import commentsImage from "./Icons/comment.png"
+import api from "../../../../../Api/api.js"
 
 class TableRow extends Component {
+    constructor() {
+        super()
+        // allApplicants is all of the applicants in the organization
+        // tableData is only the applicants currently showing in the table
+        this.state = {
+            didMemberLikeApplicant: false
+        }
+    }
+
+    async componentDidMount() {
+        await api.didMemberLikeApplicant(this.props.id)
+            .then(res => {
+                console.log(this.props.firstName)
+                console.log(res.data.like)
+                this.setState({
+                    didMemberLikeApplicant: res.data.like
+                })
+            })
+            .catch(err => {
+                console.log("Call to didMemberLikeApplicant failed")
+                console.log(err)
+            })
+    }
+
     render() {
         const components = []
+
+        const heart = this.state.didMemberLikeApplicant ? filledHeart : emptyHeart
+
+        console.log(this.props.firstName)
+        console.log(this.state.didMemberLikeApplicant)
 
         const name = (
             <td className="name-div table-data-cell" key="name">
@@ -16,7 +47,7 @@ class TableRow extends Component {
 
         const likes = (
             <td className="table-data-cell" key="likes">
-                <img className="heart-icon" src={likesImage} alt="Heart icon" />
+                <img className="heart-icon" src={heart} alt="Heart icon" />
                 <span>{this.props.likes}</span>
             </td>
         )
