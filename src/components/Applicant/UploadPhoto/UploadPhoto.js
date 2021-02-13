@@ -17,14 +17,9 @@ class UploadPhoto extends Component {
     }
 
     toggleShowModal = () => {
-        console.log("hello")
         this.setState({
             isOpen: !this.state.isOpen
         })
-        // Reset Upload Photo preview to profile photo if not confirmed
-        if (!this.state.isOpen) {
-            this.state.selectedFile = null
-        }
     }
 
     uploadFile = event => {
@@ -47,10 +42,9 @@ class UploadPhoto extends Component {
 
     sendFile = async (event) => {
         const formData = new FormData();
-        // formData.append("applicantId", this.props.applicant._id);
+        const applicantId = this.props.applicant._id;
         formData.append("image", this.state.selectedFile);
-        response = await api.uploadApplicantImage(formData);
-        console.log(response);
+        await api.uploadApplicantImage(applicantId, formData);
         this.toggleShowModal();
     };
 

@@ -5,9 +5,14 @@ class ApplicantInfo extends Component {
     render() {
         let grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
         let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
+        let filledHeart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_filled.svg"
         let chat = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Chat/SVG/ic_fluent_chat_16_regular.svg"
         let placeholder = ""
         let applicant = this.props.applicant
+
+        let beforeCurrStatus = this.props.originallyLiked ? applicant.likes.length - 1 : applicant.likes.length 
+        let numLikes = this.props.likedApplicant ? beforeCurrStatus + 1 : beforeCurrStatus
+
         return (
             <div id="applicant-info-item">
                 <img id="applicant-image" src={applicant ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />
@@ -17,12 +22,13 @@ class ApplicantInfo extends Component {
                     </div>
                     <div id="applicant-likes-and-comments-container">
                         <div id="applicant-likes-container">
-                            <img id="applicant-heart-image" src={heart} alt="Heart icon" />
-                            <span id="applicant-like-text">{applicant ? applicant.likes.length : placeholder} like{applicant.likes.length != 1 ? "s" : ""} </span>
+                            {this.props.likedApplicant ? <img id="applicant-heart-image" src={filledHeart} alt="Like icon"/> :
+                            <img id="applicant-heart-image" src={heart} alt="Heart icon" />}
+                            <span id="applicant-like-text">{applicant ? numLikes : placeholder} like{numLikes !== 1 ? "s" : ""} </span>
                         </div>
                         <div id="applicant-comments-container">
                             <img id="applicant-chat-image" src={chat} alt="Chat icon" />
-                            <span id="applicant-comment-text">{applicant ? applicant.comments.length : placeholder} comment{applicant.likes.length != 1 ? "s" : ""} </span>
+                            <span id="applicant-comment-text">{applicant ? applicant.comments.length : placeholder} comment{applicant.likes.length !== 1 ? "s" : ""} </span>
                         </div>
                     </div>
                 </div>
