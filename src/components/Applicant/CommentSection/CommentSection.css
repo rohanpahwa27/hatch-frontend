@@ -3,6 +3,7 @@
     grid-column: 1 / span 1;
 
     width: 600px;
+    /* TODO: set limit based on inspect case */
     height: 556px;
     padding-left: 31px;
     padding-top: 24px;
@@ -23,7 +24,7 @@
     top: 200px;
 }
 
-.no-comments-image {
+.no-comments {
     position: absolute;
     right: 1.06%;
     bottom: 12.23%;

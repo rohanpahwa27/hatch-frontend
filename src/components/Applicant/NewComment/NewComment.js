@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component , useState} from "react"
 import InputField from "@kiwicom/orbit-components/lib/InputField";
 import Button from "@kiwicom/orbit-components/lib/Button";
 import api from "../../../Api/api"
@@ -11,12 +11,17 @@ class NewComment extends Component {
         this.state = {
             isOpen: false,
             comment: "",
+            reload: false
         }
     }
 
     sendComment = async () => {
         const applicantId = this.props.applicant._id
-        const response = await api.uploadApplicantComment(applicantId, this.state.comment);
+        const text = this.state.comment
+        await api.addComment(applicantId, {text})
+        this.setState({
+            comment: ""
+        })
     };
 
     handleChange = e => {
