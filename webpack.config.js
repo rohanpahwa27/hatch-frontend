@@ -37,5 +37,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'public'),
         port: process.env.PORT || 8080
     },
-    // plugins: [new HtmlWebpackPlugin()],
+    plugins: [new HtmlWebpackPlugin({
+      template: './public/index.html'
+    })],
 };
