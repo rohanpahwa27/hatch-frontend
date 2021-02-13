@@ -1,1 +1,1 @@
-web: npm run build
+web: ./node_modules/webpack/bin/webpack.js -p --progress && node server.js
