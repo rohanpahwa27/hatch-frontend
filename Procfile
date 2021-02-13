@@ -1,0 +1,1 @@
+web: ./node_modules/webpack/bin/webpack.js -p --progress && node server.js

@@ -1,10 +1,11 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 require('dotenv').config()
 module.exports = {
     entry: ['babel-polyfill', './src/index.js'],
     output: {
         filename: 'bundle.js',
-        path: path.join(__dirname, 'public'),
+        path: path.join(__dirname, 'dist'),
         publicPath: '/' || '/admin/'
     },
     module: {
@@ -36,4 +37,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'public'),
         port: process.env.PORT || 8080
     },
+    plugins: [new HtmlWebpackPlugin({
+      template: './public/index.html'
+    })],
 };
