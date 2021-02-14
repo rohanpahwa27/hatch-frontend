@@ -71,10 +71,8 @@ class Home extends Component {
 
     handleFilter(updatedFilters) {
         const { allApplicants } = this.state;
-        console.log(allApplicants);
         const filteredApplicants = allApplicants.filter(applicant => {
             const { status } = applicant;
-            console.log
             return updatedFilters.has(status);
         });
 
@@ -114,30 +112,33 @@ class Home extends Component {
     }
 
     handleSearch(event) {
-        const queryText = event.target.value
+        const queryText = event.target.value;
+        const { allApplicants, filters } = this.state;
 
-        const filteredApplicants = this.state.allApplicants.filter(applicant => {
+        const filteredApplicants = allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName
             return applicantFullName.toLowerCase().indexOf(queryText) > -1;
         })
 
-        this.setState({
-            tableData: filteredApplicants,
-            query: queryText,
-            numApplicantsShowing: filteredApplicants.length
+        const updatedApplicants = filteredApplicants.filter(applicant => {
+            const { status } = applicant;
+            return filters.has(status);
         })
 
-        // console.log(this.state.tableData.length)
+        this.setState({
+            tableData: updatedApplicants,
+            query: queryText,
+            numApplicantsShowing: updatedApplicants.length
+        })
 
-        // console.log(filteredApplicants.length)
         if (this.state.sortBy === "name") {
-            this.sortByName(filteredApplicants, this.state.sortDirection)
+            this.sortByName(updatedApplicants, this.state.sortDirection)
         }
         else if (this.state.sortBy === "likes") {
-            this.sortByLikes(filteredApplicants, this.state.sortDirection)
+            this.sortByLikes(updatedApplicants, this.state.sortDirection)
         }
         else if (this.state.sortBy === "comments") {
-            this.sortByComments(filteredApplicants, this.state.sortDirection)
+            this.sortByComments(updatedApplicants, this.state.sortDirection)
         }
     }
 

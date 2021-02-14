@@ -15,9 +15,10 @@ class ManageApplicants extends Component {
     constructor() {
         super();
         this.state = {
-            allApplicantData: null,
+            allApplicants: null,
             tableData: [],
             query: "",
+            filters: new Set(["Active"]),
             selected: new Set(),
             numApplicantsShowing: 0,
             sortBy: "name",
@@ -32,6 +33,7 @@ class ManageApplicants extends Component {
         this.sortbyComments = this.sortbyComments.bind(this);
         this.isSelected = this.isSelected.bind(this);
         this.handleSelected = this.handleSelected.bind(this);
+        this.handleFilter = this.handleFilter.bind(this)
         this.selectAll = this.selectAll.bind(this);
         this.updateApplicants = this.updateApplicants.bind(this);
         this.deleteApplicants = this.deleteApplicants.bind(this);
@@ -48,7 +50,7 @@ class ManageApplicants extends Component {
             const organizationResponse = await api.getOrgById(orgId);
             const orgCode = organizationResponse.data.organization.addCode;
             this.setState({
-                allApplicantData: applicantData,
+                allApplicants: applicantData,
                 tableData: applicantData,
                 numApplicantsShowing: applicantData.length,
                 orgCode: orgCode
@@ -56,9 +58,43 @@ class ManageApplicants extends Component {
         } catch (error) {
 
         }
+        
+        this.handleFilter(this.state.filters);
         this.sortByName(this.state.tableData, "ascending");
     }
 
+    handleFilter(updatedFilters) {
+        const { allApplicants } = this.state;
+        const filteredApplicants = allApplicants.filter(applicant => {
+            const { status } = applicant;
+            return updatedFilters.has(status);
+        });
+
+        // TODO (DRY principle): Change code snippet below to call handleSearch once updated to not use 'event'
+        // Need to run handleSearch again on filter results
+        const updatedApplicants = filteredApplicants.filter(applicant => {
+            const applicantFullName = applicant.firstName + " " + applicant.lastName
+            return applicantFullName.toLowerCase().indexOf(this.state.query) > -1;
+        })
+
+        // TODO (DRY principle): Change code snippet below to call handleSort once updated to not use 'event'
+        // Need to run handleSort again on filter & search results
+        if (this.state.sortBy === "name") {
+            this.sortByName(updatedApplicants, this.state.sortDirection)
+        }
+        else if (this.state.sortBy === "likes") {
+            this.sortByLikes(updatedApplicants, this.state.sortDirection)
+        }
+        else if (this.state.sortBy === "comments") {
+            this.sortByComments(updatedApplicants, this.state.sortDirection)
+        }
+
+        this.setState({
+            tableData: updatedApplicants,
+            numApplicantsShowing: updatedApplicants.length,
+            filters: updatedFilters
+        });
+    }
 
     isSelected(applicantId) {
         return this.state.selected.has(applicantId);
@@ -68,7 +104,6 @@ class ManageApplicants extends Component {
         const selected = this.state.selected;
         selected.has(applicantId) ? selected.delete(applicantId) : selected.add(applicantId);
         this.setState({ selected: selected });
-        console.log(this.state.selected);
         return;
     }
 
@@ -77,7 +112,6 @@ class ManageApplicants extends Component {
             this.setState({ selected: new Set() });
             return;
         }
-        console.log(this.state.tableData)
         let selectAll = new Set();
         this.state.tableData.map((applicant) => {
             selectAll.add(applicant._id);
@@ -87,31 +121,33 @@ class ManageApplicants extends Component {
 
     handleSearch(event) {
         const queryText = event.target.value;
-        const { allApplicantData } = this.state;
+        const { allApplicants, filters } = this.state;
 
         // filtering applicantData is the problem here
-        const filteredApplicants = allApplicantData.filter(applicant => {
+        const filteredApplicants = allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName;
             return applicantFullName.toLowerCase().indexOf(queryText) > -1;
+        });
+
+        const updatedApplicants = filteredApplicants.filter(applicant => {
+            const { status } = applicant;
+            return filters.has(status);
         })
 
         this.setState({
-            tableData: filteredApplicants,
+            tableData: updatedApplicants,
             query: queryText,
-            numApplicantsShowing: filteredApplicants.length
+            numApplicantsShowing: updatedApplicants.length
         })
 
-        // console.log(this.state.tableData.length)
-
-        // console.log(filteredApplicants.length)
         if (this.state.sortBy === "name") {
-            this.sortByName(filteredApplicants, this.state.sortDirection);
+            this.sortByName(updatedApplicants, this.state.sortDirection);
         }
         else if (this.state.sortBy === "likes") {
-            this.sortbyLikes(filteredApplicants, this.state.sortDirection);
+            this.sortbyLikes(updatedApplicants, this.state.sortDirection);
         }
         else if (this.state.sortBy === "comments") {
-            this.sortbyComments(filteredApplicants, this.state.sortDirection);
+            this.sortbyComments(updatedApplicants, this.state.sortDirection);
         }
     }
 
@@ -135,7 +171,6 @@ class ManageApplicants extends Component {
 
         // if the likes header is clicked
         else if (classNames.indexOf("likes") > -1) {
-            console.log("see likes in index")
             let direction = "descending";
             if (this.state.sortBy === "likes" && this.state.sortDirection === "descending") {
                 direction = "ascending";
@@ -144,7 +179,6 @@ class ManageApplicants extends Component {
         }
         // if the comments header is clicked
         else if (classNames.indexOf("comments") > -1) {
-            console.log("see comments in index")
             let direction = "descending";
             if (this.state.sortBy === "comments" && this.state.sortDirection === "descending") {
                 direction = "ascending";
@@ -260,12 +294,11 @@ class ManageApplicants extends Component {
 
     sortbyComments(applicantsArray, direction) {
         // clone array
-        const tableDataCopy = applicantsArray
+        const tableDataCopy = applicantsArray;
 
         /* if sortDirection was ascending before click or the user was sorting by
         another variable, then we want to sort descending by comments 
         */
-       console.log("SORTING BY COMMENTS")
         if (direction === "ascending") {
             tableDataCopy.sort((a, b) => {
 
@@ -322,11 +355,11 @@ class ManageApplicants extends Component {
                 <SideNavBar />
                 <div id="navbar-content-grid-container">
                     <Navbar />
-                    {this.state.allApplicantData === null ?
-                        <div>{this.state.allApplicantData}</div>
+                    {this.state.allApplicants === null ?
+                        <div>{this.state.allApplicants}</div>
                         :
                         <div>
-                            {this.state.allApplicantData.length === 0 ?
+                            {this.state.allApplicants.length === 0 ?
                                 <ImportApplicants />
                                 :
                                 (
@@ -334,9 +367,9 @@ class ManageApplicants extends Component {
                                         {/* Pass handleSort function down all the way to TableHeader */}
                                         <TableToolbar
                                             numApplicantsShowing={this.state.numApplicantsShowing}
-                                            totalApplicants={this.state.allApplicantData.length}
-                                            query={this.state.query}
-                                            handleSearch={this.handleSearch}
+                                            totalApplicants={this.state.allApplicants.length}
+                                            query={this.state.query} handleSearch={this.handleSearch}
+                                            filters={this.state.filters} handleFilter={this.handleFilter}
                                         />
                                         <Table
                                             data={this.state.tableData}
@@ -349,7 +382,7 @@ class ManageApplicants extends Component {
                                         />
                                         <UpdateApplicantsCard
                                             numSelected={this.state.selected.size}
-                                            deleteMembers={this.deleteMembers}
+                                            deleteApplicants={this.deleteApplicants}
                                             updateApplicants={this.updateApplicants}
                                         />
                                     </div>
