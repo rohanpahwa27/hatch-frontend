@@ -71,8 +71,10 @@ class Home extends Component {
 
     handleFilter(updatedFilters) {
         const { allApplicants } = this.state;
+        console.log(allApplicants);
         const filteredApplicants = allApplicants.filter(applicant => {
             const { status } = applicant;
+            console.log
             return updatedFilters.has(status);
         });
 

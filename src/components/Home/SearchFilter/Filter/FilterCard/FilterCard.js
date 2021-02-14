@@ -75,7 +75,7 @@ class FilterCard extends Component {
               <div className="filter-card-row-label">Released</div>
               <div>
                 <Check
-                  filterValue="Released"
+                  filterValue="Inactive"
                   isFilterSelected={this.isFilterSelected}
                   handleSelectFilter={this.handleSelectFilter}
                 />
