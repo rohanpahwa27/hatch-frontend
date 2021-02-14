@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import "./Page.css"
 
 import Navbar from "../Navbar/Navbar.js";
-import Logo from "./Logo/Logo.js";
+import Logo from "../Logo/Logo.js";
 import SideNavBar from "../SideNavBar/SideNavBar.js";
 
 class Page extends Component {

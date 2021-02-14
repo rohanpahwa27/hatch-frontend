@@ -1,9 +1,9 @@
-import React, { Component } from "react"
-import {Route, withRouter} from 'react-router-dom'
-import "./Home.css"
+import React, { Component } from "react";
+import { Route, withRouter } from "react-router-dom";
+import "./Home.css";
 
-import Table from "./Table/Table.js"
-import Logo from "./Logo/Logo.js";
+import Table from "./Table/Table.js";
+import Logo from "../Logo/Logo.js";
 import SideNavBar from "../SideNavBar/SideNavBar.js";
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
@@ -106,7 +106,7 @@ class Home extends Component {
         this.props.history.push({
             pathname: '/applicant',
             // TODO: Edit if we want to get rid of the actual applicant ID and want smtg else?
-            search: data, 
+            search: data,
             state: { id: data }
         })
     }
@@ -337,8 +337,8 @@ class Home extends Component {
     render() {
         return (
             <div id="page-grid-container">
-            <Logo />
-            <SideNavBar />
+                <Logo />
+                <SideNavBar />
                 <div id="home-grid-container">
                     <SearchAndFilter
                         query={this.state.query} handleSearch={this.handleSearch}
@@ -347,7 +347,7 @@ class Home extends Component {
 
                     <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={this.state.allApplicants.length} />
                     {/* Pass handleSort function down all the way to TableHeader */}
-                    <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick}/>
+                    <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick} />
                 </div>
             </div>
         )

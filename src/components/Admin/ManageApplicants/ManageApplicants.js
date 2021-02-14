@@ -8,7 +8,7 @@ import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
 
-import Logo from "../../Page/Logo/Logo.js";
+import Logo from "../../Logo/Logo.js";
 import SideNavBar from "../../SideNavBar/SideNavBar.js";
 
 class ManageApplicants extends Component {
