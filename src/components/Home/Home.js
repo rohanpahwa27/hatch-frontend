@@ -34,10 +34,10 @@ class Home extends Component {
         this.handleFilter = this.handleFilter.bind(this)
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const orgId = localStorage.getItem("orgID");
-        api.getApplicantsInOrg(orgId)
-            .then(res => {
+        await api.getApplicantsInOrg(orgId)
+            .then(async res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
                         id: applicant._id,
@@ -52,8 +52,20 @@ class Home extends Component {
                         organization: applicant.organization,
                         imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
                     }
+                    
                     return applicantInfo
                 })
+
+                for (const applicant of applicants) {
+                    await api.didMemberLikeApplicant(applicant.id)
+                    .then(res => {
+                        applicant.didMemberLikeApplicant = res.data.like
+                    })
+                    .catch(err => {
+                        console.log("Call to didMemberLikeApplicant failed")
+                        console.log(err)
+                    })
+                }
 
                 this.setState({
                     allApplicants: applicants,
