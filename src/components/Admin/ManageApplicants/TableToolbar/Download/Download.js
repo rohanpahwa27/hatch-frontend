@@ -5,8 +5,13 @@ import downloadImage from "./download.png"
 class Download extends Component {
     render() {
         return (
-            <div id="download-flex-container">
-                <img id="download-icon" src={downloadImage} alt="Download icon" />
+            <div id="applicant-toolbar-download-flex-container">
+                <button
+                    id="applicant-toolbar-download-button"
+                >
+                    <img id="applicant-toolbar-download-icon" src={downloadImage} alt="Download icon" />
+                    {/* &nbsp;Download */}
+                </button>
             </div>
         )
     }

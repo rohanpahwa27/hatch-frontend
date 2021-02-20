@@ -5,7 +5,7 @@ import UpdateMembersCard from "./UpdateMembersCard/UpdateMembersCard"
 import Navbar from "../../Navbar/Navbar"
 import Search from "./Search/Search"
 import api from "../../../Api/api"
-import Logo from "../../Page/Logo/Logo";
+import Logo from "../../Logo/Logo";
 import SideNavBar from "../../SideNavBar/SideNavBar";
 
 var memberData = []

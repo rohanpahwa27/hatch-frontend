@@ -3,7 +3,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 1%;
+    padding: 30px;
 
     background-color: rgba(239, 242, 245, 0.5);
 }

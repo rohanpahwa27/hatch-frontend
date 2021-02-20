@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./UpdateApplicantsCard.css";
 import Radio from "@kiwicom/orbit-components/lib/Radio";
 import ButtonLink from "@kiwicom/orbit-components/lib/ButtonLink";
@@ -21,9 +22,11 @@ const RadioButton = ({ label, updateApplicants }) => {
 
 class UpdateApplicantsCard extends Component {
     render() {
+        const selectedApplicantId = this.props.selected.values().next().value;
         const numSelectedText = (this.props.numSelected > 1) ? "applicants selected" : "applicant selected";
         const applicantButtonText = (this.props.numSelected == 1) ? "Go to applicant profile" : "";
         const deleteApplicantText = (this.props.numSelected > 1) ? `Delete ${this.props.numSelected} applicants` : "Delete this applicant";
+        
         return (
             (this.props.numSelected > 0) ?
                 <div className="update-applicants-container">
@@ -37,14 +40,17 @@ class UpdateApplicantsCard extends Component {
                             </div>
                         </div>
                         <div id="card-bottom-space">
-                            <br/>
+                            <br />
                             {(this.props.numSelected == 1) ?
-                                <button id="manage-applicants-goto-profile-button">
-                                    <div id="goto-profile-text">
-                                        <div>{applicantButtonText}&nbsp;&nbsp;</div>
-                                        <img id="goto-icon" src={gotoIcon} alt="Goto icon" />
-                                    </div>
-                                </button>
+                                    (<button
+                                        id="manage-applicants-goto-profile-button"
+                                        onClick={event => this.props.handleGotoApplicant(selectedApplicantId)}
+                                    >
+                                        <div id="goto-profile-text">
+                                            <div>{applicantButtonText}&nbsp;&nbsp;</div>
+                                            <img id="goto-icon" src={gotoIcon} alt="Goto icon" />
+                                        </div>
+                                    </button>)
                                 :
                                 null
                             }
