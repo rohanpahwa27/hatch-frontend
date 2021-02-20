@@ -22,7 +22,7 @@ class TableToolbar extends Component {
                 <Filter filters={this.props.filters} handleFilter={this.props.handleFilter} />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
                 <div style={{flexGrow: 1}}></div>
-                <AddApplicant />
+                <AddApplicant toggleShowImport={this.props.toggleShowImport}/>
                 <Download />
             </div>
         )

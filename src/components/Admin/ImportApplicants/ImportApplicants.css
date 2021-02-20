@@ -12,24 +12,6 @@ body {
   font-size: large;
 }
 
-/* #manage-applicants-flex-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-}
-
-#applicants-text-flex-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 44px;
-} */
-
 /* ========================== */
 
 #import-grid-container {
@@ -94,6 +76,7 @@ body {
   font-weight: bold;
   border: 0;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 #upload-button-container {

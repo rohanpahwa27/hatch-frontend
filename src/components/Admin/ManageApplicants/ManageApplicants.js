@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./ManageApplicants.css";
 import api from "../../../Api/api";
 import Navbar from "../../Navbar/Navbar.js";
@@ -21,6 +22,7 @@ class ManageApplicants extends Component {
             filters: new Set(["Active"]),
             selected: new Set(),
             numApplicantsShowing: 0,
+            showImportPage: false,
             sortBy: "name",
             sortDirection: "descending",
             orgCode: ""
@@ -35,8 +37,10 @@ class ManageApplicants extends Component {
         this.handleSelected = this.handleSelected.bind(this);
         this.handleFilter = this.handleFilter.bind(this)
         this.selectAll = this.selectAll.bind(this);
+        this.handleGotoApplicant = this.handleGotoApplicant.bind(this);
         this.updateApplicants = this.updateApplicants.bind(this);
         this.deleteApplicants = this.deleteApplicants.bind(this);
+        this.toggleShowImport = this.toggleShowImport.bind(this);
     }
 
     componentDidMount = async () => {
@@ -61,6 +65,7 @@ class ManageApplicants extends Component {
         
         this.handleFilter(this.state.filters);
         this.sortByName(this.state.tableData, "ascending");
+        {this.state.allApplicants.length === 0 ? this.toggleShowImport() : null};
     }
 
     handleFilter(updatedFilters) {
@@ -340,12 +345,29 @@ class ManageApplicants extends Component {
         })
     }
 
+    handleGotoApplicant(applicantId) {
+        console.log(this.props)
+        this.props.history.push({
+            pathname: '/applicant',
+            // TODO: Edit if we want to get rid of the actual applicant ID and want smtg else?
+            search: applicantId,
+            state: { id: applicantId }
+        })
+    }
+
     updateApplicants() {
         this.setState({ selected: new Set() })
     }
 
     deleteApplicants() {
         this.setState({ selected: new Set() })
+    }
+
+    toggleShowImport() {
+        // May delete this function later if we want import to go to a separate page
+        this.setState({
+            showImportPage: !this.state.showImportPage            
+        });
     }
 
     render() {
@@ -359,7 +381,8 @@ class ManageApplicants extends Component {
                         <div>{this.state.allApplicants}</div>
                         :
                         <div>
-                            {this.state.allApplicants.length === 0 ?
+                            {/* this.state.allApplicants.length === 0 */}
+                            {this.state.showImportPage == true ?
                                 <ImportApplicants />
                                 :
                                 (
@@ -370,6 +393,7 @@ class ManageApplicants extends Component {
                                             totalApplicants={this.state.allApplicants.length}
                                             query={this.state.query} handleSearch={this.handleSearch}
                                             filters={this.state.filters} handleFilter={this.handleFilter}
+                                            toggleShowImport={this.toggleShowImport}
                                         />
                                         <Table
                                             data={this.state.tableData}
@@ -381,7 +405,9 @@ class ManageApplicants extends Component {
                                             sortDirection={this.state.sortDirection}
                                         />
                                         <UpdateApplicantsCard
+                                            selected={this.state.selected}
                                             numSelected={this.state.selected.size}
+                                            handleGotoApplicant={this.handleGotoApplicant}
                                             deleteApplicants={this.deleteApplicants}
                                             updateApplicants={this.updateApplicants}
                                         />
@@ -396,4 +422,4 @@ class ManageApplicants extends Component {
     }
 }
 
-export default ManageApplicants;
+export default withRouter(ManageApplicants);
