@@ -10,6 +10,7 @@ class Download extends Component {
                     id="applicant-toolbar-download-button"
                 >
                     <img id="applicant-toolbar-download-icon" src={downloadImage} alt="Download icon" />
+                    {/* &nbsp;Download */}
                 </button>
             </div>
         )

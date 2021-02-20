@@ -10,7 +10,7 @@ class TableHeader extends Component {
         const sortDirection = this.props.sortDirection;
 
         return (
-            <thead id="applicant-table-header-grid-container">
+            <thead>
                 <tr id="applicant-table-header-row-grid-container">
 
                     <th id="applicant-select-header" onClick={event => this.props.selectAll(event)}>Select</th>
@@ -19,6 +19,10 @@ class TableHeader extends Component {
                         <span className="applicant-column-header-span name-header-click-area" style={sortBy === "name" ? {fontWeight: "bold"} : null}>Name</span> 
                         {sortBy === "name" ? 
                         <img className="sort-arrow name-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
+                    </th>
+
+                    <th id="applicant-header">
+                        <span>&nbsp;</span>
                     </th>
 
                     <th id="applicant-header" className="likes-header-click-area" onClick={event => this.props.handleSort(event)}>

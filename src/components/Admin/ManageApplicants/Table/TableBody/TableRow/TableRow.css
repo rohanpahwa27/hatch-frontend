@@ -5,8 +5,8 @@
 
     /* Grid container properties */
     display: grid;
-    grid-template-rows: 100%;
-    grid-template-columns: 1fr 2fr 2fr 1fr 1fr 2fr;
+    grid-template-columns: 98px 255px minmax(30px, 230px) 104px 178px 104px 104px;
+    
     justify-items: flex-start;
     align-items: center;
 }
@@ -16,13 +16,13 @@
 }
 
 .manage-table-data-cell {
+    grid-column: span 1;
     display: flex;
     align-items: center;
 }
 
 .manage-checkbox-div {
-    justify-self: flex-start;
-    padding-left: 9%;
+    justify-self: center;
 }
 
 .select-checkbox {
@@ -31,7 +31,6 @@
 }
 
 .manage-name-div {
-    padding-left: 3%;
     width: 100%;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .manage-applicant-name {
-    margin-left: 3%;
+    /* margin-left: 3%; */
 }
 
 .manage-row-item {

@@ -45,7 +45,7 @@ class TableBody extends Component {
         })
 
         return (
-            <tbody id="table-body-manage-grid-container">
+            <tbody id="applicant-table-body-grid-container">
                 {applicantComponents}
             </tbody>
         )

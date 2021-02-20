@@ -21,9 +21,9 @@ class TableToolbar extends Component {
                 <ShowingApplicantsLabel numApplicantsShowing={this.props.numApplicantsShowing} totalApplicants={this.props.totalApplicants} />
                 <Filter filters={this.props.filters} handleFilter={this.props.handleFilter} />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
-                <div style={{flexGrow: 1}}></div>
-                <AddApplicant toggleShowImport={this.props.toggleShowImport}/>
+                {/* <div style={{flexGrow: 1}}></div> */}
                 <Download />
+                <AddApplicant toggleShowImport={this.props.toggleShowImport}/>
             </div>
         )
     }
