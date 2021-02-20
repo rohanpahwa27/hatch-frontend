@@ -4,8 +4,9 @@ import Loading from "@kiwicom/orbit-components/lib/Loading";
 
 import SideNavBar from "../SideNavBar/SideNavBar"
 import Logo from "../Page/Logo/Logo.js";
-
-import ApplicantInfoBar from "./ApplicantInfoBar/ApplicantInfoBar.js"
+import LikeInfoBarItem from "./ProfileActions/LikeInfoBarItem/LikeInfoBarItem.js"
+import NextInfoBarItem from "./ProfileActions/NextInfoBarItem/NextInfoBarItem.js"
+import ApplicantInfo from "./ApplicantInfo/ApplicantInfo.js"
 import ApplicantInfoDrop from "./ApplicantInfoDrop/ApplicantInfoDrop.js"
 import UploadPhoto from "./UploadPhoto/UploadPhoto.js"
 import NewComment from "./NewComment/NewComment.js"
@@ -19,76 +20,134 @@ class Applicant extends Component {
     constructor() {
         super()
         this.state = {
-            memberId: null,
-            commentData: null,
+            currMemberId: null,
+            currApplicantPreCall: window.location.search ? window.location.search.substring(1, window.location.search.length) : this.props.location.state.id,
+            currApplicantId: null,
+            currApplicantLikedByMember: null,
+            currApplicantComments: null,
+            currApplicantData: null,
             allApplicants: null,
-            currApplicant: null,
-            applicantLiked: null,
-            ids: null,
-            currApplicantPreCall: window.location.search ? window.location.search.substring(1, window.location.search.length) : this.props.location.state.id
+            allApplicantIds: null,
+            likedApplicant: false, // TODO: old changes from applicant info bar
+            liveLikeStaus: false
         }
 
-        this.handleClick = this.handleClick.bind(this)
+        this.handleNext = this.handleNext.bind(this)
+        this.handleLike = this.handleLike.bind(this)
     }
 
     componentDidMount = async () => {
-        // TODO: HANDLE "bad" urls with fake search terms
-        // TODO: don't call applicant by ID API but instead index + have that info on hand (cache it)
         try {
-            const orgId = localStorage.getItem("orgID");
-            const applicantID = this.state.currApplicantPreCall;
-            const applicantResponse = await api.getApplicantById(applicantID);
-            const applicantLike = await api.didMemberLikeApplicant(applicantID);
-            const memberId = await api.getThisMember();
-            const applicants = await api.getApplicantsInOrg(orgId);
-            const ids = applicants.data.applicants.map(applicant => {
-                const applicantInfo = {
-                    id: applicant._id
+            // TODO: if (set timer for a certain time because otherwise we may want to refresh instead of using old data)
+            if (!this.state.allApplicants) {
+                // Applicant page called by Home / direct URL and not next
+                const applicantId = this.state.currApplicantPreCall;
+                const orgId = localStorage.getItem("orgID");
+                const memberId = await api.getThisMember();
+
+                // const applicantResponse = await api.getApplicantById(applicantID);
+                const applicantLike = await api.didMemberLikeApplicant(applicantId);
+                const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
+                const applicantData = allApplicantsResponse.data.applicants.map(applicant => {
+                    const applicantInfo = {
+                        id: applicant._id,
+                        firstName: applicant.firstName,
+                        lastName: applicant.lastName,
+                        email: applicant.email,
+                        comments: applicant.comments,
+                        likes: applicant.likes,
+                        extraFields: applicant.extraFields,
+                        status: applicant.status,
+                        recruitingCycle: applicant.recruitingCycle,
+                        organization: applicant.organization,
+                        imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
+                    }
+                    return applicantInfo
+                });
+
+                const applicantIds = applicantData.map(x => x.id);
+                const currApplicantData = applicantData.find(x => x.id == applicantId);
+                if (currApplicantData == null) {
+                    // TODO: HANDLE "bad" urls with fake search terms, CHECK for valid ids aka ones that are in applicantData
                 }
-                return applicantInfo
-            });
-            const applicantData = applicantResponse.data.applicant;
-    
-            this.setState({
-                currApplicant: applicantData,
-                commentData: applicantData.comments,
-                applicantLiked: applicantLike.data.like,
-                memberId: memberId.data.member._id,
-                ids: ids
-            });
+        
+                this.setState({
+                    currMemberId: memberId.data.member._id,
+                    currApplicantId: applicantId,
+                    currApplicantLikedByMember: applicantLike.data.like,
+                    currApplicantData: currApplicantData,
+                    currApplicantComments: currApplicantData.comments,
+                    allApplicants: applicantData,
+                    allApplicantIds: applicantIds,
+                    likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
+                });
+            } else {
+                // Applicant page called by next, need to only update the currApplicantInfo
+                console.log(this.state.currApplicantId)
+                const currApplicantData = this.state.allApplicants.find(x => x.id == this.state.currApplicantId);
+                const applicantLike = await api.didMemberLikeApplicant(this.state.currApplicantId);
+                this.setState({
+                    currApplicantLikedByMember: applicantLike.data.like,
+                    currApplicantComments: currApplicantData.comments,
+                    currApplicantData: currApplicantData
+                });
+            }
         } catch (error) {
             
         }
     }
 
-    handleClick() {
-        const id = this.state.ids[this.state.indexOf(this.state.currApplicantPreCall)]
-        this.props.history.push({
-            pathname: '/applicant',
-            search: id,
-            state: {id: id}
-        })
+    handleNext() {
+        // TODO: Fix slight bug where the first next click doesn't work
+        const currIndex = this.state.allApplicantIds.findIndex(id => id === this.state.currApplicantId)
+        if (currIndex === -1) {
+            // TODO: Add a proper error state
+            console.log("yikes this is an issue for applicant")
+        }
+        this.setState({
+            currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
+        });
+        this.componentDidMount()
+    }
+
+    handleLike = async () => {
+        this.setState({
+            liveLikeStatus: !this.state.liveLikeStatus,
+            likedApplicant: !(this.state.currApplicantLikedByMember && this.state.liveLikeStatus)
+        });
+        await api.changeMemberLikeApplicant(this.props.applicant._id);
+        this.componentDidMount();
     }
 
     render() {
         return (
         (this.state.currApplicantPreCall) ?
-            (this.state.currApplicant) ?
+            (this.state.currApplicantData) ?
             <div id="page-grid-container">
                 <Logo />
                 <SideNavBar />
                 <div id="applicant-grid-container">
-                    <ApplicantInfoBar applicant = {this.state.currApplicant} handleClick={this.handleClick} applicantLike={this.state.applicantLiked}/>
-                    <CommentSection applicant = {this.state.currApplicant} comments = {this.state.commentData} member={this.state.memberId}/>
-                    <div id="applicant-side-features-container">
-                        <UploadPhoto applicant = {this.state.currApplicant}/>
-                        {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
-                        <ApplicantInfoDrop applicant = {this.state.currApplicant}/>
+                    <div id="info-container">
+                        <div id="applicantinfobar">
+                            <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.likedApplicant} originallyLiked={this.state.currApplicantLikedByMember}/>
+                        </div>
+                        <div id="applicant-action-container">
+                            <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.likedApplicant} handleLike={this.handleLike}/>
+                            <NextInfoBarItem handleNext={this.handleNext}/>
+                        </div>
                     </div>
-                    <NewComment applicant={this.state.currApplicant} />
+                    <div id="content-container">
+                        <CommentSection applicant = {this.state.currApplicantData} comments = {this.state.currApplicantComments} member={this.state.currMemberId}/>
+                        <div id="applicant-side-features-container">
+                            <UploadPhoto applicant = {this.state.currApplicantData}/>
+                            {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
+                            <ApplicantInfoDrop applicant = {this.state.currApplicantData}/>
+                        </div>
+                    </div>
+                    <NewComment applicant={this.state.currApplicantData} />
                 </div>
             </div> : <div id="loading-screen"><Loading/></div>
-            : <span>Page does not exist</span> // TODO: Replace this eventually...
+            : <span>Page does not exist {this.state.currApplicantPreCall}</span> // TODO: Replace this eventually...
         )
       }
 }
