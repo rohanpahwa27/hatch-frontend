@@ -137,9 +137,6 @@ class Home extends Component {
             numApplicantsShowing: filteredApplicants.length
         })
 
-        // console.log(this.state.tableData.length)
-
-        // console.log(filteredApplicants.length)
         if (this.state.sortBy === "name") {
             this.sortByName(filteredApplicants, this.state.sortDirection)
         }

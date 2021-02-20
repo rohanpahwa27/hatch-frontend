@@ -4,25 +4,49 @@
     width: 100%;
 
     /* Grid container properties */
-    display: grid;
-    grid-template-rows: 100%;
-    grid-template-columns: 4fr 1fr 1fr;
-    justify-items: flex-start;
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
+
+    /* display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 2px 74px 30px 74px;
+    justify-items: flex-start;
+    align-items: center; */
 }
 
 #table-row-grid-container:hover {
     background-color: #F8F8F8;
 }
 
-.table-data-cell {
+/* .table-data-cell {
     display: flex;
     align-items: center;
+} */
+
+.name-div-home {
+    padding-left: 3%;
+    width: 200px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
-.name-div {
-    padding-left: 3%;
-    width: 100%;
+.likes-div-home {
+    margin-right: 30px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.comments-div-home {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.empty-td {
+    flex-basis: 30px;
+    max-width: 100px;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .applicant-image {
