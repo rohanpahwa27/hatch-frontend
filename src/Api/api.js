@@ -47,6 +47,7 @@ const resetPassword = (token, payload) => api.post(`reset-password/${token}`, pa
 
 const getComments = applicantId => api.get(`/comments/${applicantId}`)
 const addComment = (applicantId, payload) => api.post(`/comments/${applicantId}`, payload)
+const changeApplicantCommentLike = (applicantId, payload) => api.post(`/comments/like/${applicantId}`, payload)
 const deleteComment = (applicantId) => api.delete(`/comments/${applicantId}`)
 
 const insertUser = (payload) => api.post("/signup", payload);
@@ -97,6 +98,7 @@ const apis = {
   resetPassword,
   getComments,
   addComment,
+  changeApplicantCommentLike,
   deleteComment,
   insertUser,
   loginUser,

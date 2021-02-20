@@ -1,8 +1,8 @@
 #new-comment-bar {
-    position: absolute;
+    position: fixed;
+    bottom: 0;
     width: 88%;
     height: 81px;
-    top: calc(100vh - 81px);
     left: 175px;
 
     display: flex;
@@ -14,23 +14,32 @@
     display: flex;
 
     position: absolute;
-    width: 634.56px;
-    height: 44px;
-    top: 19px;
-    left: 40.24px;
+    width: 620px;
+    height: 41px;
+    top: 20px;
+    left: 34px;
 }
 
 #new-comment-text-box {
     position: absolute;
-    width: 570.56px;
-    height: 42.56px;
+    width: 560px;
+    height: 41px;
     border-radius: 3px;
 }
 
 #new-comment-send {
     position: absolute;
-    left: 590.79px;
 
-    width: 63px;
+    width: 44px;
     height: 44px;
+
+    left: 576px;
+}
+
+#new-comment-send-icon{
+    position: static;
+    width: 24px;
+    height: 24px;
+    left: 10px;
+    top: 10px;
 }

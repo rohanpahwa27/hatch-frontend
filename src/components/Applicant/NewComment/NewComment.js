@@ -1,7 +1,8 @@
-import React, { Component , useState} from "react"
+import React, { Component } from "react"
 import InputField from "@kiwicom/orbit-components/lib/InputField";
 import Button from "@kiwicom/orbit-components/lib/Button";
 import api from "../../../Api/api"
+import ChevronRight from "@kiwicom/orbit-components/lib/icons/ChevronRight";
 
 import "./NewComment.css"
 
@@ -21,7 +22,7 @@ class NewComment extends Component {
         await api.addComment(applicantId, {text})
         this.setState({
             comment: ""
-        })
+        });
     };
 
     handleChange = e => {
@@ -31,6 +32,7 @@ class NewComment extends Component {
     }
 
     render() {
+        let sendIcon = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Send/SVG/ic_fluent_send_24_regular.svg";
         return (
             <div id="new-comment-bar">
                 <div id="new-comment-container">
@@ -38,7 +40,7 @@ class NewComment extends Component {
                         <InputField type="text" placeholder="type your comment here" value={this.state.comment} onChange={this.handleChange}/>
                     </div>
                     <div id="new-comment-send">
-                        <Button submit={true} fullWidth={false} type={"secondary"} onClick={this.sendComment}>Send</Button>
+                        <Button submit={true} fullWidth={false} type={"secondary"} onClick={this.sendComment} iconLeft={<ChevronRight />}></Button>
                     </div>
                 </div>
             </div>

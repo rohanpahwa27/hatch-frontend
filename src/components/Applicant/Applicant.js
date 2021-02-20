@@ -14,7 +14,6 @@ import CommentSection from "./CommentSection/CommentSection"
 import api from "../../Api/api"
 
 import "./Applicant.css"
-import { colProperties } from "@fluentui/react";
 
 class Applicant extends Component {
     constructor() {
@@ -25,7 +24,7 @@ class Applicant extends Component {
             allApplicants: null,
             currApplicant: null,
             applicantLiked: null,
-            numApplicantsShowing: 1,
+            ids: null,
             currApplicantPreCall: window.location.search ? window.location.search.substring(1, window.location.search.length) : this.props.location.state.id
         }
 
@@ -34,27 +33,40 @@ class Applicant extends Component {
 
     componentDidMount = async () => {
         // TODO: HANDLE "bad" urls with fake search terms
+        // TODO: don't call applicant by ID API but instead index + have that info on hand (cache it)
         try {
+            const orgId = localStorage.getItem("orgID");
             const applicantID = this.state.currApplicantPreCall;
             const applicantResponse = await api.getApplicantById(applicantID);
             const applicantLike = await api.didMemberLikeApplicant(applicantID);
             const memberId = await api.getThisMember();
-
+            const applicants = await api.getApplicantsInOrg(orgId);
+            const ids = applicants.data.applicants.map(applicant => {
+                const applicantInfo = {
+                    id: applicant._id
+                }
+                return applicantInfo
+            });
             const applicantData = applicantResponse.data.applicant;
+    
             this.setState({
                 currApplicant: applicantData,
                 commentData: applicantData.comments,
                 applicantLiked: applicantLike.data.like,
-                memberId: memberId.data.member._id
+                memberId: memberId.data.member._id,
+                ids: ids
             });
         } catch (error) {
             
         }
     }
 
-    handleClick(event) {
+    handleClick() {
+        const id = this.state.ids[this.state.indexOf(this.state.currApplicantPreCall)]
         this.props.history.push({
-            pathname: '/applicant'
+            pathname: '/applicant',
+            search: id,
+            state: {id: id}
         })
     }
 

@@ -1,6 +1,6 @@
 #comments-grid-container {
     position: static;
-    width: 550px;
+    width: 620px;
     /* TODO: FIX to adjust based on comment size */
     height: 59px;
     left: 0px;
@@ -62,14 +62,15 @@
     font-style: normal;
     font-weight: bold;
     font-size: 13px;
-    line-height: 125%;
+    line-height: 150%;
 }
 
 .comment {
     padding: 0px 10px 10px 0px;
     font-style: normal;
     font-size: 13px;
-    line-height: 125%;
+    line-height: 135%;
+    color: #252A31;
 }
  
 .date {
@@ -93,9 +94,9 @@
     margin: 4px 0px;
 }
 
-.comment-heart-image {
-    width: 12px;
-    height: 12px;
+#comment-heart-image {
+    width: 20px;
+    height: 20px;
 }
 
 .comment-like {

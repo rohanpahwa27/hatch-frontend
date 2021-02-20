@@ -21,6 +21,7 @@
     border-bottom: 2px solid #E8EDF1;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(30px);
 }
 
 #applicant-action-container {

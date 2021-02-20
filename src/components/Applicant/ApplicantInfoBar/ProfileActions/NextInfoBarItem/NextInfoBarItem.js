@@ -4,10 +4,8 @@ import "./NextInfoBarItem.css"
 class NextInfoBarItem extends Component {
     render() {
         let next = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Arrow%20Right/SVG/ic_fluent_arrow_right_16_regular.svg"
-        // TODO: send numApplicants for this
-        // TODO: how do we want to determine order for next?? handling inactive applicants + prob want an array sent down of valid memberIDs?
         return (
-            <div id="next-info-bar-item" onClick={event => this.props.handleClick(event)}>
+            <div id="next-info-bar-item" onClick={this.props.handleClick}>
                 <img id="applicant-action-next-image" src={next} alt="Next icon" />
                 <span id="applicant-action-next-text">Next applicant</span>
             </div>

@@ -103,11 +103,12 @@ class Home extends Component {
     }
 
     handleClick(event, data) {
+
         this.props.history.push({
             pathname: '/applicant',
             // TODO: Edit if we want to get rid of the actual applicant ID and want smtg else?
             search: data, 
-            state: { id: data }
+            state: { id: data}
         })
     }
 

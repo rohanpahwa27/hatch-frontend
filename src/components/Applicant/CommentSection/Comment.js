@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import likesImage from "./heart.png"
 import "./Comment.css"
 import api from "../../../Api/api"
 
@@ -22,7 +21,8 @@ class Comment extends Component {
             const memberResponse = await api.getMemberById(commenterID);
             this.setState({
                 commenter: memberResponse.data.member,
-                likedComment: this.props.likes.includes(this.props.member) ^ this.state.likedComment            });
+                likedComment: this.props.likes.includes(this.props.member) ^ this.state.likedComment            
+            });
         } catch (error) {
             
         }
@@ -32,8 +32,10 @@ class Comment extends Component {
         this.setState({
             likedComment: !this.state.likedComment
         });
-        // await api.changeMemberLikeApplicant(this.props.applicant._id);
-        // TODO: ADD LIKES
+        console.log("hello")
+        const commentId = this.props.commentId
+        const response = await api.changeApplicantCommentLike(this.props.applicantId, {commentId});
+        console.log(response)
         this.componentDidMount();
     }
     
