@@ -1,17 +1,20 @@
 #comments-grid-container {
     position: static;
-    width: 550px;
+    width: 620px;
     /* TODO: FIX to adjust based on comment size */
     height: 59px;
     left: 0px;
 
     margin: 0px 0px 32px 0px;
+    display: flex;
+    flex-direction: row;
 }
 
 #comment-frame {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    justify-content: flex-start;
 
     /* position: absolute; */
     width: 550px;
@@ -51,9 +54,16 @@
     width: 446px;
     height: 59px;
 
-
     /* TODO, look into this and figure out why it's not */
     margin: -4px 30px; 
+}
+
+#comment-additional-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
 }
 
 .comment-name {
@@ -62,24 +72,23 @@
     font-style: normal;
     font-weight: bold;
     font-size: 13px;
-    line-height: 125%;
+    line-height: 150%;
 }
 
 .comment {
     padding: 0px 10px 10px 0px;
     font-style: normal;
     font-size: 13px;
-    line-height: 125%;
+    line-height: 135%;
+    color: #252A31;
 }
  
-.date {
-    grid-row: 2 / span 1;
-    grid-column: 3/ span 1;
-
-    font-size: 13px;
+#date {
+    font-size: 11px;
     color: #5F738C;
-    align-items: flex-start;
-    justify-items: flex-start;
+
+    position: static;
+    margin: 0px 24px;
 }
 
 #like {
@@ -93,12 +102,22 @@
     margin: 4px 0px;
 }
 
-.comment-heart-image {
-    width: 12px;
-    height: 12px;
+#comment-heart-image {
+    width: 20px;
+    height: 20px;
 }
 
 .comment-like {
     padding: 0px 5px 0px 5px;
     font-size: 11px;
+}
+
+.comment-date {
+    font-size: 11px;
+    color: #5F738C;
+}
+
+#comment-delete {
+    left: 100;
+    /* position: fixed; */
 }

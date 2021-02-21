@@ -1,46 +1,45 @@
 #comment-section-grid-container {
-    grid-row: 2 / span 1;
     grid-column: 1 / span 1;
 
-    width: 600px;
-    /* TODO: set limit based on inspect case */
+    position: relative;
+    width: 656px;
     height: 556px;
-    padding-left: 31px;
-    padding-top: 24px;
+    top: 32px;
+    left: 34px;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-
-    overflow-y: scroll;
 }
 
 #no-comments-container {
-    position: absolute;
+    grid-column: 1 / span 1;
+
+    position: relative;
+    /* min-width: 60px;
     width: 283px;
-    height: 319px;
-    left: 391px;
-    top: 200px;
+    height: 300px; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .no-comments {
-    position: absolute;
-    right: 1.06%;
-    bottom: 12.23%;
-    left: 0%;
-    top: 0%;
-
+    position: relative;
+    min-width: 60px;
     width: 280px;
     height: 280px;
 }
 
 #no-comments-text {
-    position: absolute;
-    left: 4.59%;
+    position: relative;
+    /* left: 4.59%;
     top: 87.77%;
     bottom: 5.96%;
-    right: 0%;
+    right: 0%; */
 
     font-style: normal;
     font-weight: normal;

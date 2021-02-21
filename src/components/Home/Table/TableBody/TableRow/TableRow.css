@@ -20,13 +20,14 @@
     align-items: center;
 }
 
-.name-div {
+.name-div-home {
     padding-left: 3%;
     width: 100%;
 }
 
 .applicant-image {
     height: 25px;
+    width: 25px;
     border-radius: 50%;
 }
 
