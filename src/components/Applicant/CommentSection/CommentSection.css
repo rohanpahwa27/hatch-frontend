@@ -2,7 +2,7 @@
     grid-column: 1 / span 1;
 
     position: relative;
-    width: 620px;
+    width: 656px;
     height: 556px;
     top: 32px;
     left: 34px;
@@ -14,13 +14,12 @@
 }
 
 #no-comments-container {
-    grid-row: 2 / span 1;
     grid-column: 1 / span 1;
 
     position: relative;
-    min-width: 60px;
+    /* min-width: 60px;
     width: 283px;
-    height: 300px;
+    height: 300px; */
 
     display: flex;
     flex-direction: column;
@@ -37,10 +36,10 @@
 
 #no-comments-text {
     position: relative;
-    left: 4.59%;
+    /* left: 4.59%;
     top: 87.77%;
     bottom: 5.96%;
-    right: 0%;
+    right: 0%; */
 
     font-style: normal;
     font-weight: normal;

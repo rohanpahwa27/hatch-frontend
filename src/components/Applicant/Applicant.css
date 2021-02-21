@@ -1,6 +1,6 @@
 #applicant-grid-container {
     display: grid;
-    grid-template-rows: 96px 70% 81px;
+    grid-template-rows: 96px minmax(60px, 75%) 81px;
 
     width: 100%;
     height: 99vh;
@@ -22,7 +22,6 @@
     overflow-y: scroll;
     
     display: grid;
-    align-items: flex-start;
     grid-template-columns: minmax(656px, 70%) 30%;
 }
 

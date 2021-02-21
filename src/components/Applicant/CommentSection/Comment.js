@@ -32,7 +32,6 @@ class Comment extends Component {
         this.setState({
             likedComment: !this.state.likedComment
         });
-        console.log("hello")
         const commentId = this.props.commentId
         const response = await api.changeApplicantCommentLike(this.props.applicantId, {commentId});
         console.log(response)
@@ -51,6 +50,7 @@ class Comment extends Component {
         let grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
         let filledHeart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_filled.svg"
         let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
+        let trash = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Delete/SVG/ic_fluent_delete_16_regular.svg"
 
         const beforeCurrLikeStatus = this.props.likes.includes(this.props.member) ? this.props.likes.length - 1 : this.props.likes.length
         const numLikes = this.state.likedComment ? beforeCurrLikeStatus + 1 : beforeCurrLikeStatus
@@ -66,19 +66,23 @@ class Comment extends Component {
                             <span className="comment-name">{this.state.commenter.firstName} {this.state.commenter.lastName}</span>
                             <span className="comment">{this.props.comment}</span>
                         </div>
+                        <div id="comment-additional-info">
+                            <div id ="like">
+                                {this.state.likedComment ? <img id="comment-heart-image" src={filledHeart} alt="Like icon" onClick={this.handleLike}/> :
+                                <img id="comment-heart-image" src={heart} alt="Heart icon" onClick={this.handleLike}/>}
+                                <span className="comment-like">{numLikes}</span>
+                            </div>
+                            <div id ="date">
+                                <span className="comment-date">{this.props.date.substr(4, 6)}</span>
+                            </div>
+                        </div>
                         {/* TODO, account for one line comments + comments that are more than 2 lines with see more */}
-                        <div id ="like">
-                            {this.state.likedComment ? <img id="comment-heart-image" src={filledHeart} alt="Like icon" onClick={this.handleLike}/> :
-                            <img id="comment-heart-image" src={heart} alt="Heart icon" onClick={this.handleLike}/>}
-                            <span className="comment-like">{numLikes}</span>
-                        </div>
-                        {/* TODO ACCOUNT FOR DATE */}
                     </div>
-                    {this.state.isHoveringOver && (
+                    {/* {this.state.isHoveringOver && ( */}
                         <div id="comment-delete">
-                            <span id="comment-delete" onClick={this.deleteComment}><Close/></span>
+                            <img id="comment-delete" onClick={this.deleteComment} img id="comment-delete" src={trash} alt="Delete icon"/>
                         </div>
-                    )}
+                    {/* )} */}
                 </div>
             </div> : null
         )

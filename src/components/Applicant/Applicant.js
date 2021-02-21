@@ -45,7 +45,6 @@ class Applicant extends Component {
                 const orgId = localStorage.getItem("orgID");
                 const memberId = await api.getThisMember();
 
-                // const applicantResponse = await api.getApplicantById(applicantID);
                 const applicantLike = await api.didMemberLikeApplicant(applicantId);
                 const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
                 const applicantData = allApplicantsResponse.data.applicants.map(applicant => {
@@ -97,7 +96,7 @@ class Applicant extends Component {
         }
     }
 
-    handleNext() {
+    handleNext = () => {
         // TODO: Fix slight bug where the first next click doesn't work
         const currIndex = this.state.allApplicantIds.findIndex(id => id === this.state.currApplicantId)
         if (currIndex === -1) {
@@ -123,30 +122,30 @@ class Applicant extends Component {
         return (
         (this.state.currApplicantPreCall) ?
             (this.state.currApplicantData) ?
-            <div id="page-grid-container">
-                <Logo />
-                <SideNavBar />
-                <div id="applicant-grid-container">
-                    <div id="info-container">
-                        <div id="applicantinfobar">
-                            <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.likedApplicant} originallyLiked={this.state.currApplicantLikedByMember}/>
+                <div id="page-grid-container">
+                    <Logo />
+                    <SideNavBar />
+                    <div id="applicant-grid-container">
+                        <div id="info-container">
+                            <div id="applicantinfobar">
+                                <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.likedApplicant} originallyLiked={this.state.currApplicantLikedByMember}/>
+                            </div>
+                            <div id="applicant-action-container">
+                                <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.likedApplicant} handleLike={this.handleLike}/>
+                                <NextInfoBarItem handleNext={this.handleNext}/>
+                            </div>
                         </div>
-                        <div id="applicant-action-container">
-                            <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.likedApplicant} handleLike={this.handleLike}/>
-                            <NextInfoBarItem handleNext={this.handleNext}/>
+                        <div id="content-container">
+                            <CommentSection applicant = {this.state.currApplicantData} comments = {this.state.currApplicantComments} member={this.state.currMemberId}/>
+                            <div id="applicant-side-features-container">
+                                <UploadPhoto applicant = {this.state.currApplicantData}/>
+                                {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
+                                <ApplicantInfoDrop applicant = {this.state.currApplicantData}/>
+                            </div>
                         </div>
+                        <NewComment applicantID={this.state.currApplicantId} />
                     </div>
-                    <div id="content-container">
-                        <CommentSection applicant = {this.state.currApplicantData} comments = {this.state.currApplicantComments} member={this.state.currMemberId}/>
-                        <div id="applicant-side-features-container">
-                            <UploadPhoto applicant = {this.state.currApplicantData}/>
-                            {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
-                            <ApplicantInfoDrop applicant = {this.state.currApplicantData}/>
-                        </div>
-                    </div>
-                    <NewComment applicant={this.state.currApplicantData} />
-                </div>
-            </div> : <div id="loading-screen"><Loading/></div>
+                </div> : <div id="loading-screen"><Loading/></div>
             : <span>Page does not exist {this.state.currApplicantPreCall}</span> // TODO: Replace this eventually...
         )
       }

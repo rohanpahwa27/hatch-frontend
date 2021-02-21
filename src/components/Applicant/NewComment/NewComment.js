@@ -17,9 +17,10 @@ class NewComment extends Component {
     }
 
     sendComment = async () => {
-        const applicantId = this.props.applicant._id
+        const applicantId = this.props.applicantID
         const text = this.state.comment
-        await api.addComment(applicantId, {text})
+        const date = new Date().toString();
+        await api.addComment(applicantId, {text, date})
         this.setState({
             comment: ""
         });

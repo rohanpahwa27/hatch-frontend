@@ -12,6 +12,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    justify-content: flex-start;
 
     /* position: absolute; */
     width: 550px;
@@ -51,9 +52,15 @@
     width: 446px;
     height: 59px;
 
-
     /* TODO, look into this and figure out why it's not */
     margin: -4px 30px; 
+}
+
+#comment-additional-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .comment-name {
@@ -73,14 +80,12 @@
     color: #252A31;
 }
  
-.date {
-    grid-row: 2 / span 1;
-    grid-column: 3/ span 1;
-
-    font-size: 13px;
+#date {
+    font-size: 11px;
     color: #5F738C;
-    align-items: flex-start;
-    justify-items: flex-start;
+
+    position: static;
+    margin: 0px 24px;
 }
 
 #like {
@@ -102,4 +107,9 @@
 .comment-like {
     padding: 0px 5px 0px 5px;
     font-size: 11px;
+}
+
+.comment-date {
+    font-size: 11px;
+    color: #5F738C;
 }
