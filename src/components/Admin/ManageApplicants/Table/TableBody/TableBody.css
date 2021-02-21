@@ -1,18 +1,13 @@
-#table-body-manage-grid-container {
-    /* Grid item properties*/
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
-
-/* Grid container proprties */
+#applicant-table-body-grid-container {
+    /* Grid container proprties */
     display: grid;
     grid-auto-rows: 75px;
-    grid-template-columns: 100%;
-
-    overflow-x: scroll;
-    overflow-y: scroll;
 
     height: 100%;
     width: 100%;
+
+    overflow-x: scroll;
+    overflow-y: scroll;
 
     justify-items: center;
     align-items: center;

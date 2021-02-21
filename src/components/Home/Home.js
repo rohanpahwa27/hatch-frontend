@@ -1,9 +1,9 @@
-import React, { Component } from "react"
-import {Route, withRouter} from 'react-router-dom'
-import "./Home.css"
+import React, { Component } from "react";
+import { Route, withRouter } from "react-router-dom";
+import "./Home.css";
 
-import Table from "./Table/Table.js"
-import Logo from "./Logo/Logo.js";
+import Table from "./Table/Table.js";
+import Logo from "../Logo/Logo.js";
 import SideNavBar from "../SideNavBar/SideNavBar.js";
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
@@ -34,10 +34,10 @@ class Home extends Component {
         this.handleFilter = this.handleFilter.bind(this)
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const orgId = localStorage.getItem("orgID");
-        api.getApplicantsInOrg(orgId)
-            .then(res => {
+        await api.getApplicantsInOrg(orgId)
+            .then(async res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
                         id: applicant._id,
@@ -52,8 +52,20 @@ class Home extends Component {
                         organization: applicant.organization,
                         imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
                     }
+                    
                     return applicantInfo
                 })
+
+                for (const applicant of applicants) {
+                    await api.didMemberLikeApplicant(applicant.id)
+                    .then(res => {
+                        applicant.didMemberLikeApplicant = res.data.like
+                    })
+                    .catch(err => {
+                        console.log("Call to didMemberLikeApplicant failed")
+                        console.log(err)
+                    })
+                }
 
                 this.setState({
                     allApplicants: applicants,
@@ -107,36 +119,39 @@ class Home extends Component {
         this.props.history.push({
             pathname: '/applicant',
             // TODO: Edit if we want to get rid of the actual applicant ID and want smtg else?
-            search: data, 
-            state: { id: data}
+            search: data,
+            state: { id: data }
         })
     }
 
     handleSearch(event) {
-        const queryText = event.target.value
+        const queryText = event.target.value;
+        const { allApplicants, filters } = this.state;
 
-        const filteredApplicants = this.state.allApplicants.filter(applicant => {
+        const filteredApplicants = allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName
             return applicantFullName.toLowerCase().indexOf(queryText) > -1;
         })
 
-        this.setState({
-            tableData: filteredApplicants,
-            query: queryText,
-            numApplicantsShowing: filteredApplicants.length
+        const updatedApplicants = filteredApplicants.filter(applicant => {
+            const { status } = applicant;
+            return filters.has(status);
         })
 
-        // console.log(this.state.tableData.length)
+        this.setState({
+            tableData: updatedApplicants,
+            query: queryText,
+            numApplicantsShowing: updatedApplicants.length
+        })
 
-        // console.log(filteredApplicants.length)
         if (this.state.sortBy === "name") {
-            this.sortByName(filteredApplicants, this.state.sortDirection)
+            this.sortByName(updatedApplicants, this.state.sortDirection)
         }
         else if (this.state.sortBy === "likes") {
-            this.sortByLikes(filteredApplicants, this.state.sortDirection)
+            this.sortByLikes(updatedApplicants, this.state.sortDirection)
         }
         else if (this.state.sortBy === "comments") {
-            this.sortByComments(filteredApplicants, this.state.sortDirection)
+            this.sortByComments(updatedApplicants, this.state.sortDirection)
         }
     }
 
@@ -338,8 +353,8 @@ class Home extends Component {
     render() {
         return (
             <div id="page-grid-container">
-            <Logo />
-            <SideNavBar />
+                <Logo />
+                <SideNavBar />
                 <div id="home-grid-container">
                     <SearchAndFilter
                         query={this.state.query} handleSearch={this.handleSearch}
@@ -348,7 +363,7 @@ class Home extends Component {
 
                     <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={this.state.allApplicants.length} />
                     {/* Pass handleSort function down all the way to TableHeader */}
-                    <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick}/>
+                    <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick} />
                 </div>
             </div>
         )

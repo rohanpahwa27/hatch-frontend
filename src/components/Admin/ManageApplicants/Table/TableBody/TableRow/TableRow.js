@@ -38,6 +38,12 @@ class TableRow extends Component {
             </td>
         );
 
+        const adjustSpace = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">&nbsp;</span>
+            </td>
+        );
+
         const likes = (
             <td className="manage-table-data-cell">
                 <span className="manage-row-item">{this.props.likes}</span>
@@ -50,6 +56,18 @@ class TableRow extends Component {
             </td>
         );
 
+        const dateAdded = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">Feb 2, 2021</span>
+            </td>
+        );
+
+        const dateModified = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">Feb 2, 2021</span>
+            </td>
+        );
+
         // const tags = (
         //     <td>
         //         <span className="manage-row-item">{this.props.tags}</span>
@@ -58,8 +76,11 @@ class TableRow extends Component {
 
         components.push(select);
         components.push(name);
+        components.push(adjustSpace);
         components.push(likes);
         components.push(comments);
+        components.push(dateAdded);
+        components.push(dateModified);
 
         return (
             <tr id="manage-table-row-grid-container">
