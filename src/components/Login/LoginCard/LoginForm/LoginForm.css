@@ -6,6 +6,13 @@
     width: 100%;
 }
 
+.login-label{
+    font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 20px;
+}
+
 #sign-up-links {
     display: flex;
 }
