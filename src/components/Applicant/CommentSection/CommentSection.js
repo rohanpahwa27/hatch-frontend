@@ -29,7 +29,8 @@ class CommentSection extends Component {
                 commenterID={comments.member}
                 comment={comments.text}
                 commentId={comments._id} 
-                date={comments.date ? comments.date : ""}/>
+                date={comments.date ? comments.date : ""}
+                handleDelete={this.props.handleDelete}/>
             return comment
         })
                 

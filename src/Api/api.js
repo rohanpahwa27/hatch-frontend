@@ -35,7 +35,7 @@ const getApplicantsInOrg = () => api.get(`/applicants/inOrg`)
 const getApplicantById = applicantId => api.get(`/applicants/byId/${applicantId}`)
 const createApplicant = payload => api.post(`/applicants`, payload)
 const updateApplicant = (applicantId, payload) => api.patch(`/applicants//${applicantId}`, payload)
-const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}`)
+const deleteApplicant = applicantId => api.delete(`/applicants/${applicantId}/${commentId}`)
 
 // Upload image
 const uploadApplicantImage = (applicantId, payload) => api.post(`/upload-image/applicant/${applicantId}`, payload)
@@ -48,7 +48,7 @@ const resetPassword = (token, payload) => api.post(`reset-password/${token}`, pa
 const getComments = applicantId => api.get(`/comments/${applicantId}`)
 const addComment = (applicantId, payload) => api.post(`/comments/${applicantId}`, payload)
 const changeApplicantCommentLike = (applicantId, payload) => api.post(`/comments/like/${applicantId}`, payload)
-const deleteComment = (applicantId) => api.delete(`/comments/${applicantId}`)
+const deleteComment = (applicantId, commentId) => api.delete(`/comments/${applicantId}/${commentId}`)
 
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);

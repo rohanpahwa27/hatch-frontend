@@ -2,8 +2,8 @@ import React, { Component } from "react"
 import {withRouter} from 'react-router-dom'
 import Loading from "@kiwicom/orbit-components/lib/Loading";
 
+import Logo from "../Logo/Logo"
 import SideNavBar from "../SideNavBar/SideNavBar"
-import Logo from "../Page/Logo/Logo.js";
 import LikeInfoBarItem from "./ProfileActions/LikeInfoBarItem/LikeInfoBarItem.js"
 import NextInfoBarItem from "./ProfileActions/NextInfoBarItem/NextInfoBarItem.js"
 import ApplicantInfo from "./ApplicantInfo/ApplicantInfo.js"
@@ -29,11 +29,13 @@ class Applicant extends Component {
             allApplicants: null,
             allApplicantIds: null,
             likedApplicant: false, // TODO: old changes from applicant info bar
-            liveLikeStaus: false
+            liveLikeStaus: false,
+            commentChange: true
         }
 
         this.handleNext = this.handleNext.bind(this)
         this.handleLike = this.handleLike.bind(this)
+        this.handleNewComment = this.handleNewComment.bind(this)
     }
 
     componentDidMount = async () => {
@@ -80,6 +82,12 @@ class Applicant extends Component {
                     allApplicantIds: applicantIds,
                     likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
                 });
+            } else if (this.state.commentChange) {
+                const commentsResponse = await api.getComments(this.state.currApplicantId);
+                this.setState({
+                    currApplicantComments: commentsResponse.data.comments,
+                    commentChange: false
+                });
             } else {
                 // Applicant page called by next, need to only update the currApplicantInfo
                 console.log(this.state.currApplicantId)
@@ -117,6 +125,21 @@ class Applicant extends Component {
         await api.changeMemberLikeApplicant(this.props.applicant._id);
         this.componentDidMount();
     }
+    
+    handleNewComment = () => {
+        this.setState({
+            commentChange: true
+        });
+        this.componentDidMount()
+    }
+
+    handleDelete = () => {
+        console.log("helllo")
+        this.setState({
+            commentChange: true
+        });
+        this.componentDidMount()
+    }
 
     render() {
         return (
@@ -128,7 +151,7 @@ class Applicant extends Component {
                     <div id="applicant-grid-container">
                         <div id="info-container">
                             <div id="applicantinfobar">
-                                <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.likedApplicant} originallyLiked={this.state.currApplicantLikedByMember}/>
+                                <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.likedApplicant} originallyLiked={this.state.currApplicantLikedByMember} comments = {this.state.currApplicantComments}/>
                             </div>
                             <div id="applicant-action-container">
                                 <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.likedApplicant} handleLike={this.handleLike}/>
@@ -136,14 +159,14 @@ class Applicant extends Component {
                             </div>
                         </div>
                         <div id="content-container">
-                            <CommentSection applicant = {this.state.currApplicantData} comments = {this.state.currApplicantComments} member={this.state.currMemberId}/>
+                            <CommentSection applicant = {this.state.currApplicantData} comments = {this.state.currApplicantComments} member={this.state.currMemberId} handleDelete={this.handleDelete}/>
                             <div id="applicant-side-features-container">
                                 <UploadPhoto applicant = {this.state.currApplicantData}/>
                                 {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
                                 <ApplicantInfoDrop applicant = {this.state.currApplicantData}/>
                             </div>
                         </div>
-                        <NewComment applicantID={this.state.currApplicantId} />
+                        <NewComment applicantID={this.state.currApplicantId} handleNewComment={this.handleNewComment}/>
                     </div>
                 </div> : <div id="loading-screen"><Loading/></div>
             : <span>Page does not exist {this.state.currApplicantPreCall}</span> // TODO: Replace this eventually...

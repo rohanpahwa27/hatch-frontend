@@ -2,27 +2,29 @@ import React, { Component } from "react"
 import "./Comment.css"
 import api from "../../../Api/api"
 
-import Close from "@kiwicom/orbit-components/lib/icons/Close"
-
 class Comment extends Component {
     constructor() {
         super()
         this.state = {
             commenter: null,
-            isHoveringOver: false,
             likedComment: false,
-            numLikes: ""
+            numLikes: "",
+            hidden: false,
+            deleted: false,
+            isHovering: false
         }
     }
 
     componentDidMount = async () => {
         try {
-            const commenterID = this.props.commenterID;
-            const memberResponse = await api.getMemberById(commenterID);
-            this.setState({
-                commenter: memberResponse.data.member,
-                likedComment: this.props.likes.includes(this.props.member) ^ this.state.likedComment            
-            });
+            if (!this.state.hidden) {
+                const commenterID = this.props.commenterID;
+                const memberResponse = await api.getMemberById(commenterID);
+                this.setState({
+                    commenter: memberResponse.data.member,
+                    likedComment: this.props.likes.includes(this.props.member) ^ this.state.likedComment            
+                });
+            }
         } catch (error) {
             
         }
@@ -39,11 +41,26 @@ class Comment extends Component {
     }
     
     deleteComment = async () => {
+        this.setState({
+            hidden: true
+        });
+        this.componentDidMount();
         const applicantId = this.props.applicantId
         const commentId = this.props.commentId
-        console.log("Delete comment" + applicantId + commentId);
-        // await api.deleteComment(applicantId, commentId)
-        // TODO: REMOVE COMMENT ON FRONT END
+        await api.deleteComment(applicantId, commentId)
+        this.setState({
+            deleted: true
+        });
+        this.componentDidMount();
+        this.props.handleDelete();
+    }
+
+    handleMouseEnter = () => {
+        this.setState({isHovering: true});
+    }
+
+    handleMouseLeave = () => {
+        this.setState({isHovering: false});
     }
 
     render() {
@@ -55,8 +72,8 @@ class Comment extends Component {
         const beforeCurrLikeStatus = this.props.likes.includes(this.props.member) ? this.props.likes.length - 1 : this.props.likes.length
         const numLikes = this.state.likedComment ? beforeCurrLikeStatus + 1 : beforeCurrLikeStatus
         return (
-            (this.state.commenter) ?
-            <div id="comments-grid-container">
+            (this.state.commenter && !this.state.deleted && !this.state.hidden) ?
+            <div id="comments-grid-container" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <div id="comment-frame">
                     <div id="image">
                         <img className="comment-user-image" src={this.state.commenter.imageUrl ? this.state.commenter.imageUrl : grayCircleSrc} alt="Headshot" />
@@ -78,11 +95,11 @@ class Comment extends Component {
                         </div>
                         {/* TODO, account for one line comments + comments that are more than 2 lines with see more */}
                     </div>
-                    {/* {this.state.isHoveringOver && ( */}
-                        <div id="comment-delete">
-                            <img id="comment-delete" onClick={this.deleteComment} img id="comment-delete" src={trash} alt="Delete icon"/>
-                        </div>
-                    {/* )} */}
+                    <div id="comment-delete">
+                        {this.state.isHovering &&
+                            <img id="comment-delete" onClick={this.deleteComment} src={trash} alt="Delete icon"/> 
+                        }
+                    </div>
                 </div>
             </div> : null
         )

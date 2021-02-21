@@ -24,6 +24,7 @@ class NewComment extends Component {
         this.setState({
             comment: ""
         });
+        this.props.handleNewComment()
     };
 
     handleChange = e => {
