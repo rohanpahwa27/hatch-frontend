@@ -18,12 +18,6 @@ class TableRow extends Component {
             </td>
         )
 
-        // space between name and likes
-        const emptyTd = (
-            <td className="empty-td">
-            </td>
-        )
-
         const likes = (
             <td className="likes-div-home table-data-cell" key="likes">
                 <img className="heart-icon" src={heart} alt="Heart icon" />
@@ -39,7 +33,6 @@ class TableRow extends Component {
         )
 
         components.push(name)
-        components.push(emptyTd)
         components.push(likes)
         components.push(comments)
 
