@@ -3,7 +3,7 @@ import "./ImportApplicants.css";
 import { Link } from "react-router-dom";
 import Import from "./Import/Import.js";
 
-import importImage from "./Icons/import.png";
+import importImage from "./Icons/import1.png";
 
 class ImportApplicants extends Component {
   constructor() {
@@ -26,6 +26,7 @@ class ImportApplicants extends Component {
           this.state.onImportPage ?
             <Import
               toggleImportPage={this.toggleImportPage}
+              reloadPage={this.props.reloadPage}
             />
             :
             <div id="import-home-grid-container">

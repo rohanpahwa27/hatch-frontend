@@ -38,12 +38,6 @@ class TableRow extends Component {
             </td>
         );
 
-        const adjustSpace = (
-            <td className="manage-table-data-cell">
-                <span className="manage-row-item">&nbsp;</span>
-            </td>
-        );
-
         const likes = (
             <td className="manage-table-data-cell">
                 <span className="manage-row-item">{this.props.likes}</span>
@@ -76,7 +70,6 @@ class TableRow extends Component {
 
         components.push(select);
         components.push(name);
-        components.push(adjustSpace);
         components.push(likes);
         components.push(comments);
         components.push(dateAdded);

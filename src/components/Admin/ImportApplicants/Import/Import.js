@@ -27,6 +27,7 @@ class Import extends Component {
     const formData = new FormData();
     formData.append("data", this.state.selectedFile);
     await api.uploadApplicantInfo(formData);
+    this.props.reloadPage();
   };
 
   downloadTemplate = async (event) => {

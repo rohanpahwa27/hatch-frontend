@@ -41,6 +41,7 @@ class ManageApplicants extends Component {
         this.updateApplicants = this.updateApplicants.bind(this);
         this.deleteApplicants = this.deleteApplicants.bind(this);
         this.toggleShowImport = this.toggleShowImport.bind(this);
+        this.reloadPage = this.reloadPage.bind(this);
     }
 
     componentDidMount = async () => {
@@ -351,15 +352,25 @@ class ManageApplicants extends Component {
             // TODO: Edit if we want to get rid of the actual applicant ID and want smtg else?
             search: applicantId,
             state: { id: applicantId }
-        })
+        });
     }
 
     updateApplicants() {
-        this.setState({ selected: new Set() })
+        this.setState({ selected: new Set() });
     }
 
-    deleteApplicants() {
-        this.setState({ selected: new Set() })
+    deleteApplicants = async () => {
+        const resp = await api.removeManyMembers({members: Array.from(this.state.selected)})
+        memberData = resp.data.allMembers
+        const userID = resp.data.user._id
+        const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
+        if (index > -1) memberData.splice(index, 1);
+        this.setState({
+            tableData: memberData,
+            totalMembers: memberData.length
+        });
+        // this.setState({selected: new Set()})
+        this.setState({ selected: new Set() });        
     }
 
     toggleShowImport() {
@@ -367,6 +378,10 @@ class ManageApplicants extends Component {
         this.setState({
             showImportPage: !this.state.showImportPage            
         });
+    }
+
+    reloadPage() {
+        this.props.history.go(0);
     }
 
     render() {
@@ -382,7 +397,7 @@ class ManageApplicants extends Component {
                         <div>
                             {/* this.state.allApplicants.length === 0 */}
                             {this.state.showImportPage == true ?
-                                <ImportApplicants />
+                                <ImportApplicants reloadPage={this.reloadPage}/>
                                 :
                                 (
                                     <div id="manage-applicant-grid-container">
