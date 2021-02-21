@@ -13,8 +13,6 @@ and a grid container for table-body-grid-container and table-header-grid-contain
 
     /* Grid container properties */
     display: grid;
-    grid-template-rows: 40px auto;
-    /* grid-template-rows: 5% 95%; */
-    /* grid-template-columns: 1fr; */
-    /* overflow: hidden; */
+    grid-template-rows: 28px 1fr;
+    grid-template-columns: 1fr;
 }
