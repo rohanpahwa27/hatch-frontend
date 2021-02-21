@@ -28,7 +28,7 @@ class ApplicantInfo extends Component {
                         </div>
                         <div id="applicant-comments-container">
                             <img id="applicant-chat-image" src={chat} alt="Chat icon" />
-                            <span id="applicant-comment-text">{applicant ? applicant.comments.length : placeholder} comment{applicant.likes.length !== 1 ? "s" : ""} </span>
+                            <span id="applicant-comment-text">{applicant ? this.props.comments.length : placeholder} comment{this.props.comments.length !== 1 ? "s" : ""} </span>
                         </div>
                     </div>
                 </div>
