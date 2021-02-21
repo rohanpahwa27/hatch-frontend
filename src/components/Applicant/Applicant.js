@@ -30,7 +30,7 @@ class Applicant extends Component {
             allApplicantIds: null,
             likedApplicant: false, // TODO: old changes from applicant info bar
             liveLikeStaus: false,
-            commentChange: true
+            commentChange: false
         }
 
         this.handleNext = this.handleNext.bind(this)
@@ -39,68 +39,63 @@ class Applicant extends Component {
     }
 
     componentDidMount = async () => {
-        try {
-            // TODO: if (set timer for a certain time because otherwise we may want to refresh instead of using old data)
-            if (!this.state.allApplicants) {
-                // Applicant page called by Home / direct URL and not next
-                const applicantId = this.state.currApplicantPreCall;
-                const orgId = localStorage.getItem("orgID");
-                const memberId = await api.getThisMember();
+        // TODO: if (set timer for a certain time because otherwise we may want to refresh instead of using old data)
+        if (!this.state.allApplicants) {
+            // Applicant page called by Home / direct URL and not next
+            const applicantId = this.state.currApplicantPreCall;
+            const orgId = localStorage.getItem("orgID");
+            const memberId = await api.getThisMember();
 
-                const applicantLike = await api.didMemberLikeApplicant(applicantId);
-                const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
-                const applicantData = allApplicantsResponse.data.applicants.map(applicant => {
-                    const applicantInfo = {
-                        id: applicant._id,
-                        firstName: applicant.firstName,
-                        lastName: applicant.lastName,
-                        email: applicant.email,
-                        comments: applicant.comments,
-                        likes: applicant.likes,
-                        extraFields: applicant.extraFields,
-                        status: applicant.status,
-                        recruitingCycle: applicant.recruitingCycle,
-                        organization: applicant.organization,
-                        imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
-                    }
-                    return applicantInfo
-                });
-
-                const applicantIds = applicantData.map(x => x.id);
-                const currApplicantData = applicantData.find(x => x.id == applicantId);
-                if (currApplicantData == null) {
-                    // TODO: HANDLE "bad" urls with fake search terms, CHECK for valid ids aka ones that are in applicantData
+            const applicantLike = await api.didMemberLikeApplicant(applicantId);
+            const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
+            const applicantData = allApplicantsResponse.data.applicants.map(applicant => {
+                const applicantInfo = {
+                    id: applicant._id,
+                    firstName: applicant.firstName,
+                    lastName: applicant.lastName,
+                    email: applicant.email,
+                    comments: applicant.comments,
+                    likes: applicant.likes,
+                    extraFields: applicant.extraFields,
+                    status: applicant.status,
+                    recruitingCycle: applicant.recruitingCycle,
+                    organization: applicant.organization,
+                    imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
                 }
-        
-                this.setState({
-                    currMemberId: memberId.data.member._id,
-                    currApplicantId: applicantId,
-                    currApplicantLikedByMember: applicantLike.data.like,
-                    currApplicantData: currApplicantData,
-                    currApplicantComments: currApplicantData.comments,
-                    allApplicants: applicantData,
-                    allApplicantIds: applicantIds,
-                    likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
-                });
-            } else if (this.state.commentChange) {
-                const commentsResponse = await api.getComments(this.state.currApplicantId);
-                this.setState({
-                    currApplicantComments: commentsResponse.data.comments,
-                    commentChange: false
-                });
-            } else {
-                // Applicant page called by next, need to only update the currApplicantInfo
-                console.log(this.state.currApplicantId)
-                const currApplicantData = this.state.allApplicants.find(x => x.id == this.state.currApplicantId);
-                const applicantLike = await api.didMemberLikeApplicant(this.state.currApplicantId);
-                this.setState({
-                    currApplicantLikedByMember: applicantLike.data.like,
-                    currApplicantComments: currApplicantData.comments,
-                    currApplicantData: currApplicantData
-                });
+                return applicantInfo
+            });
+
+            const applicantIds = applicantData.map(x => x.id);
+            const currApplicantData = applicantData.find(x => x.id == applicantId);
+            if (currApplicantData == null) {
+                // TODO: HANDLE "bad" urls with fake search terms, CHECK for valid ids aka ones that are in applicantData
             }
-        } catch (error) {
-            
+    
+            this.setState({
+                currMemberId: memberId.data.member._id,
+                currApplicantId: applicantId,
+                currApplicantLikedByMember: applicantLike.data.like,
+                currApplicantData: currApplicantData,
+                currApplicantComments: currApplicantData.comments,
+                allApplicants: applicantData,
+                allApplicantIds: applicantIds,
+                likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
+            });
+        } else if (this.state.commentChange) {
+            const commentsResponse = await api.getComments(this.state.currApplicantId);
+            this.setState({
+                currApplicantComments: commentsResponse.data.comments,
+                commentChange: false
+            });
+        } else {
+            // Applicant page called by next, need to only update the currApplicantInfo
+            const currApplicantData = this.state.allApplicants.find(x => x.id == this.state.currApplicantId);
+            const applicantLike = await api.didMemberLikeApplicant(this.state.currApplicantId);
+            this.setState({
+                currApplicantLikedByMember: applicantLike.data.like,
+                currApplicantComments: currApplicantData.comments,
+                currApplicantData: currApplicantData
+            });
         }
     }
 
@@ -113,8 +108,7 @@ class Applicant extends Component {
         }
         this.setState({
             currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
-        });
-        this.componentDidMount()
+        }, () => {this.componentDidMount()});
     }
 
     handleLike = async () => {
@@ -134,7 +128,6 @@ class Applicant extends Component {
     }
 
     handleDelete = () => {
-        console.log("helllo")
         this.setState({
             commentChange: true
         });

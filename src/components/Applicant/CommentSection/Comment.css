@@ -6,6 +6,8 @@
     left: 0px;
 
     margin: 0px 0px 32px 0px;
+    display: flex;
+    flex-direction: row;
 }
 
 #comment-frame {
@@ -61,6 +63,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    bottom: 0;
 }
 
 .comment-name {
@@ -112,4 +115,9 @@
 .comment-date {
     font-size: 11px;
     color: #5F738C;
+}
+
+#comment-delete {
+    left: 100;
+    /* position: fixed; */
 }

@@ -25,6 +25,7 @@ class CommentSection extends Component {
             const comment = <Comment 
                 key={index}
                 applicantId={this.props.applicant.id}
+                currMember={this.props.member}
                 likes={comments.likes}
                 commenterID={comments.member}
                 comment={comments.text}

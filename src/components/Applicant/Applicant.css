@@ -18,8 +18,7 @@
 
 #content-container {
     grid-row: 2 / span 1;
-
-    overflow-y: scroll;
+    overflow-y: auto;
     
     display: grid;
     grid-template-columns: minmax(656px, 70%) 30%;

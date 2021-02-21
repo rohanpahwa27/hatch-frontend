@@ -22,7 +22,7 @@ class Comment extends Component {
                 const memberResponse = await api.getMemberById(commenterID);
                 this.setState({
                     commenter: memberResponse.data.member,
-                    likedComment: this.props.likes.includes(this.props.member) ^ this.state.likedComment            
+                    likedComment: this.props.likes.includes(this.props.currMember) ^ this.state.likedComment            
                 });
             }
         } catch (error) {
@@ -35,8 +35,7 @@ class Comment extends Component {
             likedComment: !this.state.likedComment
         });
         const commentId = this.props.commentId
-        const response = await api.changeApplicantCommentLike(this.props.applicantId, {commentId});
-        console.log(response)
+        const response = await api.changeApplicantCommentLike(this.props.applicantId, commentId);
         this.componentDidMount();
     }
     
@@ -69,7 +68,7 @@ class Comment extends Component {
         let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
         let trash = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Delete/SVG/ic_fluent_delete_16_regular.svg"
 
-        const beforeCurrLikeStatus = this.props.likes.includes(this.props.member) ? this.props.likes.length - 1 : this.props.likes.length
+        const beforeCurrLikeStatus = this.props.likes.includes(this.props.commenterId) ? this.props.likes.length - 1 : this.props.likes.length
         const numLikes = this.state.likedComment ? beforeCurrLikeStatus + 1 : beforeCurrLikeStatus
         return (
             (this.state.commenter && !this.state.deleted && !this.state.hidden) ?
@@ -95,11 +94,11 @@ class Comment extends Component {
                         </div>
                         {/* TODO, account for one line comments + comments that are more than 2 lines with see more */}
                     </div>
-                    <div id="comment-delete">
-                        {this.state.isHovering &&
+                </div>
+                <div id="comment-delete">
+                        {this.state.isHovering && this.props.commenterID == this.props.currMember &&
                             <img id="comment-delete" onClick={this.deleteComment} src={trash} alt="Delete icon"/> 
                         }
-                    </div>
                 </div>
             </div> : null
         )
