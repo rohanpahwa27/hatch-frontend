@@ -1,11 +1,10 @@
-import React, { Component } from "react"
-import "./TableToolbar.css"
-import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
-import Filter from "./Filter/Filter.js"
-import SearchBar from "./SearchBar/SearchBar.js"
-import SelectCycleDropdown from "./SelectCycleDropdown/SelectCycleDropdown.js"
-import AddApplicant from "./AddApplicant/AddApplicant.js"
-import Download from "./Download/Download.js"
+import React, { Component } from "react";
+import "./TableToolbar.css";
+import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js";
+import Filter from "./Filter/Filter.js";
+import SearchBar from "./SearchBar/SearchBar.js";
+import AddApplicant from "./AddApplicant/AddApplicant.js";
+import Download from "./Download/Download.js";
 
 class TableToolbar extends Component {
     render() {
@@ -20,11 +19,11 @@ class TableToolbar extends Component {
                     Download data
                 */}
                 <ShowingApplicantsLabel numApplicantsShowing={this.props.numApplicantsShowing} totalApplicants={this.props.totalApplicants} />
-                <Filter />
+                <Filter filters={this.props.filters} handleFilter={this.props.handleFilter} />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
-                <div style={{flexGrow: 1}}></div>
-                <AddApplicant />
+                {/* <div style={{flexGrow: 1}}></div> */}
                 <Download />
+                <AddApplicant toggleShowImport={this.props.toggleShowImport}/>
             </div>
         )
     }

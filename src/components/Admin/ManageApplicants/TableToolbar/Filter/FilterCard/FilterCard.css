@@ -1,0 +1,39 @@
+.home-filter-card-container {
+  background-color: white;
+  min-width: 340px;
+  box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
+  border-radius: 3px; 
+  position: fixed;
+  
+  margin-top: 40px;
+  margin-left: -46px;
+}
+
+.home-filter-card {
+  margin: 5%;
+}
+
+.filter-card-row {
+  display: flex;
+}
+
+.filter-card-row-label {
+  flex-grow: 1;
+}
+
+.filter-card-bottom-space {
+  padding-bottom: 50%;
+}
+
+.filter-card-footer-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-card-back-button {
+  margin-right: 10px;
+}
+
+.filter-card-add-filter-button {
+
+}

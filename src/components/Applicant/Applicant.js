@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom'
 import Loading from "@kiwicom/orbit-components/lib/Loading";
 
 import SideNavBar from "../SideNavBar/SideNavBar"
-import Logo from "../Page/Logo/Logo.js";
+import Logo from "../Logo/Logo.js";
 
 import ApplicantInfoBar from "./ApplicantInfoBar/ApplicantInfoBar.js"
 import ApplicantInfoDrop from "./ApplicantInfoDrop/ApplicantInfoDrop.js"
