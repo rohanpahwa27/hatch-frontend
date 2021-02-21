@@ -21,10 +21,6 @@ class TableHeader extends Component {
                         <img className="sort-arrow name-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}  
                     </th>
 
-                    <th id="applicant-header">
-                        <span>&nbsp;</span>
-                    </th>
-
                     <th id="applicant-header" className="likes-header-click-area" onClick={event => this.props.handleSort(event)}>
                         <span className="applicant-column-header-span likes-header-click-area" style={sortBy === "likes" ? {fontWeight: "bold"} : null}>Likes</span>
                         {sortBy === "likes" ? 
