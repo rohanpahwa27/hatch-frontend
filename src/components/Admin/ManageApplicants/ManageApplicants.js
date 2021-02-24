@@ -40,6 +40,7 @@ class ManageApplicants extends Component {
         this.handleGotoApplicant = this.handleGotoApplicant.bind(this);
         this.updateApplicants = this.updateApplicants.bind(this);
         this.deleteApplicants = this.deleteApplicants.bind(this);
+        this.downloadApplicantsExcel = this.downloadApplicantsExcel.bind(this);
         this.toggleShowImport = this.toggleShowImport.bind(this);
         this.reloadPage = this.reloadPage.bind(this);
     }
@@ -355,22 +356,36 @@ class ManageApplicants extends Component {
         });
     }
 
-    updateApplicants() {
+    downloadApplicantsExcel = async () => {
+        console.log('downloadApplicantsExcel')
+        await api.downloadApplicantsExcel();
+    };
+
+    updateApplicants = async (label) => {
+        const resp = await api.updateApplicantStatus({
+            updatedStatus: label,
+            applicants: Array.from(this.state.selected)
+        });
+        const applicantData = resp.data.allApplicants;
+        // this.setState({
+        //     tableData: applicantData,
+        // });
         this.setState({ selected: new Set() });
+        // Can reload or reset state. However, with reset state we'll need to reapply sort/search/filters possibly?
+        this.reloadPage();
     }
 
     deleteApplicants = async () => {
-        const resp = await api.removeManyMembers({members: Array.from(this.state.selected)})
-        memberData = resp.data.allMembers
-        const userID = resp.data.user._id
-        const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
-        if (index > -1) memberData.splice(index, 1);
-        this.setState({
-            tableData: memberData,
-            totalMembers: memberData.length
+        const resp = await api.removeManyApplicants({
+            applicants: Array.from(this.state.selected)
         });
-        // this.setState({selected: new Set()})
-        this.setState({ selected: new Set() });        
+        const applicantData = resp.data.allApplicants;
+        // this.setState({
+        //     tableData: applicantData,
+        // });
+        this.setState({ selected: new Set() });
+        // Can reload or reset state. However, with reset state we'll need to reapply sort/search/filters possibly?
+        this.reloadPage();
     }
 
     toggleShowImport() {
@@ -407,6 +422,7 @@ class ManageApplicants extends Component {
                                             totalApplicants={this.state.allApplicants.length}
                                             query={this.state.query} handleSearch={this.handleSearch}
                                             filters={this.state.filters} handleFilter={this.handleFilter}
+                                            downloadApplicantsExcel={this.downloadApplicantsExcel}
                                             toggleShowImport={this.toggleShowImport}
                                         />
                                         <Table

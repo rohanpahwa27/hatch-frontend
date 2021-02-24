@@ -8,6 +8,7 @@ class Download extends Component {
             <div id="applicant-toolbar-download-flex-container">
                 <button
                     id="applicant-toolbar-download-button"
+                    onClick={this.props.downloadApplicantsExcel}
                 >
                     <img id="applicant-toolbar-download-icon" src={downloadImage} alt="Download icon" />
                     {/* &nbsp;Download */}

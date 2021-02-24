@@ -8,7 +8,6 @@ from Table as a prop
 */
 class TableBody extends Component {
     render() {
-        console.log(this.props.data)
         const memberComponents = this.props.data.map((member, index) => {
             let admin = member.organizations[0].isAdmin
             let numComments = member.organizations[0].numComments;
