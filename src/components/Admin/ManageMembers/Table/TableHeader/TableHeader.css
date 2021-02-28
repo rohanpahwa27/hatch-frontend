@@ -52,6 +52,10 @@
     line-height: 150%;
 }
 
+.admin-header-click-area{
+    cursor: default !important;
+}
+
 /* #member-email-header {
     grid-column: 3 / span 1;
     font-size: 13px;

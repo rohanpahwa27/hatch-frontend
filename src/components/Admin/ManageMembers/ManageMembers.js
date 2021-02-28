@@ -286,10 +286,7 @@ class ManageMembers extends Component {
         const tableDataCopy = membersArray
         if (direction === "ascending") {
             tableDataCopy.sort((a, b) => {
-                if (a.admin < b.admin) {
-                    return -1
-                }
-                else if (b.admin < a.admin) {
+                if (a.admin !== b.admin) {
                     return 1
                 }
                 return 0
@@ -300,12 +297,9 @@ class ManageMembers extends Component {
         }
         else {
             tableDataCopy.sort((a, b) => {
-                if (a.admin > b.admin) {
+                if (a.admin !== b.admin) {
                     return -1
                 }
-                else if (b.admin > a.admin) {
-                    return 1
-                } 
                 return 0
             })
             this.setState({
