@@ -357,7 +357,6 @@ class ManageApplicants extends Component {
     }
 
     downloadApplicantsExcel = async () => {
-        console.log('downloadApplicantsExcel')
         await api.downloadApplicantsExcel();
     };
 

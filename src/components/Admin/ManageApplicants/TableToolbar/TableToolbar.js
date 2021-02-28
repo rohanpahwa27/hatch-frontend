@@ -10,14 +10,6 @@ class TableToolbar extends Component {
     render() {
         return (
             <div id="table-toolbar-grid-item">
-                {/* 
-                    Showing applicants
-                    Filter
-                    Search
-                    Active recruiting cycle
-                    Add guest
-                    Download data
-                */}
                 <ShowingApplicantsLabel numApplicantsShowing={this.props.numApplicantsShowing} totalApplicants={this.props.totalApplicants} />
                 <Filter filters={this.props.filters} handleFilter={this.props.handleFilter} />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />

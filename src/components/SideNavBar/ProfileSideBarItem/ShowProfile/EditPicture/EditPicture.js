@@ -19,8 +19,7 @@ class EditPicture extends Component {
         const formData = new FormData();
         formData.append("image", this.state.selectedFile);
         const response = await api.uploadMemberImage(formData);
-        console.log(response)
-        this.props.closeButton()
+        this.props.closeButton();
     }
 
     uploadFile = event => {

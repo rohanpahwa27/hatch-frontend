@@ -34,7 +34,7 @@ class TableRow extends Component {
         const name = (
             <td className="manage-name-div manage-table-data-cell">
                 <img className="manage-applicant-image" src={this.props.imageUrl} alt="Headshot" />
-                <span className="manage-row-item manage-applicant-name">{this.props.firstName} {this.props.lastName}</span>
+                <span className="manage-row-item manage-applicant-name">&nbsp;{this.props.firstName} {this.props.lastName}</span>
             </td>
         );
 
@@ -50,21 +50,15 @@ class TableRow extends Component {
             </td>
         );
 
-        const dateAdded = (
-            <td className="manage-table-data-cell">
-                <span className="manage-row-item">Feb 2, 2021</span>
-            </td>
-        );
+        // const dateAdded = (
+        //     <td className="manage-table-data-cell">
+        //         <span className="manage-row-item">Feb 2, 2021</span>
+        //     </td>
+        // );
 
-        const dateModified = (
-            <td className="manage-table-data-cell">
-                <span className="manage-row-item">Feb 2, 2021</span>
-            </td>
-        );
-
-        // const tags = (
-        //     <td>
-        //         <span className="manage-row-item">{this.props.tags}</span>
+        // const dateModified = (
+        //     <td className="manage-table-data-cell">
+        //         <span className="manage-row-item">Feb 2, 2021</span>
         //     </td>
         // );
 
@@ -72,8 +66,8 @@ class TableRow extends Component {
         components.push(name);
         components.push(likes);
         components.push(comments);
-        components.push(dateAdded);
-        components.push(dateModified);
+        // components.push(dateAdded);
+        // components.push(dateModified);
 
         return (
             <tr id="manage-table-row-grid-container">
