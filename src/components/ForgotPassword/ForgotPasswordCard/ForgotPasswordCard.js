@@ -38,7 +38,6 @@ class ForgotPasswordCard extends Component {
     const response = await api.forgotPassword({
       email: this.state.email
     });
-    console.log(response);
 
     if (response.data.status === "error"){
       errors.push(response.data.message)

@@ -95,8 +95,8 @@ class ChangePassword extends Component {
                 return;
             }
             this.props.closeButton()
-        } catch(e){
-            console.log(e)
+        } catch(err){
+            console.log(err)
             return;
         }
     };

@@ -62,7 +62,7 @@ class Home extends Component {
                         applicant.didMemberLikeApplicant = res.data.like
                     })
                     .catch(err => {
-                        console.log("Call to didMemberLikeApplicant failed")
+                        // console.log("Call to didMemberLikeApplicant failed")
                         console.log(err)
                     })
                 }
