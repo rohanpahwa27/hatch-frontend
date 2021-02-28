@@ -43,11 +43,11 @@ class TableRow extends Component {
             </td>
         )
 
-        const votes = (
-            <td className="table-data-cell">
-                <span className="row-item">{this.props.votes}</span>
-            </td>
-        )
+        // const votes = (
+        //     <td className="table-data-cell">
+        //         <span className="row-item">{this.props.votes}</span>
+        //     </td>
+        // )
 
         const admin = (
             <td className="table-data-cell">
@@ -66,7 +66,7 @@ class TableRow extends Component {
         components.push(name)
         components.push(email)
         components.push(comments)
-        components.push(votes)
+        // components.push(votes)
         components.push(admin)
 
         return (

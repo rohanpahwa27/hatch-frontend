@@ -30,11 +30,6 @@ class ImportApplicants extends Component {
             />
             :
             <div id="import-home-grid-container">
-              {/* <div id="manage-applicants-flex-container">
-                <div id="applicants-text-flex-container">
-                  Manage your applicants
-                </div>
-              </div> */}
               <div id="import-grid-container">
                 {/* div flex start container 1 - icon */}
                 <div id="import-icon-container">

@@ -3,8 +3,6 @@
     grid-row: 1 / span 1;
     grid-column: 1 / span 1;
 
-    border-left: 2px solid #E8EDF1;
-
     /* Flexbox container properties */
     display: flex;
     align-items: flex-end;

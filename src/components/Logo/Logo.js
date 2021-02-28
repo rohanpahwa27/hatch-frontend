@@ -6,11 +6,11 @@ import "./Logo.css"
 class Logo extends Component {
     render() {
         return (
-            <Link to="/home">
-                <div id="logo-grid-container">
+            <div id="logo-grid-container">
+                <Link to="/home">
                     <img id="logo" src={logo} alt="Hatch" />
-                </div>
-            </Link>
+                </Link>
+            </div>
         )
     }
 }
