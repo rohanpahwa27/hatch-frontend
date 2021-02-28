@@ -22,16 +22,20 @@
 }
 
 .checkbox{
-    padding-left: 7%;
+    
 }
 
 .table-data-cell {
     display: flex;
     align-items: center;
+    margin-left: 10px;
+}
+
+.checkbox-div {
+    justify-self: center;
 }
 
 .name-div {
-    padding-left: 3%;
     width: 100%;
 }
 

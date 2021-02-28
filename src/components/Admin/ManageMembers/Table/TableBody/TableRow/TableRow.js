@@ -19,13 +19,13 @@ class TableRow extends Component {
         const isAdmin = this.props.admin
         const components = []
         const checkbox = (
-            <td className="name-div table-data-cell">
+            <td className="checkbox-div table-data-cell">
                 <span className="row-item checkbox"><Check memberID ={this.props.memberID} handleSelected={this.props.handleSelected} isSelected={this.props.isSelected}/></span>
             </td>
         )
 
         const name = (
-            <td className="name-div table-data-cell">
+            <td className="name-div">
                 <img className="member-image" src={this.props.imgURL} alt="Headshot" />
                 <span className="member-name row-item truncate-text-admin-members">{this.props.firstName} {this.props.lastName}</span>
             </td>
@@ -43,11 +43,11 @@ class TableRow extends Component {
             </td>
         )
 
-        const votes = (
-            <td className="table-data-cell">
-                <span className="row-item">{this.props.votes}</span>
-            </td>
-        )
+        // const votes = (
+        //     <td className="table-data-cell">
+        //         <span className="row-item">{this.props.votes}</span>
+        //     </td>
+        // )
 
         const admin = (
             <td className="table-data-cell">
@@ -66,7 +66,7 @@ class TableRow extends Component {
         components.push(name)
         components.push(email)
         components.push(comments)
-        components.push(votes)
+        // components.push(votes)
         components.push(admin)
 
         return (

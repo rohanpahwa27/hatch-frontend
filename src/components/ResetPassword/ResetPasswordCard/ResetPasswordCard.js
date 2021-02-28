@@ -49,7 +49,6 @@ class ResetPasswordCard extends Component {
     await api.resetPassword(token, {
       password: this.state.password
     }).then(res => {
-      console.log(res)
       this.setState({
         submitted: true,
         validToken: true

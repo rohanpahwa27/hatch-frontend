@@ -16,7 +16,6 @@ const isLogin = async () => {
 const isAdmin = async () => {
     if (_isMounted){
         const resp = await api.checkIfUserIsAdmin();
-        console.log("admin:", resp.data.admin)
         return resp.data.admin
     }
     return false;
