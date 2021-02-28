@@ -56,16 +56,16 @@ class Home extends Component {
                     return applicantInfo
                 })
 
-                for (const applicant of applicants) {
-                    await api.didMemberLikeApplicant(applicant.id)
-                    .then(res => {
-                        applicant.didMemberLikeApplicant = res.data.like
-                    })
-                    .catch(err => {
-                        console.log("Call to didMemberLikeApplicant failed")
-                        console.log(err)
-                    })
-                }
+                // for (const applicant of applicants) {
+                //     await api.didMemberLikeApplicant(applicant.id)
+                //     .then(res => {
+                //         applicant.didMemberLikeApplicant = res.data.like
+                //     })
+                //     .catch(err => {
+                //         console.log("Call to didMemberLikeApplicant failed")
+                //         console.log(err)
+                //     })
+                // }
 
                 this.setState({
                     allApplicants: applicants,
