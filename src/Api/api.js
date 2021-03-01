@@ -5,9 +5,10 @@ const FileDownload = require('js-file-download');
 //   baseURL: "https://hatchrecruiting-service.herokuapp.com/",
 //   withCredentials: true
 // });
-
+console.log(process.env.NODE_ENV)
+console.log(process.env.REACT_APP_API_URL)
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:3000",
   withCredentials: true
 });
 
