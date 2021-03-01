@@ -106,6 +106,12 @@ class Applicant extends Component {
             // TODO: Add a proper error state
             // console.log("yikes this is an issue for applicant")
         }
+        if (currIndex === this.state.allApplicantIds.length - 1) {
+            this.setState({
+                currApplicantId: this.state.allApplicantIds[0],
+                allApplicants: null
+            }, () => {this.componentDidMount()});
+        }
         this.setState({
             currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
         }, () => {this.componentDidMount()});
@@ -116,7 +122,7 @@ class Applicant extends Component {
             liveLikeStatus: !this.state.liveLikeStatus,
             likedApplicant: !(this.state.currApplicantLikedByMember && this.state.liveLikeStatus)
         });
-        await api.changeMemberLikeApplicant(this.props.applicant._id);
+        await api.changeMemberLikeApplicant(this.state.currApplicantId);
         this.componentDidMount();
     }
     
