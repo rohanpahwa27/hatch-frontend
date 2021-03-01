@@ -6,8 +6,6 @@ const FileDownload = require('js-file-download');
 //   withCredentials: true
 // });
 const BASEURL = (process.env.NODE_ENV == 'production') ? "https://hatchrecruiting-backend.herokuapp.com/": "http://localhost:3000"
-console.log(process.env.NODE_ENV)
-console.log(process.env.REACT_APP_API_URL)
 const api = axios.create({
   baseURL: BASEURL,
   withCredentials: true
