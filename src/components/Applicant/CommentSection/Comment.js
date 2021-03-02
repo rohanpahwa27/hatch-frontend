@@ -8,31 +8,25 @@ class Comment extends Component {
         this.state = {
             commenter: null,
             likedComment: false,
+            liveLikeStatus: false,
             numLikes: "",
-            hidden: false,
-            deleted: false,
             isHovering: false
         }
     }
 
     componentDidMount = async () => {
-        try {
-            if (!this.state.hidden) {
-                const commenterID = this.props.commenterID;
-                const memberResponse = await api.getMemberById(commenterID);
-                this.setState({
-                    commenter: memberResponse.data.member,
-                    likedComment: this.props.likes.includes(this.props.currMember) ^ this.state.likedComment            
-                });
-            }
-        } catch (error) {
-            
-        }
+        const commenterID = this.props.commenterID;
+        const memberResponse = await api.getMemberById(commenterID);
+        console.log(memberResponse.data.member)
+        this.setState({
+            commenter: memberResponse.data.member,
+            likedComment: this.props.likes.includes(this.props.currMember) ^ this.state.liveLikeStatus            
+        });
     }
 
     handleLike = async () => {
         this.setState({
-            likedComment: !this.state.likedComment
+            liveLikeStatus: !this.state.liveLikeStatus
         });
         const commentId = this.props.commentId
         const response = await api.changeApplicantCommentLike(this.props.applicantId, commentId);
@@ -40,17 +34,9 @@ class Comment extends Component {
     }
     
     deleteComment = async () => {
-        this.setState({
-            hidden: true
-        });
-        this.componentDidMount();
         const applicantId = this.props.applicantId
         const commentId = this.props.commentId
         await api.deleteComment(applicantId, commentId)
-        this.setState({
-            deleted: true
-        });
-        this.componentDidMount();
         this.props.handleDelete();
     }
 
@@ -68,10 +54,10 @@ class Comment extends Component {
         let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
         let trash = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Delete/SVG/ic_fluent_delete_16_regular.svg"
 
-        const beforeCurrLikeStatus = this.props.likes.includes(this.props.commenterId) ? this.props.likes.length - 1 : this.props.likes.length
+        const beforeCurrLikeStatus = this.props.likes.includes(this.props.currMember) ? this.props.likes.length - 1 : this.props.likes.length
         const numLikes = this.state.likedComment ? beforeCurrLikeStatus + 1 : beforeCurrLikeStatus
         return (
-            (this.state.commenter && !this.state.deleted && !this.state.hidden) ?
+            (this.state.commenter) ?
             <div id="comments-grid-container" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <div id="comment-frame">
                     <div id="image">

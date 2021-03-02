@@ -10,8 +10,12 @@ class ApplicantInfo extends Component {
         let placeholder = ""
         let applicant = this.props.applicant
 
-        let beforeCurrStatus = this.props.originallyLiked ? applicant.likes.length - 1 : applicant.likes.length 
-        let numLikes = this.props.likedApplicant ? beforeCurrStatus + 1 : beforeCurrStatus
+        let numLikes = applicant.likes.length
+        if (this.props.likedApplicant && !(applicant.likes.includes(this.props.member))) {
+            numLikes = numLikes + 1
+        } else if (!this.props.likedApplicant && (applicant.likes.includes(this.props.member))) {
+            numLikes = numLikes - 1
+        }
 
         return (
             <div id="applicant-info-item">
