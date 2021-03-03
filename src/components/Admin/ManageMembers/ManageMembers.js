@@ -286,10 +286,7 @@ class ManageMembers extends Component {
         const tableDataCopy = membersArray
         if (direction === "ascending") {
             tableDataCopy.sort((a, b) => {
-                if (a.admin < b.admin) {
-                    return -1
-                }
-                else if (b.admin < a.admin) {
+                if (a.admin !== b.admin) {
                     return 1
                 }
                 return 0
@@ -300,12 +297,9 @@ class ManageMembers extends Component {
         }
         else {
             tableDataCopy.sort((a, b) => {
-                if (a.admin > b.admin) {
+                if (a.admin !== b.admin) {
                     return -1
                 }
-                else if (b.admin > a.admin) {
-                    return 1
-                } 
                 return 0
             })
             this.setState({
@@ -360,7 +354,7 @@ class ManageMembers extends Component {
 
     updateMembers = async (label) => {
         const resp = await api.updateMemberStatus({updatedStatus: label.toLowerCase(), members: Array.from(this.state.selected)})
-        memberData = resp.data.allMembers
+        let memberData = resp.data.allMembers
         const userID = resp.data.user._id
         const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
@@ -370,7 +364,7 @@ class ManageMembers extends Component {
 
     deleteMembers = async () => {
         const resp = await api.removeManyMembers({members: Array.from(this.state.selected)})
-        memberData = resp.data.allMembers
+        let memberData = resp.data.allMembers
         const userID = resp.data.user._id
         const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);

@@ -104,7 +104,7 @@ class Applicant extends Component {
         const currIndex = this.state.allApplicantIds.findIndex(id => id === this.state.currApplicantId)
         if (currIndex === -1) {
             // TODO: Add a proper error state
-            console.log("yikes this is an issue for applicant")
+            // console.log("yikes this is an issue for applicant")
         }
         if (currIndex === this.state.allApplicantIds.length - 1) {
             this.setState({

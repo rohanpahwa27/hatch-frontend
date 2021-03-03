@@ -42,7 +42,7 @@ class UploadPhoto extends Component {
 
     sendFile = async (event) => {
         const formData = new FormData();
-        const applicantId = this.props.applicant._id;
+        const applicantId = this.props.applicant.id;
         formData.append("image", this.state.selectedFile);
         await api.uploadApplicantImage(applicantId, formData);
         this.toggleShowModal();

@@ -40,7 +40,9 @@ class ManageApplicants extends Component {
         this.handleGotoApplicant = this.handleGotoApplicant.bind(this);
         this.updateApplicants = this.updateApplicants.bind(this);
         this.deleteApplicants = this.deleteApplicants.bind(this);
+        this.downloadApplicantsExcel = this.downloadApplicantsExcel.bind(this);
         this.toggleShowImport = this.toggleShowImport.bind(this);
+        this.reloadPage = this.reloadPage.bind(this);
     }
 
     componentDidMount = async () => {
@@ -351,15 +353,38 @@ class ManageApplicants extends Component {
             // TODO: Edit if we want to get rid of the actual applicant ID and want smtg else?
             search: applicantId,
             state: { id: applicantId }
-        })
+        });
     }
 
-    updateApplicants() {
-        this.setState({ selected: new Set() })
+    downloadApplicantsExcel = async () => {
+        await api.downloadApplicantsExcel();
+    };
+
+    updateApplicants = async (label) => {
+        const resp = await api.updateApplicantStatus({
+            updatedStatus: label,
+            applicants: Array.from(this.state.selected)
+        });
+        const applicantData = resp.data.allApplicants;
+        // this.setState({
+        //     tableData: applicantData,
+        // });
+        this.setState({ selected: new Set() });
+        // Can reload or reset state. However, with reset state we'll need to reapply sort/search/filters possibly?
+        this.reloadPage();
     }
 
-    deleteApplicants() {
-        this.setState({ selected: new Set() })
+    deleteApplicants = async () => {
+        const resp = await api.removeManyApplicants({
+            applicants: Array.from(this.state.selected)
+        });
+        const applicantData = resp.data.allApplicants;
+        // this.setState({
+        //     tableData: applicantData,
+        // });
+        this.setState({ selected: new Set() });
+        // Can reload or reset state. However, with reset state we'll need to reapply sort/search/filters possibly?
+        this.reloadPage();
     }
 
     toggleShowImport() {
@@ -367,6 +392,10 @@ class ManageApplicants extends Component {
         this.setState({
             showImportPage: !this.state.showImportPage            
         });
+    }
+
+    reloadPage() {
+        this.props.history.go(0);
     }
 
     render() {
@@ -382,7 +411,11 @@ class ManageApplicants extends Component {
                         <div>
                             {/* this.state.allApplicants.length === 0 */}
                             {this.state.showImportPage == true ?
-                                <ImportApplicants />
+                                <ImportApplicants
+                                    reloadPage={this.reloadPage}
+                                    allApplicants={this.state.allApplicants}
+                                    toggleShowImport={this.toggleShowImport}
+                                />
                                 :
                                 (
                                     <div id="manage-applicant-grid-container">
@@ -392,6 +425,7 @@ class ManageApplicants extends Component {
                                             totalApplicants={this.state.allApplicants.length}
                                             query={this.state.query} handleSearch={this.handleSearch}
                                             filters={this.state.filters} handleFilter={this.handleFilter}
+                                            downloadApplicantsExcel={this.downloadApplicantsExcel}
                                             toggleShowImport={this.toggleShowImport}
                                         />
                                         <Table

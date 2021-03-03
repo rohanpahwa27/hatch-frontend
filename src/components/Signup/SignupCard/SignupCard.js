@@ -28,11 +28,11 @@ function validate(email, password, confirmPassword, firstName, lastName, org) {
 
   if (email.length === 0) {
     errors.email = "Required Field"
-  } else if (!email.includes('@')){
+  } else if (!email.includes('@')) {
     errors.email = "Email must include '@' symbol"
   }
 
-  if (password.length === 0){
+  if (password.length === 0) {
     errors.password = "Required Field"
   } else if (password.length < 6) {
     errors.password = "Must be 6+ characters"
@@ -57,7 +57,7 @@ class SignupCard extends React.Component {
     super(props);
     this.state = initialState;
   }
-  
+
   handleSubmit = async (event, admin) => {
     event.preventDefault();
     const errors = validate(this.state.email, this.state.password, this.state.confirmPassword, this.state.firstName, this.state.lastName, this.state.org);
@@ -79,10 +79,10 @@ class SignupCard extends React.Component {
       user.organizationCode = this.state.org.trim();
     }
     const response = await api.insertUser(user);
-    if (response.data.status === "error"){
-      if (response.data.message === 'Organization Name taken.'){
+    if (response.data.status === "error") {
+      if (response.data.message === 'Organization Name taken.') {
         errors.org = response.data.message
-      } else if (response.data.message === 'Add code doesn\'t exist.'){
+      } else if (response.data.message === 'Add code doesn\'t exist.') {
         errors.org = response.data.message
       } else {
         errors.email = response.data.message;
@@ -134,22 +134,22 @@ class SignupCard extends React.Component {
     if (!admin) {
       // submit = <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
       organizationNameorCode = <InputField
-      label="Add Code"
-      placeholder= {memberIsAdmin}
-      error={this.state.errors.org}
-      value={this.state.org}
-      onChange={this.handleOrg}
-      maxLength="4"
-    />
-      signup = <p className="adminSignUp">if your group doesn’t have an add code or a Hatch account, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
+        label="Add Code"
+        placeholder={memberIsAdmin}
+        error={this.state.errors.org}
+        value={this.state.org}
+        onChange={this.handleOrg}
+        maxLength="4"
+      />
+      // signup = <p className="adminSignUp">if your group doesn’t have an add code or a Hatch account, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
     } else {
       organizationNameorCode = <InputField
-      label="Organization Name"
-      placeholder= {memberIsAdmin}
-      error={this.state.errors.org}
-      value={this.state.org}
-      onChange={this.handleOrg}
-    />
+        label="Organization Name"
+        placeholder={memberIsAdmin}
+        error={this.state.errors.org}
+        value={this.state.org}
+        onChange={this.handleOrg}
+      />
       signup = <p className="adminSignUp">If someone in your organization is asking you to join them on Hatch, <Link className='signupLink' to="/signup?query=member">sign up as a member </Link></p>
     }
     return (
@@ -160,33 +160,35 @@ class SignupCard extends React.Component {
             <div class="column">
             </div>
           </div>
+
           <div class="row">
             <div class="column">
               <InputField
                 label="First Name"
                 placeholder="type your first name"
-                error = {errors.firstName}
+                error={errors.firstName}
                 value={this.state.firstName}
                 onChange={this.handleFirstNameChange}
                 maxLength="20"
-              /> 
+              />
             </div>
             <div class="column">
               <InputField
                 label="Last Name"
                 placeholder="type your last name"
-                error = {this.state.errors.lastName}
+                error={this.state.errors.lastName}
                 value={this.state.lastName}
                 onChange={this.handleLastNameChange}
                 maxLength="20"
               />
             </div>
           </div>
+
           <div class="row">
             <div class="column">
               <InputField
                 label="Email"
-                error = {this.state.errors.email}
+                error={this.state.errors.email}
                 placeholder="type your email"
                 value={this.state.email}
                 onChange={this.handleEmailChange}
@@ -195,6 +197,7 @@ class SignupCard extends React.Component {
             </div>
             <div class="column"></div>
           </div>
+
           <div class="row">
             <div class="column">
               <InputField
@@ -219,22 +222,30 @@ class SignupCard extends React.Component {
               />
             </div>
           </div>
+
           <div class="row">
             <div class="column">
               {organizationNameorCode}
             </div>
+          </div>
+
+          <div class="row">
             <div class="column">
               {signup}
             </div>
           </div>
+
           <div className="row">
             <div class="column"></div>
             <div class="column">
-              <div className= "submit"><Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button></div>
+              <div className="submit">
+                <Button type="primary" admin={false} onClick={(e) => this.handleSubmit(e, admin)}>Done</Button>
+              </div>
             </div>
           </div>
+
         </div>
-      </div>   
+      </div>
     );
   }
 }

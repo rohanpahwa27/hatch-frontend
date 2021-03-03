@@ -1,13 +1,14 @@
 #next-info-bar-item {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-   position: relative;
-   width: 147px;
-   height: 44px;
-   top: 26px;
-   left: 16px;
+    position: relative;
+    width: 147px;
+    height: 44px;
+    top: 26px;
+    left: 16px;
+    cursor: pointer;
 }
 
 #applicant-action-next-image {

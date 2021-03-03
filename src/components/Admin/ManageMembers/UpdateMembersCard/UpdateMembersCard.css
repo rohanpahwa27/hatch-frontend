@@ -37,3 +37,7 @@
     background: #FAEAEA;
     border-radius: 3px;
 }
+
+.updateMembers-card-row{
+    display: flex;
+}

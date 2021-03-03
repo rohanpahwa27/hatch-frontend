@@ -4,17 +4,26 @@ body {
 
 #import-applicants-grid-container {
     display: grid;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: minmax(50px, auto);
     grid-template-columns: repeat(2, 50%);
-    grid-row-gap: 20px;
+    /* grid-row-gap: 20px; */
     justify-items: start;
     align-items: center;
 
-    min-width: 1000px;
+    min-width: 1500px;
     margin-left: 30px;
+    margin-top: 32px;
 }
 
 #back-button-item {
+    grid-column: 1 / 2;
+
+    display: flex;
+    align-items: center;
+}
+
+#info-text-item {
+    grid-row: span 1;
     grid-column: 1 / 2;
 }
 
@@ -65,6 +74,13 @@ body {
     align-items: center;
 }
 
+#add-applicants-text {
+    font-size: large;
+    font-weight: normal;
+
+    margin-left: 20px;
+}
+
 #download-template-button {
     cursor: pointer;
     background-color: #ffffff;
@@ -95,6 +111,7 @@ body {
     flex-grow: 1;
     margin-left: 20px;
 
+    font-size: 13px;
     font-style: italic;
     color: #5F738C;
 }
@@ -108,6 +125,7 @@ body {
     border: 0;
     border-radius: 5px;
 }
+
 #large {
     font-size: large;
 }

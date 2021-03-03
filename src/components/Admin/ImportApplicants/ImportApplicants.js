@@ -3,13 +3,14 @@ import "./ImportApplicants.css";
 import { Link } from "react-router-dom";
 import Import from "./Import/Import.js";
 
-import importImage from "./Icons/import.png";
+import importImage from "./Icons/import1.png";
 
 class ImportApplicants extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      onImportPage: false,
+      onImportPage: this.props.allApplicants.length === 0 ?
+       false : true,
     }
   }
 
@@ -25,15 +26,13 @@ class ImportApplicants extends Component {
         {
           this.state.onImportPage ?
             <Import
+              allApplicants={this.props.allApplicants}
               toggleImportPage={this.toggleImportPage}
+              toggleShowImport={this.props.toggleShowImport}
+              reloadPage={this.props.reloadPage}
             />
             :
             <div id="import-home-grid-container">
-              {/* <div id="manage-applicants-flex-container">
-                <div id="applicants-text-flex-container">
-                  Manage your applicants
-                </div>
-              </div> */}
               <div id="import-grid-container">
                 {/* div flex start container 1 - icon */}
                 <div id="import-icon-container">

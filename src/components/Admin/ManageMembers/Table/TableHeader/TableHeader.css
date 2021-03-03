@@ -6,7 +6,8 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    
+    border-bottom: 1px solid #E8EDF1;
+    box-shadow: 0px 6px 4px -4px #E8EDF1;
     background-color: rgba(239, 242, 245, 0.5);
 }
 
@@ -33,28 +34,29 @@
 
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 #member-select-header {
     grid-column: 1 / span 1;
-    padding-left: 7%;
-    width: 93%;
-    height: 100%;
+    justify-content: center;
+
     font-weight:normal;
     font-size: 13px;
     line-height: 150%;
 }
 
-#member-name-header {
-    grid-column: 2 / span 1;
-    padding-left: 3%;
-    width: 97%;
-    height: 100%;
+#member-header {
+    grid-column: span 1;
     font-size: 13px;
     line-height: 150%;
 }
 
-#member-email-header {
+.admin-header-click-area{
+    cursor: default !important;
+}
+
+/* #member-email-header {
     grid-column: 3 / span 1;
     font-size: 13px;
     line-height: 150%;
@@ -76,7 +78,7 @@
     grid-column: 6 / span 1;
     font-size: 13px;
     line-height: 150%;
-}
+} */
 
 .sort-arrow {
     width: 20px;

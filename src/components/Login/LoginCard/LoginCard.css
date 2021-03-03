@@ -13,8 +13,20 @@
     margin: 5% 10%;
 }
 
+.login-link{
+    font-style: normal;
+font-weight: bold;
+font-size: 13px;
+}
+
+#admin-login-signup{
+    margin-left: auto;
+}
+
 #create-account-label {
     margin-top: 10%;
+    font-size: 13px;
+line-height: 150%;
 }
 
 #sign-up-links {
@@ -24,4 +36,13 @@
 #sign-up-links a {
     color: #00A991;
     width: 50%;
+    /* padding-left: 69%; */
+}
+
+#login-welcome-back{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 150%;
 }

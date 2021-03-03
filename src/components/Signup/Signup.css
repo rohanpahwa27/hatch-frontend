@@ -6,7 +6,22 @@ body {
     /* Grid item properties */
     grid-row: 1 / -1;
     grid-column: 1 / - 1;
+    min-width: 600px;
+    /* min-width: 50%; */
+}
 
-    min-width: 50%;
+@media only screen and (max-width: 805px) {
+    #login-grid-container {
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+    
+        background-color: #F5F7F9;
+    }
+    
+    #signup-grid-item {
+        width: 90%;
+        min-width: auto;
+    }
 }
   
