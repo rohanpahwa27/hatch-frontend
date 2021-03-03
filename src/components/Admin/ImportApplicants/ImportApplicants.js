@@ -6,10 +6,11 @@ import Import from "./Import/Import.js";
 import importImage from "./Icons/import1.png";
 
 class ImportApplicants extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      onImportPage: false,
+      onImportPage: this.props.allApplicants.length === 0 ?
+       false : true,
     }
   }
 
@@ -25,7 +26,9 @@ class ImportApplicants extends Component {
         {
           this.state.onImportPage ?
             <Import
+              allApplicants={this.props.allApplicants}
               toggleImportPage={this.toggleImportPage}
+              toggleShowImport={this.props.toggleShowImport}
               reloadPage={this.props.reloadPage}
             />
             :
