@@ -55,7 +55,7 @@ class Applicant extends Component {
                     email: applicant.email,
                     comments: applicant.comments,
                     likes: applicant.likes,
-                    extraFields: applicant.extraFields,
+                    extraFields: applicant.extraFields ? applicant.extraFields : [],
                     status: applicant.status,
                     recruitingCycle: applicant.recruitingCycle,
                     organization: applicant.organization,
