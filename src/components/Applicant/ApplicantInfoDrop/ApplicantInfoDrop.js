@@ -5,6 +5,16 @@ import Collapse from "@kiwicom/orbit-components/lib/Collapse";
 class ApplicantInfoDrop extends Component {
     
     render() {
+        const fields = this.props.applicant.extraFields.map(el => 
+            {
+                return Object.keys(el)[0].split(":")[0]
+            });
+
+        const contents = this.props.applicant.extraFields.map(el =>
+            {
+                return el[Object.keys(el)[0]]
+            });
+        
         const FieldMapping = ({extraFields, extraFieldContents}) => (
             <>
               {extraFields.map((extraField, index) => (
@@ -15,13 +25,14 @@ class ApplicantInfoDrop extends Component {
               ))}
             </>
         );
+
         return (
-            (this.props.applicant.extraFields.length > 1) ?
+            (this.props.applicant.extraFields) ?
             <div id="applicantinfodrop">
                 <div id="collapse">
                     <Collapse label="Applicant info">
                         <div id = "onclick"></div>
-                        <FieldMapping extraFields={this.props.applicant.extraFields[0]} extraFieldContents={this.props.applicant.extraFields[1]} />
+                        <FieldMapping extraFields={fields} extraFieldContents={contents} />
                     </Collapse>
                 </div>
             </div> : null
