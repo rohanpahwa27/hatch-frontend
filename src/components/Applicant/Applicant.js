@@ -42,6 +42,7 @@ class Applicant extends Component {
             // Applicant page called by Home / direct URL and not next
             const applicantId = this.state.currApplicantId ? this.state.currApplicantId : this.state.currApplicantPreCall;
             const orgId = localStorage.getItem("orgID");
+            // TODO: Add check for valid ids
             const memberId = await api.getThisMember();
 
             const applicantLike = await api.didMemberLikeApplicant(applicantId);
@@ -65,20 +66,22 @@ class Applicant extends Component {
 
             const applicantIds = applicantData.map(x => x.id);
             const currApplicantData = applicantData.find(x => x.id == applicantId);
-            if (currApplicantData == null) {
-                // TODO: HANDLE "bad" urls with fake search terms, CHECK for valid ids aka ones that are in applicantData
+            if (currApplicantData != null) {
+                this.setState({
+                    currMemberId: memberId.data.member._id,
+                    currApplicantId: applicantId,
+                    currApplicantLikedByMember: applicantLike.data.like,
+                    currApplicantData: currApplicantData,
+                    currApplicantComments: currApplicantData.comments,
+                    allApplicants: applicantData,
+                    allApplicantIds: applicantIds,
+                    likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
+                });
+            } else {
+                this.setState({
+                    currApplicantPreCall: null
+                });
             }
-    
-            this.setState({
-                currMemberId: memberId.data.member._id,
-                currApplicantId: applicantId,
-                currApplicantLikedByMember: applicantLike.data.like,
-                currApplicantData: currApplicantData,
-                currApplicantComments: currApplicantData.comments,
-                allApplicants: applicantData,
-                allApplicantIds: applicantIds,
-                likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
-            });
         } else if (this.state.commentChange) {
             const commentsResponse = await api.getComments(this.state.currApplicantId);
             this.setState({
@@ -112,6 +115,11 @@ class Applicant extends Component {
         this.setState({
             currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
         }, () => {this.componentDidMount()});
+
+        this.props.history.push({
+            pathname: '/applicant',
+            search: this.state.currApplicantId
+        })
     }
 
     handleLike = async () => {
@@ -161,7 +169,7 @@ class Applicant extends Component {
                         <NewComment applicantID={this.state.currApplicantId} handleNewComment={this.handleNewComment}/>
                     </div>
                 </div> : <div id="loading-screen"><Loading/></div>
-            : <span>Page does not exist {this.state.currApplicantPreCall}</span> // TODO: Replace this eventually...
+            : <span>Page does not exist</span>
         )
       }
 }
