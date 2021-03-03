@@ -41,7 +41,11 @@ class Import extends Component {
         <div id="back-button-item">
           <button
             id="back-button-import"
-            onClick={this.props.toggleImportPage}
+            // Have onclick call toggleImportPage (import1) IFF numApplicants == 0
+            // Have onclick call toggleShowImport (import2 only) IFF numApplicants >= 1
+            onClick={this.props.allApplicants.length === 0 ? 
+              this.props.toggleImportPage : this.props.toggleShowImport
+            }
           >
             <img id="small-icon" src={backIcon} alt="Back icon" />
               &nbsp;Back
