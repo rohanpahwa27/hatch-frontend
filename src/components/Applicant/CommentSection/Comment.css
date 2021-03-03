@@ -2,10 +2,10 @@
     position: static;
     width: 620px;
     /* TODO: FIX to adjust based on comment size */
-    height: 59px;
+    /* height: 59px; */
     left: 0px;
 
-    margin: 0px 0px 32px 0px;
+    margin: 10px 0px 32px 0px;
     display: flex;
     flex-direction: row;
 }
@@ -18,7 +18,7 @@
 
     /* position: absolute; */
     width: 550px;
-    height: 59px;
+    /* height: 59px; */
 }
 
 .comment-user-image {
@@ -41,7 +41,7 @@
     left: 100px;
     width: 416px;
     /* TODO FIX for varied height */
-    height: 59px;
+    /* height: 59px; */
 }
 
 #comment-information {
@@ -52,7 +52,7 @@
 
     position: static;
     width: 446px;
-    height: 59px;
+    /* height: 59px; */
 
     /* TODO, look into this and figure out why it's not */
     margin: -4px 30px; 
