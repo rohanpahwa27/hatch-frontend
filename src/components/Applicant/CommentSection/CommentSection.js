@@ -6,19 +6,19 @@ import noCommentsImage from "./no-comments.png"
 import Loading from "@kiwicom/orbit-components/lib/Loading";
 
 class CommentSection extends Component {
-    test = async () => {
-        const commentComponents = this.props.comments.map((comments, index) => {
-            const comment = <Comment 
-                key={index}
-                applicantId={this.props.applicant._id}
-                likes={comments.likes}
-                commenterID={comments.member}
-                comment={comments.text}
-                commentId={comments._id} />
-            return comment
-        })
-        return commentComponents
-    }
+    // test = async () => {
+    //     const commentComponents = this.props.comments.map((comments, index) => {
+    //         const comment = <Comment 
+    //             key={index}
+    //             applicantId={this.props.applicant._id}
+    //             likes={comments.likes}
+    //             commenterID={comments.member}
+    //             comment={comments.text}
+    //             commentId={comments._id} />
+    //         return comment
+    //     })
+    //     return commentComponents
+    // }
 
     render() {
         const commentComponents = this.props.comments.map((comments, index) => {
@@ -34,7 +34,7 @@ class CommentSection extends Component {
                 handleDelete={this.props.handleDelete}/>
             return comment
         })
-                
+
         // TODO: Load comments all at once
         return ( 
         (this.props.comments.length >= 1) ?

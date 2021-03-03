@@ -28,8 +28,6 @@ class Applicant extends Component {
             currApplicantData: null,
             allApplicants: null,
             allApplicantIds: null,
-            likedApplicant: false, // TODO: old changes from applicant info bar
-            liveLikeStaus: false,
             commentChange: false
         }
 
@@ -42,7 +40,7 @@ class Applicant extends Component {
         // TODO: if (set timer for a certain time because otherwise we may want to refresh instead of using old data)
         if (!this.state.allApplicants) {
             // Applicant page called by Home / direct URL and not next
-            const applicantId = this.state.currApplicantPreCall;
+            const applicantId = this.state.currApplicantId ? this.state.currApplicantId : this.state.currApplicantPreCall;
             const orgId = localStorage.getItem("orgID");
             const memberId = await api.getThisMember();
 
@@ -100,7 +98,6 @@ class Applicant extends Component {
     }
 
     handleNext = () => {
-        // TODO: Fix slight bug where the first next click doesn't work
         const currIndex = this.state.allApplicantIds.findIndex(id => id === this.state.currApplicantId)
         if (currIndex === -1) {
             // TODO: Add a proper error state
@@ -118,10 +115,6 @@ class Applicant extends Component {
     }
 
     handleLike = async () => {
-        this.setState({
-            liveLikeStatus: !this.state.liveLikeStatus,
-            likedApplicant: !(this.state.currApplicantLikedByMember && this.state.liveLikeStatus)
-        });
         await api.changeMemberLikeApplicant(this.state.currApplicantId);
         this.componentDidMount();
     }
@@ -150,10 +143,10 @@ class Applicant extends Component {
                     <div id="applicant-grid-container">
                         <div id="info-container">
                             <div id="applicantinfobar">
-                                <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.likedApplicant} originallyLiked={this.state.currApplicantLikedByMember} comments = {this.state.currApplicantComments}/>
+                                <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.currApplicantLikedByMember} comments = {this.state.currApplicantComments} member={this.state.currMemberId}/>
                             </div>
                             <div id="applicant-action-container">
-                                <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.likedApplicant} handleLike={this.handleLike}/>
+                                <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.currApplicantLikedByMember} handleLike={this.handleLike}/>
                                 <NextInfoBarItem handleNext={this.handleNext}/>
                             </div>
                         </div>
