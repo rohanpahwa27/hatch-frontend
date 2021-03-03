@@ -411,7 +411,11 @@ class ManageApplicants extends Component {
                         <div>
                             {/* this.state.allApplicants.length === 0 */}
                             {this.state.showImportPage == true ?
-                                <ImportApplicants reloadPage={this.reloadPage}/>
+                                <ImportApplicants
+                                    reloadPage={this.reloadPage}
+                                    allApplicants={this.state.allApplicants}
+                                    toggleShowImport={this.toggleShowImport}
+                                />
                                 :
                                 (
                                     <div id="manage-applicant-grid-container">
