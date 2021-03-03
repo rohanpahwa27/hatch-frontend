@@ -141,7 +141,7 @@ class SignupCard extends React.Component {
         onChange={this.handleOrg}
         maxLength="4"
       />
-      signup = <p className="adminSignUp">if your group doesn’t have an add code or a Hatch account, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
+      // signup = <p className="adminSignUp">if your group doesn’t have an add code or a Hatch account, <Link className='signupLink' to="/signup?query=admin">sign up as a administrator </Link></p>
     } else {
       organizationNameorCode = <InputField
         label="Organization Name"
