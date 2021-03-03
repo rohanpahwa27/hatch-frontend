@@ -21,12 +21,12 @@ function App() {
         <Route exact path="/">
           <Redirect to="/Login" />
         </Route>
-        <PublicRoute restricted={true} component={<Signup />} path="/Signup" exact />
-        <PrivateRoute component={<Home/>} loadingScreen={true} path="/Home" exact />
-        <PublicRoute restricted={true} component={<Login />} path="/Login" exact />
-        <PrivateRoute component={<Applicant />} path="/Applicant" exact />
-        <AdminRoute component={<ManageApplicants />} path="/Admin/Applicants" exact />
-        <AdminRoute component={<ManageMembers />} path="/Admin/Members" exact />
+        <PublicRoute restricted={true} component={<Signup />} path="/signup" exact />
+        <PrivateRoute component={<Home/>} loadingScreen={true} path="/home" exact />
+        <PublicRoute restricted={true} component={<Login />} path="/login" exact />
+        <PrivateRoute component={<Applicant />} path="/applicant" exact />
+        <AdminRoute component={<ManageApplicants />} path="/admin/applicants" exact />
+        <AdminRoute component={<ManageMembers />} path="/admin/members" exact />
         <Route path="/page" component={Page} />
         <PublicRoute restricted={true} component={<ForgotPassword />} path="/forgot-password" exact />
         <PublicRoute restricted={true} component={<ResetPassword />} path="/reset-password/:token" exact />
