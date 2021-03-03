@@ -68,7 +68,7 @@ class LoginCard extends Component {
         <div id="login-card-content">
           <p id="login-welcome-back"> Welcome back! </p>
           <LoginForm email={this.state.email} password={this.state.password} handleSubmit={this.handleSubmit} handleEmailChange={this.handleEmailChange} handlePasswordChange={this.handlePasswordChange} errors={errors} />
-          <p id="create-account-label">Or, create an account to get started</p>
+          <p id="create-account-label">Or, create an account to get started </p>
           <div id="sign-up-links">
             <a href="signup?query=member" className="login-link">Sign up as a member</a>
             {/* <a href="signup?query=admin" className="login-link" id="admin-login-signup">Sign up as an administrator</a> */}
