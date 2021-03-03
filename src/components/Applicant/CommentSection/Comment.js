@@ -17,7 +17,6 @@ class Comment extends Component {
     componentDidMount = async () => {
         const commenterID = this.props.commenterID;
         const memberResponse = await api.getMemberById(commenterID);
-        console.log(memberResponse.data.member)
         this.setState({
             commenter: memberResponse.data.member,
             likedComment: this.props.likes.includes(this.props.currMember) ^ this.state.liveLikeStatus            
