@@ -25,7 +25,7 @@ class TableRow extends Component {
         )
 
         const name = (
-            <td className="name-div">
+            <td className="name-div table-data-cell">
                 <img className="member-image" src={this.props.imgURL} alt="Headshot" />
                 <span className="member-name row-item truncate-text-admin-members">{this.props.firstName} {this.props.lastName}</span>
             </td>

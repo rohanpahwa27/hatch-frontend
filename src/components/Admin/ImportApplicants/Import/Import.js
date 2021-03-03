@@ -43,21 +43,31 @@ class Import extends Component {
             id="back-button-import"
             // Have onclick call toggleImportPage (import1) IFF numApplicants == 0
             // Have onclick call toggleShowImport (import2 only) IFF numApplicants >= 1
-            onClick={this.props.allApplicants.length === 0 ? 
+            onClick={this.props.allApplicants.length === 0 ?
               this.props.toggleImportPage : this.props.toggleShowImport
             }
           >
             <img id="small-icon" src={backIcon} alt="Back icon" />
               &nbsp;Back
           </button>
+          <p id="add-applicants-text">Add applicants to Hatch</p>
         </div>
-        <div id="download-template-item">
-          <p id="large">Add applicants to Hatch</p>
-          <br />
+        <div id="info-text-item">
+          {/* <br /> */}
           <p>
             Compile a Excel (xlsx) or comma separated value (csv) file, either manually or by using our template, in the same format as the example
           </p>
-          <br />
+          <p>
+            For the <b>Recruiting cycle</b> field:
+          </p>
+          <p>
+            <ul>
+              <li>it can help to use a wide timeframe like “Spring 2020” that applies to many applicants</li>
+              <li>check to make sure each recruiting cycle is typed the same way for all applicants</li>
+            </ul>
+          </p>
+        </div>
+        <div id="download-template-item">
           <button id="download-template-button"
             onClick={this.downloadTemplate}>
             <img id="small-icon" src={downloadIcon} alt="Download icon" />
