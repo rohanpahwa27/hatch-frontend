@@ -23,7 +23,7 @@ class CommentSection extends Component {
     render() {
         const commentComponents = this.props.comments.map((comments, index) => {
             const comment = <Comment 
-                key={index}
+                key={comments._id}
                 applicantId={this.props.applicant.id}
                 currMember={this.props.member}
                 likes={comments.likes}
