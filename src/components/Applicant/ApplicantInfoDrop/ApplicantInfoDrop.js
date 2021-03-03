@@ -10,7 +10,7 @@ class ApplicantInfoDrop extends Component {
               {extraFields.map((extraField, index) => (
                   <div id = "field" key={extraField}>
                     <div id = "title" key={extraField}>{extraField} </div>
-                    <div id = "info" key={index}> {extraFieldContents[index]}</div>
+                    <div id = "info" key={index}> {extraFieldContents[index] ? extraFieldContents[index] : ""}</div>
                   </div>
               ))}
             </>
