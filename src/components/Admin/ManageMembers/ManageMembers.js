@@ -7,12 +7,14 @@ import Search from "./Search/Search"
 import api from "../../../Api/api"
 import Logo from "../../Logo/Logo";
 import SideNavBar from "../../SideNavBar/SideNavBar";
+import EmptyState from "./EmptyState"
 
 var memberData = []
 class ManageMembers extends Component {
     constructor() {
         super()
         this.state = {
+            showEmptyState: null,
             tableData: memberData, 
             query: "",
             selected: new Set(),
@@ -47,7 +49,7 @@ class ManageMembers extends Component {
             if (index > -1) memberData.splice(index, 1);
             const organizationResponse = await api.getOrgById()
             const orgCode = organizationResponse.data.organization.addCode
-            this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode, numMembersShowing: memberData.length})
+            this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode, numMembersShowing: memberData.length, showEmptyState: memberData.length==0})
         } catch (error) {
             console.log(error)
         }
@@ -78,7 +80,7 @@ class ManageMembers extends Component {
         const queryText = event.target.value
         const filteredMembers = memberData.filter(member => {
             const memberFullName = member.firstName + " " + member.lastName
-            return memberFullName.toLowerCase().indexOf(queryText) > -1;
+            return memberFullName.toLowerCase().indexOf(queryText.toLowerCase()) > -1;
         })
 
         this.setState({
@@ -358,7 +360,7 @@ class ManageMembers extends Component {
         const userID = resp.data.user._id
         const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
-        this.setState({tableData: memberData, totalMembers: memberData.length})
+        this.setState({tableData: memberData, totalMembers: memberData.length, showEmptyState: memberData.length==0})
         this.setState({selected: new Set()})
     }
 
@@ -368,23 +370,25 @@ class ManageMembers extends Component {
         const userID = resp.data.user._id
         const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
         if (index > -1) memberData.splice(index, 1);
-        this.setState({tableData: memberData, totalMembers: memberData.length})
+        this.setState({tableData: memberData, totalMembers: memberData.length, showEmptyState: memberData.length==0})
         this.setState({selected: new Set()})
     }
 
     render() {
+        console.log('Show Empty State:', this.state.showEmptyState, 'length=0', this.state.tableData.length==0)
+        console.log('Show Empty State:', this.state.showEmptyState)
         return (
             <div id="page-grid-container">
                 <Logo />
                 <SideNavBar />
                 <div id="navbar-content-grid-container">
                     <Navbar/>
-                    <div id="manage-members-grid-container">
-                        {/* Pass handleSort function down all the way to TableHeader */}
-                        <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
-                        <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
-                        <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
-                    </div>
+                    {this.state.showEmptyState == null ? null: (this.state.showEmptyState ? <EmptyState orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/> : (
+                        <div id="manage-members-grid-container">
+                            <Search query={this.state.query} handleSearch={this.handleSearch} numMembersShowing={this.state.numMembersShowing} totalMembers={memberData.length} orgCode={this.state.orgCode} generateOrgCode={this.generateOrgCode}/>
+                            <Table data={this.state.tableData} handleSelected={this.handleSelected} isSelected={this.isSelected} handleSort={this.handleSort} selectAll={this.selectAll} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} />
+                            <UpdateMembersCard numSelected={this.state.selected.size} deleteMembers={this.deleteMembers} updateMembers={this.updateMembers}/>
+                        </div>))}
                 </div>
             </div>
             
