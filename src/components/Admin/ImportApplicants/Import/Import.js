@@ -55,7 +55,7 @@ class Import extends Component {
         <div id="info-text-item">
           {/* <br /> */}
           <p>
-            Compile a Excel (xlsx) or comma separated value (csv) file, either manually or by using our template, in the same format as the example
+            Compile a Excel (xlsx), either manually or by using our template, in the same format as the example
           </p>
           <p>
             For the <b>Recruiting cycle</b> field:

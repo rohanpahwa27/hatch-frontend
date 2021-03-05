@@ -130,7 +130,7 @@ class Home extends Component {
 
         const filteredApplicants = allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName
-            return applicantFullName.toLowerCase().indexOf(queryText) > -1;
+            return applicantFullName.toLowerCase().indexOf(queryText.toLowerCase()) > -1;
         })
 
         const updatedApplicants = filteredApplicants.filter(applicant => {

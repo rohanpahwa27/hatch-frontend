@@ -100,3 +100,36 @@ body {
   border: 0;
   border-radius: 10px;
 }
+
+#empty-state-text{
+  font-size: 13px;
+line-height: 150%;
+/* or 19px */
+
+text-align: center;
+}
+
+#empty-members-grid-container {
+  display: grid;
+  grid-template-rows: 3fr 3fr 4fr;
+  grid-template-columns: 2fr 1.5fr 2fr;
+
+  height: 100vh;
+  font-size: 13px;
+}
+
+#group-add-code-empty-state{
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: bold;
+}
+
+#get-new-code-empty-state{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 150%;
+  text-decoration-line: underline;
+  color: #00A991;
+  cursor: pointer;
+}

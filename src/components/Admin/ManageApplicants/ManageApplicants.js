@@ -24,8 +24,7 @@ class ManageApplicants extends Component {
             numApplicantsShowing: 0,
             showImportPage: false,
             sortBy: "name",
-            sortDirection: "descending",
-            orgCode: ""
+            sortDirection: "descending"
         };
 
         this.handleSearch = this.handleSearch.bind(this);
@@ -50,16 +49,10 @@ class ManageApplicants extends Component {
             const orgId = localStorage.getItem("orgID");
             const applicantResponse = await api.getApplicantsInOrg(orgId);
             let applicantData = applicantResponse.data.applicants;
-            const index = applicantData.map(function (e) { return e._id; }).indexOf(localStorage.getItem('userID'));
-            if (index > -1) applicantData.splice(index, 1);
-
-            const organizationResponse = await api.getOrgById(orgId);
-            const orgCode = organizationResponse.data.organization.addCode;
             this.setState({
                 allApplicants: applicantData,
                 tableData: applicantData,
                 numApplicantsShowing: applicantData.length,
-                orgCode: orgCode
             });
         } catch (error) {
 
@@ -133,7 +126,7 @@ class ManageApplicants extends Component {
         // filtering applicantData is the problem here
         const filteredApplicants = allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName;
-            return applicantFullName.toLowerCase().indexOf(queryText) > -1;
+            return applicantFullName.toLowerCase().indexOf(queryText.toLowerCase()) > -1;
         });
 
         const updatedApplicants = filteredApplicants.filter(applicant => {
