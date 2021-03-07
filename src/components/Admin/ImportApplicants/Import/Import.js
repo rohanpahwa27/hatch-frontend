@@ -20,7 +20,6 @@ class Import extends Component {
 
   handleFileUploadChange = async (event) => {
     this.setState({ selectedFile: event.target.files[0] });
-    this.sendFile();
   };
 
   sendFile = async (event) => {
