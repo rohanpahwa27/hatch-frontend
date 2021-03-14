@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./ForgotPassword.css";
 import ForgotPasswordCard from "./ForgotPasswordCard/ForgotPasswordCard";
-import LogoSlogan from "./LogoSlogan/LogoSlogan.js"
+import LogoSlogan from "../LogoSlogan/LogoSlogan.js"
 
 class ForgotPassword extends Component {
   render() {

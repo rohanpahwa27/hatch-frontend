@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./ResetPassword.css";
 import ResetPasswordCard from "./ResetPasswordCard/ResetPasswordCard";
-import LogoSlogan from "./LogoSlogan/LogoSlogan.js"
+import LogoSlogan from "../LogoSlogan/LogoSlogan.js"
 
 class ResetPassword extends Component {
   render() {
