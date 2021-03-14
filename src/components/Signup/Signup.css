@@ -1,13 +1,20 @@
-body {
-    background: #e5e5e5 !important;
+#signup-grid-container {
+    display: grid;
+
+    background-color: #F5F7F9;
+    justify-items: center;
+
+    width: 100vw;
+    height: 100vh;
 }
 
 #signup-grid-item {
     /* Grid item properties */
     grid-row: 1 / -1;
     grid-column: 1 / - 1;
-    /* min-width: 600px; */
-    /* min-width: 50%; */
+
+    width: 650px;
+    padding-top: 48px;
 }
 
 @media only screen and (max-width: 805px) {

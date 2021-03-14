@@ -113,7 +113,7 @@ class ResetPasswordCard extends Component {
           <p id="create-account-label">Or, create an account to get started</p>
           <div id="sign-up-links">
             <a href="signup?query=member">Sign up as a member</a>
-            <a href="signup?query=admin">Sign up as an administrator</a>
+            {/* <a href="signup?query=admin">Sign up as an administrator</a> */}
           </div>
         </div>
       </div>
