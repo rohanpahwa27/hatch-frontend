@@ -9,21 +9,21 @@ class ImportApplicants extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      onImportPage: this.props.allApplicants.length === 0 ?
-       false : true,
+      // onImportPage: this.props.allApplicants.length === 0 ?
+      //  false : true,
     }
   }
 
-  toggleImportPage = () => {
-    this.setState({
-      onImportPage: !this.state.onImportPage
-    });
-  }
+  // toggleImportPage = () => {
+  //   this.setState({
+  //     onImportPage: !this.state.onImportPage
+  //   });
+  // }
 
   render() {
     return (
       <div>
-        {
+        {/* {
           this.state.onImportPage ?
             <Import
               allApplicants={this.props.allApplicants}
@@ -31,7 +31,7 @@ class ImportApplicants extends Component {
               toggleShowImport={this.props.toggleShowImport}
               reloadPage={this.props.reloadPage}
             />
-            :
+            : */}
             <div id="import-home-grid-container">
               <div id="import-grid-container">
                 {/* div flex start container 1 - icon */}
@@ -44,16 +44,18 @@ class ImportApplicants extends Component {
                 </div>
                 {/* div flex end container 3 - button */}
                 <div id="import-button-container">
-                  <button
-                    id="import-button"
-                    onClick={this.toggleImportPage}
-                  >
-                    Import applicant information
+                  <Link to="/admin/applicants">
+                    <button
+                      id="import-button"
+                    // onClick={this.gotoAdminImport}
+                    >
+                      Import applicant information
                   </button>
+                  </Link>
                 </div>
               </div>
             </div>
-        }
+        {/* } */}
       </div>
     );
   }
