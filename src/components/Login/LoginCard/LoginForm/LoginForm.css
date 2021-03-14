@@ -3,14 +3,14 @@
 }
 
 #login-card-content input {
-    width: 100%;
+    /* width: 100%; */
 }
 
 .login-label{
     font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 20px;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
 }
 
 #sign-up-links {
@@ -35,5 +35,5 @@ line-height: 20px;
 }
 
 #login-button {
-    width: 100%;
+    /* width: 100%; */
 }
