@@ -4,7 +4,8 @@ import "./ManageApplicants.css";
 import api from "../../../Api/api";
 import Navbar from "../../Navbar/Navbar.js";
 
-import ImportApplicants from "../ImportApplicants/ImportApplicants.js";
+// import ImportApplicants from "../ImportApplicants/ImportApplicants.js";
+import Import from "../ImportApplicants/Import/Import.js";
 import TableToolbar from "./TableToolbar/TableToolbar.js";
 import Table from "./Table/Table.js";
 import UpdateApplicantsCard from "./UpdateApplicantsCard/UpdateApplicantsCard.js";
@@ -404,10 +405,9 @@ class ManageApplicants extends Component {
                         <div>
                             {/* this.state.allApplicants.length === 0 */}
                             {this.state.showImportPage == true ?
-                                <ImportApplicants
+                                <Import
                                     reloadPage={this.reloadPage}
                                     allApplicants={this.state.allApplicants}
-                                    toggleShowImport={this.toggleShowImport}
                                 />
                                 :
                                 (

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Import.css";
+import { Link } from "react-router-dom";
 import api from "../../../../Api/api.js";
 
 import exampleImage from "./Assets/example.png";
@@ -38,17 +39,19 @@ class Import extends Component {
     return (
       <div id="import-applicants-grid-container">
         <div id="back-button-item">
-          <button
-            id="back-button-import"
-            // Have onclick call toggleImportPage (import1) IFF numApplicants == 0
-            // Have onclick call toggleShowImport (import2 only) IFF numApplicants >= 1
-            onClick={this.props.allApplicants.length === 0 ?
-              this.props.toggleImportPage : this.props.toggleShowImport
-            }
+          <a id="back-button-link"
+            // Have onclick goto home (import1) IFF numApplicants == 0
+            // Have onclick goto manage applicants (import2) IFF numApplicants >= 1
+            href={this.props.allApplicants.length === 0 ?
+              "/home" : "/admin/applicants"}
           >
-            <img id="small-icon" src={backIcon} alt="Back icon" />
+            <button
+              id="back-button-import"
+            >
+              <img id="small-icon" src={backIcon} alt="Back icon" />
               &nbsp;Back
           </button>
+          </a>
           <p id="add-applicants-text">Add applicants to Hatch</p>
         </div>
         <div id="info-text-item">

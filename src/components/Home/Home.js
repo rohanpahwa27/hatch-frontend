@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
 import "./Home.css";
 
+import ImportApplicants from "../Admin/ImportApplicants/ImportApplicants.js";
 import Table from "./Table/Table.js";
 import Logo from "../Logo/Logo.js";
 import SideNavBar from "../SideNavBar/SideNavBar.js";
@@ -16,7 +17,7 @@ class Home extends Component {
         // allApplicants is all of the applicants in the organization
         // tableData is only the applicants currently showing in the table
         this.state = {
-            allApplicants: [],
+            allApplicants: null,
             tableData: [],
             query: "",
             filters: new Set(["Active"]),
@@ -52,7 +53,7 @@ class Home extends Component {
                         organization: applicant.organization,
                         imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
                     }
-                    
+
                     return applicantInfo
                 })
 
@@ -350,21 +351,45 @@ class Home extends Component {
         })
     }
 
+    reloadPage() {
+        this.props.history.go(0);
+    }
+
     render() {
+        console.log(this.state.allApplicants)
         return (
             <div id="page-grid-container">
                 <Logo />
                 <SideNavBar />
-                <div id="home-grid-container">
-                    <SearchAndFilter
-                        query={this.state.query} handleSearch={this.handleSearch}
-                        filters={this.state.filters} handleFilter={this.handleFilter}
-                    />
-
-                    <ShowingApplicantsLabel numApplicantsShowing={this.state.numApplicantsShowing} totalApplicants={this.state.allApplicants.length} />
-                    {/* Pass handleSort function down all the way to TableHeader */}
-                    <Table data={this.state.tableData} handleSort={this.handleSort} sortBy={this.state.sortBy} sortDirection={this.state.sortDirection} handleClick={this.handleClick} />
-                </div>
+                {this.state.allApplicants === null ?
+                    <div>{this.state.allApplicants}</div>
+                    :
+                    <div>
+                        {this.state.allApplicants.length === 0 ?
+                            <ImportApplicants
+                                reloadPage={this.reloadPage}
+                                allApplicants={this.state.allApplicants}
+                            />
+                            :
+                            <div id="home-grid-container">
+                                <SearchAndFilter
+                                    query={this.state.query} handleSearch={this.handleSearch}
+                                    filters={this.state.filters} handleFilter={this.handleFilter}
+                                />
+                                <ShowingApplicantsLabel
+                                    numApplicantsShowing={this.state.numApplicantsShowing}
+                                    totalApplicants={this.state.allApplicants.length}
+                                />
+                                <Table
+                                    data={this.state.tableData}
+                                    handleSort={this.handleSort}
+                                    sortBy={this.state.sortBy}
+                                    sortDirection={this.state.sortDirection}
+                                    handleClick={this.handleClick}
+                                />
+                            </div>}
+                    </div>
+                }
             </div>
         )
     }

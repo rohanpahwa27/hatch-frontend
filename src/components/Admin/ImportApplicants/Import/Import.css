@@ -61,6 +61,10 @@ body {
     height: auto;
 }
 
+#back-button-link {
+    text-decoration: none;
+}
+
 #back-button-import {
     cursor: pointer;
     background-color: #ffffff;
