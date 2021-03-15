@@ -59,27 +59,27 @@ class TableRow extends Component {
             </td>
         );
 
-        // const dateAdded = (
-        //     <td className="manage-table-data-cell">
-        //         <span className="manage-row-item">Feb 2, 2021</span>
-        //     </td>
-        // );
+        const dateAdded = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">Feb 2, 2021</span>
+            </td>
+        );
 
-        // const dateModified = (
-        //     <td className="manage-table-data-cell">
-        //         <span className="manage-row-item">Feb 2, 2021</span>
-        //     </td>
-        // );
+        const dateModified = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">Feb 2, 2021</span>
+            </td>
+        );
 
         components.push(select);
         components.push(name);
         components.push(likes);
         components.push(comments);
-        // components.push(dateAdded);
-        // components.push(dateModified);
-
+        components.push(dateAdded);
+        components.push(dateModified);
+        
         return (
-            <tr id="manage-table-row-grid-container">
+            <tr id={this.props.isSelected(this.props.applicantId) ? "manage-table-row-grid-container-selected" : "manage-table-row-grid-container" }>
                 {components}
             </tr>
         );

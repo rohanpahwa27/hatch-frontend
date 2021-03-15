@@ -6,7 +6,7 @@ body {
   display: grid;
   grid-template-rows: 50px;
 
-  min-width: 1000px;
+  /* min-width: 1000px; */
 }
 
 

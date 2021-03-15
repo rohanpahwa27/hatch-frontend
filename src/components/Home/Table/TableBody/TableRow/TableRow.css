@@ -9,6 +9,7 @@
     grid-template-columns: 4fr 1fr 1fr;
     justify-items: flex-start;
     align-items: center;
+    cursor: pointer;
 }
 
 #table-row-grid-container:hover {
