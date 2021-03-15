@@ -1,12 +1,10 @@
 #manage-table-row-grid-container {
-    /* Grid item properties */
     height: 100%;
     width: 100%;
 
-    /* Grid container properties */
     display: grid;
-    grid-template-columns: 1fr 4fr 2fr 1fr 1fr 2fr;
-    /* grid-template-columns: 98px 255px minmax(30px, 230px) 104px 178px 104px 104px; */
+    /* grid-template-columns: 1fr 4fr 2fr 1fr 1fr 2fr; */
+    grid-template-columns: 98px minmax(285px , 485px) 104px 178px 104px 104px;
     
     justify-items: flex-start;
     align-items: center;
@@ -16,11 +14,24 @@
     background-color: #F8F8F8;
 }
 
+#manage-table-row-grid-container-selected {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    /* grid-template-columns: 1fr 4fr 2fr 1fr 1fr 2fr; */
+    grid-template-columns: 98px minmax(285px , 485px) 104px 178px 104px 104px;
+    
+    justify-items: flex-start;
+    align-items: center;
+    background-color: #F8F8F8;
+}
+
 .manage-table-data-cell {
     grid-column: span 1;
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 .manage-checkbox-div {
@@ -42,9 +53,15 @@
 }
 
 .manage-applicant-name {
-    /* margin-left: 3%; */
+    margin-left: 12px;
 }
 
 .manage-row-item {
     font-size: 13px;
+}
+
+.manage-heart-icon, .manage-comment-icon {
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
 }

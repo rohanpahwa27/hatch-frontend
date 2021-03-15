@@ -1,6 +1,10 @@
-import React, { Component } from "react"
-import "./TableRow.css"
+import React, { Component } from "react";
+import "./TableRow.css";
+import emptyHeart from "./Icons/emptyHeart.png";
+import filledHeart from "./Icons/filledHeart.png";
+import commentsImage from "./Icons/comment.png";
 import Checkbox from "@kiwicom/orbit-components/lib/Checkbox";
+import Badge from "@kiwicom/orbit-components/lib/Badge";
 
 const Check = ({ applicantId, handleSelected, isSelected }) => {
     let [checked] = React.useState(false);
@@ -34,43 +38,48 @@ class TableRow extends Component {
         const name = (
             <td className="manage-name-div manage-table-data-cell">
                 <img className="manage-applicant-image" src={this.props.imageUrl} alt="Headshot" />
-                <span className="manage-row-item manage-applicant-name">&nbsp;{this.props.firstName} {this.props.lastName}</span>
+                <span className="manage-row-item manage-applicant-name">
+                    {this.props.status === "Inactive" ? <Badge type="info">Withdrawn</Badge> : null}
+                    &nbsp;{this.props.firstName} {this.props.lastName}
+                </span>
             </td>
         );
 
         const likes = (
             <td className="manage-table-data-cell">
+                <img className="manage-heart-icon" src={emptyHeart} alt="Heart icon" />
                 <span className="manage-row-item">{this.props.likes}</span>
             </td>
         );
 
         const comments = (
             <td className="manage-table-data-cell">
+                <img className="manage-comment-icon" src={commentsImage} alt="Comments icon" />
                 <span className="manage-row-item">{this.props.comments}</span>
             </td>
         );
 
-        // const dateAdded = (
-        //     <td className="manage-table-data-cell">
-        //         <span className="manage-row-item">Feb 2, 2021</span>
-        //     </td>
-        // );
+        const dateAdded = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">Feb 2, 2021</span>
+            </td>
+        );
 
-        // const dateModified = (
-        //     <td className="manage-table-data-cell">
-        //         <span className="manage-row-item">Feb 2, 2021</span>
-        //     </td>
-        // );
+        const dateModified = (
+            <td className="manage-table-data-cell">
+                <span className="manage-row-item">Feb 2, 2021</span>
+            </td>
+        );
 
         components.push(select);
         components.push(name);
         components.push(likes);
         components.push(comments);
-        // components.push(dateAdded);
-        // components.push(dateModified);
-
+        components.push(dateAdded);
+        components.push(dateModified);
+        
         return (
-            <tr id="manage-table-row-grid-container">
+            <tr id={this.props.isSelected(this.props.applicantId) ? "manage-table-row-grid-container-selected" : "manage-table-row-grid-container" }>
                 {components}
             </tr>
         );

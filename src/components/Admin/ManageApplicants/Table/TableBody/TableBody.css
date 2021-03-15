@@ -7,7 +7,7 @@
     width: 100%;
 
     overflow-x: scroll;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
     justify-items: center;
     align-items: center;

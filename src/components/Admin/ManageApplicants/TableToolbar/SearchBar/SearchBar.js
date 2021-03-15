@@ -7,7 +7,14 @@ class SearchBar extends Component {
     render() {
         return (
             <div id="toolbar-search-bar-flex-container">
-                <InputField id="toolbar-search-bar" prefix={<Search />} type="text" placeholder="Search applicants" value={this.props.query} onChange={event => this.props.handleSearch(event)} />
+                <InputField
+                    id="toolbar-search-bar"
+                    prefix={<Search />}
+                    type="text"
+                    placeholder="Search applicants"
+                    value={this.props.query}
+                    onChange={event => this.props.handleSearch(event)}
+                />
             </div>
         )
     }

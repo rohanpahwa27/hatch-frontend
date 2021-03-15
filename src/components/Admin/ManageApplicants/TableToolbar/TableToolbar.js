@@ -14,7 +14,7 @@ class TableToolbar extends Component {
                 <Filter filters={this.props.filters} handleFilter={this.props.handleFilter} />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
                 {/* <div style={{flexGrow: 1}}></div> */}
-                <Download downloadApplicantsExcel={this.props.downloadApplicantsExcel}/>
+                {/* <Download downloadApplicantsExcel={this.props.downloadApplicantsExcel}/> */}
                 <AddApplicant toggleShowImport={this.props.toggleShowImport}/>
             </div>
         )

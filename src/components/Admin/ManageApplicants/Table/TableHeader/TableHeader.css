@@ -5,8 +5,8 @@
 
     /* Grid container properties */
     display: grid;
-    grid-template-columns: 1fr 4fr 2fr 1fr 1fr 2fr;
-    /* grid-template-columns: 98px 255px minmax(30px, 230px) 104px 178px 104px 104px; */
+    /* grid-template-columns: 1fr 4fr 2fr 1fr 1fr 2fr; */
+    grid-template-columns: 98px minmax(285px , 485px) 104px 178px 104px 104px;
     
     justify-items: flex-start;
     align-items: center;

@@ -33,7 +33,7 @@ class TableHeader extends Component {
                         <img className="sort-arrow comments-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null}                 
                     </th>
 
-                    {/* <th id="applicant-header" className="dateAdded-header-click-area" onClick={event => this.props.handleSort(event)}>
+                    <th id="applicant-header" className="dateAdded-header-click-area" onClick={event => this.props.handleSort(event)}>
                         <span className="applicant-column-header-span dateAdded-header-click-area" style={sortBy === "dateAdded" ? {fontWeight: "bold"} : null}>Date Added</span>
                         {sortBy === "dateAdded" ? 
                         <img className="sort-arrow dateAdded-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
@@ -43,7 +43,7 @@ class TableHeader extends Component {
                         <span className="applicant-column-header-span dateModified-header-click-area" style={sortBy === "dateModified" ? {fontWeight: "bold"} : null}>Date Modified</span>
                         {sortBy === "dateModified" ? 
                         <img className="sort-arrow dateModified-header-click-area" src={sortDirection === "ascending" ? upArrow : downArrow} alt="Sort arrow" /> : null} 
-                    </th> */}
+                    </th>
                 </tr>
             </thead>
         )
