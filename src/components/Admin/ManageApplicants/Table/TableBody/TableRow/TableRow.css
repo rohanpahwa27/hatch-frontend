@@ -42,9 +42,15 @@
 }
 
 .manage-applicant-name {
-    /* margin-left: 3%; */
+    margin-left: 12px;
 }
 
 .manage-row-item {
     font-size: 13px;
+}
+
+.manage-heart-icon, .manage-comment-icon {
+    margin-right: 10%;
+    width: 16px;
+    height: 16px;
 }
