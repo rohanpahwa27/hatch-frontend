@@ -50,6 +50,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --watch",
+    "start:prod": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
