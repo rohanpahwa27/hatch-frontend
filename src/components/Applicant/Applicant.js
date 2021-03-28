@@ -110,16 +110,19 @@ class Applicant extends Component {
             this.setState({
                 currApplicantId: this.state.allApplicantIds[0],
                 allApplicants: null
-            }, () => {this.componentDidMount()});
+            });
         }
+
         this.setState({
             currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
-        }, () => {this.componentDidMount()});
+        });
 
         this.props.history.push({
             pathname: '/applicant',
             search: this.state.currApplicantId
-        })
+        });
+
+        this.componentDidMount();
     }
 
     handleLike = async () => {
