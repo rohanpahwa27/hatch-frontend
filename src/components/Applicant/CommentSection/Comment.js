@@ -1,5 +1,6 @@
 import React from "react"
 import "./Comment.css"
+import CommentSection from "./CommentSection"
 
 export default function Comment(props) {
     const trash = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Delete/SVG/ic_fluent_delete_16_regular.svg"
@@ -21,12 +22,12 @@ export default function Comment(props) {
         // (props.currMemberName != "") ?
             <div id="comments-grid-container" onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
                 <div id="comment-frame">
-                    {/* <div id="image">
+                    <div id="image">
                         <img className="comment-user-image" src={props.profile} alt="Headshot" />
-                    </div> */}
+                    </div>
                     <div id="comment-information">
                         <div id="comment-container">
-                            <span className="comment-name">Test</span>
+                            <span className="comment-name">{props.commenterName}</span>
                             <span className="comment">{props.comment}</span>
                         </div>
                         <div id="comment-additional-info">
