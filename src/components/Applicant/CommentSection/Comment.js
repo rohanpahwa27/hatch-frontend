@@ -1,13 +1,14 @@
 import React from "react"
 import "./Comment.css"
-import CommentSection from "./CommentSection"
 
 export default function Comment(props) {
     const trash = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Delete/SVG/ic_fluent_delete_16_regular.svg"
     const liked = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_filled.svg"
     const notLiked = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"  
     
-    const hoverOn = () => props.handleHover(props.commentId);
+    const hoverOn = () => {
+        props.handleHover(props.commentId);
+    }
     const hoverOff = () => props.handleHover(null);
 
     const deleteComment  = () => {
@@ -19,8 +20,7 @@ export default function Comment(props) {
     }
 
     return (
-        // (props.currMemberName != "") ?
-            <div id="comments-grid-container" onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+            <div id="comments-grid-container" onMouseOver={hoverOn} onMouseLeave={hoverOff}>
                 <div id="comment-frame">
                     <div id="image">
                         <img className="comment-user-image" src={props.profile} alt="Headshot" />
@@ -49,7 +49,6 @@ export default function Comment(props) {
                         }
                 </div>
             </div> 
-        // : <div id="loading-comment">Loading </div>
     );
 }
 

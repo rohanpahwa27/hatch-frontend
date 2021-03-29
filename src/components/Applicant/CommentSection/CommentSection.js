@@ -19,8 +19,8 @@ export default function CommentSection (props) {
     }
 
     const deleteComment = async (applicantId, commentId) => {
+        props.handleDelete(commentId);
         await api.deleteComment(applicantId, commentId);
-        props.handleDelete();
     }
 
     const commentComponents = props.comments.map(comments => {

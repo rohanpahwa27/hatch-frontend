@@ -22,11 +22,11 @@ export default function Applicant () {
     const [currApplicantData, setCurrApplicantData] = useState({});
     const [isLikedByCurrMember, setApplicantLike] = useState(false);
     const [allApplicantData, setApplicantData] = useState([]);
-    const [currApplicantComments, setCurrApplicantComments] = useState([]);
+    const [commentData, setCommentData] = useState([]);
     const [testComments, setTestComments] = useState([]);
     const [isLoadingComments, setIsLoading] = useState(true);
-
     const [memberId, setMemberId] = useState("");
+
 
     useEffect(async () => {
         const memberIdResponse = await api.getThisMember();
@@ -55,99 +55,28 @@ export default function Applicant () {
         setApplicantData(applicantData);
         const currApplicantDataInfo = applicantData.find(x => x.id == currApplicantId);
         setCurrApplicantData(currApplicantDataInfo);
-        setCurrApplicantComments(currApplicantDataInfo.comments)
-
-        let currApplicantCommentData = [];
-        let requests = currApplicantDataInfo.comments.map(async (comment) => {
-            const memberResponse = await api.getMemberById(comment.member)
-            currApplicantCommentData.push(
-                {...comment, 
-                name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName, 
-                imageSrc: memberResponse.data.member.imageUrl
-            })
-        });
-
-        Promise.all(requests)
-            .then(() => {
-                console.log(currApplicantCommentData);
-                setTestComments(currApplicantCommentData);
-                setIsLoading(false);
-            });
+        setCommentData(currApplicantDataInfo.comments)
     }, []);
 
-    // useEffect(async () => {
-    //     // for each comment
-    //         // api call and get name + profile photo
-    //         // eventually fix name issue
-    //     console.log("hello")
-    //     for (const comment in currApplicantComments) {
-    //         let memberResponse = await api.getMemberById(comment.member);
-    //         console.log(memberResponse.data.member)
-    //     }
-    // }, []);
-    // componentDidMount = async () => {
-    //     // TODO: if (set timer for a certain time because otherwise we may want to refresh instead of using old data)
-    //     if (!this.state.allApplicants) {
-    //         // Applicant page called by Home / direct URL and not next
-    //         const applicantId = this.state.currApplicantId ? this.state.currApplicantId : this.state.currApplicantPreCall;
-    //         const orgId = localStorage.getItem("orgID");
-    //         // TODO: Add check for valid ids
-    //         const memberId = await api.getThisMember();
+    useEffect(async () => {
+        if ((Object.keys(currApplicantData).length != 0)) {
+            let currApplicantCommentData = testComments;
+            let requests = commentData.map(async (comment) => {
+                const memberResponse = await api.getMemberById(comment.member)
+                    currApplicantCommentData.push(
+                        {...comment, 
+                        name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName, 
+                        imageSrc: memberResponse.data.member.imageUrl
+                })
+            });
 
-    //         const applicantLike = await api.didMemberLikeApplicant(applicantId);
-    //         const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
-    //         const applicantData = allApplicantsResponse.data.applicants.map(applicant => {
-    //             const applicantInfo = {
-    //                 id: applicant._id,
-    //                 firstName: applicant.firstName,
-    //                 lastName: applicant.lastName,
-    //                 email: applicant.email,
-    //                 comments: applicant.comments,
-    //                 likes: applicant.likes,
-    //                 extraFields: applicant.extraFields ? applicant.extraFields : [],
-    //                 status: applicant.status,
-    //                 recruitingCycle: applicant.recruitingCycle,
-    //                 organization: applicant.organization,
-    //                 imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
-    //             }
-    //             return applicantInfo
-    //         });
-
-    //         const applicantIds = applicantData.map(x => x.id);
-    //         const currApplicantData = applicantData.find(x => x.id == applicantId);
-    //         if (currApplicantData != null) {
-    //             this.setState({
-    //                 currMemberId: memberId.data.member._id,
-    //                 currApplicantId: applicantId,
-    //                 currApplicantLikedByMember: applicantLike.data.like,
-    //                 currApplicantData: currApplicantData,
-    //                 currApplicantComments: currApplicantData.comments,
-    //                 allApplicants: applicantData,
-    //                 allApplicantIds: applicantIds,
-    //                 likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
-    //             });
-    //         } else {
-    //             this.setState({
-    //                 currApplicantPreCall: null
-    //             });
-    //         }
-    //     } else if (this.state.commentChange) {
-    //         const commentsResponse = await api.getComments(this.state.currApplicantId);
-    //         this.setState({
-    //             currApplicantComments: commentsResponse.data.comments,
-    //             commentChange: false
-    //         });
-    //     } else {
-    //         // Applicant page called by next, need to only update the currApplicantInfo
-    //         const currApplicantData = this.state.allApplicants.find(x => x.id == this.state.currApplicantId);
-    //         const applicantLike = await api.didMemberLikeApplicant(this.state.currApplicantId);
-    //         this.setState({
-    //             currApplicantLikedByMember: applicantLike.data.like,
-    //             currApplicantComments: currApplicantData.comments,
-    //             currApplicantData: currApplicantData
-    //         });
-    //     }
-    // }
+            Promise.all(requests)
+                .then(() => {
+                    setTestComments(currApplicantCommentData);
+                    setIsLoading(false);
+                });
+        }
+    }, [commentData]);
 
     const handleNext = () => {
         console.log("next test")
@@ -185,27 +114,34 @@ export default function Applicant () {
     
     const handleNewComment = async () => {
         const commentsResponse = await api.getComments(currApplicantId);
-        setCurrApplicantComments(commentsResponse.data.comments)
+        // TODO: filter to get the comments that aren't already there, will lead to bug if multiple people comment at the same time
+        let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]      
+        const memberResponse = await api.getMemberById(newComment.member)
+
+        let currApplicantCommentData = testComments;
+        currApplicantCommentData.push(
+            {...newComment, 
+            name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName,
+            imageSrc: memberResponse.data.member.imageUrl
+        })
+        setTestComments([])
+        setTestComments(currApplicantCommentData)
     }
 
-    const handleDelete = async () => {
-        // GRAB curr comments
-        // Delete the old comment
-        // Update the thing
-        
-        // const commentsResponse = await api.getComments(currApplicantId);
-        // setTestComments(commentsResponse.data.comments)
+    const handleDelete = async (commentId) => {
+        let newComments = testComments.filter( comment => comment._id !== commentId)
+        setTestComments(newComments)
     }
 
     return (
-        (Object.keys(currApplicantData).length != 0 && Object.keys(currApplicantComments).length != 0) ? // TODO: CHECK IF DATA IS READY , make cleaner function for readability
+        (Object.keys(currApplicantData).length != 0) ? // CHECK IF DATA IS READY TODO: make cleaner function for readability
         <div id="page-grid-container">
             <Logo />
             <SideNavBar />
             <div id="applicant-grid-container">
                 <div id="info-container">
                     <div id="applicantinfobar">
-                        <ApplicantInfo applicant={currApplicantData} likedApplicant={isLikedByCurrMember} comments = {currApplicantComments} member={memberId}/>
+                        <ApplicantInfo applicant={currApplicantData} likedApplicant={isLikedByCurrMember} comments={testComments} member={memberId}/>
                     </div>
                     <div id="applicant-action-container">
                         <LikeInfoBarItem applicantID={currApplicantId} likedApplicant={isLikedByCurrMember} handleLike={handleLike}/>
@@ -213,7 +149,7 @@ export default function Applicant () {
                     </div>
                 </div>
                 <div id="content-container">
-                    <CommentSection applicant = {currApplicantData} comments = {testComments} member={memberId} isLoading={isLoadingComments} handleDelete={handleDelete}/>
+                    <CommentSection applicant = {currApplicantData} comments={testComments} member={memberId} isLoading={isLoadingComments} handleDelete={handleDelete}/>
                     <div id="applicant-side-features-container">
                         <UploadPhoto applicant = {currApplicantData}/>
                         {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
