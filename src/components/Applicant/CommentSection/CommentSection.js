@@ -12,12 +12,6 @@ export default function CommentSection (props) {
         setHover(commentId);
     }
 
-    const [commentLiked, setLike] = useState(false); // TODO: need to make sure init state is correctly reflecting comment like
-    const toggleLike = async (applicantId, commentId) => {
-        setLike(!commentLiked);
-        await api.changeApplicantCommentLike(applicantId, commentId);
-    }
-
     const deleteComment = async (applicantId, commentId) => {
         props.handleDelete(commentId);
         await api.deleteComment(applicantId, commentId);
@@ -35,12 +29,10 @@ export default function CommentSection (props) {
             commentId={comments._id} 
             date={comments.date ? comments.date : ""}
             profile={comments.imageSrc ? comments.imageSrc : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"}
-            likedComment={commentLiked}
-            numLikes={comments.likes.length} // TODO: reflect accurate like num based on live like status
+            likedComment={comments.likes.includes(props.member)}
             hoveredCommentId={hoveredComment}
             handleHover={toggleHover}
             handleDelete={deleteComment}
-            handleLike={toggleLike}
             />
         return comment
     })
