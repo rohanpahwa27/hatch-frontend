@@ -34,7 +34,6 @@ class NewComment extends Component {
     }
 
     render() {
-        let sendIcon = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Send/SVG/ic_fluent_send_24_regular.svg";
         return (
             <div id="new-comment-bar">
                 <div id="new-comment-container">

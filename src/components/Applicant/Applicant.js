@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from "react"
 import {withRouter} from 'react-router-dom'
 import Loading from "@kiwicom/orbit-components/lib/Loading";
 
@@ -16,38 +16,25 @@ import api from "../../Api/api"
 
 import "./Applicant.css"
 
-class Applicant extends Component {
-    constructor() {
-        super()
-        this.state = {
-            currMemberId: null,
-            currApplicantPreCall: window.location.search ? window.location.search.substring(1, window.location.search.length) : this.props.location.state.id,
-            currApplicantId: null,
-            currApplicantLikedByMember: null,
-            currApplicantComments: null,
-            currApplicantData: null,
-            allApplicants: null,
-            allApplicantIds: null,
-            commentChange: false
-        }
+export default function Applicant (props) {
+    const orgId = localStorage.getItem("orgID");
+    const [currApplicantId, setCurrApplicantId] = useState(window.location.search ? window.location.search.substring(1, window.location.search.length) : props.location.state.id);
+    const [currApplicantData, setCurrApplicantData] = useState({});
+    const [isLikedByCurrMember, setApplicantLike] = useState(false);
+    const [allApplicantData, setApplicantData] = useState([]);
+    const [commentData, setCommentData] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [isLoadingComments, setIsLoading] = useState(true);
+    const [isLessThan, setLessThan] = useState(true);
+    const [memberId, setMemberId] = useState("");
+    const [allApplicantIds, setApplicantIds] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
-        this.handleNext = this.handleNext.bind(this)
-        this.handleLike = this.handleLike.bind(this)
-        this.handleNewComment = this.handleNewComment.bind(this)
-    }
-
-    componentDidMount = async () => {
-        // TODO: if (set timer for a certain time because otherwise we may want to refresh instead of using old data)
-        if (!this.state.allApplicants) {
-            // Applicant page called by Home / direct URL and not next
-            const applicantId = this.state.currApplicantId ? this.state.currApplicantId : this.state.currApplicantPreCall;
-            const orgId = localStorage.getItem("orgID");
-            // TODO: Add check for valid ids
-            const memberId = await api.getThisMember();
-
-            const applicantLike = await api.didMemberLikeApplicant(applicantId);
-            const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
-            const applicantData = allApplicantsResponse.data.applicants.map(applicant => {
+    useEffect(async () => {
+        const memberIdResponse = await api.getThisMember();
+        const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
+        const applicantData =
+            allApplicantsResponse.data.applicants.map(applicant => {
                 const applicantInfo = {
                     id: applicant._id,
                     firstName: applicant.firstName,
@@ -64,114 +51,121 @@ class Applicant extends Component {
                 return applicantInfo
             });
 
-            const applicantIds = applicantData.map(x => x.id);
-            const currApplicantData = applicantData.find(x => x.id == applicantId);
-            if (currApplicantData != null) {
-                this.setState({
-                    currMemberId: memberId.data.member._id,
-                    currApplicantId: applicantId,
-                    currApplicantLikedByMember: applicantLike.data.like,
-                    currApplicantData: currApplicantData,
-                    currApplicantComments: currApplicantData.comments,
-                    allApplicants: applicantData,
-                    allApplicantIds: applicantIds,
-                    likedApplicant: applicantLike.data.like ^ this.state.liveLikeStatus
-                });
+        setMemberId(memberIdResponse.data.member._id);
+        setApplicantData(applicantData);
+        setApplicantIds(applicantData.map(x => x.id));
+    }, [refresh]);
+
+    useEffect(async () => {
+        if ((Object.keys(allApplicantData).length != 0)) {
+            const applicantLikeResponse = await api.didMemberLikeApplicant(currApplicantId);
+            setApplicantLike(applicantLikeResponse.data.like)
+
+            const currApplicantDataInfo = allApplicantData.find(x => x.id == currApplicantId);
+            setCurrApplicantData(currApplicantDataInfo);
+            setIsLoading(true);
+            if (currApplicantDataInfo.comments.length < 10) {
+                setLessThan(true);
             } else {
-                this.setState({
-                    currApplicantPreCall: null
-                });
+                setLessThan(false);
             }
-        } else if (this.state.commentChange) {
-            const commentsResponse = await api.getComments(this.state.currApplicantId);
-            this.setState({
-                currApplicantComments: commentsResponse.data.comments,
-                commentChange: false
+            setComments([]);
+            setCommentData(currApplicantDataInfo.comments);
+        }
+    }, [currApplicantId, allApplicantData]);
+
+    useEffect(async () => {
+        if ((Object.keys(currApplicantData).length != 0)) {
+            let currApplicantCommentData = [];
+            let requests = commentData.map(async (comment) => {
+                const memberResponse = await api.getMemberById(comment.member)
+                    currApplicantCommentData.push(
+                        {...comment, 
+                        name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName, 
+                        imageSrc: memberResponse.data.member.imageUrl
+                })
             });
+
+            Promise.all(requests)
+                .then(() => {
+                    setComments(currApplicantCommentData);
+                    setIsLoading(false);
+                });
+        }
+    }, [commentData]);
+
+    const handleNext = () => {
+        const currIdIndex = allApplicantIds.findIndex(id => id === currApplicantId)
+        if (currIdIndex === -1) {
+            setCurrApplicantId(allApplicantIds[0]);
+            // TODO: Add proper error state
+        } else if (currIdIndex === allApplicantIds.length - 1) {
+            setCurrApplicantId(allApplicantIds[0]);
+            setAllApplicantData([])
+            setRefresh(!refresh);
         } else {
-            // Applicant page called by next, need to only update the currApplicantInfo
-            const currApplicantData = this.state.allApplicants.find(x => x.id == this.state.currApplicantId);
-            const applicantLike = await api.didMemberLikeApplicant(this.state.currApplicantId);
-            this.setState({
-                currApplicantLikedByMember: applicantLike.data.like,
-                currApplicantComments: currApplicantData.comments,
-                currApplicantData: currApplicantData
-            });
+            setCurrApplicantId(allApplicantIds[currIdIndex + 1]);
         }
+
+        // TODO: Update URL
+        // props.history.push({
+        //     pathname: '/applicant',
+        //     search: currApplicantId
+        // });
     }
 
-    handleNext = () => {
-        const currIndex = this.state.allApplicantIds.findIndex(id => id === this.state.currApplicantId)
-        if (currIndex === -1) {
-            // TODO: Add a proper error state
-            // console.log("yikes this is an issue for applicant")
-        }
-        if (currIndex === this.state.allApplicantIds.length - 1) {
-            this.setState({
-                currApplicantId: this.state.allApplicantIds[0],
-                allApplicants: null
-            }, () => {this.componentDidMount()});
-        }
-        this.setState({
-            currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
-        }, () => {this.componentDidMount()});
-
-        this.props.history.push({
-            pathname: '/applicant',
-            search: this.state.currApplicantId
-        })
-    }
-
-    handleLike = async () => {
-        await api.changeMemberLikeApplicant(this.state.currApplicantId);
-        this.componentDidMount();
+    const handleLike = async () => {
+        // TODO: double check the data is updated correctly
+        setApplicantLike(!isLikedByCurrMember);
+        await api.changeMemberLikeApplicant(currApplicantId);
     }
     
-    handleNewComment = () => {
-        this.setState({
-            commentChange: true
-        });
-        this.componentDidMount()
+    const handleNewComment = async () => {
+        const commentsResponse = await api.getComments(currApplicantId);
+        // TODO: filter to get the comments that aren't already there, will lead to bug if multiple people comment at the same time
+        let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]      
+        const memberResponse = await api.getMemberById(newComment.member)
+
+        let currApplicantCommentData = comments;
+        currApplicantCommentData.push(
+            {...newComment, 
+            name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName,
+            imageSrc: memberResponse.data.member.imageUrl
+        })
+        setComments([])
+        setComments(currApplicantCommentData)
     }
 
-    handleDelete = () => {
-        this.setState({
-            commentChange: true
-        });
-        this.componentDidMount()
+    const handleDelete = async (commentId) => {
+        let newComments = comments.filter( comment => comment._id !== commentId)
+        setComments(newComments)
     }
 
-    render() {
-        return (
-        (this.state.currApplicantPreCall) ?
-            (this.state.currApplicantData) ?
-                <div id="page-grid-container">
-                    <Logo />
-                    <SideNavBar />
-                    <div id="applicant-grid-container">
-                        <div id="info-container">
-                            <div id="applicantinfobar">
-                                <ApplicantInfo applicant={this.state.currApplicantData} likedApplicant={this.state.currApplicantLikedByMember} comments = {this.state.currApplicantComments} member={this.state.currMemberId}/>
-                            </div>
-                            <div id="applicant-action-container">
-                                <LikeInfoBarItem applicantID={this.state.currApplicantId} likedApplicant={this.state.currApplicantLikedByMember} handleLike={this.handleLike}/>
-                                <NextInfoBarItem handleNext={this.handleNext}/>
-                            </div>
-                        </div>
-                        <div id="content-container">
-                            <CommentSection applicant = {this.state.currApplicantData} comments = {this.state.currApplicantComments} member={this.state.currMemberId} handleDelete={this.handleDelete}/>
-                            <div id="applicant-side-features-container">
-                                <UploadPhoto applicant = {this.state.currApplicantData}/>
-                                {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
-                                <ApplicantInfoDrop applicant = {this.state.currApplicantData}/>
-                            </div>
-                        </div>
-                        <NewComment applicantID={this.state.currApplicantId} handleNewComment={this.handleNewComment}/>
+    return (
+        (Object.keys(currApplicantData).length != 0) ? // CHECK IF DATA IS READY TODO: make cleaner function for readability
+        <div id="page-grid-container">
+            <Logo />
+            <SideNavBar />
+            <div id="applicant-grid-container">
+                <div id="info-container">
+                    <div id="applicantinfobar">
+                        <ApplicantInfo applicant={currApplicantData} likedApplicant={isLikedByCurrMember} comments={comments} member={memberId}/>
                     </div>
-                </div> : <div id="loading-screen"><Loading/></div>
-            : <span>Page does not exist</span>
-        )
-      }
+                    <div id="applicant-action-container">
+                        <LikeInfoBarItem applicantID={currApplicantId} likedApplicant={isLikedByCurrMember} handleLike={handleLike}/>
+                        <NextInfoBarItem handleNext={handleNext}/>
+                    </div>
+                </div>
+                <div id="content-container">
+                    <CommentSection applicant = {currApplicantData} comments={comments} member={memberId} isLoading={isLoadingComments} isLessThan={isLessThan} handleDelete={handleDelete}/>
+                    <div id="applicant-side-features-container">
+                        <UploadPhoto applicant = {currApplicantData}/>
+                        {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
+                        <ApplicantInfoDrop applicant = {currApplicantData}/>
+                    </div>
+                </div>
+                <NewComment applicantID={currApplicantId} handleNewComment={handleNewComment}/>
+            </div>
+        </div> : <div id="loading-screen"><Loading/></div>
+    );
 }
-
-export default withRouter(Applicant)

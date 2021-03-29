@@ -3,21 +3,25 @@ import "./ApplicantInfo.css"
 
 class ApplicantInfo extends Component {
     render() {
-        let grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
-        let heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
-        let filledHeart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_filled.svg"
-        let chat = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Chat/SVG/ic_fluent_chat_16_regular.svg"
-        let placeholder = ""
-        let applicant = this.props.applicant
+        const grayCircleSrc = "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
+        const heart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_regular.svg"
+        const filledHeart = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Heart/SVG/ic_fluent_heart_16_filled.svg"
+        const chat = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Chat/SVG/ic_fluent_chat_16_regular.svg"
+        const placeholder = ""
+        const applicant = this.props.applicant
+        let numLikes = 0
 
-        let numLikes = applicant.likes.length
-        if (this.props.likedApplicant && !(applicant.likes.includes(this.props.member))) {
-            numLikes = numLikes + 1
-        } else if (!this.props.likedApplicant && (applicant.likes.includes(this.props.member))) {
-            numLikes = numLikes - 1
+        if (Object.keys(applicant).length != 0) {
+            numLikes = applicant.likes.length
+            if (this.props.likedApplicant && !(applicant.likes.includes(this.props.member))) {
+                numLikes = numLikes + 1
+            } else if (!this.props.likedApplicant && (applicant.likes.includes(this.props.member))) {
+                numLikes = numLikes - 1
+            }
         }
 
         return (
+            (this.props.member != "" && Object.keys(applicant).length != 0) ? 
             <div id="applicant-info-item">
                 <img id="applicant-image" src={applicant ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />
                 <div id="applicant-info-heading-container">
@@ -36,7 +40,7 @@ class ApplicantInfo extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> : null
         )
     }
 }
