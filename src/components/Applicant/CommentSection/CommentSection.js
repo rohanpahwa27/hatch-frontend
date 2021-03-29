@@ -55,6 +55,7 @@ export default function CommentSection (props) {
                 <img className="no-comments" src={noCommentsImage} alt="No Comments default" />
                 <span id="no-comments-text">No one has commented yet. Be the first!</span>
             </div>
-        : <div><Loading/></div> // TODO: Change to something more aesthetic
+        : 
+        (props.isLessThan) ? null : <div><Loading/></div> // TODO: Change to something more aesthetic
     );
 }

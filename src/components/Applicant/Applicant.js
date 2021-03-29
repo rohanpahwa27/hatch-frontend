@@ -16,25 +16,23 @@ import api from "../../Api/api"
 
 import "./Applicant.css"
 
-export default function Applicant () {
+export default function Applicant (props) {
     const orgId = localStorage.getItem("orgID");
-    const [currApplicantId, setCurrApplicantId] = useState(window.location.search ? window.location.search.substring(1, window.location.search.length) : this.props.location.state.id);
+    const [currApplicantId, setCurrApplicantId] = useState(window.location.search ? window.location.search.substring(1, window.location.search.length) : props.location.state.id);
     const [currApplicantData, setCurrApplicantData] = useState({});
     const [isLikedByCurrMember, setApplicantLike] = useState(false);
     const [allApplicantData, setApplicantData] = useState([]);
     const [commentData, setCommentData] = useState([]);
-    const [testComments, setTestComments] = useState([]);
+    const [comments, setComments] = useState([]);
     const [isLoadingComments, setIsLoading] = useState(true);
+    const [isLessThan, setLessThan] = useState(true);
     const [memberId, setMemberId] = useState("");
-
+    const [allApplicantIds, setApplicantIds] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(async () => {
         const memberIdResponse = await api.getThisMember();
-        const applicantLikeResponse = await api.didMemberLikeApplicant(currApplicantId);
         const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
-
-        setMemberId(memberIdResponse.data.member._id);
-        setApplicantLike(applicantLikeResponse.data.like)
         const applicantData =
             allApplicantsResponse.data.applicants.map(applicant => {
                 const applicantInfo = {
@@ -52,15 +50,33 @@ export default function Applicant () {
                 }
                 return applicantInfo
             });
+
+        setMemberId(memberIdResponse.data.member._id);
         setApplicantData(applicantData);
-        const currApplicantDataInfo = applicantData.find(x => x.id == currApplicantId);
-        setCurrApplicantData(currApplicantDataInfo);
-        setCommentData(currApplicantDataInfo.comments)
-    }, []);
+        setApplicantIds(applicantData.map(x => x.id));
+    }, [refresh]);
+
+    useEffect(async () => {
+        if ((Object.keys(allApplicantData).length != 0)) {
+            const applicantLikeResponse = await api.didMemberLikeApplicant(currApplicantId);
+            setApplicantLike(applicantLikeResponse.data.like)
+
+            const currApplicantDataInfo = allApplicantData.find(x => x.id == currApplicantId);
+            setCurrApplicantData(currApplicantDataInfo);
+            setIsLoading(true);
+            if (currApplicantDataInfo.comments.length < 10) {
+                setLessThan(true);
+            } else {
+                setLessThan(false);
+            }
+            setComments([]);
+            setCommentData(currApplicantDataInfo.comments);
+        }
+    }, [currApplicantId, allApplicantData]);
 
     useEffect(async () => {
         if ((Object.keys(currApplicantData).length != 0)) {
-            let currApplicantCommentData = testComments;
+            let currApplicantCommentData = [];
             let requests = commentData.map(async (comment) => {
                 const memberResponse = await api.getMemberById(comment.member)
                     currApplicantCommentData.push(
@@ -72,38 +88,30 @@ export default function Applicant () {
 
             Promise.all(requests)
                 .then(() => {
-                    setTestComments(currApplicantCommentData);
+                    setComments(currApplicantCommentData);
                     setIsLoading(false);
                 });
         }
     }, [commentData]);
 
     const handleNext = () => {
-        console.log("next test")
-        // TODO: FIX THIS
+        const currIdIndex = allApplicantIds.findIndex(id => id === currApplicantId)
+        if (currIdIndex === -1) {
+            setCurrApplicantId(allApplicantIds[0]);
+            // TODO: Add proper error state
+        } else if (currIdIndex === allApplicantIds.length - 1) {
+            setCurrApplicantId(allApplicantIds[0]);
+            setAllApplicantData([])
+            setRefresh(!refresh);
+        } else {
+            setCurrApplicantId(allApplicantIds[currIdIndex + 1]);
+        }
 
-        // const currIndex = this.state.allApplicantIds.findIndex(id => id === this.state.currApplicantId)
-        // if (currIndex === -1) {
-        //     // TODO: Add a proper error state
-        //     // console.log("yikes this is an issue for applicant")
-        // }
-        // if (currIndex === this.state.allApplicantIds.length - 1) {
-        //     this.setState({
-        //         currApplicantId: this.state.allApplicantIds[0],
-        //         allApplicants: null
-        //     });
-        // }
-
-        // this.setState({
-        //     currApplicantId: currIndex != (this.state.allApplicantIds.length - 1) && currIndex != -1 ? this.state.allApplicantIds[currIndex + 1] : this.state.allApplicantIds[0]
-        // });
-
-        // this.props.history.push({
+        // TODO: Update URL
+        // props.history.push({
         //     pathname: '/applicant',
-        //     search: this.state.currApplicantId
+        //     search: currApplicantId
         // });
-
-        // this.componentDidMount();
     }
 
     const handleLike = async () => {
@@ -118,19 +126,19 @@ export default function Applicant () {
         let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]      
         const memberResponse = await api.getMemberById(newComment.member)
 
-        let currApplicantCommentData = testComments;
+        let currApplicantCommentData = comments;
         currApplicantCommentData.push(
             {...newComment, 
             name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName,
             imageSrc: memberResponse.data.member.imageUrl
         })
-        setTestComments([])
-        setTestComments(currApplicantCommentData)
+        setComments([])
+        setComments(currApplicantCommentData)
     }
 
     const handleDelete = async (commentId) => {
-        let newComments = testComments.filter( comment => comment._id !== commentId)
-        setTestComments(newComments)
+        let newComments = comments.filter( comment => comment._id !== commentId)
+        setComments(newComments)
     }
 
     return (
@@ -141,7 +149,7 @@ export default function Applicant () {
             <div id="applicant-grid-container">
                 <div id="info-container">
                     <div id="applicantinfobar">
-                        <ApplicantInfo applicant={currApplicantData} likedApplicant={isLikedByCurrMember} comments={testComments} member={memberId}/>
+                        <ApplicantInfo applicant={currApplicantData} likedApplicant={isLikedByCurrMember} comments={comments} member={memberId}/>
                     </div>
                     <div id="applicant-action-container">
                         <LikeInfoBarItem applicantID={currApplicantId} likedApplicant={isLikedByCurrMember} handleLike={handleLike}/>
@@ -149,7 +157,7 @@ export default function Applicant () {
                     </div>
                 </div>
                 <div id="content-container">
-                    <CommentSection applicant = {currApplicantData} comments={testComments} member={memberId} isLoading={isLoadingComments} handleDelete={handleDelete}/>
+                    <CommentSection applicant = {currApplicantData} comments={comments} member={memberId} isLoading={isLoadingComments} isLessThan={isLessThan} handleDelete={handleDelete}/>
                     <div id="applicant-side-features-container">
                         <UploadPhoto applicant = {currApplicantData}/>
                         {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
