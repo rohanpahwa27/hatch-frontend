@@ -79,9 +79,9 @@ export default function Applicant (props) {
     useEffect(async () => {
         if ((Object.keys(currApplicantData).length != 0)) {
             let currApplicantCommentData = [];
-            let requests = commentData.map(async (comment) => {
+            let requests = commentData.map(async (comment, index) => {
                 const memberResponse = await api.getMemberById(comment.member)
-                    currApplicantCommentData.push(
+                    currApplicantCommentData.splice(index, 0,
                         {...comment, 
                         name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName, 
                         imageSrc: memberResponse.data.member.imageUrl
