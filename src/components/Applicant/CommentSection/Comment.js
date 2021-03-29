@@ -20,6 +20,7 @@ export default function Comment(props) {
     const [commentLiked, setLike] = useState(props.likedComment);
     const toggleLike = async () => {
         await api.changeApplicantCommentLike(props.applicantId, props.commentId);
+        // backwards logic because commentLiked is not accurate but did it before setLike because setLike is not instant
         if (props.likedComment) {
             setLikes(props.likes.length - 1 + ((commentLiked) ? 0 : 1))
         } else {
