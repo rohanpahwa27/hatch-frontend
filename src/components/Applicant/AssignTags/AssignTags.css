@@ -1,0 +1,70 @@
+#applicant-assign-tags-container {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 100%;
+
+    width: 280px;
+    padding: 40px 30px 10px 10px;
+}
+
+#applicant-assign-tags-item {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+#applicant-assign-tags-button {
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 5px;
+}
+
+#add-image-tags {
+    width: 20px;
+    height: 20px;
+    
+    margin: 0px 0px -5px 0px;
+}
+
+/* #applicantinfodrop {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 100%;
+
+    width: 280px;
+    padding: 40px 30px 10px 10px;
+}
+
+#collapse {
+    border: 1px solid #E8EDF1;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px -4px #E8EDF1;
+    border-radius: 3px;
+    border-bottom: 1px solid #E8EDF1;
+    padding: 20px 15px 10px 15px;
+}
+
+#title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 150%;
+
+    display: flex;
+    align-items: center;
+    color: #5F738C;
+    padding: 12px 0px 3px 0px;
+}
+
+#info {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+    
+    display: flex;
+    align-items: center;
+} */
