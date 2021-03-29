@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {withRouter} from 'react-router-dom'
+import { useHistory } from 'react-router'
 import Loading from "@kiwicom/orbit-components/lib/Loading";
 
 import Logo from "../Logo/Logo"
@@ -18,6 +18,7 @@ import "./Applicant.css"
 
 export default function Applicant (props) {
     const orgId = localStorage.getItem("orgID");
+    const history = useHistory();
     const [currApplicantId, setCurrApplicantId] = useState(window.location.search ? window.location.search.substring(1, window.location.search.length) : props.location.state.id);
     const [currApplicantData, setCurrApplicantData] = useState({});
     const [isLikedByCurrMember, setApplicantLike] = useState(false);
@@ -57,19 +58,20 @@ export default function Applicant (props) {
     }, [refresh]);
 
     useEffect(async () => {
+        // TODO: fix next bug where many fast next clicks look weird
         if ((Object.keys(allApplicantData).length != 0)) {
             const applicantLikeResponse = await api.didMemberLikeApplicant(currApplicantId);
             setApplicantLike(applicantLikeResponse.data.like)
 
             const currApplicantDataInfo = allApplicantData.find(x => x.id == currApplicantId);
-            setCurrApplicantData(currApplicantDataInfo);
             setIsLoading(true);
+            setComments([]);
+            setCurrApplicantData(currApplicantDataInfo);
             if (currApplicantDataInfo.comments.length < 10) {
                 setLessThan(true);
             } else {
                 setLessThan(false);
             }
-            setComments([]);
             setCommentData(currApplicantDataInfo.comments);
         }
     }, [currApplicantId, allApplicantData]);
@@ -95,23 +97,22 @@ export default function Applicant (props) {
     }, [commentData]);
 
     const handleNext = () => {
+        history.push({
+            pathname: '/applicant',
+            search: currApplicantId
+        });
+
         const currIdIndex = allApplicantIds.findIndex(id => id === currApplicantId)
         if (currIdIndex === -1) {
             setCurrApplicantId(allApplicantIds[0]);
             // TODO: Add proper error state
         } else if (currIdIndex === allApplicantIds.length - 1) {
             setCurrApplicantId(allApplicantIds[0]);
-            setAllApplicantData([])
+            setApplicantData([])
             setRefresh(!refresh);
         } else {
             setCurrApplicantId(allApplicantIds[currIdIndex + 1]);
         }
-
-        // TODO: Update URL
-        // props.history.push({
-        //     pathname: '/applicant',
-        //     search: currApplicantId
-        // });
     }
 
     const handleLike = async () => {
