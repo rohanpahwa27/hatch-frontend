@@ -1,0 +1,75 @@
+#update-tags-container {
+  background-color: white;
+  width: 25%;
+  box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
+  border-radius: 3px; 
+  position: fixed;
+  min-width: 300px;
+  right: 2.5%;
+  bottom: 4%;
+  z-index: 2;
+}
+
+#update-tags-card {
+  margin: 5% 10%;
+}
+
+#add-icon {
+width: 10px;
+height: 10px;
+}
+
+#goto-icon {
+  width: 8px;
+  height: 12px;
+}
+
+#goto-profile-text {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  color: #252A31;
+}
+
+#manage-tags-goto-profile-button {
+  background-color: #F5F7F9;
+  border: 0px;
+  border-radius: 5px;
+  height: 50px;
+  cursor: pointer;
+}
+
+#num-tags-selected {
+  font-size: 16px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+}
+
+#update-applicant-account-status {
+  font-size: 14px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  color: #252A31;
+}
+
+#update-applicant-radio-grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+}
+
+#update-applicant-radio {
+  grid-column: span 1;
+}
+
+#card-bottom-space {
+  padding-bottom: 50%;
+}
+
+#deleteMembers {
+  background: #FAEAEA;
+  border-radius: 3px;
+}

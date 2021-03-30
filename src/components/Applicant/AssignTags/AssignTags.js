@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./AssignTags.css";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
+import UpdateTagsCard from "./UpdateTagsCard/UpdateTagsCard.js";
 
 class AssignTags extends Component {
     render() {
@@ -32,7 +33,7 @@ class AssignTags extends Component {
         return (
             <div id="applicant-assign-tags-container">
                 <div id="applicant-assign-tags-item">
-                    &nbsp;Tags
+                    Tags
                     <TagsMapping
                         applicantTags={this.props.applicant.tags}
                         allTags={this.props.allTags}
@@ -43,6 +44,7 @@ class AssignTags extends Component {
                     >
                         <img id="add-image-tags" src={add} alt="Add icon" />
                     </button>
+                    <UpdateTagsCard/>
                 </div>
             </div>
         )
