@@ -1,38 +1,48 @@
 import React, { Component } from "react";
-import "./AssignTags.css";
+import onClickOutside from "react-onclickoutside";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
 import UpdateTagsCard from "./UpdateTagsCard/UpdateTagsCard.js";
 
-class AssignTags extends Component {
-    render() {
-        let add = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Add/SVG/ic_fluent_add_12_regular.svg";
-        // const TagsMapping = ({ label, updateApplicants }) => {
-        //     const [checked, setChecked] = React.useState(false);
-        //     return (
-        //         <Radio
-        //             checked={checked}
-        //             onChange={() => {
-        //                 setChecked(!checked)
-        //                 updateApplicants()
-        //             }}
-        //             label={label}
-        //         />
-        //     );
-        // };
+import "./AssignTags.css";
 
-        const TagsMapping = ({ applicantTags, allTags }) => (
-            <>
-                {applicantTags.map((tagId, index) => (
-                    <div id="" key={index}>
-                        <Badge type="info">{allTags[tagId].text}</Badge>
-                    </div>
-                ))}
-            </>
-        );
+const TagsMapping = ({ applicantTags, allTags }) => (
+    <>
+        {applicantTags.map((tagId, index) => (
+            <div id="individual-tag-badge" key={index}>
+                <Badge type="info">{allTags[tagId].text}</Badge>
+            </div>
+        ))}
+    </>
+);
+
+class AssignTags extends Component {
+    constructor() {
+        super();
+        this.state = {
+            showTagsCard: true
+        };
+    }
+
+    // Unique fxn courtesy of `react-onclickoutside`
+    handleClickOutside = (event) => {
+        event.stopPropagation();
+        this.setState({
+            showTagsCard: false
+        });
+    }
+
+    toggleShowTags = () => {
+        this.setState({
+            showTagsCard: !this.state.showTagsCard
+        });
+    }
+
+    render() {
+        const addImage = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Add/SVG/ic_fluent_add_12_regular.svg";
 
         return (
             <div id="applicant-assign-tags-container">
-                <div id="applicant-assign-tags-item">
+                <div id="applicant-current-tags-item">
                     Tags
                     <TagsMapping
                         applicantTags={this.props.applicant.tags}
@@ -40,15 +50,21 @@ class AssignTags extends Component {
                     />
                     <button
                         id="applicant-assign-tags-button"
-                    // onClick={this.toggleModifyTagsPopup}
+                        onClick={this.toggleShowTags}
                     >
-                        <img id="add-image-tags" src={add} alt="Add icon" />
+                        <img id="applicant-assign-tags-add-icon" src={addImage} alt="Add icon" />
                     </button>
-                    <UpdateTagsCard/>
+                    {
+                        this.state.showTagsCard ?
+                            <UpdateTagsCard
+                                applicantTags={this.props.applicant.tags}
+                                allTags={this.props.allTags}
+                            /> : null
+                    }
                 </div>
             </div>
         )
     }
 }
 
-export default AssignTags
+export default onClickOutside(AssignTags);
