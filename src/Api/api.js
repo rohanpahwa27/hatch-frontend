@@ -12,14 +12,12 @@ const api = axios.create({
 });
 
 // Organizations
-const getAllOrgs = () => api.get("/organizations");
 const getOrgById = () => api.get("/organizations/myOrg");
 const createOrg = payload => api.post("/organizations", payload);
 const updateOrg = payload => api.patch("/organizations/", payload);
 const deleteOrg = () => api.delete("/organizations");
 
 // Members
-const getMembersAcrossAllOrgs = () => api.get("/members");
 const getMembersInOrg = () => api.get("/members/inOrg");
 const getMemberById = memberId => api.get(`/members/byId/${memberId}`);
 const getThisMember = () => api.get(`/members/me`);
@@ -30,7 +28,6 @@ const deleteMember = () => api.delete(`/members`);
 const removeMemberFromOrg = (memberId) => api.delete(`/members/${memberId}`);
 
 // Applicants 
-const getApplicantsAcrossAllOrgs = () => api.get("/applicants");
 const getApplicantsInOrg = () => api.get(`/applicants/inOrg`);
 const getApplicantById = applicantId => api.get(`/applicants/byId/${applicantId}`);
 const createApplicant = payload => api.post(`/applicants`, payload);
@@ -77,12 +74,10 @@ const removeMember = () => api.delete(`/updateProfile/deleteMember`);
 const logout = () => api.get(`/updateProfile/logout`);
 
 const apis = {
-  getAllOrgs,
   getOrgById,
   createOrg,
   updateOrg,
   deleteOrg,
-  getMembersAcrossAllOrgs,
   getMembersInOrg,
   getMemberById,
   getThisMember,
@@ -91,7 +86,6 @@ const apis = {
   updateMember,
   deleteMember,
   removeMemberFromOrg,
-  getApplicantsAcrossAllOrgs,
   getApplicantsInOrg,
   getApplicantById,
   createApplicant,

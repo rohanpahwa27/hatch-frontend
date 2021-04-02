@@ -124,7 +124,9 @@ export default function Applicant (props) {
     const handleNewComment = async () => {
         const commentsResponse = await api.getComments(currApplicantId);
         // TODO: filter to get the comments that aren't already there, will lead to bug if multiple people comment at the same time
-        let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]      
+        let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]     
+        console.log("New comment: ")
+        console.log(newComment) 
         const memberResponse = await api.getMemberById(newComment.member)
 
         let currApplicantCommentData = comments;
