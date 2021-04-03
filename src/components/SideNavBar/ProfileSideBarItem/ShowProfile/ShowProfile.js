@@ -34,7 +34,7 @@ class Profile extends Component {
     componentDidMount = async () => {
         try {
             const memberResp = await api.getThisMember()
-            const orgResp = await api.getOrgById()
+            const orgResp = await api.getMyOrg()
             this.setState({profileAttributes: {name: memberResp.data.member.firstName + " " + memberResp.data.member.lastName,
                                                 email: memberResp.data.member.email,
                                             numLikes: memberResp.data.member.organizations[0].numLikes,

@@ -36,8 +36,7 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        const orgId = localStorage.getItem("orgID");
-        await api.getApplicantsInOrg(orgId)
+        await api.getApplicantsInOrg()
             .then(async res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
