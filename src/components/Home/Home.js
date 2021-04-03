@@ -36,6 +36,27 @@ class Home extends Component {
     }
 
     async componentDidMount() {
+        await api.getMyOrg()
+            .then(res => {
+                const org = res.data.organization;
+                const tags = org.tags;
+
+                const tagsMap = new Map();
+
+                let i;
+                for (i = 0; i < tags.length; i++) {
+                    const tag = tags[i];
+                    tagsMap.set(tag._id, { text: tag.text, color: tag.color });
+                }
+
+                this.setState({
+                    tags: tagsMap
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
         await api.getApplicantsInOrg()
             .then(async res => {
                 const applicants = res.data.applicants.map(applicant => {
@@ -55,17 +76,6 @@ class Home extends Component {
 
                     return applicantInfo
                 })
-
-                // for (const applicant of applicants) {
-                //     await api.didMemberLikeApplicant(applicant.id)
-                //     .then(res => {
-                //         applicant.didMemberLikeApplicant = res.data.like
-                //     })
-                //     .catch(err => {
-                //         console.log("Call to didMemberLikeApplicant failed")
-                //         console.log(err)
-                //     })
-                // }
 
                 this.setState({
                     allApplicants: applicants,
