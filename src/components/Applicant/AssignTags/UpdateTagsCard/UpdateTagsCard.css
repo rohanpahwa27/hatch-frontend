@@ -1,12 +1,10 @@
 #update-tags-container {
   display: flex;
   width: 360px;
-  height: 500px;
-   
-  position: fixed;
-  right: 2.5%;
-  bottom: 4%;
   z-index: 2;
+
+  position: fixed;
+  top: 200px;
   
   background-color: white;
   box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
@@ -28,9 +26,14 @@
   row-gap: 10px;
 }
 
+#select-option-text {
+  color: #5F738C;
+}
+
 #tags-list-item {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 #edit-tag-button {
@@ -43,4 +46,9 @@
 
 #update-tags-more-icon {  
   margin: 0px 0px -5px 0px;
+}
+
+#create-new-tag-item {
+  display: flex;
+  flex-direction: column;
 }

@@ -1,38 +1,49 @@
 import React, { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
+import UpdateTagInfo from "./UpdateTagInfo/UpdateTagInfo.js";
 
 import "./UpdateTagsCard.css";
 
-const TagsMapping = ({ applicantTags, allTags }) => (
-    <>
-        {applicantTags.map((tagId, index) => (
-            <div id="individual-tag-badge" key={index}>
-                <Badge type="info">{allTags[tagId].text}</Badge>
-            </div>
-        ))}
-    </>
-);
+const TagsMapping = ({ applicantTags, allTags }) => {
+    // https://github.com/microsoft/fluentui-system-icons/tree/master/assets/Dismiss/SVG
+    const dismissImage = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Dismiss/SVG/ic_fluent_dismiss_12_regular.svg";
 
-const AllTagsList = ({ allTags }) => {
+    return (
+        applicantTags.map((tagId, index) => (
+            <div id="individual-tag-badge" key={index}>
+                <Badge type="info">
+                    {allTags[tagId].text}
+                    <button id="delete-tag-x-button">
+                        <img id="delete-tag-x-icon" src={dismissImage} alt="Dismiss icon" />
+                    </button>
+                </Badge>
+            </div>
+        ))
+    )
+}
+
+const AllTagsList = ({ allTags, toggleEditTag, showEditTagCard, editTagId }) => {
     const moreFilled = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/More%20Horizontal/SVG/ic_fluent_more_horizontal_16_filled.svg";
-    // const [showEditTagCard, toggleEditTag] = useState(false);
 
     return (
         Object.entries(allTags).map(([tagId, tagData]) => (
             <div id="tags-list-item">
                 <button
                     id="edit-tag-button"
-                    onClick={toggleEditTag(true)}
+                    onClick={event => toggleEditTag(tagId)}
                 >
                     <img id="update-tags-more-icon" src={moreFilled} alt="More icon" />
                 </button>
                 <div id="individual-tag-badge" key={tagId}>
+                    {/* <Badge type={tagData.color}> */}
                     <Badge type="info">{allTags[tagId].text}</Badge>
                 </div>
                 {
-                    showEditTagCard ?
-                        <div>showing card!</div> : null
+                    showEditTagCard && editTagId === tagId ?
+                        <UpdateTagInfo
+                            editTagId={tagId}
+                        /> : null
                 }
             </div>
         ))
@@ -40,26 +51,39 @@ const AllTagsList = ({ allTags }) => {
 }
 
 class UpdateTagsCard extends Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         showEditTagCard: true
-    //     };
-    // }
+    constructor() {
+        super();
+        this.state = {
+            showEditTagCard: false,
+            editTagId: null
+        };
+    }
 
-    // // Unique fxn courtesy of `react-onclickoutside`
-    // handleClickOutside = (event) => {
-    //     event.stopPropagation();
-    //     this.setState({
-    //         showEditTagCard: false
-    //     });
-    // }
+    // Unique fxn courtesy of `react-onclickoutside`
+    handleClickOutside = (event) => {
+        event.stopPropagation();
+        this.setState({
+            showEditTagCard: false,
+            editTagId: null
+        });
+    }
 
-    // toggleEditTag = () => {
-    //     this.setState({
-    //         showEditTagCard: !this.state.showEditTagCard
-    //     });
-    // }
+    toggleEditTag = (tagId) => {
+        // If clicking same tag, toggle it open/close
+        tagId === this.state.editTagId ? (
+            this.setState({
+                showEditTagCard: !this.state.showEditTagCard,
+                editTagId: tagId
+            })
+        ) :
+            // If clicking different tag, open only
+            (
+                this.setState({
+                    showEditTagCard: true,
+                    editTagId: tagId
+                })
+            )
+    }
 
     render() {
         return (
@@ -73,10 +97,14 @@ class UpdateTagsCard extends Component {
                         />
                     </div>
                     <div id="all-tags-list-item">
-                        Select an option or create one
-                        <AllTagsList 
-                        allTags={this.props.allTags} 
-                        toggleEditTag={this.toggleEditTag}
+                        <div id="select-option-text">
+                            Select an option or create one
+                        </div>
+                        <AllTagsList
+                            allTags={this.props.allTags}
+                            toggleEditTag={this.toggleEditTag}
+                            showEditTagCard={this.state.showEditTagCard}
+                            editTagId={this.state.editTagId}
                         />
                     </div>
                     <div id="create-new-tag-item">

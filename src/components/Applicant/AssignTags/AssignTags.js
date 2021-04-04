@@ -5,15 +5,17 @@ import UpdateTagsCard from "./UpdateTagsCard/UpdateTagsCard.js";
 
 import "./AssignTags.css";
 
-const TagsMapping = ({ applicantTags, allTags }) => (
-    <>
-        {applicantTags.map((tagId, index) => (
+const TagsMapping = ({ applicantTags, allTags }) => {
+    return (
+        applicantTags.map((tagId, index) => (
             <div id="individual-tag-badge" key={index}>
-                <Badge type="info">{allTags[tagId].text}</Badge>
+                <Badge type="info">
+                    {allTags[tagId].text}
+                </Badge>
             </div>
-        ))}
-    </>
-);
+        ))
+    )
+}
 
 class AssignTags extends Component {
     constructor() {
