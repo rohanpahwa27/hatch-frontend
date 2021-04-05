@@ -44,14 +44,23 @@ const uploadMemberImage = payload => api.post(`/upload-image/member`, payload);
 // Forgot and reset password
 const forgotPassword = payload => api.post("/forgot-password", payload);
 const resetPassword = (token, payload) => api.post(`reset-password/${token}`, payload);
-;
+
+// Comments
 const getComments = applicantId => api.get(`/comments/${applicantId}`);
 const addComment = (applicantId, payload) => api.post(`/comments/${applicantId}`, payload);
 const changeApplicantCommentLike = (applicantId, commentId) => api.post(`/comments/like/${applicantId}/${commentId}`);
 const deleteComment = (applicantId, commentId) => api.delete(`/comments/${applicantId}/${commentId}`);
 
+// Tags
+const addTag = (payload) => api.post(`/tags/`, payload);
+const updateTag = (payload) => api.patch(`/tags/`, payload);
+const deleteTag = (payload) => api.delete(`/tags/`, payload);
+
+// Signup & login
 const insertUser = (payload) => api.post("/signup", payload);
 const loginUser = (payload) => api.post("/login", payload);
+
+// Download files
 const downloadTemplate = () => api.get("/downloadTemplate", {responseType: 'blob'}).then((response) => {
   FileDownload(response.data, 'applicantTemplate.xlsx');
 });
@@ -59,14 +68,25 @@ const downloadApplicantsExcel = () => api.get("/downloadInfo/applicant", {respon
   FileDownload(response.data, 'allApplicants.xlsx');
 });
 
-export const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
-export const generateOrgCode = () => api.get(`/generateOrgCode`);
+// Upload files
+const uploadApplicantInfo = (payload) => api.post("/uploadApplicantInfo", payload);
+
+// Generate org code
+const generateOrgCode = () => api.get(`/generateOrgCode`);
+
+// Likes
 const didMemberLikeApplicant = (applicantID) => api.get(`/likes/${applicantID}`);
 const changeMemberLikeApplicant = (applicantID) => api.post(`/likes/${applicantID}`);
+
+// Update Applicants
 const updateApplicantStatus = (payload) => api.patch(`/updateApplicantStatus/`, payload);
 const removeManyApplicants = (payload) => api.patch(`/updateApplicantStatus/deleteApplicants`, payload);
+
+// Update Members
 const updateMemberStatus = (payload) => api.patch(`/updateMemberStatus/`, payload);
 const removeManyMembers = (payload) => api.patch(`/updateMemberStatus/deleteMembers`, payload);
+
+// Check login session
 const checkIfUserLoggedIn = () => api.get("/checkUserSession/login");
 const checkIfUserIsAdmin = () => api.get("/checkUserSession/admin");
 
@@ -75,6 +95,7 @@ const confirmPassword = (payload) => api.post(`/updateProfile/confirmPassword`, 
 const updatePassword = (payload) => api.patch(`/updateProfile/updatePassword`, payload);
 const removeMember = () => api.delete(`/updateProfile/deleteMember`);
 const logout = () => api.get(`/updateProfile/logout`);
+
 
 const apis = {
   getAllOrgs,
@@ -122,7 +143,10 @@ const apis = {
   removeManyMembers,
   updateApplicantStatus,
   removeManyApplicants,
-  downloadApplicantsExcel
+  downloadApplicantsExcel,
+  addTag,
+  updateTag,
+  deleteTag
 };
 
 export default apis;

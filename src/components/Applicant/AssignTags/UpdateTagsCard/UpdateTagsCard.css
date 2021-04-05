@@ -5,6 +5,7 @@
 
   position: fixed;
   top: 200px;
+  right: 10%;
   
   background-color: white;
   box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);

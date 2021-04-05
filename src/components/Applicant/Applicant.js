@@ -93,9 +93,10 @@ export default function Applicant(props) {
             let currApplicantCommentData = [];
             let requests = commentData.map(async (comment, index) => {
                 const memberResponse = await api.getMemberById(comment.member)
-                    currApplicantCommentData.splice(index, 0,
-                        {...comment, 
-                        name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName, 
+                currApplicantCommentData.splice(index, 0,
+                    {
+                        ...comment,
+                        name: memberResponse.data.member.firstName + " " + memberResponse.data.member.lastName,
                         imageSrc: memberResponse.data.member.imageUrl
                     })
             });
@@ -155,6 +156,17 @@ export default function Applicant(props) {
         setComments(newComments)
     }
 
+    const handleUpdateTag = async (id, color, text) => {
+        console.log(id, color, text);
+        const resp = await api.updateTag({
+            tagId: id,
+            color: color,
+            text: text
+        })
+        console.log(resp)
+        // const applicantData = resp.data.message;
+    }
+
     return (
         (Object.keys(currApplicantData).length != 0) ? // CHECK IF DATA IS READY TODO: make cleaner function for readability
             <div id="page-grid-container">
@@ -174,7 +186,11 @@ export default function Applicant(props) {
                         <CommentSection applicant={currApplicantData} comments={comments} member={memberId} isLoading={isLoadingComments} isLessThan={isLessThan} handleDelete={handleDelete} />
                         <div id="applicant-side-features-container">
                             <UploadPhoto applicant={currApplicantData} />
-                            <AssignTags applicant={currApplicantData} allTags={allOrganizationTags}/>
+                            <AssignTags
+                                applicant={currApplicantData}
+                                allTags={allOrganizationTags}
+                                handleUpdateTag={handleUpdateTag}
+                            />
                             {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
                             <ApplicantInfoDrop applicant={currApplicantData} />
                         </div>

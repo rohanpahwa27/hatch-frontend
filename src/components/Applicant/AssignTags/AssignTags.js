@@ -8,6 +8,7 @@ import "./AssignTags.css";
 const TagsMapping = ({ applicantTags, allTags }) => {
     return (
         applicantTags.map((tagId, index) => (
+            console.log(allTags, tagId),
             <div id="individual-tag-badge" key={index}>
                 <Badge type="info">
                     {allTags[tagId].text}
@@ -61,6 +62,7 @@ class AssignTags extends Component {
                             <UpdateTagsCard
                                 applicantTags={this.props.applicant.tags}
                                 allTags={this.props.allTags}
+                                handleUpdateTag={this.props.handleUpdateTag}
                             /> : null
                     }
                 </div>
