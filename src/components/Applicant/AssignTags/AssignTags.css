@@ -6,8 +6,10 @@
 
 #applicant-assign-tags-item {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    align-self: flex-start;
+
+    row-gap: 12px;
 }
 
 #applicant-assign-tags-button {
@@ -25,18 +27,4 @@
 
 #individual-tag-badge {
     padding: 0px 12px;
-}
-
-#delete-tag-x-button {
-    background-color: inherit;
-    border: 0;
-    border-radius: 5px;
-}
-
-#delete-tag-x-icon {
-    color: #ffffff;
-    width: 12px;
-    height: 12px;
-    
-    margin: 0px 0px -2px 0px;
 }

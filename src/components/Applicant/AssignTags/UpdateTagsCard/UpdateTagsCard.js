@@ -36,14 +36,18 @@ const AllTagsList = ({ allTags, toggleEditTag, showEditTagCard, editTagId, handl
             <div id="tags-list-item">
                 <button
                     id="edit-tag-button"
+                    className="ignore-react-onclickoutside"
                     onClick={event => toggleEditTag(tagId)}
                 >
                     <img id="update-tags-more-icon" src={moreFilled} alt="More icon" />
                 </button>
-                <div id="individual-tag-badge" key={tagId}
-                    onClick={event => handleAddTagApplicant(tagId)}
-                >
-                    <Badge type={tagData.color}>{allTags[tagId].text}</Badge>
+                <div id="add-tag-div-item">
+                    <div id="individual-tag-badge-tags-list" key={tagId}
+                        onClick={event => handleAddTagApplicant(tagId)}
+                    >
+                        <Badge type={tagData.color}>{allTags[tagId].text}</Badge>
+                    </div>
+                    <div style={{flexGrow: 1}}></div>
                 </div>
                 {
                     showEditTagCard && editTagId === tagId ?
@@ -78,7 +82,6 @@ class UpdateTagsCard extends Component {
     }
 
     toggleEditTag = (tagId) => {
-        console.log(tagId)
         tagId === this.state.editTagId ? (
             // If clicking same tag, toggle it open/close
             this.setState({
