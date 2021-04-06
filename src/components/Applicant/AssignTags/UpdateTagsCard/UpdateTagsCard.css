@@ -1,7 +1,8 @@
 #update-tags-container {
   display: flex;
   width: 360px;
-  z-index: 2;
+  max-width: 360px;
+  z-index: 3;
 
   position: fixed;
   top: 200px;
@@ -14,16 +15,24 @@
 
 #update-tags-card {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  row-gap: 20px;
 
+  row-gap: 20px;
   margin: 20px 16px;
+}
+
+#current-tags-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  row-gap: 10px;
 }
 
 #all-tags-list-item {
   display: flex;
   flex-direction: column;
+
   row-gap: 10px;
 }
 
@@ -51,5 +60,9 @@
 
 #create-new-tag-item {
   display: flex;
-  flex-direction: column;
+  column-gap: 10px;
+}
+
+#new-tag-input-item {
+  width: 180px;
 }

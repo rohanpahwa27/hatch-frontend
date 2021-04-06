@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import onClickOutside from "react-onclickoutside";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
 import UpdateTagsCard from "./UpdateTagsCard/UpdateTagsCard.js";
 
@@ -8,9 +7,8 @@ import "./AssignTags.css";
 const TagsMapping = ({ applicantTags, allTags }) => {
     return (
         applicantTags.map((tagId, index) => (
-            console.log(allTags, tagId),
             <div id="individual-tag-badge" key={index}>
-                <Badge type="info">
+                <Badge type={allTags[tagId].color}>
                     {allTags[tagId].text}
                 </Badge>
             </div>
@@ -26,14 +24,6 @@ class AssignTags extends Component {
         };
     }
 
-    // Unique fxn courtesy of `react-onclickoutside`
-    handleClickOutside = (event) => {
-        event.stopPropagation();
-        this.setState({
-            showTagsCard: false
-        });
-    }
-
     toggleShowTags = () => {
         this.setState({
             showTagsCard: !this.state.showTagsCard
@@ -45,7 +35,7 @@ class AssignTags extends Component {
 
         return (
             <div id="applicant-assign-tags-container">
-                <div id="applicant-current-tags-item">
+                <div id="applicant-assign-tags-item">
                     Tags
                     <TagsMapping
                         applicantTags={this.props.applicant.tags}
@@ -62,7 +52,9 @@ class AssignTags extends Component {
                             <UpdateTagsCard
                                 applicantTags={this.props.applicant.tags}
                                 allTags={this.props.allTags}
-                                handleUpdateTag={this.props.handleUpdateTag}
+                                toggleShowTags={this.toggleShowTags}
+                                handleTagCRUD={this.props.handleTagCRUD}
+                                handleTagApplicant={this.props.handleTagApplicant}
                             /> : null
                     }
                 </div>
@@ -71,4 +63,4 @@ class AssignTags extends Component {
     }
 }
 
-export default onClickOutside(AssignTags);
+export default AssignTags;

@@ -1,7 +1,7 @@
 #update-tag-info-container {
   display: flex;
   width: 308px;
-  z-index: 3;
+  z-index: 4;
 
   position: absolute;
   /* top: 20px; */
@@ -24,7 +24,7 @@
   margin: 20px 16px;
 }
 
-#update-tag-color-item {
+#update-tag-item {
   width: inherit;
 }
 
@@ -42,8 +42,4 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  /* flex-direction: row; */
-  /* row-gap: 16px;
-
-  margin: 8px; */
 }

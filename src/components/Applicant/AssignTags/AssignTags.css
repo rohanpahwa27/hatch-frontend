@@ -4,7 +4,7 @@
     font-size: 13px;
 }
 
-#applicant-current-tags-item {
+#applicant-assign-tags-item {
     display: flex;
     align-items: center;
     align-self: flex-start;
@@ -24,7 +24,7 @@
 }
 
 #individual-tag-badge {
-    padding: 0px 12px 0px 12px;
+    padding: 0px 12px;
 }
 
 #delete-tag-x-button {

@@ -52,9 +52,11 @@ const changeApplicantCommentLike = (applicantId, commentId) => api.post(`/commen
 const deleteComment = (applicantId, commentId) => api.delete(`/comments/${applicantId}/${commentId}`);
 
 // Tags
-const addTag = (payload) => api.post(`/tags/`, payload);
+const createTag = (payload) => api.post(`/tags/`, payload);
 const updateTag = (payload) => api.patch(`/tags/`, payload);
 const deleteTag = (payload) => api.delete(`/tags/`, payload);
+const addTagApplicant = (applicantId, payload) => api.post(`/tags/${applicantId}`, payload);
+const removeTagApplicant = (applicantId, payload) => api.delete(`/tags/${applicantId}`, payload);
 
 // Signup & login
 const insertUser = (payload) => api.post("/signup", payload);
@@ -144,9 +146,11 @@ const apis = {
   updateApplicantStatus,
   removeManyApplicants,
   downloadApplicantsExcel,
-  addTag,
+  createTag,
   updateTag,
-  deleteTag
+  deleteTag,
+  addTagApplicant,
+  removeTagApplicant
 };
 
 export default apis;

@@ -156,15 +156,45 @@ export default function Applicant(props) {
         setComments(newComments)
     }
 
-    const handleUpdateTag = async (id, color, text) => {
-        console.log(id, color, text);
-        const resp = await api.updateTag({
-            tagId: id,
-            color: color,
-            text: text
+    const handleCreateTag = async (color, text) => {
+        const resp = await api.createTag({ color, text })
+        console.log(resp)
+    }
+
+    const handleUpdateTag = async (tagId, color, text) => {
+        console.log(tagId, color, text);
+        const resp = await api.updateTag({ tagId, color, text })
+        console.log(resp)
+        // const applicantData = resp.data.allApplicants;
+    }
+
+    const handleDeleteTag = async (tagId) => {
+        const resp = await api.deleteTag({
+            _id: tagId,
         })
         console.log(resp)
-        // const applicantData = resp.data.message;
+    }
+
+    const handleAddTagApplicant = async (tagId) => {
+        console.log(currApplicantId, tagId)
+        const resp = await api.addTagApplicant({ applicantId: currApplicantId, tagId })
+            .then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+        console.log(resp)
+    }
+
+    const handleRemoveTagApplicant = async (tagId) => {
+        console.log(currApplicantId, tagId)
+        const resp = await api.removeTagApplicant({ applicantId: currApplicantId, tagId })
+            .then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+        console.log(resp)
     }
 
     return (
@@ -189,7 +219,8 @@ export default function Applicant(props) {
                             <AssignTags
                                 applicant={currApplicantData}
                                 allTags={allOrganizationTags}
-                                handleUpdateTag={handleUpdateTag}
+                                handleTagCRUD={{ handleCreateTag, handleUpdateTag, handleDeleteTag }}
+                                handleTagApplicant={{ handleAddTagApplicant, handleRemoveTagApplicant }}
                             />
                             {/* <SortComment /> Getting rid of comment likes so only want to sort by recent */}
                             <ApplicantInfoDrop applicant={currApplicantData} />

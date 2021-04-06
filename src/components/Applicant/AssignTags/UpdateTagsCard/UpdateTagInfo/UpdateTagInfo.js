@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import onClickOutside from "react-onclickoutside";
 import Radio from "@kiwicom/orbit-components/lib/Radio";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
-import ListChoice from "@kiwicom/orbit-components/lib/ListChoice";
+import InputField from "@kiwicom/orbit-components/lib/InputField";
+import Button from "@kiwicom/orbit-components/lib/Button";
+import Remove from "@kiwicom/orbit-components/lib/icons/Remove";
 
 import "./UpdateTagInfo.css";
 
 const TagChoice = ({ color, label, currentColor, changeTagColor }) => {
-  // console.log("color", color)
-  // console.log('currentColor', currentColor)
   return (
     <div id="update-tag-color-list-item">
       <div>
@@ -53,45 +54,75 @@ class UpdateTagInfo extends Component {
     }
   }
 
+  handleClickOutside = (event) => {
+    event.stopPropagation();
+    this.props.toggleEditTag(this.props.id);
+  }
+
   changeTagColor = (type) => {
     this.setState({
       color: type
     });
   }
 
-  changeTagText = (name) => {
+  changeTagText = (event) => {
     this.setState({
-      text: name
+      text: event.target.value
     });
+  }
+
+  deleteTag = (id) => {
+    this.props.handleDeleteTag(id);
+    this.props.toggleEditTag(id);
+  }
+
+  updateTag = (id, color, text) => {
+    this.props.handleUpdateTag(id, color, text);
+    this.props.toggleEditTag(id);
   }
 
   render() {
     return (
       <div id="update-tag-info-container">
         <div id="update-tag-info-card">
-          <div id="update-tag-name-item">
-            Tag name
-            {/* {this.state.text} */}
-            {/* Call changeTagText to update local state */}
+          <div id="update-tag-item">
+            <InputField
+              type="text"
+              placeholder="Tag name"
+              label="Tag name"
+              inlineLabel={true}
+              value={this.state.text}
+              error={this.state.text.length < 3 ? "Tag name must be at least 3 characters" : null}
+              minLength={3}
+              maxLength={30}
+              onChange={this.changeTagText}
+            />
           </div>
-          <div id="update-tag-color-item">
+          <div id="update-tag-item">
             <TagsColorList
-              // id={this.props.id}
               currentColor={this.state.color}
               changeTagColor={this.changeTagColor}
             />
           </div>
-          <div id="update-tag-delete-item">
-            Delete
+          <div id="update-tag-item">
+            <Button
+              fullWidth={true}
+              type={"criticalSubtle"}
+              iconLeft={<Remove />}
+              onClick={event => this.deleteTag(this.props.id)}
+            >
+              Delete this tag
+            </Button>
           </div>
-          <div id="update-tag-done-item">
-            <button
-              onClick={event => this.props.handleUpdateTag(this.props.id, this.state.color, this.state.text)}
+          <div id="update-tag-item">
+            <Button
+              fullWidth={true}
+              type={"secondary"}
+              disabled={this.state.text === null || this.state.text.length < 3}
+              onClick={event => this.updateTag(this.props.id, this.state.color, this.state.text)}
             >
               Done
-            </button>
-            {/* Call api update tag color with this state's color */}
-            {/* Call api update text with this state's text */}
+            </Button>
           </div>
         </div>
       </div>
@@ -99,4 +130,4 @@ class UpdateTagInfo extends Component {
   }
 }
 
-export default UpdateTagInfo;
+export default onClickOutside(UpdateTagInfo, { excludeScrollbar: true });
