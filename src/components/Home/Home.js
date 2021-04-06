@@ -52,6 +52,7 @@ class Home extends Component {
                 this.setState({
                     tags: tagsMap
                 });
+
             })
             .catch(err => {
                 console.log(err);
@@ -71,6 +72,7 @@ class Home extends Component {
                         status: applicant.status,
                         recruitingCycle: applicant.recruitingCycle,
                         organization: applicant.organization,
+                        tags: applicant.tags,
                         imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
                     }
 
@@ -394,6 +396,7 @@ class Home extends Component {
                                     sortBy={this.state.sortBy}
                                     sortDirection={this.state.sortDirection}
                                     handleClick={this.handleClick}
+                                    tags={this.state.tags}
                                 />
                             </div>}
                     </div>
