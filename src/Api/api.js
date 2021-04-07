@@ -12,7 +12,7 @@ const api = axios.create({
 });
 
 // Organizations
-const getOrgById = () => api.get("/organizations/myOrg");
+const getMyOrg = () => api.get("/organizations/myOrg");
 const createOrg = payload => api.post("/organizations", payload);
 const updateOrg = payload => api.patch("/organizations/", payload);
 const deleteOrg = () => api.delete("/organizations");
@@ -74,7 +74,7 @@ const removeMember = () => api.delete(`/updateProfile/deleteMember`);
 const logout = () => api.get(`/updateProfile/logout`);
 
 const apis = {
-  getOrgById,
+  getMyOrg,
   createOrg,
   updateOrg,
   deleteOrg,

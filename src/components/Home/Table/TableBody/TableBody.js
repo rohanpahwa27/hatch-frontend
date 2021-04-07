@@ -20,7 +20,9 @@ class TableBody extends Component {
                           tags={applicant.tags}
                           email={applicant.email}
                           handleClick={this.props.handleClick}
-                          didMemberLikeApplicant={applicant.didMemberLikeApplicant}/>
+                          didMemberLikeApplicant={applicant.didMemberLikeApplicant}
+                          orgTags={this.props.orgTags}
+                          />
             )
         })
 

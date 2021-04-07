@@ -36,8 +36,29 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        const orgId = localStorage.getItem("orgID");
-        await api.getApplicantsInOrg(orgId)
+        await api.getMyOrg()
+            .then(res => {
+                const org = res.data.organization;
+                const tags = org.tags;
+
+                const tagsMap = new Map();
+
+                let i;
+                for (i = 0; i < tags.length; i++) {
+                    const tag = tags[i];
+                    tagsMap.set(tag._id, { text: tag.text, color: tag.color });
+                }
+
+                this.setState({
+                    tags: tagsMap
+                });
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        await api.getApplicantsInOrg()
             .then(async res => {
                 const applicants = res.data.applicants.map(applicant => {
                     const applicantInfo = {
@@ -51,22 +72,12 @@ class Home extends Component {
                         status: applicant.status,
                         recruitingCycle: applicant.recruitingCycle,
                         organization: applicant.organization,
+                        tags: applicant.tags,
                         imageUrl: applicant.imageUrl ? applicant.imageUrl : "https://images.squarespace-cdn.com/content/v1/5ba24ff7fcf7fdb9d4c3e95e/1544106754797-TZN1YT7FVM4J2VXAM6G8/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg"
                     }
 
                     return applicantInfo
                 })
-
-                // for (const applicant of applicants) {
-                //     await api.didMemberLikeApplicant(applicant.id)
-                //     .then(res => {
-                //         applicant.didMemberLikeApplicant = res.data.like
-                //     })
-                //     .catch(err => {
-                //         console.log("Call to didMemberLikeApplicant failed")
-                //         console.log(err)
-                //     })
-                // }
 
                 this.setState({
                     allApplicants: applicants,
@@ -385,6 +396,7 @@ class Home extends Component {
                                     sortBy={this.state.sortBy}
                                     sortDirection={this.state.sortDirection}
                                     handleClick={this.handleClick}
+                                    tags={this.state.tags}
                                 />
                             </div>}
                     </div>

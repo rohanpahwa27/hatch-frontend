@@ -47,7 +47,7 @@ class ManageMembers extends Component {
             let userID = userResp.data.member._id
             const index = memberData.map(function(e) { return e._id; }).indexOf(userID);
             if (index > -1) memberData.splice(index, 1);
-            const organizationResponse = await api.getOrgById()
+            const organizationResponse = await api.getMyOrg()
             const orgCode = organizationResponse.data.organization.addCode
             this.setState({tableData: memberData, totalMembers: memberData.length, orgCode: orgCode, numMembersShowing: memberData.length, showEmptyState: memberData.length==0})
         } catch (error) {

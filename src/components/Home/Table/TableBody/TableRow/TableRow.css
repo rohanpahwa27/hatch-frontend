@@ -24,6 +24,9 @@
 .name-div-home {
     padding-left: 3%;
     width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .applicant-image {
@@ -40,4 +43,8 @@
     margin-right: 10%;
     width: 16px;
     height: 16px;
+}
+
+.tag-badge {
+    margin-left: 10px;
 }
