@@ -14,13 +14,15 @@ const TagsMapping = ({ applicantTags, allTags, handleRemoveTagApplicant }) => {
         applicantTags.map((tagId, index) => (
             <div id="individual-tag-badge" key={index}>
                 <Badge type={allTags[tagId].color}>
-                    {allTags[tagId].text}
-                    <button
-                        id="delete-tag-x-button"
-                        onClick={event => handleRemoveTagApplicant(tagId)}
-                    >
-                        <img id="delete-tag-x-icon" src={dismissImage} alt="Dismiss icon" />
-                    </button>
+                    <div id="individual-tag-text">
+                        {allTags[tagId].text}
+                        <button
+                            id="delete-tag-x-button"
+                            onClick={event => handleRemoveTagApplicant(tagId)}
+                        >
+                            <img id="delete-tag-x-icon" src={dismissImage} alt="Dismiss icon" />
+                        </button>
+                    </div>
                 </Badge>
             </div>
         ))
@@ -32,7 +34,6 @@ const AllTagsList = ({ allTags, toggleEditTag, showEditTagCard, editTagId, handl
 
     return (
         Object.entries(allTags).map(([tagId, tagData]) => (
-            // console.log(tagId, tagData),
             <div id="tags-list-item">
                 <button
                     id="edit-tag-button"
@@ -41,13 +42,18 @@ const AllTagsList = ({ allTags, toggleEditTag, showEditTagCard, editTagId, handl
                 >
                     <img id="update-tags-more-icon" src={moreFilled} alt="More icon" />
                 </button>
-                <div id="add-tag-div-item">
-                    <div id="individual-tag-badge-tags-list" key={tagId}
-                        onClick={event => handleAddTagApplicant(tagId)}
-                    >
-                        <Badge type={tagData.color}>{allTags[tagId].text}</Badge>
+                <div
+                    id="add-tag-div-item"
+                    onClick={event => handleAddTagApplicant(tagId)}
+                >
+                    <div id="individual-tag-badge-tags-list" key={tagId}>
+                        <Badge type={tagData.color}>
+                            <div id="individual-tag-text">
+                                {allTags[tagId].text}
+                            </div>
+                        </Badge>
                     </div>
-                    <div style={{flexGrow: 1}}></div>
+                    <div style={{ flexGrow: 1 }}></div>
                 </div>
                 {
                     showEditTagCard && editTagId === tagId ?
@@ -71,7 +77,8 @@ class UpdateTagsCard extends Component {
         this.state = {
             showEditTagCard: false,
             editTagId: null,
-            text: ""
+            text: "",
+            disableSubmit: true
         };
     }
 
@@ -99,7 +106,8 @@ class UpdateTagsCard extends Component {
 
     changeTagText = (event) => {
         this.setState({
-            text: event.target.value
+            text: event.target.value,
+            disableSubmit: event.target.value.length < 3
         });
     }
 
@@ -141,7 +149,6 @@ class UpdateTagsCard extends Component {
                         />
                     </div>
                     <div id="create-new-tag-item">
-                        {/* New Tag&nbsp; */}
                         <InputField
                             id="new-tag-input-item"
                             type="text"
@@ -153,14 +160,17 @@ class UpdateTagsCard extends Component {
                             maxLength={30}
                             onChange={this.changeTagText}
                         />
-                        <Button
-                            fullWidth={true}
-                            type={"secondary"}
-                            disabled={this.state.text === null || this.state.text.length < 3}
+                        <button
+                            id="update-tag-done-button"
+                            style={{ 
+                                opacity: (this.state.disableSubmit) ? 0.3 : 1,
+                                cursor: (this.state.disableSubmit) ? "not-allowed" : "pointer"
+                            }}
+                            disabled={this.state.disableSubmit}
                             onClick={event => this.createTag(this.state.text)}
                         >
                             Done
-                        </Button>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -52,11 +52,11 @@ const changeApplicantCommentLike = (applicantId, commentId) => api.post(`/commen
 const deleteComment = (applicantId, commentId) => api.delete(`/comments/${applicantId}/${commentId}`);
 
 // Tags
-const createTag = (payload) => api.post(`/tags/`, payload);
-const updateTag = (payload) => api.patch(`/tags/`, payload);
-const deleteTag = (payload) => api.delete(`/tags/`, payload);
+const createTag = (payload) => api.post(`/tags`, payload);
+const updateTag = (payload) => api.patch(`/tags`, payload);
+const deleteTag = (payload) => api.post(`/tags/delete`, payload);
 const addTagApplicant = (applicantId, payload) => api.post(`/tags/${applicantId}`, payload);
-const removeTagApplicant = (applicantId, payload) => api.delete(`/tags/${applicantId}`, payload);
+const removeTagApplicant = (applicantId, payload) => api.post(`/tags/${applicantId}/delete`, payload);
 
 // Signup & login
 const insertUser = (payload) => api.post("/signup", payload);

@@ -38,6 +38,8 @@
 }
 
 button {
+  font-family: Inter;
+  font-size: 13px;
   font-weight: bold;
   cursor: pointer;
   border: none;

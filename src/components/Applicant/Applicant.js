@@ -163,21 +163,23 @@ export default function Applicant(props) {
 
     const handleUpdateTag = async (tagId, color, text) => {
         console.log(tagId, color, text);
-        const resp = await api.updateTag({ tagId, color, text })
+        const resp = await api.updateTag({ tagId, color, text });
         console.log(resp)
         // const applicantData = resp.data.allApplicants;
     }
 
-    const handleDeleteTag = async (tagId) => {
-        const resp = await api.deleteTag({
-            _id: tagId,
-        })
-        console.log(resp)
+    const handleDeleteTag = async (_id) => {
+        console.log("_id", _id)
+        console.log("typeof(_id)", typeof(_id))
+        console.log("{ _id }", { _id })
+        const resp = await api.deleteTag( { _id: _id } );
+        console.log("resp", resp)
     }
 
     const handleAddTagApplicant = async (tagId) => {
-        console.log(currApplicantId, tagId)
-        const resp = await api.addTagApplicant({ applicantId: currApplicantId, tagId })
+        console.log("applicantId", currApplicantId)
+        console.log("tagId", tagId)
+        const resp = await api.addTagApplicant(currApplicantId, { tagId })
             .then(res => {
                 console.log(res)
             }).catch(err => {
@@ -187,14 +189,12 @@ export default function Applicant(props) {
     }
 
     const handleRemoveTagApplicant = async (tagId) => {
-        console.log(currApplicantId, tagId)
-        const resp = await api.removeTagApplicant({ applicantId: currApplicantId, tagId })
+        const resp = await api.removeTagApplicant(currApplicantId, { tagId })
             .then(res => {
                 console.log(res)
             }).catch(err => {
                 console.log(err)
             })
-        console.log(resp)
     }
 
     return (

@@ -13,7 +13,9 @@ const TagChoice = ({ color, label, currentColor, changeTagColor }) => {
     <div id="update-tag-color-list-item">
       <div>
         <Badge type={color}>
-          {label}
+          <div id="individual-tag-text">
+            {label}
+          </div>
         </Badge>
       </div>
       <div style={{ flexGrow: 1 }}></div>
@@ -50,7 +52,8 @@ class UpdateTagInfo extends Component {
     super(props);
     this.state = {
       color: this.props.color,
-      text: this.props.text
+      text: this.props.text,
+      disableSubmit: this.props.text.length < 3
     }
   }
 
@@ -67,17 +70,18 @@ class UpdateTagInfo extends Component {
 
   changeTagText = (event) => {
     this.setState({
-      text: event.target.value
+      text: event.target.value,
+      disableSubmit: event.target.value.length < 3
     });
-  }
-
-  deleteTag = (id) => {
-    this.props.handleDeleteTag(id);
-    this.props.toggleEditTag(id);
   }
 
   updateTag = (id, color, text) => {
     this.props.handleUpdateTag(id, color, text);
+    this.props.toggleEditTag(id);
+  }
+
+  deleteTag = (id) => {
+    this.props.handleDeleteTag(id);
     this.props.toggleEditTag(id);
   }
 
@@ -92,7 +96,7 @@ class UpdateTagInfo extends Component {
               label="Tag name"
               inlineLabel={true}
               value={this.state.text}
-              error={this.state.text.length < 3 ? "Tag name must be at least 3 characters" : null}
+              error={this.state.disableSubmit ? "Tag name must be at least 3 characters" : null}
               minLength={3}
               maxLength={30}
               onChange={this.changeTagText}
@@ -105,24 +109,28 @@ class UpdateTagInfo extends Component {
             />
           </div>
           <div id="update-tag-item">
-            <Button
-              fullWidth={true}
-              type={"criticalSubtle"}
-              iconLeft={<Remove />}
+            <button
+              id="update-tag-delete-button"
+              // fullWidth={true}
+              // type={"criticalSubtle"}
+              // iconLeft={<Remove />}
               onClick={event => this.deleteTag(this.props.id)}
             >
-              Delete this tag
-            </Button>
+              <Remove />&nbsp;Delete this tag
+            </button>
           </div>
           <div id="update-tag-item">
-            <Button
-              fullWidth={true}
-              type={"secondary"}
-              disabled={this.state.text === null || this.state.text.length < 3}
+            <button
+              id="update-tag-done-button"
+              style={{ 
+                  opacity: (this.state.disableSubmit) ? 0.3 : 1,
+                  cursor: (this.state.disableSubmit) ? "not-allowed" : "pointer"
+              }}
+              disabled={this.state.disableSubmit}
               onClick={event => this.updateTag(this.props.id, this.state.color, this.state.text)}
             >
               Done
-            </Button>
+            </button>
           </div>
         </div>
       </div>

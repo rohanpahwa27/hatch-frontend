@@ -9,7 +9,9 @@ const TagsMapping = ({ applicantTags, allTags }) => {
         applicantTags.map((tagId, index) => (
             <div id="individual-tag-badge" key={index}>
                 <Badge type={allTags[tagId].color}>
-                    {allTags[tagId].text}
+                    <div id="individual-tag-text">
+                        {allTags[tagId].text}
+                    </div>
                 </Badge>
             </div>
         ))
