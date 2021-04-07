@@ -23,7 +23,7 @@ class TableRow extends Component {
 
             for (const [key, value] of orgTags.entries()) {
                 if (applicantTag === key) {
-                    tagBadges.push(<Badge type={value.color} key={key}>{value.text}</Badge>);
+                    tagBadges.push(<div className="tag-badge"><Badge type={value.color} key={key}>{value.text}</Badge></div>);
                 }
             }
         }  
