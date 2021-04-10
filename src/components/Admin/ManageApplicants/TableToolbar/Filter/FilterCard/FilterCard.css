@@ -1,39 +1,64 @@
-.home-filter-card-container {
-  background-color: white;
+#applicant-toolbar-filter-card-container {
+  display: flex;
   min-width: 340px;
-  box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
-  border-radius: 3px; 
+  max-height: 360px;
+
   position: fixed;
-  
   margin-top: 40px;
   margin-left: -46px;
+
+
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(37, 42, 49, 0.16), 0px 8px 24px rgba(37, 42, 49, 0.24);
+  border-radius: 3px; 
+  
+  overflow-y: scroll;
 }
 
-.home-filter-card {
-  margin: 5%;
+#applicant-toolbar-filter-card {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  width: 100%;
+  row-gap: 12px;
+
+  margin: 20px 16px;
 }
 
-.filter-card-row {
+#filter-applicant-status {
+  margin: 0;
+}
+
+#applicant-toolbar-filter-card-row {
+  width: inherit;
   display: flex;
 }
 
-.filter-card-row-label {
+#applicant-toolbar-filter-card-row-label {
   flex-grow: 1;
+
+  font-size: 13px;
 }
 
-.filter-card-bottom-space {
-  padding-bottom: 50%;
-}
-
-.filter-card-footer-buttons {
+#applicant-toolbar-filter-card-footer-buttons {
   display: flex;
-  justify-content: flex-end;
+  align-self: flex-end;
+
+  padding-top: 30px;
 }
 
-.filter-card-back-button {
+#applicant-toolbar-filter-card-back-button {
   margin-right: 10px;
 }
 
-.filter-card-add-filter-button {
+#applicant-toolbar-filter-card-add-filter-button {
 
+}
+
+#filter-card-tags-list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 }

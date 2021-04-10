@@ -18,6 +18,7 @@ class ManageApplicants extends Component {
         super();
         this.state = {
             allApplicants: null,
+            organizationTags: {},
             tableData: [],
             query: "",
             filters: new Set(["Active"]),
@@ -49,11 +50,21 @@ class ManageApplicants extends Component {
         try {
             const orgId = localStorage.getItem("orgID");
             const applicantResponse = await api.getApplicantsInOrg(orgId);
-            let applicantData = applicantResponse.data.applicants;
+            const organizationResponse = await api.getOrgById(orgId);
+            const applicantData = applicantResponse.data.applicants;
+            const organizationTags = organizationResponse.data.organization.tags.reduce((map, tag) => {
+                map[tag._id] = {
+                    color: tag.color,
+                    text: tag.text,
+                }
+                return map
+            }, {});
+
             this.setState({
                 allApplicants: applicantData,
                 tableData: applicantData,
                 numApplicantsShowing: applicantData.length,
+                organizationTags: organizationTags
             });
         } catch (error) {
 
@@ -67,8 +78,19 @@ class ManageApplicants extends Component {
     handleFilter(updatedFilters) {
         const { allApplicants } = this.state;
         const filteredApplicants = allApplicants.filter(applicant => {
-            const { status } = applicant;
-            return updatedFilters.has(status);
+            const { status, tags } = applicant;
+            // NOT SURE HOW WE WANT FILTER TO WORK
+            // Should it filter Active AND has tag
+            // Should it filter Active OR has tag
+            
+            // console.log("status", status)
+            // console.log("tags", tags)
+            // console.log("updatedFilters", updatedFilters)
+            // console.log("updatedFilters", updatedFilters)
+            const applicantSet = new Set(tags);
+            const intersection = new Set([...updatedFilters].filter(x => applicantSet.has(x)));
+            // console.log(intersection)
+            return updatedFilters.has(status) || intersection.size !== 0;
         });
 
         // TODO (DRY principle): Change code snippet below to call handleSearch once updated to not use 'event'
@@ -417,7 +439,7 @@ class ManageApplicants extends Component {
                                             numApplicantsShowing={this.state.numApplicantsShowing}
                                             totalApplicants={this.state.allApplicants.length}
                                             query={this.state.query} handleSearch={this.handleSearch}
-                                            filters={this.state.filters} handleFilter={this.handleFilter}
+                                            filters={this.state.filters} allTags={this.state.organizationTags} handleFilter={this.handleFilter}
                                             downloadApplicantsExcel={this.downloadApplicantsExcel}
                                             toggleShowImport={this.toggleShowImport}
                                         />

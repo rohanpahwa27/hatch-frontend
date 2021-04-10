@@ -46,6 +46,7 @@ class Home extends Component {
                         lastName: applicant.lastName,
                         email: applicant.email,
                         likes: applicant.likes.length,
+                        tags: applicant.tags,
                         comments: applicant.comments.length,
                         extraFields: applicant.extraFields,
                         status: applicant.status,
@@ -356,6 +357,8 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.state.allApplicants)
+        console.log(this.state.filters)
         return (
             <div id="page-grid-container">
                 <Logo />

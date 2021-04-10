@@ -3,7 +3,6 @@ import onClickOutside from "react-onclickoutside";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
 import UpdateTagInfo from "./UpdateTagInfo/UpdateTagInfo.js";
 import InputField from "@kiwicom/orbit-components/lib/InputField";
-import Button from "@kiwicom/orbit-components/lib/Button";
 
 import "./UpdateTagsCard.css";
 

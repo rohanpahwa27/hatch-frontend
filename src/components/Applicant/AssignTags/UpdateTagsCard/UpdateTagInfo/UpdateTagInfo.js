@@ -91,6 +91,7 @@ class UpdateTagInfo extends Component {
         <div id="update-tag-info-card">
           <div id="update-tag-item">
             <InputField
+              id="update-tag-input-item"
               type="text"
               placeholder="Tag name"
               label="Tag name"
@@ -111,9 +112,6 @@ class UpdateTagInfo extends Component {
           <div id="update-tag-item">
             <button
               id="update-tag-delete-button"
-              // fullWidth={true}
-              // type={"criticalSubtle"}
-              // iconLeft={<Remove />}
               onClick={event => this.deleteTag(this.props.id)}
             >
               <Remove />&nbsp;Delete this tag
