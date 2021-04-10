@@ -23,7 +23,7 @@ class ApplicantInfo extends Component {
         return (
             (this.props.member != "" && Object.keys(applicant).length != 0) ? 
             <div id="applicant-info-item">
-                <img id="applicant-image" src={applicant ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />
+                <img id="applicant-image" src={applicant && applicant.imageUrl ? applicant.imageUrl : grayCircleSrc} alt="Applicant icon" />
                 <div id="applicant-info-heading-container">
                     <div id="applicant-name">
                         <span>{applicant ? applicant.firstName : placeholder} {applicant ? applicant.lastName : placeholder}</span>

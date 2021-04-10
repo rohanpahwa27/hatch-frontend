@@ -6,15 +6,17 @@ import "./AssignTags.css";
 
 const TagsMapping = ({ applicantTags, allTags }) => {
     return (
-        applicantTags.map((tagId, index) => (
-            <div id="individual-tag-badge" key={index}>
-                <Badge type={allTags[tagId].color}>
-                    <div id="individual-tag-text">
-                        {allTags[tagId].text}
-                    </div>
-                </Badge>
-            </div>
-        ))
+        applicantTags.map((tagId, index) => {
+            return (tagId in allTags ?
+                <div id="individual-tag-badge" key={index}>
+                    <Badge type={allTags[tagId].color}>
+                        <div id="individual-tag-text">
+                            {allTags[tagId].text}
+                        </div>
+                    </Badge>
+                </div> : null
+            )
+        })
     )
 }
 
@@ -22,7 +24,7 @@ class AssignTags extends Component {
     constructor() {
         super();
         this.state = {
-            showTagsCard: true
+            showTagsCard: false
         };
     }
 

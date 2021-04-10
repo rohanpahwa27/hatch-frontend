@@ -11,21 +11,23 @@ const TagsMapping = ({ applicantTags, allTags, handleRemoveTagApplicant }) => {
     const dismissImage = "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/master/assets/Dismiss/SVG/ic_fluent_dismiss_12_regular.svg";
 
     return (
-        applicantTags.map((tagId, index) => (
-            <div id="individual-tag-badge" key={index}>
-                <Badge type={allTags[tagId].color}>
-                    <div id="individual-tag-text">
-                        {allTags[tagId].text}
-                        <button
-                            id="delete-tag-x-button"
-                            onClick={event => handleRemoveTagApplicant(tagId)}
-                        >
-                            <img id="delete-tag-x-icon" src={dismissImage} alt="Dismiss icon" />
-                        </button>
-                    </div>
-                </Badge>
-            </div>
-        ))
+        applicantTags.map((tagId, index) => {
+            return (tagId in allTags ?
+                <div id="individual-tag-badge" key={index}>
+                    <Badge type={allTags[tagId].color}>
+                        <div id="individual-tag-text">
+                            {allTags[tagId].text}
+                            <button
+                                id="delete-tag-x-button"
+                                onClick={event => handleRemoveTagApplicant(tagId)}
+                            >
+                                <img id="delete-tag-x-icon" src={dismissImage} alt="Dismiss icon" />
+                            </button>
+                        </div>
+                    </Badge>
+                </div> : null
+            )
+        })
     )
 }
 
@@ -162,7 +164,7 @@ class UpdateTagsCard extends Component {
                         />
                         <button
                             id="update-tag-done-button"
-                            style={{ 
+                            style={{
                                 opacity: (this.state.disableSubmit) ? 0.3 : 1,
                                 cursor: (this.state.disableSubmit) ? "not-allowed" : "pointer"
                             }}

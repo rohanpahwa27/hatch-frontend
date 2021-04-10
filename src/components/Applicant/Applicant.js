@@ -36,7 +36,7 @@ export default function Applicant(props) {
     useEffect(async () => {
         const memberIdResponse = await api.getThisMember();
         const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
-        const currOrganizationResponse = await await api.getOrgById(orgId);
+        const currOrganizationResponse = await api.getOrgById(orgId);
         const applicantData =
             allApplicantsResponse.data.applicants.map(applicant => {
                 const applicantInfo = {
@@ -156,45 +156,44 @@ export default function Applicant(props) {
         setComments(newComments)
     }
 
+    const handleRefreshTags = (organizationResponse) => {
+        const newOrganizationTags = organizationResponse.data.organization.tags.reduce((map, tag) => {
+            map[tag._id] = {
+                color: tag.color,
+                text: tag.text,
+            }
+            return map
+        }, {});
+        setAllOrganizationTags(newOrganizationTags);
+    }
+
     const handleCreateTag = async (color, text) => {
-        const resp = await api.createTag({ color, text })
-        console.log(resp)
+        const organizationResponse = await api.createTag({ color, text });
+        handleRefreshTags(organizationResponse);
     }
 
     const handleUpdateTag = async (tagId, color, text) => {
-        console.log(tagId, color, text);
-        const resp = await api.updateTag({ tagId, color, text });
-        console.log(resp)
-        // const applicantData = resp.data.allApplicants;
+        const organizationResponse = await api.updateTag({ tagId, color, text });
+        handleRefreshTags(organizationResponse);
     }
 
     const handleDeleteTag = async (_id) => {
-        console.log("_id", _id)
-        console.log("typeof(_id)", typeof(_id))
-        console.log("{ _id }", { _id })
-        const resp = await api.deleteTag( { _id: _id } );
-        console.log("resp", resp)
+        const organizationResponse = await api.deleteTag( { _id: _id } );
+        handleRefreshTags(organizationResponse);
     }
 
     const handleAddTagApplicant = async (tagId) => {
-        console.log("applicantId", currApplicantId)
-        console.log("tagId", tagId)
-        const resp = await api.addTagApplicant(currApplicantId, { tagId })
-            .then(res => {
-                console.log(res)
-            }).catch(err => {
-                console.log(err)
-            })
-        console.log(resp)
+        if (currApplicantData.tags.indexOf(tagId) === -1) {
+            const applicantResponse = await api.addTagApplicant(currApplicantId, { tagId });
+            setCurrApplicantData(applicantResponse.data.applicant);
+        }
     }
 
     const handleRemoveTagApplicant = async (tagId) => {
-        const resp = await api.removeTagApplicant(currApplicantId, { tagId })
-            .then(res => {
-                console.log(res)
-            }).catch(err => {
-                console.log(err)
-            })
+        if (currApplicantData.tags.indexOf(tagId) !== -1) {
+            const applicantResponse = await api.removeTagApplicant(currApplicantId, { tagId });
+            setCurrApplicantData(applicantResponse.data.applicant);
+        }
     }
 
     return (
