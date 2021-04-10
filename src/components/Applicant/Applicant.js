@@ -11,7 +11,7 @@ import ApplicantInfoDrop from "./ApplicantInfoDrop/ApplicantInfoDrop.js"
 import UploadPhoto from "./UploadPhoto/UploadPhoto.js"
 import NewComment from "./NewComment/NewComment.js"
 import CommentSection from "./CommentSection/CommentSection"
-
+import {trackEvent} from "../../tracking/utils"
 import api from "../../Api/api"
 
 import "./Applicant.css"
@@ -113,12 +113,14 @@ export default function Applicant (props) {
         } else {
             setCurrApplicantId(allApplicantIds[currIdIndex + 1]);
         }
+        trackEvent('go to next applicant')
     }
 
     const handleLike = async () => {
         // TODO: double check the data is updated correctly
         setApplicantLike(!isLikedByCurrMember);
         await api.changeMemberLikeApplicant(currApplicantId);
+        trackEvent('like applicant')
     }
     
     const handleNewComment = async () => {
@@ -137,6 +139,7 @@ export default function Applicant (props) {
         })
         setComments([])
         setComments(currApplicantCommentData)
+        trackEvent('comment on applicant')
     }
 
     const handleDelete = async (commentId) => {

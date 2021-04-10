@@ -6,7 +6,7 @@ import api from "../../../../Api/api.js";
 import exampleImage from "./Assets/example.png";
 import backIcon from "./Icons/back.png";
 import downloadIcon from "./Icons/download.png";
-
+import {trackEvent} from "../../../../tracking/utils"
 class Import extends Component {
   constructor() {
     super();
@@ -28,10 +28,12 @@ class Import extends Component {
     formData.append("data", this.state.selectedFile);
     await api.uploadApplicantInfo(formData);
     this.props.reloadPage();
+    trackEvent('importing applicants')
   };
 
   downloadTemplate = async (event) => {
     await api.downloadTemplate();
+    trackEvent('downloading template')
   };
 
   render() {

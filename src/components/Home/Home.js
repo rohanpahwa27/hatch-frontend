@@ -8,7 +8,7 @@ import Logo from "../Logo/Logo.js";
 import SideNavBar from "../SideNavBar/SideNavBar.js";
 import SearchAndFilter from "./SearchFilter/SearchFilter.js"
 import ShowingApplicantsLabel from "./ShowingApplicantsLabel/ShowingApplicantsLabel.js"
-
+import {trackEvent} from "../../tracking/utils"
 import api from "../../Api/api"
 
 class Home extends Component {
@@ -134,6 +134,8 @@ class Home extends Component {
             search: data,
             state: { id: data }
         })
+
+        trackEvent('click on applicant')
     }
 
     handleSearch(event) {
@@ -165,6 +167,7 @@ class Home extends Component {
         else if (this.state.sortBy === "comments") {
             this.sortByComments(updatedApplicants, this.state.sortDirection)
         }
+        trackEvent('search for applicant')
     }
 
     handleSort(event) {
@@ -185,6 +188,7 @@ class Home extends Component {
             }
 
             this.sortByName(this.state.tableData, direction)
+            trackEvent('sort by applicant')
         }
 
         // if the likes header is clicked

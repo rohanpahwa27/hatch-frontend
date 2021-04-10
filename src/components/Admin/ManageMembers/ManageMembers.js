@@ -8,6 +8,7 @@ import api from "../../../Api/api"
 import Logo from "../../Logo/Logo";
 import SideNavBar from "../../SideNavBar/SideNavBar";
 import EmptyState from "./EmptyState"
+import {trackEvent} from "../../../tracking/utils"
 
 var memberData = []
 class ManageMembers extends Component {
@@ -362,6 +363,7 @@ class ManageMembers extends Component {
         if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length, showEmptyState: memberData.length==0})
         this.setState({selected: new Set()})
+        trackEvent('updating members')
     }
 
     deleteMembers = async () => {
@@ -372,6 +374,7 @@ class ManageMembers extends Component {
         if (index > -1) memberData.splice(index, 1);
         this.setState({tableData: memberData, totalMembers: memberData.length, showEmptyState: memberData.length==0})
         this.setState({selected: new Set()})
+        trackEvent('deleting members')
     }
 
     render() {
