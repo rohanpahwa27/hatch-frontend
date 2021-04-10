@@ -3,6 +3,7 @@ import "./LoginCard.css";
 import api from "../../../Api/api.js";
 import LoginForm from "./LoginForm/LoginForm.js"
 import { withRouter } from "react-router-dom";
+import {setUserId, trackEvent, setUserProperties} from "../../../tracking/utils"
 
 const initialState = {
   email: "",
@@ -51,6 +52,10 @@ class LoginCard extends Component {
       return;
     }
     this.props.history.push("/Home");
+    const orgResp = await api.getMyOrg()
+    setUserId(response.data.member._id)
+    setUserProperties({organization: orgResp.data.organization.name, accountType: (response.data.member.organizations[0].isAdmin) ? 'Administrator':'General Member'})
+    trackEvent('login')
   };
 
   handleEmailChange = evt => {

@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./ManageApplicants.css";
 import api from "../../../Api/api";
 import Navbar from "../../Navbar/Navbar.js";
-
+import {trackEvent} from "../../../tracking/utils"
 // import ImportApplicants from "../ImportApplicants/ImportApplicants.js";
 import Import from "../ImportApplicants/Import/Import.js";
 import TableToolbar from "./TableToolbar/TableToolbar.js";
@@ -370,6 +370,7 @@ class ManageApplicants extends Component {
             search: applicantId,
             state: { id: applicantId }
         });
+        trackEvent('go to applicant from admin')
     }
 
     downloadApplicantsExcel = async () => {
@@ -388,6 +389,7 @@ class ManageApplicants extends Component {
         this.setState({ selected: new Set() });
         // Can reload or reset state. However, with reset state we'll need to reapply sort/search/filters possibly?
         this.reloadPage();
+        trackEvent('update applicant')
     }
 
     deleteApplicants = async () => {
@@ -401,6 +403,7 @@ class ManageApplicants extends Component {
         this.setState({ selected: new Set() });
         // Can reload or reset state. However, with reset state we'll need to reapply sort/search/filters possibly?
         this.reloadPage();
+        trackEvent('delete applicant')
     }
 
     toggleShowImport() {

@@ -3,7 +3,7 @@ import "./TableRow.css"
 import emptyHeart from "./Icons/emptyHeart.png"
 import filledHeart from "./Icons/filledHeart.png"
 import commentsImage from "./Icons/comment.png"
-import api from "../../../../../Api/api.js"
+import Badge from "@kiwicom/orbit-components/lib/Badge";
 
 class TableRow extends Component {
     render() {
@@ -11,10 +11,28 @@ class TableRow extends Component {
 
         const heart = this.props.didMemberLikeApplicant ? filledHeart : emptyHeart
 
+        const applicantTags = this.props.tags;
+        const orgTags = this.props.orgTags;
+
+        // populate array containing all of this applicant's tags
+        const tagBadges = [];
+
+        let i;
+        for (i = 0; i < applicantTags.length; i++) {
+            const applicantTag = applicantTags[i];
+
+            for (const [key, value] of orgTags.entries()) {
+                if (applicantTag === key) {
+                    tagBadges.push(<div className="tag-badge"><Badge type={value.color} key={key}>{value.text}</Badge></div>);
+                }
+            }
+        }  
+
         const name = (
             <td className="name-div-home table-data-cell" key="name">
                 <img className="applicant-image" src={this.props.imageUrl} alt="Headshot" />
                 <span className="applicant-name">{this.props.firstName} {this.props.lastName}</span>
+                {tagBadges}
             </td>
         )
 
