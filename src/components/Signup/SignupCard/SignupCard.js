@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import InputField from "@kiwicom/orbit-components/lib/InputField";
 import Button from "@kiwicom/orbit-components/lib/Button";
+import {trackEvent} from "../../../tracking/utils"
 
 const initialState = {
   email: "",
@@ -90,7 +91,7 @@ class SignupCard extends React.Component {
       this.setState({ errors: errors });
       return;
     }
-
+    trackEvent('New User', {accountType: (admin) ? 'Administrator' : 'General Member'})
     this.props.history.push("/login");
   };
 
