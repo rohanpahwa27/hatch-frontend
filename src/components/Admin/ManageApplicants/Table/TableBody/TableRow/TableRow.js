@@ -19,6 +19,22 @@ const Check = ({ applicantId, handleSelected, isSelected }) => {
     );
 };
 
+const TagsMapping = ({ applicantTags, allTags }) => {
+    return (
+        applicantTags.map((tagId, index) => {
+            return (tagId in allTags ?
+                <div id="individual-tag-badge" key={index}>
+                    <Badge type={allTags[tagId].color}>
+                        <div id="individual-tag-text">
+                            {allTags[tagId].text}
+                        </div>
+                    </Badge>
+                </div> : null
+            )
+        })
+    )
+}
+
 class TableRow extends Component {
     render() {
         const components = [];
@@ -41,6 +57,10 @@ class TableRow extends Component {
                 <span className="manage-row-item manage-applicant-name">
                     {this.props.status === "Inactive" ? <Badge type="info">Withdrawn</Badge> : null}
                     &nbsp;{this.props.firstName} {this.props.lastName}
+                    <TagsMapping
+                        applicantTags={this.props.tags}
+                        allTags={this.props.allTags}
+                    />
                 </span>
             </td>
         );

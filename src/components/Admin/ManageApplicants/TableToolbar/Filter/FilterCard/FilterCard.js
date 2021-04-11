@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./FilterCard.css"
+import Badge from "@kiwicom/orbit-components/lib/Badge";
 import Checkbox from "@kiwicom/orbit-components/lib/Checkbox";
 import Button from "@kiwicom/orbit-components/lib/Button";
 
@@ -9,11 +10,36 @@ const Check = ({ filterValue, isFilterSelected, handleSelectFilter }) => {
     <Checkbox
       checked={checked}
       onChange={() => {
+        console.log(filterValue)
         handleSelectFilter(filterValue)
       }}
     />
   );
 };
+
+const AllTagsFilters = ({ allTags, isFilterSelected, handleSelectFilter }) => {
+  return (
+    Object.entries(allTags).map(([tagId, tagData]) => (
+      <div id="filter-card-tags-list-item">
+        <div id="individual-tag-badge-tags-list" key={tagId}>
+          <Badge type={tagData.color}>
+            <div id="individual-tag-text">
+              {allTags[tagId].text}
+            </div>
+          </Badge>
+        </div>
+        <div style={{ flexGrow: 1 }}></div>
+        <div>
+          <Check
+            filterValue={tagId}
+            isFilterSelected={isFilterSelected}
+            handleSelectFilter={handleSelectFilter}
+          />
+        </div>
+      </div>
+    ))
+  )
+}
 
 class FilterCard extends Component {
   constructor(props) {
@@ -51,46 +77,50 @@ class FilterCard extends Component {
 
   render() {
     return (
-      <div className="home-filter-card-container">
-        <div className="home-filter-card">
-          <div>
-            <p className="filter-applicant-status">Filter by applicant status</p>
-            <div className="filter-card-row">
-              <div className="filter-card-row-label">Active</div>
-              <div>
-                <Check
-                  filterValue="Active"
-                  isFilterSelected={this.isFilterSelected}
-                  handleSelectFilter={this.handleSelectFilter}
-                />
-              </div>
+      <div id="applicant-toolbar-filter-card-container">
+        <div id="applicant-toolbar-filter-card">
+
+          <p id="filter-applicant-status">Filter by</p>
+          
+          <div id="applicant-toolbar-filter-card-row">
+            <div id="applicant-toolbar-filter-card-row-label">Active</div>
+            <div>
+              <Check
+                filterValue="Active"
+                isFilterSelected={this.isFilterSelected}
+                handleSelectFilter={this.handleSelectFilter}
+              />
             </div>
-            <div className="filter-card-row">
-              <div className="filter-card-row-label">Released</div>
-              <div>
-                <Check
-                  filterValue="Inactive"
-                  isFilterSelected={this.isFilterSelected}
-                  handleSelectFilter={this.handleSelectFilter}
-                />
-              </div>
+          </div>
+          <div id="applicant-toolbar-filter-card-row">
+            <div id="applicant-toolbar-filter-card-row-label">Withdrawn</div>
+            <div>
+              <Check
+                filterValue="Inactive"
+                isFilterSelected={this.isFilterSelected}
+                handleSelectFilter={this.handleSelectFilter}
+              />
             </div>
           </div>
 
-          <div className="filter-card-bottom-space">
-          </div>
+          {/* <AllTagsFilters
+            allTags={this.props.allTags}
+            isFilterSelected={this.isFilterSelected}
+            handleSelectFilter={this.handleSelectFilter}
+          /> */}
 
-          <div className="filter-card-footer-buttons">
-            <div className="filter-card-back-button">
+          <div id="applicant-toolbar-filter-card-footer-buttons">
+            <div id="applicant-toolbar-filter-card-back-button">
               <Button type="secondary"
                 onClick={this.resetFilters}
               >Back</Button>
             </div>
-            <div className="filter-card-add-filter-button">
+            <div id="applicant-toolbar-filter-card-add-filter-button">
               <Button
                 onClick={this.addFilters}
               >Add Filter</Button>
             </div>
+
           </div>
         </div>
       </div>

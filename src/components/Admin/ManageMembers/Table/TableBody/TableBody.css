@@ -5,7 +5,7 @@
     
     /* Grid container proprties */
         display: grid;
-        grid-auto-rows: 75px;
+        grid-auto-rows: minmax(75px, auto);
         grid-template-columns: 100%;
     
         overflow-x: scroll;

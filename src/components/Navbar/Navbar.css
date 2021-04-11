@@ -36,14 +36,14 @@ body {
 #navbar-link-green {
   color: inherit;
   font-weight: bold;
-  padding: 6px 32px;
+  padding: 8px 32px;
   border-bottom: 2px solid #00A991;
   text-decoration: inherit;
 }
 
 #navbar-link-grey {
   color: #5F738C;
-  padding: 6px 32px;
+  padding: 8px 32px;
   border-bottom: 2px solid #BAC7D5;
   text-decoration: inherit;
 }

@@ -11,7 +11,7 @@ class TableToolbar extends Component {
         return (
             <div id="table-toolbar-grid-item">
                 <ShowingApplicantsLabel numApplicantsShowing={this.props.numApplicantsShowing} totalApplicants={this.props.totalApplicants} />
-                <Filter filters={this.props.filters} handleFilter={this.props.handleFilter} />
+                <Filter filters={this.props.filters} allTags={this.props.allTags} handleFilter={this.props.handleFilter} />
                 <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
                 {/* <div style={{flexGrow: 1}}></div> */}
                 {/* <Download downloadApplicantsExcel={this.props.downloadApplicantsExcel}/> */}

@@ -32,6 +32,7 @@ class Filter extends Component {
                         <FilterCard
                             toggleShowFilter={this.toggleShowFilter}
                             filters={this.props.filters}
+                            allTags={this.props.allTags}
                             handleFilter={this.props.handleFilter}
                         /> : null
                     }

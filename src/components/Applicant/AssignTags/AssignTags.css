@@ -1,0 +1,37 @@
+#applicant-assign-tags-container {
+    width: 280px;
+    padding: 40px 30px 10px 10px;
+    font-size: 13px;
+}
+
+#applicant-assign-tags-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    row-gap: 12px;
+}
+
+#applicant-assign-tags-button {
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 5px;
+}
+
+#applicant-assign-tags-add-icon {
+    width: 20px;
+    height: 20px;
+    
+    margin: 0px 0px -5px 0px;
+}
+
+#individual-tag-badge {
+    padding: 0px 0px 0px 12px;
+}
+
+#individual-tag-text {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+}

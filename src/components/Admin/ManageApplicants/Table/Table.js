@@ -16,6 +16,7 @@ class Table extends Component {
                 />
                 <TableBody
                     data={this.props.data}
+                    allTags={this.props.allTags}
                     handleSelected={this.props.handleSelected}
                     isSelected={this.props.isSelected}
                 />
