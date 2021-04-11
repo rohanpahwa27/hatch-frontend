@@ -11,7 +11,8 @@ import ApplicantInfoDrop from "./ApplicantInfoDrop/ApplicantInfoDrop.js";
 import AssignTags from "./AssignTags/AssignTags.js";
 import UploadPhoto from "./UploadPhoto/UploadPhoto.js";
 import NewComment from "./NewComment/NewComment.js";
-import CommentSection from "./CommentSection/CommentSection";
+import CommentSection from "./CommentSection/CommentSection.js";
+
 import { trackEvent } from "../../tracking/utils";
 import api from "../../Api/api";
 
@@ -173,22 +174,26 @@ export default function Applicant(props) {
     const handleCreateTag = async (color, text) => {
         const organizationResponse = await api.createTag({ color, text });
         handleRefreshTags(organizationResponse);
+        trackEvent('Create tag');
     }
 
     const handleUpdateTag = async (tagId, color, text) => {
         const organizationResponse = await api.updateTag({ tagId, color, text });
         handleRefreshTags(organizationResponse);
+        trackEvent('Update tag');
     }
 
     const handleDeleteTag = async (_id) => {
         const organizationResponse = await api.deleteTag( { _id: _id } );
         handleRefreshTags(organizationResponse);
+        trackEvent('Delete tag');
     }
 
     const handleAddTagApplicant = async (tagId) => {
         if (currApplicantData.tags.indexOf(tagId) === -1) {
             const applicantResponse = await api.addTagApplicant(currApplicantId, { tagId });
             setCurrApplicantData(applicantResponse.data.applicant);
+            trackEvent('Add tag to applicant');
         }
     }
 
@@ -196,6 +201,7 @@ export default function Applicant(props) {
         if (currApplicantData.tags.indexOf(tagId) !== -1) {
             const applicantResponse = await api.removeTagApplicant(currApplicantId, { tagId });
             setCurrApplicantData(applicantResponse.data.applicant);
+            trackEvent('Remove tag from applicant');
         }
     }
 
