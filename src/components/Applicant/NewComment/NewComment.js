@@ -38,7 +38,9 @@ class NewComment extends Component {
             <div id="new-comment-bar">
                 <div id="new-comment-container">
                     <div id="new-comment-text-box">
-                        <InputField type="text" placeholder="type your comment here" value={this.state.comment} onChange={this.handleChange}/>
+                        <InputField 
+                        id="new-comment-text-box-item"
+                        type="text" placeholder="type your comment here" value={this.state.comment} onChange={this.handleChange}/>
                     </div>
                     <div id="new-comment-send">
                         <Button submit={true} fullWidth={false} type={"secondary"} onClick={this.sendComment} iconLeft={<ChevronRight />}></Button>

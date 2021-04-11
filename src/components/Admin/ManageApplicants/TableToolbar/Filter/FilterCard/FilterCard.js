@@ -80,7 +80,7 @@ class FilterCard extends Component {
       <div id="applicant-toolbar-filter-card-container">
         <div id="applicant-toolbar-filter-card">
 
-          <p id="filter-applicant-status">Filter by applicant status</p>
+          <p id="filter-applicant-status">Filter by</p>
           
           <div id="applicant-toolbar-filter-card-row">
             <div id="applicant-toolbar-filter-card-row-label">Active</div>
@@ -93,7 +93,7 @@ class FilterCard extends Component {
             </div>
           </div>
           <div id="applicant-toolbar-filter-card-row">
-            <div id="applicant-toolbar-filter-card-row-label">Released</div>
+            <div id="applicant-toolbar-filter-card-row-label">Withdrawn</div>
             <div>
               <Check
                 filterValue="Inactive"

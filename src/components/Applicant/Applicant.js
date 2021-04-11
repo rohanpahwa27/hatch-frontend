@@ -36,7 +36,7 @@ export default function Applicant(props) {
     useEffect(async () => {
         const memberIdResponse = await api.getThisMember();
         const allApplicantsResponse = await api.getApplicantsInOrg(orgId);
-        const currOrganizationResponse = await api.getOrgById(orgId);
+        const currOrganizationResponse = await api.getMyOrg();
         const applicantData =
             allApplicantsResponse.data.applicants.map(applicant => {
                 const applicantInfo = {
@@ -139,13 +139,9 @@ export default function Applicant(props) {
     const handleNewComment = async () => {
         const commentsResponse = await api.getComments(currApplicantId);
         // TODO: filter to get the comments that aren't already there, will lead to bug if multiple people comment at the same time
-<<<<<<< HEAD
-        let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]
-=======
         let newComment = commentsResponse.data.comments[commentsResponse.data.comments.length - 1]     
         console.log("New comment: ")
         console.log(newComment) 
->>>>>>> main
         const memberResponse = await api.getMemberById(newComment.member)
 
         let currApplicantCommentData = comments;

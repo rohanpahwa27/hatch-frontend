@@ -150,11 +150,14 @@ class UpdateTagsCard extends Component {
                         />
                     </div>
                     <div id="create-new-tag-item">
+                        <label
+                            id="new-tag-input-label"
+                            for="new-tag-input-item"
+                        >New tag</label>
                         <InputField
                             id="new-tag-input-item"
                             type="text"
                             placeholder="Name your tag here"
-                            label="New tag"
                             inlineLabel={true}
                             value={this.state.text}
                             minLength={3}

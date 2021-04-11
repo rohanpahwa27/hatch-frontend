@@ -50,7 +50,7 @@ class ManageApplicants extends Component {
         try {
             const orgId = localStorage.getItem("orgID");
             const applicantResponse = await api.getApplicantsInOrg(orgId);
-            const organizationResponse = await api.getOrgById(orgId);
+            const organizationResponse = await api.getMyOrg();
             const applicantData = applicantResponse.data.applicants;
             const organizationTags = organizationResponse.data.organization.tags.reduce((map, tag) => {
                 map[tag._id] = {

@@ -54,7 +54,7 @@ class FilterCard extends Component {
       <div className="home-filter-card-container">
         <div className="home-filter-card">
           <div>
-            <p className="filter-applicant-status">Filter by applicant status</p>
+            <p className="filter-applicant-status">Filter by</p>
             <div className="filter-card-row">
               <div className="filter-card-row-label">Active</div>
               <div>
@@ -66,7 +66,7 @@ class FilterCard extends Component {
               </div>
             </div>
             <div className="filter-card-row">
-              <div className="filter-card-row-label">Released</div>
+              <div className="filter-card-row-label">Withdrawn</div>
               <div>
                 <Check
                   filterValue="Inactive"

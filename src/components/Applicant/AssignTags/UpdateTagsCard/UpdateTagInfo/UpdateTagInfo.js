@@ -89,15 +89,18 @@ class UpdateTagInfo extends Component {
     return (
       <div id="update-tag-info-container">
         <div id="update-tag-info-card">
-          <div id="update-tag-item">
+          <div id="update-tag-item-input">
+            <label
+              id="new-tag-input-label"
+              for="update-tag-input-item"
+            >Tag name</label>
             <InputField
               id="update-tag-input-item"
               type="text"
               placeholder="Tag name"
-              label="Tag name"
               inlineLabel={true}
               value={this.state.text}
-              error={this.state.disableSubmit ? "Tag name must be at least 3 characters" : null}
+              error={this.state.disableSubmit ? "Must be 3+ characters" : null}
               minLength={3}
               maxLength={30}
               onChange={this.changeTagText}
@@ -114,15 +117,16 @@ class UpdateTagInfo extends Component {
               id="update-tag-delete-button"
               onClick={event => this.deleteTag(this.props.id)}
             >
-              <Remove />&nbsp;Delete this tag
+              <Remove />
+              &nbsp;&nbsp;&nbsp;&nbsp;Delete this tag
             </button>
           </div>
           <div id="update-tag-item">
             <button
-              id="update-tag-done-button"
-              style={{ 
-                  opacity: (this.state.disableSubmit) ? 0.3 : 1,
-                  cursor: (this.state.disableSubmit) ? "not-allowed" : "pointer"
+              id="update-tag-item-done-button"
+              style={{
+                opacity: (this.state.disableSubmit) ? 0.3 : 1,
+                cursor: (this.state.disableSubmit) ? "not-allowed" : "pointer"
               }}
               disabled={this.state.disableSubmit}
               onClick={event => this.updateTag(this.props.id, this.state.color, this.state.text)}

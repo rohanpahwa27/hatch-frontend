@@ -42,7 +42,7 @@ class UpdateApplicantsCard extends Component {
                                 />
                                 <RadioButton
                                     className="update-applicant-radio"
-                                    label="Released"
+                                    label="Withdrawn"
                                     updateApplicants={event => this.props.updateApplicants("Inactive")}
                                 />
                             </div>

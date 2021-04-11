@@ -16,6 +16,8 @@
 
   body {
     font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 400;
   }
   
   /* * { border: 1px solid black; } */

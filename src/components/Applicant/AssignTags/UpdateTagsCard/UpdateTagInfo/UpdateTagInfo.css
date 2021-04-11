@@ -25,6 +25,11 @@
   margin: 20px 16px;
 }
 
+#update-tag-item-input {
+  width: inherit;
+  display: flex;
+}
+
 #update-tag-item {
   width: inherit;
 }
@@ -35,7 +40,7 @@
   flex-direction: column;
   row-gap: 16px;
 
-  margin: 8px;
+  /* margin: 8px; */
 }
 
 #update-tag-color-list-item {
@@ -57,4 +62,15 @@
 
 #update-tag-input-item {
   font-family: Inter;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+#update-tag-item-done-button {
+  width: 100%;
+  background-color: #E8EDF1;
+  color: #252A31;
+
+  padding: 12px 16px 12px 16px;
+  border-radius: 3px;
 }

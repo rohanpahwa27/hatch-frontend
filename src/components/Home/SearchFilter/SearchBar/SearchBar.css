@@ -8,3 +8,8 @@
     height: 44px;
     width: 440px;
 }
+
+#search-bar {
+    font-family: Inter;
+    font-size: 13px;
+}
