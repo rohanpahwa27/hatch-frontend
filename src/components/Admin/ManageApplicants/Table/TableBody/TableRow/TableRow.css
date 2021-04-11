@@ -54,6 +54,11 @@
 
 .manage-applicant-name {
     margin-left: 12px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 12px;
 }
 
 .manage-row-item {

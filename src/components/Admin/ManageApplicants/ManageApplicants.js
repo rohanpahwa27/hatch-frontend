@@ -82,14 +82,8 @@ class ManageApplicants extends Component {
             // NOT SURE HOW WE WANT FILTER TO WORK
             // Should it filter Active AND has tag
             // Should it filter Active OR has tag
-            
-            // console.log("status", status)
-            // console.log("tags", tags)
-            // console.log("updatedFilters", updatedFilters)
-            // console.log("updatedFilters", updatedFilters)
             const applicantSet = new Set(tags);
             const intersection = new Set([...updatedFilters].filter(x => applicantSet.has(x)));
-            // console.log(intersection)
             return updatedFilters.has(status) || intersection.size !== 0;
         });
 
@@ -448,6 +442,7 @@ class ManageApplicants extends Component {
                                         />
                                         <Table
                                             data={this.state.tableData}
+                                            allTags={this.state.organizationTags}
                                             handleSelected={this.handleSelected}
                                             selectAll={this.selectAll}
                                             isSelected={this.isSelected}

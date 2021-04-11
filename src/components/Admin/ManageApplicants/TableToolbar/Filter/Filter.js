@@ -7,7 +7,7 @@ class Filter extends Component {
     constructor() {
         super();
         this.state = {
-            showFilterCard: true,
+            showFilterCard: false,
         }
     }
     

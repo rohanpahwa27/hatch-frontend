@@ -21,6 +21,7 @@ class TableBody extends Component {
                         comments={applicant.comments.length}
                         tags={applicant.tags}
                         status={applicant.status}
+                        allTags={this.props.allTags}
                         handleSelected={this.props.handleSelected}
                         isSelected={this.props.isSelected}
                     />
@@ -38,6 +39,7 @@ class TableBody extends Component {
                         comments={applicant.comments.length}
                         tags={applicant.tags}
                         status={applicant.status}
+                        allTags={this.props.allTags}
                         handleSelected={this.props.handleSelected}
                         isSelected={this.props.isSelected}
                     />

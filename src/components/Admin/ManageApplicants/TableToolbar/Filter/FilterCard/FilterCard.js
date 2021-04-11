@@ -103,11 +103,11 @@ class FilterCard extends Component {
             </div>
           </div>
 
-          <AllTagsFilters
+          {/* <AllTagsFilters
             allTags={this.props.allTags}
             isFilterSelected={this.isFilterSelected}
             handleSelectFilter={this.handleSelectFilter}
-          />
+          /> */}
 
           <div id="applicant-toolbar-filter-card-footer-buttons">
             <div id="applicant-toolbar-filter-card-back-button">

@@ -372,8 +372,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state.allApplicants)
-        console.log(this.state.filters)
         return (
             <div id="page-grid-container">
                 <Logo />

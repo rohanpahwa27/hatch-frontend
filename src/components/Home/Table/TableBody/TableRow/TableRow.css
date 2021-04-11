@@ -27,6 +27,7 @@
 
     display: flex;
     flex-wrap: wrap;
+    row-gap: 12px;
 }
 
 .applicant-image {
