@@ -1,6 +1,7 @@
 import amplitude from 'amplitude-js';
 
 export const initAmplitude = () => {
+    console.log(process.env.NODE_ENV)
   amplitude.getInstance().init(process.env.REACT_APP_AMPLITUDE);
 };
 
