@@ -1,7 +1,7 @@
 #applicant-table-body-grid-container {
     /* Grid container proprties */
     display: grid;
-    grid-auto-rows: minmax(75px, auto);
+    grid-auto-rows: minmax(75px, max-content);
 
     height: 100%;
     width: 100%;
