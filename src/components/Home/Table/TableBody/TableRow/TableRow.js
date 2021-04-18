@@ -31,7 +31,10 @@ class TableRow extends Component {
         const name = (
             <td className="name-div-home table-data-cell" key="name">
                 <img className="applicant-image" src={this.props.imageUrl} alt="Headshot" />
-                <span className="applicant-name">{this.props.firstName} {this.props.lastName}</span>
+                <span className="applicant-name">
+                    {this.props.status === "Inactive" ? <Badge type="info">Withdrawn</Badge> : null}
+                    &nbsp;{this.props.firstName} {this.props.lastName}
+                    </span>
                 {tagBadges}
             </td>
         )

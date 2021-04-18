@@ -10,7 +10,6 @@ const Check = ({ filterValue, isFilterSelected, handleSelectFilter }) => {
     <Checkbox
       checked={checked}
       onChange={() => {
-        console.log(filterValue)
         handleSelectFilter(filterValue)
       }}
     />

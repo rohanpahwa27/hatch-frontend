@@ -32,8 +32,8 @@ const TagsMapping = ({ applicantTags, allTags }) => {
                 </div> : null
             )
         })
-    )
-}
+    );
+};
 
 class TableRow extends Component {
     render() {

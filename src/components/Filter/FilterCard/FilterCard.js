@@ -52,22 +52,24 @@ class FilterCard extends Component {
 
   // Unique fxn courtesy of `react-onclickoutside`
   handleClickOutside = (event) => {
-      this.props.toggleShowFilter();
+    this.setState({
+      updatedFilters: this.props.filters
+    });
+    this.props.toggleShowFilter();
   }
 
   isFilterSelected = (filterValue) => {
     const { updatedFilters } = this.state;
-    return (filterValue =="Active" || filterValue =="Inactive") ?
-    updatedFilters.status.has(filterValue) : updatedFilters.tags.has(filterValue)
+    return (filterValue == "Active" || filterValue == "Inactive") ?
+      updatedFilters.status.has(filterValue) : updatedFilters.tags.has(filterValue)
   }
 
   handleSelectFilter = (filterValue) => {
     const { updatedFilters } = this.state;
-    (filterValue =="Active" || filterValue =="Inactive") ?
-    updatedFilters.status.has(filterValue) ? updatedFilters.status.delete(filterValue) : updatedFilters.status.add(filterValue) 
-    :
-    updatedFilters.tags.has(filterValue) ? updatedFilters.tags.delete(filterValue) : updatedFilters.tags.add(filterValue) 
-    // updatedFilters.has(filterValue) ? updatedFilters.delete(filterValue) : updatedFilters.add(filterValue);
+    (filterValue == "Active" || filterValue == "Inactive") ?
+      updatedFilters.status.has(filterValue) ? updatedFilters.status.delete(filterValue) : updatedFilters.status.add(filterValue)
+      :
+      updatedFilters.tags.has(filterValue) ? updatedFilters.tags.delete(filterValue) : updatedFilters.tags.add(filterValue)
     this.setState({
       updatedFilters: updatedFilters
     });

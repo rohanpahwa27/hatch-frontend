@@ -21,7 +21,10 @@ class Home extends Component {
             organizationTags: {},
             tableData: [],
             query: "",
-            filters: new Set(["Active"]),
+            filters: {
+                status: new Set(["Active"]),
+                tags: new Set()
+            },
             numApplicantsShowing: 0,
             sortBy: "name",
             sortDirection: "descending"
@@ -69,6 +72,7 @@ class Home extends Component {
                         email: applicant.email,
                         likes: applicant.likes.length,
                         tags: applicant.tags,
+                        status: applicant.status,
                         comments: applicant.comments.length,
                         extraFields: applicant.extraFields,
                         status: applicant.status,
@@ -111,8 +115,22 @@ class Home extends Component {
     handleFilter(updatedFilters) {
         const { allApplicants } = this.state;
         const filteredApplicants = allApplicants.filter(applicant => {
-            const { status } = applicant;
-            return updatedFilters.has(status);
+            const { status, tags } = applicant;
+            // Check if status is good first
+            let includeApplicant = updatedFilters.status.has(status);
+            if (includeApplicant == false) {
+                return false;
+            }
+            // Then check intersection of tags
+            updatedFilters.tags.forEach(filter => {
+                if (tags.includes(filter)) {
+                    includeApplicant = true;
+                }
+                else {
+                    includeApplicant = false;
+                }
+            })
+            return includeApplicant;
         });
 
         // TODO (DRY principle): Change code snippet below to call handleSearch once updated to not use 'event'

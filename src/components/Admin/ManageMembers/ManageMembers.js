@@ -378,8 +378,8 @@ class ManageMembers extends Component {
     }
 
     render() {
-        console.log('Show Empty State:', this.state.showEmptyState, 'length=0', this.state.tableData.length==0)
-        console.log('Show Empty State:', this.state.showEmptyState)
+        // console.log('Show Empty State:', this.state.showEmptyState, 'length=0', this.state.tableData.length==0)
+        // console.log('Show Empty State:', this.state.showEmptyState)
         return (
             <div id="page-grid-container">
                 <Logo />
