@@ -21,7 +21,11 @@ class ManageApplicants extends Component {
             organizationTags: {},
             tableData: [],
             query: "",
-            filters: new Set(["Active"]),
+            filters: {
+                status: new Set(["Active"]),
+                tags: new Set()
+            },
+            // filters: new Set(["Active"]),
             selected: new Set(),
             numApplicantsShowing: 0,
             showImportPage: false,
@@ -77,15 +81,54 @@ class ManageApplicants extends Component {
 
     handleFilter(updatedFilters) {
         const { allApplicants } = this.state;
+        // const active = updatedFilters.has("Active");
+        // const inactive = updatedFilters.has("Inactive");
         const filteredApplicants = allApplicants.filter(applicant => {
             const { status, tags } = applicant;
             // NOT SURE HOW WE WANT FILTER TO WORK
             // Should it filter Active AND has tag
             // Should it filter Active OR has tag
-            const applicantSet = new Set(tags);
-            const intersection = new Set([...updatedFilters].filter(x => applicantSet.has(x)));
-            return updatedFilters.has(status) || intersection.size !== 0;
+
+            // Active and withdrawn
+            // Then intersection of that and tags
+            // For each item in set, if it's "Active" "Inactive" ONLY then we gucc
+            // Otherwise, that means we have a tag we want to filter by
+            let includeApplicant = updatedFilters.status.has(status);
+            if (includeApplicant == false) {
+                return false;
+            }
+            // for filter in updatedFilters {
+            // updatedFilters.status.forEach(filter => {
+            //     // if ( (filter =="Active" || filter =="Inactive") && updatedFilters.has(status)) {
+            //     if (filter == status) {
+            //         includeApplicant = true;
+            //     }
+            //     // else if (filter === "Inactive" && status == filter) {
+            //     //     includeApplicant = true;
+            //     // }
+            // })
+            updatedFilters.tags.forEach(filter => {
+                if (tags.includes(filter)) {
+                    includeApplicant = true;
+                }
+                else {
+                    includeApplicant = false;
+                    // return includeApplicant;
+                }
+            })
+            // }
+            // updatedFilters.forEach(
+            // ) 
+            // const applicantSet = new Set(tags);
+            // const intersection = new Set([...updatedFilters].filter(x => applicantSet.has(x)));
+            // console.log("applicantSet", applicantSet)
+            // console.log("intersection", intersection)
+            // return updatedFilters.has(status) || intersection.size !== 0;
+            return includeApplicant;
         });
+        // Set(2) {"Active", "607109f5c6cf9b01fc04ad77"}
+        console.log("updatedFilters", updatedFilters)
+        console.log("filteredApplicants", filteredApplicants)
 
         // TODO (DRY principle): Change code snippet below to call handleSearch once updated to not use 'event'
         // Need to run handleSearch again on filter results

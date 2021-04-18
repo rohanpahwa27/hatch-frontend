@@ -18,6 +18,7 @@ class Home extends Component {
         // tableData is only the applicants currently showing in the table
         this.state = {
             allApplicants: null,
+            organizationTags: {},
             tableData: [],
             query: "",
             filters: new Set(["Active"]),
@@ -92,6 +93,19 @@ class Home extends Component {
             .catch(err => {
                 console.log(err);
             })
+        
+        
+        const organizationResponse = await api.getMyOrg();
+        const organizationTags = organizationResponse.data.organization.tags.reduce((map, tag) => {
+            map[tag._id] = {
+                color: tag.color,
+                text: tag.text,
+            }
+            return map
+        }, {});
+        this.setState({
+            organizationTags: organizationTags
+        });
     }
 
     handleFilter(updatedFilters) {
@@ -389,7 +403,7 @@ class Home extends Component {
                             <div id="home-grid-container">
                                 <SearchAndFilter
                                     query={this.state.query} handleSearch={this.handleSearch}
-                                    filters={this.state.filters} handleFilter={this.handleFilter}
+                                    filters={this.state.filters} allTags={this.state.organizationTags} handleFilter={this.handleFilter}
                                 />
                                 <ShowingApplicantsLabel
                                     numApplicantsShowing={this.state.numApplicantsShowing}
