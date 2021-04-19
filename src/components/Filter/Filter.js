@@ -1,7 +1,9 @@
-import React, { Component } from "react"
-import "./Filter.css"
+import React, { Component } from "react";
 import FilterCard from "./FilterCard/FilterCard.js";
-import filterImage from "./filter.png"
+import filterImage from "./filter.png";
+import Button from "@kiwicom/orbit-components/lib/Button";
+
+import "./Filter.css";
 
 class Filter extends Component {
     constructor() {
@@ -10,24 +12,24 @@ class Filter extends Component {
             showFilterCard: false,
         }
     }
-    
+
     // Declaring it as such binds the function automatically; don't need this.toggleShowFilter = this.toggleShowFilter.bind(this)
     toggleShowFilter = () => {
         this.setState({
-            showFilterCard: !this.state.showFilterCard            
+            showFilterCard: !this.state.showFilterCard
         });
     }
 
     render() {
         return (
-            <div id="filter-flex-container">
-                <button
-                    id="home-filter-button"
-                    className="ignore-react-onclickoutside"
+            <div id="filter-flex-container" className="ignore-react-onclickoutside">
+                <Button
+                    type="secondary"
+                    iconLeft={<img id="filter-icon" src={filterImage} alt="Filter icon" />}
                     onClick={this.toggleShowFilter}
                 >
-                    <img id="filter-icon" src={filterImage} alt="Filter icon" />
-                </button>
+                    {/* <img id="filter-icon" src={filterImage} alt="Filter icon" /> */}
+                </Button>
                 <div>
                     {this.state.showFilterCard ?
                         <FilterCard
@@ -43,4 +45,4 @@ class Filter extends Component {
     }
 }
 
-export default Filter
+export default Filter;

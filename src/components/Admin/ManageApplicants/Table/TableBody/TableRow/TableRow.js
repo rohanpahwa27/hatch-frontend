@@ -5,6 +5,7 @@ import filledHeart from "./Icons/filledHeart.png";
 import commentsImage from "./Icons/comment.png";
 import Checkbox from "@kiwicom/orbit-components/lib/Checkbox";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
+import InformationCircle from "@kiwicom/orbit-components/lib/icons/InformationCircle";
 
 const Check = ({ applicantId, handleSelected, isSelected }) => {
     let [checked] = React.useState(false);
@@ -55,7 +56,10 @@ class TableRow extends Component {
             <td className="manage-name-div manage-table-data-cell">
                 <img className="manage-applicant-image" src={this.props.imageUrl} alt="Headshot" />
                 <span className="manage-row-item manage-applicant-name">
-                    {this.props.status === "Inactive" ? <Badge type="info">Withdrawn</Badge> : null}
+                    {this.props.status === "Inactive" ?
+                        <Badge type="dark" icon={<InformationCircle />}>Withdrawn</Badge>
+                        :
+                        null}
                     &nbsp;{this.props.firstName} {this.props.lastName}
                     <TagsMapping
                         applicantTags={this.props.tags}
@@ -97,9 +101,9 @@ class TableRow extends Component {
         components.push(comments);
         // components.push(dateAdded);
         // components.push(dateModified);
-        
+
         return (
-            <tr id={this.props.isSelected(this.props.applicantId) ? "manage-table-row-grid-container-selected" : "manage-table-row-grid-container" }>
+            <tr id={this.props.isSelected(this.props.applicantId) ? "manage-table-row-grid-container-selected" : "manage-table-row-grid-container"}>
                 {components}
             </tr>
         );

@@ -4,6 +4,7 @@ import emptyHeart from "./Icons/emptyHeart.png"
 import filledHeart from "./Icons/filledHeart.png"
 import commentsImage from "./Icons/comment.png"
 import Badge from "@kiwicom/orbit-components/lib/Badge";
+import InformationCircle from "@kiwicom/orbit-components/lib/icons/InformationCircle";
 
 class TableRow extends Component {
     render() {
@@ -26,15 +27,18 @@ class TableRow extends Component {
                     tagBadges.push(<div className="tag-badge"><Badge type={value.color} key={key}>{value.text}</Badge></div>);
                 }
             }
-        }  
+        }
 
         const name = (
             <td className="name-div-home table-data-cell" key="name">
                 <img className="applicant-image" src={this.props.imageUrl} alt="Headshot" />
                 <span className="applicant-name">
-                    {this.props.status === "Inactive" ? <Badge type="info">Withdrawn</Badge> : null}
+                    {this.props.status === "Inactive" ?
+                        <Badge type="dark" icon={<InformationCircle />}>Withdrawn</Badge>
+                        :
+                        null}
                     &nbsp;{this.props.firstName} {this.props.lastName}
-                    </span>
+                </span>
                 {tagBadges}
             </td>
         )
