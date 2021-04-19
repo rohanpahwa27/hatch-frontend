@@ -129,7 +129,8 @@ class Home extends Component {
                 else {
                     includeApplicant = false;
                 }
-            })
+            });
+            trackEvent('filter by applicant tags');
             return includeApplicant;
         });
 
@@ -178,12 +179,27 @@ class Home extends Component {
         const filteredApplicants = allApplicants.filter(applicant => {
             const applicantFullName = applicant.firstName + " " + applicant.lastName
             return applicantFullName.toLowerCase().indexOf(queryText.toLowerCase()) > -1;
-        })
+        });
+        trackEvent('search by applicant name');
 
         const updatedApplicants = filteredApplicants.filter(applicant => {
-            const { status } = applicant;
-            return filters.has(status);
-        })
+            const { status, tags } = applicant;
+            // Check if status is good first
+            let includeApplicant = filters.status.has(status);
+            if (includeApplicant == false) {
+                return false;
+            }
+            // Then check intersection of tags
+            filters.tags.forEach(filter => {
+                if (tags.includes(filter)) {
+                    includeApplicant = true;
+                }
+                else {
+                    includeApplicant = false;
+                }
+            })
+            return includeApplicant;
+        });
 
         this.setState({
             tableData: updatedApplicants,
