@@ -1,0 +1,17 @@
+#filter-flex-container {
+    height: 44px;
+    width: 44px;
+    margin-left: 20px;
+    
+    justify-content: center;
+    align-items: center;
+}
+
+#filter-icon {
+    height: 12px;
+    width: 16px;
+    
+    margin: 12px 10px;
+    align-items: center;
+    justify-items: center;
+}

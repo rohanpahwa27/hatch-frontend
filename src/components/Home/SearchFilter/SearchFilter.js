@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./SearchFilter.css"
-import Filter from "./Filter/Filter.js"
+import Filter from "../../Filter/Filter.js";
 import SearchBar from "./SearchBar/SearchBar.js"
 
 class SearchAndFilter extends Component {
@@ -9,7 +9,7 @@ class SearchAndFilter extends Component {
             <div id="search-filter-grid-item">
                 <div id="search-filter-flex-container">
                     <SearchBar query={this.props.query} handleSearch={this.props.handleSearch} />
-                    <Filter filters={this.props.filters} handleFilter={this.props.handleFilter}/>
+                    <Filter filters={this.props.filters} allTags={this.props.allTags} handleFilter={this.props.handleFilter}/>
                 </div>
             </div>
         )

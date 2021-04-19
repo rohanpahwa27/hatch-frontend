@@ -18,9 +18,13 @@ class Home extends Component {
         // tableData is only the applicants currently showing in the table
         this.state = {
             allApplicants: null,
+            organizationTags: {},
             tableData: [],
             query: "",
-            filters: new Set(["Active"]),
+            filters: {
+                status: new Set(["Active"]),
+                tags: new Set()
+            },
             numApplicantsShowing: 0,
             sortBy: "name",
             sortDirection: "descending"
@@ -68,6 +72,7 @@ class Home extends Component {
                         email: applicant.email,
                         likes: applicant.likes.length,
                         tags: applicant.tags,
+                        status: applicant.status,
                         comments: applicant.comments.length,
                         extraFields: applicant.extraFields,
                         status: applicant.status,
@@ -92,13 +97,40 @@ class Home extends Component {
             .catch(err => {
                 console.log(err);
             })
+        
+        
+        const organizationResponse = await api.getMyOrg();
+        const organizationTags = organizationResponse.data.organization.tags.reduce((map, tag) => {
+            map[tag._id] = {
+                color: tag.color,
+                text: tag.text,
+            }
+            return map
+        }, {});
+        this.setState({
+            organizationTags: organizationTags
+        });
     }
 
     handleFilter(updatedFilters) {
         const { allApplicants } = this.state;
         const filteredApplicants = allApplicants.filter(applicant => {
-            const { status } = applicant;
-            return updatedFilters.has(status);
+            const { status, tags } = applicant;
+            // Check if status is good first
+            let includeApplicant = updatedFilters.status.has(status);
+            if (includeApplicant == false) {
+                return false;
+            }
+            // Then check intersection of tags
+            updatedFilters.tags.forEach(filter => {
+                if (tags.includes(filter)) {
+                    includeApplicant = true;
+                }
+                else {
+                    includeApplicant = false;
+                }
+            })
+            return includeApplicant;
         });
 
         // TODO (DRY principle): Change code snippet below to call handleSearch once updated to not use 'event'
@@ -389,7 +421,7 @@ class Home extends Component {
                             <div id="home-grid-container">
                                 <SearchAndFilter
                                     query={this.state.query} handleSearch={this.handleSearch}
-                                    filters={this.state.filters} handleFilter={this.handleFilter}
+                                    filters={this.state.filters} allTags={this.state.organizationTags} handleFilter={this.handleFilter}
                                 />
                                 <ShowingApplicantsLabel
                                     numApplicantsShowing={this.state.numApplicantsShowing}

@@ -21,7 +21,10 @@ class ManageApplicants extends Component {
             organizationTags: {},
             tableData: [],
             query: "",
-            filters: new Set(["Active"]),
+            filters: {
+                status: new Set(["Active"]),
+                tags: new Set()
+            },
             selected: new Set(),
             numApplicantsShowing: 0,
             showImportPage: false,
@@ -79,12 +82,21 @@ class ManageApplicants extends Component {
         const { allApplicants } = this.state;
         const filteredApplicants = allApplicants.filter(applicant => {
             const { status, tags } = applicant;
-            // NOT SURE HOW WE WANT FILTER TO WORK
-            // Should it filter Active AND has tag
-            // Should it filter Active OR has tag
-            const applicantSet = new Set(tags);
-            const intersection = new Set([...updatedFilters].filter(x => applicantSet.has(x)));
-            return updatedFilters.has(status) || intersection.size !== 0;
+            // Check if status is good first
+            let includeApplicant = updatedFilters.status.has(status);
+            if (includeApplicant == false) {
+                return false;
+            }
+            // Then check intersection of tags
+            updatedFilters.tags.forEach(filter => {
+                if (tags.includes(filter)) {
+                    includeApplicant = true;
+                }
+                else {
+                    includeApplicant = false;
+                }
+            })
+            return includeApplicant;
         });
 
         // TODO (DRY principle): Change code snippet below to call handleSearch once updated to not use 'event'

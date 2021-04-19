@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import "./FilterCard.css"
+import onClickOutside from "react-onclickoutside";
 import Badge from "@kiwicom/orbit-components/lib/Badge";
 import Checkbox from "@kiwicom/orbit-components/lib/Checkbox";
 import Button from "@kiwicom/orbit-components/lib/Button";
+
+import "./FilterCard.css";
 
 const Check = ({ filterValue, isFilterSelected, handleSelectFilter }) => {
   const checked = isFilterSelected(filterValue);
@@ -37,36 +39,48 @@ const AllTagsFilters = ({ allTags, isFilterSelected, handleSelectFilter }) => {
         </div>
       </div>
     ))
-  )
-}
+  );
+};
 
 class FilterCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      updatedFilters: new Set(this.props.filters)
+      updatedFilters: this.props.filters
     };
+  }
+
+  // Unique fxn courtesy of `react-onclickoutside`
+  handleClickOutside = (event) => {
+    this.setState({
+      updatedFilters: this.props.filters
+    });
+    this.props.toggleShowFilter();
   }
 
   isFilterSelected = (filterValue) => {
     const { updatedFilters } = this.state;
-    return updatedFilters.has(filterValue);
+    return (filterValue == "Active" || filterValue == "Inactive") ?
+      updatedFilters.status.has(filterValue) : updatedFilters.tags.has(filterValue)
   }
 
   handleSelectFilter = (filterValue) => {
     const { updatedFilters } = this.state;
-    updatedFilters.has(filterValue) ? updatedFilters.delete(filterValue) : updatedFilters.add(filterValue);
+    (filterValue == "Active" || filterValue == "Inactive") ?
+      updatedFilters.status.has(filterValue) ? updatedFilters.status.delete(filterValue) : updatedFilters.status.add(filterValue)
+      :
+      updatedFilters.tags.has(filterValue) ? updatedFilters.tags.delete(filterValue) : updatedFilters.tags.add(filterValue)
     this.setState({
       updatedFilters: updatedFilters
     });
   }
 
-  resetFilters = () => {
-    this.setState({
-      updatedFilters: new Set(this.props.filters)
-    });
-    this.props.toggleShowFilter();
-  }
+  // resetFilters = () => {
+  //   this.setState({
+  //     updatedFilters: new Set(this.props.filters)
+  //   });
+  //   this.props.toggleShowFilter();
+  // }
 
   addFilters = () => {
     const { updatedFilters } = this.state;
@@ -76,13 +90,16 @@ class FilterCard extends Component {
 
   render() {
     return (
-      <div id="applicant-toolbar-filter-card-container">
-        <div id="applicant-toolbar-filter-card">
+      <div id="home-filter-card-container">
+        <div id="home-filter-card">
 
-          <p id="filter-applicant-status">Filter by</p>
-          
-          <div id="applicant-toolbar-filter-card-row">
-            <div id="applicant-toolbar-filter-card-row-label">Active</div>
+          <p id="filter-card-header-text">Filter by</p>
+
+          <div id="filter-card-row-header">
+            <p id="filter-row-header-text">Applicant status</p>
+          </div>
+          <div id="filter-card-row">
+            <div id="filter-card-row-label">Active</div>
             <div>
               <Check
                 filterValue="Active"
@@ -91,8 +108,8 @@ class FilterCard extends Component {
               />
             </div>
           </div>
-          <div id="applicant-toolbar-filter-card-row">
-            <div id="applicant-toolbar-filter-card-row-label">Withdrawn</div>
+          <div id="filter-card-row">
+            <div id="filter-card-row-label">Withdrawn</div>
             <div>
               <Check
                 filterValue="Inactive"
@@ -102,29 +119,32 @@ class FilterCard extends Component {
             </div>
           </div>
 
-          {/* <AllTagsFilters
+          <div id="filter-card-row-header">
+            <p id="filter-row-header-text">Tag</p>
+          </div>
+          <AllTagsFilters
             allTags={this.props.allTags}
             isFilterSelected={this.isFilterSelected}
             handleSelectFilter={this.handleSelectFilter}
-          /> */}
+          />
 
-          <div id="applicant-toolbar-filter-card-footer-buttons">
-            <div id="applicant-toolbar-filter-card-back-button">
+          <div id="filter-card-footer-buttons">
+            {/* <div id="filter-card-back-button">
               <Button type="secondary"
                 onClick={this.resetFilters}
               >Back</Button>
-            </div>
-            <div id="applicant-toolbar-filter-card-add-filter-button">
+            </div> */}
+            <div id="filter-card-add-filter-button">
               <Button
                 onClick={this.addFilters}
-              >Add Filter</Button>
+              >Done</Button>
             </div>
-
           </div>
+
         </div>
       </div>
     )
   }
 }
 
-export default FilterCard;
+export default onClickOutside(FilterCard, { excludeScrollbar: true });
